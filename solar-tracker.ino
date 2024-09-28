@@ -1,7 +1,10 @@
 // Date and time functions using a DS3231 RTC connected via I2C and Wire lib
 #include "RTClib.h"
+#include "./LinearActuator.h"
+
 
 RTC_DS3231 rtc;
+LinearActuator actuator;
 
 const int windSensorPin = A3;
 const int PWMBackward = 10;
@@ -15,26 +18,21 @@ float windSpeedMin = 0;
 float windVoltageMax = 2.0;
 float windSpeedMax = 32.0;
 
-long pos = 0;  // Actuator Position in Pulses
-long prevPos = 1;                 
-long steps = 0;  //pulses from hall effect sensors
-long prevSteps = 0;              
-float conNum = 0.000285;        // Convert to Inches
-bool homeFlag = 0;              // Flag use to know if the Actuator is home 
-unsigned long prevTimer = 0;
-unsigned long lastStepTime = 0; 
-int trigDelay = 500;
-int dir = 0;
 
+int FORWARD = 1;
+int BACKWARD = -1;
 
-void setup () {
+unsigned long sensorTimer = 0;
+
+void setup() {
   Serial.begin(57600);
 
 #ifndef ESP8266
-  while (!Serial); // wait for serial port to connect. Needed for native USB
+  while (!Serial)
+    ;  // wait for serial port to connect. Needed for native USB
 #endif
 
-  if (! rtc.begin()) {
+  if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
     Serial.flush();
     while (1) delay(10);
@@ -48,15 +46,14 @@ void setup () {
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
     // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
-    
   }
 
   pinMode(PWMBackward, OUTPUT);
   pinMode(PWMForward, OUTPUT);
 
   pinMode(2, INPUT);
-  attachInterrupt(digitalPinToInterrupt(2), countSteps, RISING);
-
+  attachInterrupt(digitalPinToInterrupt(2), countStepsWrapper, RISING);
+  Serial.println("Setup complete.");
 
   // When time needs to be re-set on a previously configured device, the
   // following line sets the RTC to the date & time this sketch was compiled
@@ -64,28 +61,31 @@ void setup () {
   // This line sets the RTC with an explicit date & time, for example to set
   // January 21, 2014 at 3am you would call:
   // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
+
+    
 }
 
-void loop () {
-    
+void loop() {
+  if(millis() - sensorTimer > 1000){
     float windSpeed = getWindSpeed();
-
-    if(homeFlag != 0){
-      homeActuator();
-    }
     float temperature = getTemperature();
     uint8_t hour = getHour();
-    delay(sensorDelay);
+    sensorTimer = millis();
+  }
+
+  if(actuator.isHomed == 0){
+    actuator.home();
+  }
 }
 
-int getWindSpeed(){
+int getWindSpeed() {
   float sensorValue = analogRead(windSensorPin);
   float sensorVoltage = sensorValue * voltageConversionConstant;
-  if(sensorVoltage <= windVoltageMin){
+  if (sensorVoltage <= windVoltageMin) {
     return 0;
   } else {
 
-    return (sensorVoltage-windVoltageMin)*windSpeedMax/(windVoltageMax-windVoltageMin);
+    return (sensorVoltage - windVoltageMin) * windSpeedMax / (windVoltageMax - windVoltageMin);
   }
 }
 
@@ -93,57 +93,11 @@ float getTemperature() {
   return rtc.getTemperature();
 }
 
-uint8_t getHour(){
+uint8_t getHour() {
   DateTime now = rtc.now();
   return now.hour();
 }
 
-void countSteps(void) {
-  if(micros()-lastStepTime > trigDelay){
-    steps++;
-    lastStepTime = micros();
-  }
-  Serial.println("new step!");
-}
-
-void updatePosition(){
-  if(dir == 1){
-    pos = pos + steps;
-    steps = 0;
-  } else {
-    pos = pos - steps;
-    steps = 0;
-  }
-}
-
-void homeActuator(){
-  prevTimer = millis();
-  while(homeFlag == 0){
-    int Speed = 127;
-    analogWrite(10, 0);
-    analogWrite(11, Speed);
-    if(prevSteps == steps){
-      if(millis() - prevTimer > 10){
-        analogWrite(10, 0);
-        analogWrite(11, 0);
-        Serial.println("homed!");
-        steps = 0;
-        Speed = 0;
-        homeFlag = 1;
-      }
-     }else{
-      prevSteps = steps;
-      
-      prevTimer = millis();
-     }
-  }
-}
-
-float convertToInches(long pos){
-  return conNum*pos;
-}
-
-bool driveLinearActuator(int windSpeed){
-    analogWrite(11, 11);
-    analogWrite(10, 0);
+void countStepsWrapper() {
+  actuator.countSteps();
 }
