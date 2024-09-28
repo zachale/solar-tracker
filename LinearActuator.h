@@ -2,27 +2,43 @@
 #define LA_H
 
 class LinearActuator {
-public:
-    long pos = 0;  // Actuator Position in Pulses
-    long maxPos = 0;
-    long prevPos = 1;                 
-    long steps = 0;  //pulses from hall effect sensors
-    long prevSteps = 0;              
-    float conNum = 0.000285;        // Convert to Inches
+  public:
+    int percentExtended = 0;
     bool isHomed = 0;
     bool isMaxed = 0;              
-    unsigned long prevTimer = 0;
-    unsigned long lastStepTime = 0; 
-    int trigDelay = 500;
-    int dir = 0;
     static const int FORWARD = 1;
+    static const int STOP = 0;
     static const int BACKWARD = -1;
-    void countSteps();
-    void updatePosition();
-    float getInchesExtended();
-    void home();
-    void direct(int direction);
+    static const int HOMING = 2;
+    static const int MAXING = 3;
+    static unsigned long lastStepTime; 
+    static const int trigDelay = 500;
+    static long steps;  //pulses from hall effect sensors
+    static void countSteps();
+    LinearActuator();
+    int getPercentExtended();
+    void recalibrate();
+    void extendToPercent(float percent);
+  private:
+    long pos = 0;  // Actuator Position in Pulses
+    long maxPos = 0;
+    unsigned long timer = 0;
+    unsigned long prevTimer = 0;
+    static const int PWMBackwardPin = 10;
+    static const int PWMForwardPin = 11;
+    long prevSteps = 0;    
+    int status = 0;              
+    int dir = 0;
+    int attemptsToRecalibrate = 0;
+    void setStatus(int statusCode);
+    void setDirection(int direction);
     void setSpeeds(int forward, int backward);
+    void home();
+    void max();
+    void extend(int direction);
+    void updatePos();
+    int getPosFromPercent(float percent);
+    bool hitBoundary();
 };
 
 #endif

@@ -1,26 +1,15 @@
 // Date and time functions using a DS3231 RTC connected via I2C and Wire lib
 #include "RTClib.h"
 #include "./LinearActuator.h"
-
+#include "./WindSensor.h"
 
 RTC_DS3231 rtc;
 LinearActuator actuator;
+WindSensor windSensor;
 
-const int windSensorPin = A3;
-const int PWMBackward = 10;
-const int PWMForward = 11;
 
 float voltageConversionConstant = 0.004882814;
 int sensorDelay = 1000;
-
-float windVoltageMin = 0.4;
-float windSpeedMin = 0;
-float windVoltageMax = 2.0;
-float windSpeedMax = 32.0;
-
-
-int FORWARD = 1;
-int BACKWARD = -1;
 
 unsigned long sensorTimer = 0;
 
@@ -40,64 +29,34 @@ void setup() {
 
   if (rtc.lostPower()) {
     Serial.println("RTC lost power, let's set the time!");
-    // When time needs to be set on a new device, or after a power loss, the
-    // following line sets the RTC to the date & time this sketch was compiled
-    // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     // This line sets the RTC with an explicit date & time, for example to set
     // January 21, 2014 at 3am you would call:
     // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
   }
+  attachInterrupt(digitalPinToInterrupt(2), actuator.countSteps, RISING);
+  actuator.recalibrate();
 
-  pinMode(PWMBackward, OUTPUT);
-  pinMode(PWMForward, OUTPUT);
-
-  pinMode(2, INPUT);
-  attachInterrupt(digitalPinToInterrupt(2), countStepsWrapper, RISING);
   Serial.println("Setup complete.");
 
-  // When time needs to be re-set on a previously configured device, the
-  // following line sets the RTC to the date & time this sketch was compiled
-  // rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  // This line sets the RTC with an explicit date & time, for example to set
-  // January 21, 2014 at 3am you would call:
-  // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
-
-    
 }
 
 void loop() {
   if(millis() - sensorTimer > 1000){
-    float windSpeed = getWindSpeed();
-    float temperature = getTemperature();
-    uint8_t hour = getHour();
+    float windSpeed = windSensor.getWindSpeed();
+    float temperature = rtc.getTemperature();
+    uint8_t hour = rtc.now().hour();
     sensorTimer = millis();
   }
 
-  if(actuator.isHomed == 0){
-    actuator.home();
-  }
+  actuator.extendToPercent(80);
+  actuator.extendToPercent(10);
+  actuator.extendToPercent(50);
+  actuator.extendToPercent(100);
+  
 }
 
-int getWindSpeed() {
-  float sensorValue = analogRead(windSensorPin);
-  float sensorVoltage = sensorValue * voltageConversionConstant;
-  if (sensorVoltage <= windVoltageMin) {
-    return 0;
-  } else {
 
-    return (sensorVoltage - windVoltageMin) * windSpeedMax / (windVoltageMax - windVoltageMin);
-  }
+void extendOnTime(){
+
 }
 
-float getTemperature() {
-  return rtc.getTemperature();
-}
-
-uint8_t getHour() {
-  DateTime now = rtc.now();
-  return now.hour();
-}
-
-void countStepsWrapper() {
-  actuator.countSteps();
-}
