@@ -66,13 +66,15 @@ void LinearActuator::max(){
 }
 
 void LinearActuator::extend(int inputDir){
+  prevTimer = millis();
   if(inputDir == FORWARD){
     setDirection(FORWARD);
-    setSpeeds(255, 0);
+    setSpeeds(speed, 0);
   } else if(inputDir == BACKWARD){
     setDirection(BACKWARD);
-    setSpeeds(0, 255);
+    setSpeeds(0, speed);
   } else {
+    speed = 255;
     setSpeeds(0, 0);
     delay(500);
   }
@@ -85,6 +87,9 @@ void LinearActuator::setSpeeds(int forward, int backward){
 }
 
 void LinearActuator::extendToPercent(float percent, void (*callback)()){
+  Serial.print("Extending to");
+  Serial.print(percent);
+  Serial.print("\n");
   updatePos();
   if(percent == 0){
     home();
@@ -93,39 +98,40 @@ void LinearActuator::extendToPercent(float percent, void (*callback)()){
     max();
     return;
   }
-
+  if(maxPos == 0){
+    recalibrate();
+  }
   float targetPos = getPosFromPercent(percent);
   if(pos < targetPos){
     extend(FORWARD);
   } else {
     extend(BACKWARD);
   }
-
   int difference;
   for(difference = 1; difference > 0; difference = (targetPos-pos) * dir){
     if(percent != 0 || percent != 100){
       if(hitBoundary()){
-        attemptsToRecalibrate++;
-        if(attemptsToRecalibrate < 2){
-          Serial.println("Recalibrating because of unexpected Boundary");
-          recalibrate();
-          extendToPercent(percent);
-        } else {
-          Serial.println("Homing because too many attempts");
-          attemptsToRecalibrate = 0;
-          home();
-        }      
+        Serial.println("Recalibrating because of unexpected Boundary");
+        recalibrate();
+        extendToPercent(percent);
+        return;
       }
       if(callback){
         callback();
       }
 
     }
+    if(difference < 255){
+      setSpeed(difference + 100);
+    }
     updatePos();
   }
-  Serial.println("Exiting Target loop");
-
   extend(STOP);
+}
+
+void LinearActuator::setSpeed(int input){
+  speed = input;
+  extend(dir);
 }
 
 int LinearActuator::getPosFromPercent(float percent){
