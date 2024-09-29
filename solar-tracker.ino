@@ -13,6 +13,9 @@ int sensorDelay = 1000;
 
 unsigned long sensorTimer = 0;
 
+uint8_t hourStart = 8;
+uint8_t hourFinish = 20;
+
 void setup() {
   Serial.begin(57600);
 
@@ -34,6 +37,7 @@ void setup() {
     // rtc.adjust(DateTime(2014, 1, 21, 3, 0, 0));
   }
   attachInterrupt(digitalPinToInterrupt(2), actuator.countSteps, RISING);
+
   actuator.recalibrate();
 
   Serial.println("Setup complete.");
@@ -43,8 +47,10 @@ void setup() {
 void loop() {
   if(millis() - sensorTimer > 1000){
     float windSpeed = windSensor.getWindSpeed();
+    // Serial.println(windSpeed);
     float temperature = rtc.getTemperature();
     uint8_t hour = rtc.now().hour();
+    // Serial.println(rtc.now().minute());
     sensorTimer = millis();
   }
 
@@ -52,11 +58,18 @@ void loop() {
   actuator.extendToPercent(10);
   actuator.extendToPercent(50);
   actuator.extendToPercent(100);
+  actuator.extendToPercent(0);
   
 }
 
 
-void extendOnTime(){
+void extendActuatorOnHour(){
+  uint8_t hour = rtc.now().hour();
+  uint8_t dayCompletePercent = (hour - hourStart)/(hourFinish - hourStart) * 100;
+  actuator.extendToPercent(dayCompletePercent)
+}
 
+int NormalizePercentage(int percent){
+  
 }
 

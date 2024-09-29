@@ -11,8 +11,6 @@ class LinearActuator {
     static const int BACKWARD = -1;
     static const int HOMING = 2;
     static const int MAXING = 3;
-    static unsigned long lastStepTime; 
-    static const int trigDelay = 500;
     static long steps;  //pulses from hall effect sensors
     static void countSteps();
     LinearActuator();
@@ -20,13 +18,14 @@ class LinearActuator {
     void recalibrate();
     void extendToPercent(float percent);
   private:
-    long pos = 0;  // Actuator Position in Pulses
-    long maxPos = 0;
-    unsigned long timer = 0;
-    unsigned long prevTimer = 0;
     static const int PWMBackwardPin = 10;
     static const int PWMForwardPin = 11;
-    long prevSteps = 0;    
+    static unsigned long lastStepTime; 
+    static const int trigDelay = 500;
+    long pos = 0;  // Actuator Position in Pulses
+    long maxPos = 0;
+    unsigned long prevTimer = 0;
+    long prevSteps = -1;    
     int status = 0;              
     int dir = 0;
     int attemptsToRecalibrate = 0;
