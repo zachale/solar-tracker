@@ -31,7 +31,6 @@ void LinearActuator::recalibrate(){
   Serial.println("Attempting to recalibrate");
   delay(5000);
   home();
-  delay(1000);
   max();
 }
 
@@ -55,6 +54,7 @@ void LinearActuator::max(){
   extend(FORWARD);
   isMaxed = 0;
   while(isMaxed == 0){
+    updatePos();
     setStatus(MAXING);
     if(hitBoundary()){
       maxPos = pos;
@@ -74,6 +74,7 @@ void LinearActuator::extend(int inputDir){
     setSpeeds(0, 255);
   } else {
     setSpeeds(0, 0);
+    delay(500);
   }
   
 }
@@ -83,9 +84,8 @@ void LinearActuator::setSpeeds(int forward, int backward){
   analogWrite(11, forward);
 }
 
-void LinearActuator::extendToPercent(float percent){
+void LinearActuator::extendToPercent(float percent, void (*callback)()){
   updatePos();
-
   if(percent == 0){
     home();
     return;
@@ -101,11 +101,8 @@ void LinearActuator::extendToPercent(float percent){
     extend(BACKWARD);
   }
 
-  Serial.println("Entering Target loop");
-
   int difference;
   for(difference = 1; difference > 0; difference = (targetPos-pos) * dir){
-    Serial.println(difference);
     if(percent != 0 || percent != 100){
       if(hitBoundary()){
         attemptsToRecalibrate++;
@@ -119,6 +116,10 @@ void LinearActuator::extendToPercent(float percent){
           home();
         }      
       }
+      if(callback){
+        callback();
+      }
+
     }
     updatePos();
   }
@@ -133,9 +134,10 @@ int LinearActuator::getPosFromPercent(float percent){
 
 bool LinearActuator::hitBoundary(){
   if(prevSteps == steps){
-    if( millis() - prevTimer > 50){
+    if( millis() - prevTimer > 1000){
       Serial.println("boundary hit");
       steps = 0;
+      prevTimer = millis();
       return true;
     }
   } else {
