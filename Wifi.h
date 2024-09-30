@@ -5,6 +5,8 @@
 #include "./LinearActuator.h" 
 #include "./WindSensor.h" 
 #include <ArduinoJson.h>
+#include "./secrets.h"
+
 
 class WifiModule {
   public:
@@ -22,6 +24,8 @@ class WifiModule {
     WiFiServer server;
     void endConnection(WiFiClient client);
     void updateParams(String params);
+    void attemptConnection(char*, char*);
+    void attemptCreation();
 };
 
 #endif

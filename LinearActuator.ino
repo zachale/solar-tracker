@@ -123,6 +123,8 @@ void LinearActuator::extendToPercent(float percent, void (*callback)()){
     }
     if(difference < 255){
       setSpeed(difference + 100);
+    } else {
+      setSpeed(255);
     }
     updatePos();
   }

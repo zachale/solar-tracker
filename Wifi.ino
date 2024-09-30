@@ -22,21 +22,13 @@ void WifiModule::setup() {
     Serial.println("Please upgrade the firmware");
   }
 
-  // by default the local IP address will be 192.168.4.1
   // you can override it with the following:
-  WiFi.config(IPAddress(192,48,56,2));
+  WiFi.config(IPAddress(192,168,1,250));
 
-  // print the network name (SSID);
-  Serial.print("Creating access point named: ");
-  Serial.println(ssid);
-
-  // Create open network. Change this line if you want to create an WEP network:
-  status = WiFi.beginAP(ssid);
-  if (status != WL_AP_LISTENING) {
-    Serial.println("Creating access point failed");
-    // don't continue
-    while (true);
-  }
+  attemptConnection(DEVSSID, DEVPASS);
+  attemptConnection(AWAYSSID, AWAYPASS);
+  attemptConnection(HOMESSID, HOMEPASS);
+  attemptCreation();
 
   // wait 10 seconds for connection:
   delay(10000);
@@ -46,6 +38,33 @@ void WifiModule::setup() {
 
   // you're connected now, so print out the status
   printWiFiStatus();
+}
+
+void WifiModule::attemptConnection(char* ssid, char* pass){
+  if (status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    status = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(5000);
+  }
+}
+
+void WifiModule::attemptCreation(){
+   if (status != WL_CONNECTED) {
+    // print the network name (SSID);
+    Serial.print("Creating access point named: ");
+    Serial.println(ssid);
+
+    // Create open network. Change this line if you want to create an WEP network:
+    status = WiFi.beginAP(ssid);
+    if (status != WL_AP_LISTENING) {
+      Serial.println("Creating access point failed");
+      while(true);
+  }
+  }
 }
 
 
@@ -74,7 +93,6 @@ void WifiModule::checkForClient() {
     String currentLine = "";                // make a String to hold incoming data from the client
     int newLineCount = 0;
     while (client.connected()) {            // loop while the client's connected
-      delayMicroseconds(10);                // This is required for the Arduino Nano RP2040 Connect - otherwise it will loop so fast that SPI will never be served.
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
         // Serial.write(c);                    // print it out to the serial monitor

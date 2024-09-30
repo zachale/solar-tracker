@@ -16,7 +16,9 @@ class LinearActuator {
     LinearActuator();
     int getPercentExtended();
     void recalibrate();
-    void extendToPercent(float percent);
+    void extendToPercent(float percent,  void (*callback)() = nullptr);
+    void home();
+    void max();
   private:
     static const int PWMBackwardPin = 10;
     static const int PWMForwardPin = 11;
@@ -24,20 +26,19 @@ class LinearActuator {
     static const int trigDelay = 500;
     long pos = 0;  // Actuator Position in Pulses
     long maxPos = 0;
+    int speed = 255;
     unsigned long prevTimer = 0;
     long prevSteps = -1;    
     int status = 0;              
     int dir = 0;
-    int attemptsToRecalibrate = 0;
     void setStatus(int statusCode);
     void setDirection(int direction);
     void setSpeeds(int forward, int backward);
-    void home();
-    void max();
     void extend(int direction);
     void updatePos();
     int getPosFromPercent(float percent);
     bool hitBoundary();
+    void setSpeed(int input);
 };
 
 #endif
