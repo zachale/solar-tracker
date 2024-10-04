@@ -1,8 +1,9 @@
 #include "./Wifi.h"
 
-WifiModule::WifiModule(LinearActuator inputActuator, WindSensor inputWindSensor) : server(80){
+WifiModule::WifiModule(LinearActuator inputActuator, WindSpeedSensor inputWindSensor, RTC_DS3231 inputRtc) : server(80){
   actuator = inputActuator;
   windSensor = inputWindSensor;
+  rtc = inputRtc;
 }
 
 
@@ -22,14 +23,8 @@ void WifiModule::setup() {
     Serial.println("Please upgrade the firmware");
   }
 
-  // you can override it with the following:
-  WiFi.config(IPAddress(192,168,1,250));
-
   attemptConnection(DEVSSID, DEVPASS);
-  attemptConnection(AWAYSSID, AWAYPASS);
-  attemptConnection(HOMESSID, HOMEPASS);
   attemptCreation();
-
   // wait 10 seconds for connection:
   delay(10000);
 
@@ -44,16 +39,13 @@ void WifiModule::attemptConnection(char* ssid, char* pass){
   if (status != WL_CONNECTED) {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+  // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
     status = WiFi.begin(ssid, pass);
-
-    // wait 10 seconds for connection:
-    delay(5000);
+    delay(3000);
   }
 }
 
 void WifiModule::attemptCreation(){
-   if (status != WL_CONNECTED) {
     // print the network name (SSID);
     Serial.print("Creating access point named: ");
     Serial.println(ssid);
@@ -63,8 +55,7 @@ void WifiModule::attemptCreation(){
     if (status != WL_AP_LISTENING) {
       Serial.println("Creating access point failed");
       while(true);
-  }
-  }
+    }
 }
 
 
@@ -118,11 +109,11 @@ void WifiModule::checkForClient() {
 
             client.print("<p style=\"font-size:7vw;\">");
             client.print("Wind speed: ");
-            client.print(windSensor.getWindSpeed());
+            client.print(windSensor.getSpeed());
             client.print("<br/>");
             client.print("Extended to: ");
             int percentExtended = actuator.getPercentExtended();
-            if(percentExtended){
+            if(percentExtended != -1){
               client.print(percentExtended);
               client.print("%<br/>");
             } else {
@@ -131,8 +122,15 @@ void WifiModule::checkForClient() {
             client.print("</p>");
             client.print("<br/>");
             client.print("<a href=\"/recalibrate\"><button style=\"font-size:7vw;\">Recalibrate</button></a>");
-            client.print(R"(<div style="font-size:7vw;"><form action="/" method="POST">Extend To<input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(actuator.getPercentExtended());
+            client.print(R"(<div style="font-size:7vw;"><form action="/" method="POST">)");
+            client.print(R"(Extend To<input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
+            client.print(percentExtended);
+            client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
+            client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
+            client.print(windSensor.getUpperSpeedMax());
+            client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
+            client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
+            client.print(windSensor.getLowerSpeedMax());
             client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
             client.print(R"(</body></html>)");
 
@@ -142,7 +140,6 @@ void WifiModule::checkForClient() {
             break;
           }
           else {      // if you got a newline, then clear currentLine:
-            Serial.println(currentLine);
             currentLine = "";
           }
         }
@@ -190,8 +187,6 @@ void WifiModule::updateParams(String params){
     String description = strtok(NULL,"");
     doc[title] = description;
   }
-  lastParams = doc;
-
   if(doc["extendToPercent"]){
     String percent = doc["extendToPercent"];
     actuator.extendToPercent(percent.toInt());

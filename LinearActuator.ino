@@ -24,7 +24,10 @@ void LinearActuator::updatePos(){
 }
 
 int LinearActuator::getPercentExtended(){
-  return percentExtended = (pos / maxPos) * 100;
+  if(!maxPos){
+    return -1;
+  }
+  return percentExtended = ((float)pos / (float)maxPos) * 100;
 }
 
 void LinearActuator::recalibrate(){
@@ -82,8 +85,8 @@ void LinearActuator::extend(int inputDir){
 }
 
 void LinearActuator::setSpeeds(int forward, int backward){
-  analogWrite(10, backward);
-  analogWrite(11, forward);
+  analogWrite(PWMBackwardPin, backward);
+  analogWrite(PWMForwardPin, forward);
 }
 
 void LinearActuator::extendToPercent(float percent, void (*callback)()){

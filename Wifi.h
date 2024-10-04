@@ -3,15 +3,14 @@
 
 #include "WiFiS3.h"
 #include "./LinearActuator.h" 
-#include "./WindSensor.h" 
+#include "./WindSpeedSensor.h" 
 #include <ArduinoJson.h>
 #include "./secrets.h"
 
 
 class WifiModule {
   public:
-    JsonDocument lastParams;
-    WifiModule(LinearActuator, WindSensor);
+    WifiModule(LinearActuator, WindSpeedSensor, RTC_DS3231);
     void setup();
     void checkForClient();
     void printWiFiStatus();
@@ -20,8 +19,9 @@ class WifiModule {
     int keyIndex = 0;                 
     int status = WL_IDLE_STATUS;
     LinearActuator actuator;
-    WindSensor windSensor;
+    WindSpeedSensor windSensor;
     WiFiServer server;
+    RTC_DS3231 inputRtc;
     void endConnection(WiFiClient client);
     void updateParams(String params);
     void attemptConnection(char*, char*);

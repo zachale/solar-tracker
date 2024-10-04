@@ -20,8 +20,8 @@ class LinearActuator {
     void home();
     void max();
   private:
-    static const int PWMBackwardPin = 10;
-    static const int PWMForwardPin = 11;
+    static const int PWMBackwardPin = 5;
+    static const int PWMForwardPin = 6;
     static unsigned long lastStepTime; 
     static const int trigDelay = 500;
     long pos = 0;  // Actuator Position in Pulses
