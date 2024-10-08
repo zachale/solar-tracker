@@ -22,7 +22,6 @@ const int AWAY = 4;
 bool alarmTriggered = false;
 
 const int ACTUATOR_INTERRUPT_PIN = 2;
-const int CLOCK_INTERRUPT_PIN = 3;
 
 void setup() {
   Serial.begin(9600);
@@ -32,7 +31,6 @@ void setup() {
     ;  // wait for serial port to connect. Needed for native USB
 #endif
 
-  attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), actuator.countSteps, RISING);
   wifi.setup();
   status = ACTIVE;
@@ -44,6 +42,16 @@ void loop() {
 
   
   pollSensorData();
+
+  if(clockModule.alarmTriggered()){
+      if(clockModule.isActiveHours()){
+        status = ACTIVE;
+        extendActuatorOnHour();
+      } else if (status == ACTIVE){
+        extendActuatorToHalf();
+        status = NIGHT;
+      }
+  }
 
   
   wifi.checkForClient();
