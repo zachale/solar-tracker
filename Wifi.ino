@@ -1,9 +1,9 @@
 #include "./Wifi.h"
 
-WifiModule::WifiModule(LinearActuator inputActuator, WindSpeedSensor inputWindSensor, RTC_DS3231 inputRtc) : server(80){
+WifiModule::WifiModule(LinearActuator* inputActuator, WindSpeedSensor* inputWindSensor, ClockModule*  inputClock) : server(80){
   actuator = inputActuator;
   windSensor = inputWindSensor;
-  rtc = inputRtc;
+  clockModule = inputClock;
 }
 
 
@@ -109,10 +109,10 @@ void WifiModule::checkForClient() {
 
             client.print("<p style=\"font-size:7vw;\">");
             client.print("Wind speed: ");
-            client.print(windSensor.getSpeed());
+            client.print(windSensor->getSpeed());
             client.print("<br/>");
             client.print("Extended to: ");
-            int percentExtended = actuator.getPercentExtended();
+            int percentExtended = actuator->getPercentExtended();
             if(percentExtended != -1){
               client.print(percentExtended);
               client.print("%<br/>");
@@ -127,10 +127,10 @@ void WifiModule::checkForClient() {
             client.print(percentExtended);
             client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
             client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(windSensor.getUpperSpeedMax());
+            client.print(windSensor->getUpperSpeedMax());
             client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
             client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(windSensor.getLowerSpeedMax());
+            client.print(windSensor->getLowerSpeedMax());
             client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
             client.print(R"(</body></html>)");
 
@@ -153,7 +153,7 @@ void WifiModule::checkForClient() {
 
         // Check to see if the client request was "GET /H" or "GET /L":       
         if (currentLine.endsWith("GET /recalibrate")) {
-          actuator.recalibrate();
+          actuator->recalibrate();
           endConnection(client);  
           return;              
         }
@@ -189,7 +189,7 @@ void WifiModule::updateParams(String params){
   }
   if(doc["extendToPercent"]){
     String percent = doc["extendToPercent"];
-    actuator.extendToPercent(percent.toInt());
+    actuator->extendToPercent(percent.toInt());
   }
 }
 
