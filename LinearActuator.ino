@@ -8,6 +8,7 @@ LinearActuator::LinearActuator(void (*inputCallBack)()){
   pinMode(2, INPUT);
   pinMode(PWMBackwardPin, OUTPUT);
   pinMode(PWMForwardPin, OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), this->countSteps, RISING);
   extensionCallBack = inputCallBack;
 }
 

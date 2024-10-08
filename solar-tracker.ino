@@ -24,15 +24,17 @@ bool alarmTriggered = false;
 const int ACTUATOR_INTERRUPT_PIN = 2;
 
 void setup() {
-  Serial.begin(9600);
+
+  Serial.begin(9600); //begining serial here because this is the first class initialized
 
 #ifndef ESP8266
   while (!Serial)
     ;  // wait for serial port to connect. Needed for native USB
 #endif
-
-  attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), actuator.countSteps, RISING);
+  
+  clockModule.setup();
   wifi.setup();
+
   status = ACTIVE;
   Serial.println("Setup complete.");
 
@@ -40,7 +42,6 @@ void setup() {
 
 void loop() {
 
-  
   pollSensorData();
 
   if(clockModule.alarmTriggered()){
@@ -53,7 +54,6 @@ void loop() {
       }
   }
 
-  
   wifi.checkForClient();
 }
 

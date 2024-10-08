@@ -3,7 +3,7 @@
 
 bool ClockModule::isAlarmTriggered = false;
 
-ClockModule::ClockModule(){
+void ClockModule::setup(){
 
   pinMode(RTC_POWER_PIN, OUTPUT);
   digitalWrite(RTC_POWER_PIN, HIGH);
@@ -39,8 +39,6 @@ ClockModule::ClockModule(){
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
-  Serial.println("Starting Setup");
-
   if(!rtc.setAlarm1(
             DateTime(2024, 10, 1, 0, 0, 0),
             DS3231_A1_Minute
@@ -50,6 +48,7 @@ ClockModule::ClockModule(){
       Serial.println("Alarm was set.");
   }
 
+  Serial.println("Setup Clock Module.");
 }
 
 bool ClockModule::alarmTriggered(){

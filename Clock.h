@@ -5,7 +5,7 @@
 
 class ClockModule {
   public:
-    ClockModule();
+    void setup();
     bool alarmTriggered();
     int getDayCompletionPercent();
     int getHalfDayExtensionPercent();
