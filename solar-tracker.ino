@@ -12,6 +12,7 @@ float voltageConversionConstant = 0.004882814;
 int sensorDelay = 1000;
 
 unsigned long sensorTimer = 0;
+unsigned long statusTimer = 0;
 
 int status;
 const int ACTIVE = 1;
@@ -19,9 +20,9 @@ const int NIGHT = 2;
 const int SAFE = 3;
 const int AWAY = 4;
 
-bool alarmTriggered = false;
-
 const int ACTUATOR_INTERRUPT_PIN = 2;
+const int CLOCK_INTERRUPT_PIN = 3;
+
 
 void setup() {
 
@@ -32,8 +33,18 @@ void setup() {
     ;  // wait for serial port to connect. Needed for native USB
 #endif
   
+  attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), actuator.countSteps, RISING);
+
+  pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
+
   clockModule.setup();
   wifi.setup();
+
+  if(millis() - statusTimer > 1000){
+    checkStatus();
+    statusTimer = millis();
+  }
 
   status = ACTIVE;
   Serial.println("Setup complete.");
@@ -44,54 +55,23 @@ void loop() {
 
   pollSensorData();
 
-  if(clockModule.alarmTriggered()){
-      if(clockModule.isActiveHours()){
-        status = ACTIVE;
-        extendActuatorOnHour();
-      } else if (status == ACTIVE){
-        extendActuatorToHalf();
-        status = NIGHT;
-      }
-  }
-
   wifi.checkForClient();
 }
 
 void pollSensorData(){
-  if(millis() - sensorTimer > 1000){
-    // float windSpeed = windSensor.getSpeed();
-    // Serial.print("Wind Speed: ");
-    // Serial.print(windSpeed);
-    // Serial.println();
-    // float temperature = rtc.getTemperature();
-    // Serial.print("Temperature: ");
-    // Serial.print(temperature);
-    // Serial.println();
-    // int percentExtended = actuator.getPercentExtended();
-    // Serial.print("PercentExtended: ");
-    // Serial.print(percentExtended);
-    // Serial.println();
-
-
-    // Serial.print(now.year(), DEC);
-    // Serial.print('/');
-    // Serial.print(now.month(), DEC);
-    // Serial.print('/');
-    // Serial.print(now.day(), DEC);
-    // Serial.print(now.hour(), DEC);
-    // Serial.print(':');
-    // Serial.print(now.minute(), DEC);
-    // Serial.print(':');
-    // Serial.print(now.second(), DEC);
-    // Serial.println();
-    // Serial.println(now.unixtime());
-
-    if(status == ACTIVE && windSensor.highWindCheck()){
-      extendActuatorToHalf();
-      status = SAFE;
-    } else if (status == SAFE && !windSensor.highWindCheck()){
-      status = ACTIVE;
-    }
+  if(millis() - sensorTimer > 10000){
+    float windSpeed = windSensor.getSpeed();
+    Serial.print("Wind Speed: ");
+    Serial.print(windSpeed);
+    Serial.println();
+    float temperature = clockModule.getClockTemp();
+    Serial.print("Temperature: ");
+    Serial.print(temperature);
+    Serial.println();
+    int percentExtended = actuator.getPercentExtended();
+    Serial.print("PercentExtended: ");
+    Serial.print(percentExtended);
+    Serial.println();
     sensorTimer = millis();
   }
 }
@@ -104,5 +84,26 @@ void extendActuatorOnHour(){
 void extendActuatorToHalf(){
   int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
   actuator.extendToPercent(halfDayPercentage);
+}
+
+void checkStatus(){
+  // TODO: Refactor this code to work in this new context
+  // if(status == ACTIVE && windSensor.highWindCheck()){
+  //   extendActuatorToHalf();
+  //   status = SAFE;
+  //   return;
+  // } else if (status == SAFE && !windSensor.highWindCheck()){
+  //   status = ACTIVE;
+  // }
+
+  if(clockModule.isAlarmTriggered()){
+      if(clockModule.isActiveHours()){
+        status = ACTIVE;
+        extendActuatorOnHour();
+      } else if (status == ACTIVE){
+        extendActuatorToHalf();
+        status = NIGHT;
+      }
+  }
 }
 

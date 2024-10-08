@@ -1,7 +1,7 @@
 
 #include "./Clock.h"
 
-bool ClockModule::isAlarmTriggered = false;
+bool ClockModule::alarmTriggered = false;
 
 void ClockModule::setup(){
 
@@ -26,9 +26,6 @@ void ClockModule::setup(){
 
   rtc.disable32K();
 
-  pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), this->setAlarmTriggered, FALLING);
-
   rtc.clearAlarm(1);
   rtc.clearAlarm(2);
   rtc.writeSqwPinMode(DS3231_OFF);
@@ -51,12 +48,12 @@ void ClockModule::setup(){
   Serial.println("Setup Clock Module.");
 }
 
-bool ClockModule::alarmTriggered(){
-  if(!isAlarmTriggered){
+bool ClockModule::isAlarmTriggered(){
+  if(!alarmTriggered){
     return false;
   }
 
-  isAlarmTriggered = false;
+  alarmTriggered = false;
   rtc.clearAlarm(1);
   Serial.println("Alarm detected and cleared.");
   if(!rtc.setAlarm1(
@@ -70,7 +67,7 @@ bool ClockModule::alarmTriggered(){
 }
 
 void ClockModule::setAlarmTriggered() {
-  isAlarmTriggered = true;
+  alarmTriggered = true;
 }
 
 uint8_t ClockModule::getHour(){
@@ -103,4 +100,8 @@ int ClockModule::normalizePercentage(float percent){
 
 bool ClockModule::isActiveHours() {
   return getHour() >= hourStart && getHour() >= hourFinish;
+}
+
+float ClockModule::getClockTemp() {
+  return rtc.getTemperature();
 }
