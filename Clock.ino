@@ -1,10 +1,13 @@
 
 #include "./Clock.h"
 
+bool ClockModule::isAlarmTriggered = false;
+
 ClockModule::ClockModule(){
 
   pinMode(RTC_POWER_PIN, OUTPUT);
   digitalWrite(RTC_POWER_PIN, HIGH);
+  
 
   for(int i = 0; i < 3; i++){
     if (rtc.begin()) {
@@ -22,7 +25,10 @@ ClockModule::ClockModule(){
   }
 
   rtc.disable32K();
+
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), this->setAlarmTriggered, FALLING);
+
   rtc.clearAlarm(1);
   rtc.clearAlarm(2);
   rtc.writeSqwPinMode(DS3231_OFF);
@@ -62,13 +68,6 @@ bool ClockModule::alarmTriggered(){
   }else {
       Serial.println("Alarm was set.");
   }
-  int hour = rtc.now().hour();
-  if(hour <= hourFinish && hour >= hourStart){
-    extendActuatorOnHour(hour);
-  } else if (status == ACTIVE){
-    extendActuatorToHalf();
-    status = NIGHT;
-  }
 }
 
 void ClockModule::setAlarmTriggered() {
@@ -101,4 +100,8 @@ int ClockModule::getHourlyExtensionPercent(){
 int ClockModule::normalizePercentage(float percent){
   float difference = percentFinish - percentStart;
   return (difference * (percent/100)) + percentStart;
+}
+
+bool ClockModule::isActiveHours() {
+  return getHour() >= hourStart && getHour() >= hourFinish;
 }
