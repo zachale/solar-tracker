@@ -118,17 +118,14 @@ void LinearActuator::extendToPercent(float percent){
   }
   int difference;
   for(difference = 1; difference > 0; difference = (targetPos-pos) * dir){
-    if(percent != 0 || percent != 100){
-      if(hitBoundary()){
-        Serial.println("Recalibrating because of unexpected Boundary");
-        recalibrate();
-        extendToPercent(percent);
-        return;
-      }
-      if(extensionCallBack){
-        extensionCallBack();
-      }
-
+    if(hitBoundary()){
+      Serial.println("Recalibrating because of unexpected Boundary");
+      recalibrate();
+      extendToPercent(percent);
+      return;
+    }
+    if(extensionCallBack){
+      extensionCallBack();
     }
     if(difference < 255){
       setSpeed(difference + 100);
