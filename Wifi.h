@@ -12,7 +12,7 @@
 
 class WifiModule {
   public:
-    WifiModule(LinearActuator*, WindSpeedSensor*, ClockModule*);
+    WifiModule(int* trackerStatus, LinearActuator*, WindSpeedSensor*, ClockModule*);
     void setup();
     void checkForClient();
     void printWiFiStatus();
@@ -20,14 +20,18 @@ class WifiModule {
     const char *ssid = "Solar-Tracker";
     int keyIndex = 0;                 
     int status = WL_IDLE_STATUS;
+    int* trackerStatus;
     LinearActuator* actuator;
     WindSpeedSensor* windSensor;
     ClockModule* clockModule;
     WiFiServer server;
+    static const String trackerStatusStrings[];
     void endConnection(WiFiClient client);
-    void updateParams(String params);
+    void getParams(String params);
     void attemptConnection(char*, char*);
     void attemptCreation();
+    void sendDashboardTo(WiFiClient client);
+    void actOnParameter(JsonDocument params);
 };
 
 #endif

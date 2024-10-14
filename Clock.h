@@ -13,6 +13,11 @@ class ClockModule {
     int getHourlyExtensionPercent();
     bool isActiveHours();
     float getClockTemp();
+    String getFullTimeString();
+    String getSimpleTimeString();
+    uint32_t getTimestamp();
+    void setSimpleTime(int hour, int minute);
+    void wifiRecalibrate();
   private:
     static bool alarmTriggered;
     RTC_DS3231 rtc;
@@ -22,8 +27,10 @@ class ClockModule {
     float hourFinish = 21;
     float percentStart = 20;
     float percentFinish = 80;
-    uint8_t getHour();
     int getPercentOfDay(float hour);
     int normalizePercentage(float percent);
+    uint8_t getHour();
+    uint8_t getMinute();
+    uint8_t getSecond();
   };
 #endif
