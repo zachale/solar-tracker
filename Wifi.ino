@@ -1,10 +1,13 @@
 #include "./Wifi.h"
 
-WifiModule::WifiModule(LinearActuator* inputActuator, WindSpeedSensor* inputWindSensor, ClockModule*  inputClock) : server(80){
+WifiModule::WifiModule(int* inputStatus, LinearActuator* inputActuator, WindSpeedSensor* inputWindSensor, ClockModule*  inputClock) : server(80){
   actuator = inputActuator;
   windSensor = inputWindSensor;
   clockModule = inputClock;
+  trackerStatus = inputStatus;
 }
+
+const String WifiModule::trackerStatusStrings[] =  {"Active",  "Night Mode", "Safe Mode", "Away Mode"};
 
 
 void WifiModule::setup() {
@@ -95,47 +98,11 @@ void WifiModule::checkForClient() {
           if (currentLine.length() == 0 && newLineCount > 5) {
 
             if(isPost){
-              updateParams(client.readString());
+              getParams(client.readString());
             }
+      
+            sendDashboardTo(client);
 
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-            // and a content-type so the client knows what's coming, then a blank line:
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println();
-
-            client.print(R"(<!DOCTYPE HTML><html><head><title>Solar Tracker Dashboard</title></head><body>)");
-
-
-            client.print("<p style=\"font-size:7vw;\">");
-            client.print("Wind speed: ");
-            client.print(windSensor->getSpeed());
-            client.print("<br/>");
-            client.print("Extended to: ");
-            int percentExtended = actuator->getPercentExtended();
-            if(percentExtended != -1){
-              client.print(percentExtended);
-              client.print("%<br/>");
-            } else {
-              client.print("Please recalibrate");
-            }
-            client.print("</p>");
-            client.print("<br/>");
-            client.print("<a href=\"/recalibrate\"><button style=\"font-size:7vw;\">Recalibrate</button></a>");
-            client.print(R"(<div style="font-size:7vw;"><form action="/" method="POST">)");
-            client.print(R"(Extend To<input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(percentExtended);
-            client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
-            client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(windSensor->getUpperSpeedMax());
-            client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
-            client.print(R"(Set upper wind speed max: <input style="font-size:7vw;" type="number" max="100" min ="0" name="extendToPercent"  value=\")");
-            client.print(windSensor->getLowerSpeedMax());
-            client.print(R"("\"><input type="submit" style="font-size:7vw;" value="Submit"></form><div/>)");
-            client.print(R"(</body></html>)");
-
-            // The HTTP response ends with another blank line:
-            client.println();
             // break out of the while loop:
             break;
           }
@@ -164,10 +131,10 @@ void WifiModule::checkForClient() {
   }
 }
 
-void WifiModule::updateParams(String params){
+void WifiModule::getParams(String params){
   int index = params.indexOf("&");
   bool parseMultiParams = index == -1 ? false : true;
-  JsonDocument doc;
+  JsonDocument docParams;
   std::vector<char*> collection;
   char buf[params.length()+1];
   params.toCharArray(buf, sizeof(buf));
@@ -185,11 +152,65 @@ void WifiModule::updateParams(String params){
   for(int i = 0; i < collection.size(); i++){
     String title = strtok(collection[i], "=");
     String description = strtok(NULL,"");
-    doc[title] = description;
+    docParams[title] = description;
   }
-  if(doc["extendToPercent"]){
-    String percent = doc["extendToPercent"];
-    actuator->extendToPercent(percent.toInt());
+  actOnParameter(docParams);
+}
+
+void WifiModule::actOnParameter(JsonDocument params){
+
+  Serial.println("Acting on param");
+  String output;
+  serializeJson(params, output);  
+  Serial.println(output);
+
+
+  if (params["status"]) {
+    *trackerStatus = params["status"].as<int>();
+  }
+
+  if (params["recalibrateActuator"]) {
+    actuator->recalibrate();
+  }
+
+  if (params["extendToPercent"]) {
+    int extendTo = params["extendToPercent"].as<int>();
+    actuator->extendToPercent(extendTo);
+  }
+
+  if (params["windUpperMaxSpeed"]) {
+    float windUpperMax = params["windUpperMaxSpeed"].as<float>();
+    windSensor->setUpperSpeedMax(windUpperMax / 3.6);
+  }
+
+  if (params["windUpperWait"]) {
+    float windUpperWait = params["windUpperWait"].as<float>();
+    windSensor->setUpperSpeedDelay(windUpperWait / 3.6);
+  }
+
+  if (params["windLowerSpeedMax"]) {
+    float windLowerMax = params["windLowerSpeedMax"].as<float>();
+    windSensor->setLowerSpeedMax(windLowerMax);
+  }
+
+  if (params["windLowerWait"]) {
+    int windLowerWait = params["windLowerWait"].as<float>();
+    windSensor->setLowerSpeedDelay(windLowerWait);
+  }
+
+  if (params["setTime"].is<String>()) {
+    String timeStr = params["setTime"];
+    char* delimiter = "%3A"; // This delimiter is the character ':' url encoded
+    int index = timeStr.indexOf(delimiter);
+    Serial.println(timeStr);
+    Serial.println(index);
+    int hour = timeStr.substring(0, index).toInt();
+    int minute = timeStr.substring(index + 3).toInt();
+    clockModule->setSimpleTime(hour, minute);
+  }
+
+  if (params["recalibrateTime"].is<bool>()) {
+    clockModule->wifiRecalibrate();
   }
 }
 
@@ -212,4 +233,102 @@ void WifiModule::printWiFiStatus() {
   Serial.print("To see this page in action, open a browser to http://");
   Serial.println(ip);
 
+}
+
+// Prints dashboard HTML to connected client
+void WifiModule::sendDashboardTo(WiFiClient client){
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-type:text/html");
+  client.println();
+  client.print(R"(<!DOCTYPE HTML><html><head><title>Solar Tracker Dashboard</title><style>)");
+  client.print(R"(body {padding: 10px;} section {padding-left: 2rem;padding-right: 2rem;margin-bottom: 4px;font-size:5vw;} input {margin-bottom:8px;})");
+  client.print(R"(</style></head><body>)");
+
+  client.print(R"(<h1 style="font-size:10vw;">Dashboard</h1>)");
+
+  client.print(R"(<section><p style="font-size:5vw;">)");
+  client.print("Wind speed: ");
+  client.print(windSensor->getSpeed());  // Placeholder: wind speed from sensor
+  client.print("<br/>");
+
+  client.print("Extended to: ");
+  client.print(actuator->getPercentExtended());  // Placeholder: percent extended from actuator
+  client.print("%<br/>");
+
+  client.print("Time: ");
+  client.print(clockModule->getFullTimeString());  // Placeholder: current time from clock module
+  client.print("<br/>");
+
+  client.print("Status: ");
+  client.print(trackerStatusStrings[*trackerStatus]);  // Placeholder: tracker status, e.g., HIGH_WIND, ACTIVE, etc.
+  client.print(R"(</p></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="ACTIVE">Set Active</button>)");
+  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="SAFE">Set Safe</button>)");
+  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="AWAY">Set Away</button>)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<h1 style="font-size:7vw;">Actuator</h1>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print(R"(<button type="submit" style="font-size:5vw;" name="recalibrateActuator" value="true">Recalibrate</button>)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Extend To ");
+  client.print(R"(<input style="font-size:5vw;" type="number" max="100" min="0" name="extendToPercent" value=")");
+  client.print(actuator->getPercentExtended());
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<h1 style="font-size:7vw;">Wind Sensor</h1>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Set upper threshold wind speed max (m/s): ");
+  client.print(R"(<input style="font-size:5vw;" type="number" max="32" min="0" name="windUpperMaxSpeed" value=")");
+  client.print(windSensor->getUpperSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Set upper threshold wait period (seconds): ");
+  client.print(R"(<input style="font-size:5vw;" type="number" max="32" min="0" name="windUpperWait" value=")");
+  client.print(windSensor->getUpperSpeedDelay() / 6000); // upper wind threshold wait period miliseconds converted to minutes
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Set lower threshold wind speed max (m/s): ");
+  client.print(R"(<input style="font-size:5vw;" type="number" max="100" min="0" name="windLowerSpeedMax" value=")");
+  client.print(windSensor->getLowerSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Set lower threshold wait period (seconds): ");
+  client.print(R"(<input style="font-size:5vw;" type="number" max="100" min="0" name="windLowerWait" value=")");
+  client.print(windSensor->getLowerSpeedDelay() / 6000); // lower wind threshold wait period miliseconds converted to minutes
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<h1 style="font-size:7vw;">Clock</h1>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print("Set time (HH:MM - 24 hour format): ");
+  client.print(R"(<input style="font-size:5vw;" type="text" pattern="^([01]\d|2[0-3]):([0-5]\d)$" name="setTime" value=")");
+  client.print(clockModule->getSimpleTimeString());
+  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print(R"(<button type="submit" style="font-size:5vw;" name="recalibrateTime" value="true">Recalibrate using internet</button>)");
+  client.print(R"(</form></section>)");
+
+  client.print("Timestamp: ");
+  client.print(clockModule->getTimestamp());
+  client.print(R"(</body></html>)");
+  
+  // The HTTP response ends with another blank line:
+  client.println();
 }

@@ -74,6 +74,14 @@ uint8_t ClockModule::getHour(){
   return rtc.now().hour();
 }
 
+uint8_t ClockModule::getMinute(){
+  return rtc.now().minute();
+}
+
+uint8_t ClockModule::getSecond(){
+  return rtc.now().second();
+}
+
 int ClockModule::getPercentOfDay(float hour){
   return  (hour - hourStart)/(hourFinish - hourStart) * 100;
 }
@@ -99,9 +107,42 @@ int ClockModule::normalizePercentage(float percent){
 }
 
 bool ClockModule::isActiveHours() {
-  return getHour() >= hourStart && getHour() >= hourFinish;
+  return (getHour() >= hourStart && getHour() <= hourFinish);
 }
 
 float ClockModule::getClockTemp() {
   return rtc.getTemperature();
+}
+
+String ClockModule::getSimpleTimeString(){
+  String result = "";
+  result.concat(getHour());
+  result.concat(":");
+  result.concat(getMinute());
+  return result;
+}
+
+String ClockModule::getFullTimeString(){
+  String  result = "";
+  result.concat(getHour());
+  result.concat(":");
+  result.concat(getMinute());
+  result.concat(":");
+  result.concat(getSecond());
+  return result;
+}
+
+uint32_t ClockModule::getTimestamp(){
+  return rtc.now().unixtime();
+}
+
+void ClockModule::setSimpleTime(int hour, int minute){
+  uint16_t year = rtc.now().year();
+  uint8_t  month = rtc.now().month();
+  uint8_t day = rtc.now().day();
+  rtc.adjust(DateTime(year, month, day, hour, minute, 0));
+}
+
+void ClockModule::wifiRecalibrate(){
+  Serial.println("TODO: Call API for time");
 }

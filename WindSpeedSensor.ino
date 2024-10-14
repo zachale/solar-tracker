@@ -15,6 +15,10 @@ float WindSpeedSensor::getUpperSpeedMax() {
 }
 
 void WindSpeedSensor::setUpperSpeedMax(float inputSpeed) {
+  Serial.println("Updated upper wind speed to");
+  Serial.print(inputSpeed);
+  Serial.print(" from ");
+  Serial.print(upperSpeedMax);
   upperSpeedMax = inputSpeed;
 }
 
@@ -23,46 +27,58 @@ float WindSpeedSensor::getLowerSpeedMax(){
 }
 
 void WindSpeedSensor::setLowerSpeedMax(float inputSpeed) {
+  Serial.println("Updated upper wind speed to");
+  Serial.print(inputSpeed);
+  Serial.print(" from ");
+  Serial.print(lowerSpeedMax);
   lowerSpeedMax = inputSpeed;
 }
 
-void WindSpeedSensor::setHighSpeedDelay(unsigned long inputDelay){
-  highSpeedDelay = inputDelay;
+void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay){
+  Serial.println("Updated upper wind speed to");
+  Serial.print(inputDelay);
+  Serial.print(" from ");
+  Serial.print(upperSpeedDelay);
+  upperSpeedDelay = inputDelay;
 }
 
-unsigned long WindSpeedSensor::getHighSpeedDelay(){
-  return highSpeedDelay;
+unsigned long WindSpeedSensor::getUpperSpeedDelay(){
+  return upperSpeedDelay;
 }
 
-void WindSpeedSensor::setLowSpeedDelay(unsigned long inputDelay){
-  lowSpeedDelay = inputDelay;
+void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay){
+  Serial.println("Updated upper wind speed to");
+  Serial.print(inputDelay);
+  Serial.print(" from ");
+  Serial.print(lowerSpeedDelay);
+  lowerSpeedDelay = inputDelay;
 }
 
-unsigned long WindSpeedSensor::getLowSpeedDelay(){
-  return lowSpeedDelay;
+unsigned long WindSpeedSensor::getLowerSpeedDelay(){
+  return lowerSpeedDelay;
 }
 
-bool WindSpeedSensor::isMaintainingHighSpeed(){
+bool WindSpeedSensor::isMaintainingUpperSpeed(){
   if(getSpeed() > getUpperSpeedMax()){
-    if(!highSpeedTimer){
+    if(!upperSpeedTimer){
       setStatus(GUST_DETECTED);
-      highSpeedTimer = millis(); 
-    } else if(millis() - highSpeedTimer > highSpeedDelay){
+      upperSpeedTimer = millis(); 
+    } else if(millis() - upperSpeedTimer > upperSpeedDelay){
       setStatus(HIGH_WIND);
-      highSpeedTimer = 0;
+      upperSpeedTimer = 0;
       return true;
     }
   }
   return false;
 }
 
-bool WindSpeedSensor::isMaintainingLowSpeed(){
+bool WindSpeedSensor::isMaintainingLowerSpeed(){
   if(getSpeed() < getLowerSpeedMax()){
-    if(!lowSpeedTimer){
-      lowSpeedTimer = millis(); 
-    } else if (millis() - highSpeedTimer > lowSpeedDelay){
+    if(!lowerSpeedTimer){
+      lowerSpeedTimer = millis(); 
+    } else if (millis() - upperSpeedTimer > lowerSpeedDelay){
       setStatus(ACTIVE);
-      lowSpeedTimer = 0;
+      lowerSpeedTimer = 0;
       return true;
     }
   }
@@ -76,9 +92,9 @@ bool WindSpeedSensor::highWindCheck(){
   // if wind is high, start 1 minute timer
   // if wind stays high -> continue
   // if wind goes low -> cancel timer
-  if(status != HIGH_WIND && isMaintainingHighSpeed()){
+  if(status != HIGH_WIND && isMaintainingUpperSpeed()){
     return true;
-  } else if (status == HIGH_WIND && isMaintainingLowSpeed()){
+  } else if (status == HIGH_WIND && isMaintainingLowerSpeed()){
     return false;
   } 
 
