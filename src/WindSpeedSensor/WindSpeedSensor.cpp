@@ -1,20 +1,26 @@
 #include "./WindSpeedSensor.h"
 
-int WindSpeedSensor::getSpeed() {
+int WindSpeedSensor::getSpeed()
+{
   float sensorValue = analogRead(WIND_SENSOR_PIN);
   float sensorVoltage = sensorValue * voltageConversionConstant;
-  if (sensorVoltage <= windVoltageMin) {
+  if (sensorVoltage <= windVoltageMin)
+  {
     return 0;
-  } else {
+  }
+  else
+  {
     return (sensorVoltage - windVoltageMin) * windSpeedMax / (windVoltageMax - windVoltageMin);
   }
 }
 
-float WindSpeedSensor::getUpperSpeedMax() {
+float WindSpeedSensor::getUpperSpeedMax()
+{
   return upperSpeedMax;
 }
 
-void WindSpeedSensor::setUpperSpeedMax(float inputSpeed) {
+void WindSpeedSensor::setUpperSpeedMax(float inputSpeed)
+{
   Serial.println("Updated upper wind speed to");
   Serial.print(inputSpeed);
   Serial.print(" from ");
@@ -22,11 +28,13 @@ void WindSpeedSensor::setUpperSpeedMax(float inputSpeed) {
   upperSpeedMax = inputSpeed;
 }
 
-float WindSpeedSensor::getLowerSpeedMax(){
+float WindSpeedSensor::getLowerSpeedMax()
+{
   return lowerSpeedMax;
 }
 
-void WindSpeedSensor::setLowerSpeedMax(float inputSpeed) {
+void WindSpeedSensor::setLowerSpeedMax(float inputSpeed)
+{
   Serial.println("Updated upper wind speed to");
   Serial.print(inputSpeed);
   Serial.print(" from ");
@@ -34,7 +42,8 @@ void WindSpeedSensor::setLowerSpeedMax(float inputSpeed) {
   lowerSpeedMax = inputSpeed;
 }
 
-void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay){
+void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay)
+{
   Serial.println("Updated upper wind speed to");
   Serial.print(inputDelay);
   Serial.print(" from ");
@@ -42,11 +51,13 @@ void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay){
   upperSpeedDelay = inputDelay;
 }
 
-unsigned long WindSpeedSensor::getUpperSpeedDelay(){
+unsigned long WindSpeedSensor::getUpperSpeedDelay()
+{
   return upperSpeedDelay;
 }
 
-void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay){
+void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay)
+{
   Serial.println("Updated upper wind speed to");
   Serial.print(inputDelay);
   Serial.print(" from ");
@@ -54,16 +65,22 @@ void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay){
   lowerSpeedDelay = inputDelay;
 }
 
-unsigned long WindSpeedSensor::getLowerSpeedDelay(){
+unsigned long WindSpeedSensor::getLowerSpeedDelay()
+{
   return lowerSpeedDelay;
 }
 
-bool WindSpeedSensor::isMaintainingUpperSpeed(){
-  if(getSpeed() > getUpperSpeedMax()){
-    if(!upperSpeedTimer){
+bool WindSpeedSensor::isMaintainingUpperSpeed()
+{
+  if (getSpeed() > getUpperSpeedMax())
+  {
+    if (!upperSpeedTimer)
+    {
       setStatus(GUST_DETECTED);
-      upperSpeedTimer = millis(); 
-    } else if(millis() - upperSpeedTimer > upperSpeedDelay){
+      upperSpeedTimer = millis();
+    }
+    else if (millis() - upperSpeedTimer > upperSpeedDelay)
+    {
       setStatus(HIGH_WIND);
       upperSpeedTimer = 0;
       return true;
@@ -72,11 +89,16 @@ bool WindSpeedSensor::isMaintainingUpperSpeed(){
   return false;
 }
 
-bool WindSpeedSensor::isMaintainingLowerSpeed(){
-  if(getSpeed() < getLowerSpeedMax()){
-    if(!lowerSpeedTimer){
-      lowerSpeedTimer = millis(); 
-    } else if (millis() - upperSpeedTimer > lowerSpeedDelay){
+bool WindSpeedSensor::isMaintainingLowerSpeed()
+{
+  if (getSpeed() < getLowerSpeedMax())
+  {
+    if (!lowerSpeedTimer)
+    {
+      lowerSpeedTimer = millis();
+    }
+    else if (millis() - upperSpeedTimer > lowerSpeedDelay)
+    {
       setStatus(ACTIVE);
       lowerSpeedTimer = 0;
       return true;
@@ -87,20 +109,25 @@ bool WindSpeedSensor::isMaintainingLowerSpeed(){
 
 // If windspeed is high for 1 minute -> flatten
 // If windspeed is low for 15 minutes -> go back to normal
-bool WindSpeedSensor::highWindCheck(){
+bool WindSpeedSensor::highWindCheck()
+{
 
   // if wind is high, start 1 minute timer
   // if wind stays high -> continue
   // if wind goes low -> cancel timer
-  if(status != HIGH_WIND && isMaintainingUpperSpeed()){
+  if (status != HIGH_WIND && isMaintainingUpperSpeed())
+  {
     return true;
-  } else if (status == HIGH_WIND && isMaintainingLowerSpeed()){
+  }
+  else if (status == HIGH_WIND && isMaintainingLowerSpeed())
+  {
     return false;
-  } 
+  }
 
   return false;
 }
 
-void WindSpeedSensor::setStatus(int inputStatus) {
+void WindSpeedSensor::setStatus(int inputStatus)
+{
   status = inputStatus;
 }

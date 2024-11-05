@@ -1,7 +1,7 @@
-#include "./Clock.h"
-#include "./LinearActuator.h"
-#include "./WindSpeedSensor.h"
-#include "./Wifi.h"
+#include "./src/Clock/Clock.h"
+#include "./src/LinearActuator/LinearActuator.h"
+#include "./src/WindSpeedSensor/WindSpeedSensor.h"
+#include "./src/Wifi/Wifi.h"
 
 int status = 0;
 const int ACTIVE = 0;
@@ -14,27 +14,24 @@ LinearActuator actuator(loop);
 WindSpeedSensor windSensor;
 WifiModule wifi(&status, &actuator, &windSensor, &clockModule);
 
-float voltageConversionConstant = 0.004882814;
 int sensorDelay = 1000;
 
 unsigned long sensorTimer = 0;
 unsigned long statusTimer = 0;
 
-
-
 const int ACTUATOR_INTERRUPT_PIN = 2;
 const int CLOCK_INTERRUPT_PIN = 3;
 
+void setup()
+{
 
-void setup() {
-
-  Serial.begin(9600); //begining serial here because this is the first class initialized
+  Serial.begin(9600); // begining serial here because this is the first class initialized
 
 #ifndef ESP8266
   while (!Serial)
-    ;  // wait for serial port to connect. Needed for native USB
+    ; // wait for serial port to connect. Needed for native USB
 #endif
-  
+
   attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), actuator.countSteps, RISING);
 
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
@@ -43,26 +40,30 @@ void setup() {
   clockModule.setup();
   wifi.setup();
 
-  if(millis() - statusTimer > 1000){
-    checkStatus();
+  if (millis() - statusTimer > 1000)
+  {
+    updateStatus();
     statusTimer = millis();
   }
 
-  status = ACTIVE;
+  updateStatus();
   Serial.println("Setup complete.");
-  checkStatus();
 }
 
-void loop() {
+void loop()
+{
   pollSensorData();
   wifi.checkForClient();
-  if(clockModule.isAlarmTriggered()){
-    checkStatus();
+  if (clockModule.isAlarmTriggered())
+  {
+    updateStatus();
   }
 }
 
-void pollSensorData(){
-  if(millis() - sensorTimer > 10000){
+void pollSensorData()
+{
+  if (millis() - sensorTimer > 10000)
+  {
     float windSpeed = windSensor.getSpeed();
     Serial.print("Wind Speed: ");
     Serial.print(windSpeed);
@@ -77,21 +78,26 @@ void pollSensorData(){
     Serial.println();
     Serial.println(clockModule.getFullTimeString());
     Serial.println(clockModule.getTimestamp());
+    Serial.print("Status:");
+    Serial.println(status);
     sensorTimer = millis();
   }
 }
 
-void extendActuatorOnHour(){
+void extendActuatorOnHour()
+{
   int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
   actuator.extendToPercent(dayCompletePercentage);
 }
 
-void extendActuatorToHalf(){
+void extendActuatorToHalf()
+{
   int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
   actuator.extendToPercent(halfDayPercentage);
 }
 
-void checkStatus(){
+void updateStatus()
+{
   // TODO: Refactor this code to work in this new context
   // if(status == ACTIVE && windSensor.highWindCheck()){
   //   extendActuatorToHalf();
@@ -101,15 +107,35 @@ void checkStatus(){
   //   status = ACTIVE;
   // }
 
-      if(clockModule.isActiveHours()){
-        status = ACTIVE;
-        Serial.println("Active hours");
-        extendActuatorOnHour();
-      } else if (status == ACTIVE){
-        Serial.println("Night Time");
-        extendActuatorToHalf();
-        status = NIGHT;
-      }
-  
+  if (clockModule.isActiveHours())
+  {
+    status = ACTIVE;
+    Serial.println("Active hours");
+    extendActuatorOnHour();
+  }
+  else if (status == ACTIVE)
+  {
+    status = NIGHT;
+    Serial.println("Night Time");
+    extendActuatorToHalf();
+  }
 }
 
+void actOnStatus()
+{
+  if (status == ACTIVE)
+  {
+    Serial.println("Active hours");
+    extendActuatorOnHour();
+  }
+  else if (status == AWAY)
+  {
+    Serial.println("Night Time");
+    extendActuatorToHalf();
+  }
+  else if (status == SAFE)
+  {
+    Serial.println("Safe Mode");
+    extendActuatorToHalf();
+  }
+}

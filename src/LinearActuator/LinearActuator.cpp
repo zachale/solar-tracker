@@ -1,52 +1,62 @@
 #include "./LinearActuator.h"
 
-
 long LinearActuator::steps = 0;
 unsigned long LinearActuator::lastStepTime = 0;
 
-LinearActuator::LinearActuator(void (*inputCallBack)()){
+LinearActuator::LinearActuator(void (*inputCallBack)())
+{
   pinMode(2, INPUT);
   pinMode(PWMBackwardPin, OUTPUT);
   pinMode(PWMForwardPin, OUTPUT);
   extensionCallBack = inputCallBack;
 }
 
-void LinearActuator::countSteps() {
-  if(micros()-lastStepTime > trigDelay){
+void LinearActuator::countSteps()
+{
+  if (micros() - lastStepTime > trigDelay)
+  {
     steps++;
     lastStepTime = micros();
   }
 }
 
-void LinearActuator::updatePos(){
+void LinearActuator::updatePos()
+{
   pos = pos + steps * dir;
   steps = 0;
 }
 
-int LinearActuator::getPercentExtended(){
-  if(!maxPos){
+int LinearActuator::getPercentExtended()
+{
+  if (!maxPos)
+  {
     return -1;
   }
   return percentExtended = ((float)pos / (float)maxPos) * 100;
 }
 
-void LinearActuator::recalibrate(){
+void LinearActuator::recalibrate()
+{
   Serial.println("Attempting to recalibrate");
   delay(5000);
   home();
   max();
 }
 
-void LinearActuator::home(){
+void LinearActuator::home()
+{
   Serial.println("homing");
   extend(BACKWARD);
   isHomed == 0;
-  while(isHomed == 0){
+  while (isHomed == 0)
+  {
     setStatus(HOMING);
-    if(extensionCallBack){
+    if (extensionCallBack)
+    {
       extensionCallBack();
     }
-    if(hitBoundary()){
+    if (hitBoundary())
+    {
       pos = 0;
       isHomed = 1;
       break;
@@ -55,17 +65,21 @@ void LinearActuator::home(){
   extend(STOP);
 }
 
-void LinearActuator::max(){
+void LinearActuator::max()
+{
   Serial.println("maxing");
   extend(FORWARD);
   isMaxed = 0;
-  while(isMaxed == 0){
+  while (isMaxed == 0)
+  {
     updatePos();
     setStatus(MAXING);
-    if(extensionCallBack){
+    if (extensionCallBack)
+    {
       extensionCallBack();
     }
-    if(hitBoundary()){
+    if (hitBoundary())
+    {
       maxPos = pos;
       isMaxed = 1;
       break;
@@ -74,62 +88,82 @@ void LinearActuator::max(){
   extend(STOP);
 }
 
-void LinearActuator::extend(int inputDir){
+void LinearActuator::extend(int inputDir)
+{
   prevTimer = millis();
-  if(inputDir == FORWARD){
+  if (inputDir == FORWARD)
+  {
     setDirection(FORWARD);
     setSpeeds(speed, 0);
-  } else if(inputDir == BACKWARD){
+  }
+  else if (inputDir == BACKWARD)
+  {
     setDirection(BACKWARD);
     setSpeeds(0, speed);
-  } else {
+  }
+  else
+  {
     speed = 255;
     setSpeeds(0, 0);
     delay(500);
   }
-  
 }
 
-void LinearActuator::setSpeeds(int forward, int backward){
+void LinearActuator::setSpeeds(int forward, int backward)
+{
   analogWrite(PWMBackwardPin, backward);
   analogWrite(PWMForwardPin, forward);
 }
 
-void LinearActuator::extendToPercent(float percent){
+void LinearActuator::extendToPercent(float percent)
+{
   Serial.print("Extending to");
   Serial.print(percent);
   Serial.print("\n");
   updatePos();
-  if(percent == 0){
+  if (percent == 0)
+  {
     home();
     return;
-  } else if(percent == 100) {
+  }
+  else if (percent == 100)
+  {
     max();
     return;
   }
-  if(maxPos == 0){
+  if (maxPos == 0)
+  {
     recalibrate();
   }
   float targetPos = getPosFromPercent(percent);
-  if(pos < targetPos){
+  if (pos < targetPos)
+  {
     extend(FORWARD);
-  } else {
+  }
+  else
+  {
     extend(BACKWARD);
   }
   int difference;
-  for(difference = 1; difference > 0; difference = (targetPos-pos) * dir){
-    if(hitBoundary()){
+  for (difference = 1; difference > 0; difference = (targetPos - pos) * dir)
+  {
+    if (hitBoundary())
+    {
       Serial.println("Recalibrating because of unexpected Boundary");
       recalibrate();
       extendToPercent(percent);
       return;
     }
-    if(extensionCallBack){
+    if (extensionCallBack)
+    {
       extensionCallBack();
     }
-    if(difference < 255){
+    if (difference < 255)
+    {
       setSpeed(difference + 100);
-    } else {
+    }
+    else
+    {
       setSpeed(255);
     }
     updatePos();
@@ -137,36 +171,44 @@ void LinearActuator::extendToPercent(float percent){
   extend(STOP);
 }
 
-void LinearActuator::setSpeed(int input){
+void LinearActuator::setSpeed(int input)
+{
   speed = input;
   extend(dir);
 }
 
-int LinearActuator::getPosFromPercent(float percent){
-  return maxPos * (percent/100);
+int LinearActuator::getPosFromPercent(float percent)
+{
+  return maxPos * (percent / 100);
 }
 
-bool LinearActuator::hitBoundary(){
-  if(prevSteps == steps){
-    if( millis() - prevTimer > 1000){
+bool LinearActuator::hitBoundary()
+{
+  if (prevSteps == steps)
+  {
+    if (millis() - prevTimer > 1000)
+    {
       Serial.println("boundary hit");
       steps = 0;
       prevTimer = millis();
       return true;
     }
-  } else {
+  }
+  else
+  {
     prevSteps = steps;
     prevTimer = millis();
   }
   return false;
 }
 
-void LinearActuator::setStatus(int inputCode){
+void LinearActuator::setStatus(int inputCode)
+{
   status = inputCode;
 }
 
-void LinearActuator::setDirection(int direction){
+void LinearActuator::setDirection(int direction)
+{
   setStatus(direction);
   dir = direction;
 }
-
