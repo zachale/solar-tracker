@@ -19,7 +19,8 @@ public:
   unsigned long getUpperSpeedDelay();
   void setLowerSpeedDelay(unsigned long);
   unsigned long getLowerSpeedDelay();
-  bool highWindCheck();
+  bool enteringHighWind();
+  bool exitingHighWind();
 
 private:
   const static int WIND_SENSOR_PIN = A3;
