@@ -1,14 +1,9 @@
 #include "./Wifi.h"
 
-WifiModule::WifiModule(int *inputStatus, LinearActuator *inputActuator, WindSpeedSensor *inputWindSensor, ClockModule *inputClock) : server(80)
+WifiModule::WifiModule(SolarTracker *inputTracker) : server(80)
 {
-  actuator = inputActuator;
-  windSensor = inputWindSensor;
-  clockModule = inputClock;
-  trackerStatus = inputStatus;
+  tracker = inputTracker;
 }
-
-const String WifiModule::trackerStatusStrings[] = {"Active", "Night Mode", "Safe Mode", "Away Mode"};
 
 void WifiModule::setup()
 {

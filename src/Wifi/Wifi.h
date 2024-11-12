@@ -4,14 +4,12 @@
 #include "WiFiS3.h"
 #include <ArduinoJson.h>
 
-#include "../LinearActuator/LinearActuator.h"
-#include "../WindSpeedSensor/WindSpeedSensor.h"
-#include "../Clock/Clock.h"
+#include "../SolarTracker/SolarTracker.h"
 
 class WifiModule
 {
 public:
-  WifiModule(int *trackerStatus, LinearActuator *, WindSpeedSensor *, ClockModule *);
+  WifiModule(SolarTracker *tracker);
   void setup();
   void checkForClient();
   void printWiFiStatus();
@@ -20,10 +18,7 @@ private:
   const char *ssid = "Solar-Tracker";
   int keyIndex = 0;
   int status = WL_IDLE_STATUS;
-  int *trackerStatus;
-  LinearActuator *actuator;
-  WindSpeedSensor *windSensor;
-  ClockModule *clockModule;
+  SolarTracker *tracker;
   WiFiServer server;
   static const String trackerStatusStrings[];
   void endConnection(WiFiClient client);
