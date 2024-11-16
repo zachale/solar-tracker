@@ -14,6 +14,7 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  wifiClient.setup();
   setStatus(ACTIVE);
 }
 

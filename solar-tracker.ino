@@ -2,7 +2,7 @@
 #include "./src/SolarTracker/SolarTracker.h"
 
 SolarTracker tracker(loop);
-WifiModule wifi(&tracker);
+// WifiModule wifi(&tracker);
 
 void setup()
 {
@@ -15,12 +15,12 @@ void setup()
 #endif
 
   tracker.setup();
-  wifi.setup();
+  // wifi.setup();
   Serial.println("Setup complete.");
 }
 
 void loop()
 {
   tracker.pollSensorData();
-  wifi.checkForClient();
+  // wifi.checkForClient();
 }

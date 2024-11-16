@@ -6,19 +6,17 @@ void ClockModule::setup()
 {
 
   pinMode(RTC_POWER_PIN, OUTPUT);
-  digitalWrite(RTC_POWER_PIN, HIGH);
 
   for (int i = 0; i < 3; i++)
   {
+    digitalWrite(RTC_POWER_PIN, HIGH);
     if (rtc.begin())
     {
       break;
     }
     digitalWrite(RTC_POWER_PIN, LOW);
     Serial.println("Couldn't find RTC");
-    Serial.flush();
     delay(5000);
-    digitalWrite(RTC_POWER_PIN, HIGH);
   }
 
   if (!rtc.begin())

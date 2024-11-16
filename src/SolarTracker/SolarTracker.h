@@ -4,6 +4,7 @@
 #include "../Clock/Clock.h"
 #include "../LinearActuator/LinearActuator.h"
 #include "../WindSpeedSensor/WindSpeedSensor.h"
+#include "../WifiClient/WifiClient.h"
 #include <Arduino.h>
 
 class SolarTracker
@@ -29,6 +30,7 @@ public:
 
 private:
   Status status = ACTIVE;
+  WifiClient wifiClient;
   static const String statusStrings[];
   unsigned long sensorTimer;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
