@@ -13,7 +13,6 @@ public:
   void setup();
   void checkForClient();
   void printWiFiStatus();
-
 private:
   const char *ssid = "Solar-Tracker";
   int keyIndex = 0;

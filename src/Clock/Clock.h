@@ -26,7 +26,7 @@ private:
   const int RTC_POWER_PIN = 8;
   const int HALF_DAY_PERCENT = 50; // 50 Percent to describe 1/2 of a day
   float hourStart = 8;
-  float hourFinish = 21;
+  float hourFinish = 20;
   float percentStart = 20;
   float percentFinish = 80;
   int getPercentOfDay(float hour);

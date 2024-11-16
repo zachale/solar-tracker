@@ -138,7 +138,7 @@ void WifiModule::checkForClient()
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /recalibrate"))
         {
-          actuator->recalibrate();
+          tracker->actuator.recalibrate();
           endConnection(client);
           return;
         }
@@ -191,42 +191,42 @@ void WifiModule::actOnParameter(JsonDocument params)
 
   if (params["status"])
   {
-    *trackerStatus = params["status"].as<int>();
+    tracker->setStatus(params["status"].as<SolarTracker::Status>());
   }
 
   if (params["recalibrateActuator"])
   {
-    actuator->recalibrate();
+    tracker->actuator.recalibrate();
   }
 
   if (params["extendToPercent"])
   {
     int extendTo = params["extendToPercent"].as<int>();
-    actuator->extendToPercent(extendTo);
+    tracker->actuator.extendToPercent(extendTo);
   }
 
   if (params["windUpperMaxSpeed"])
   {
     float windUpperMax = params["windUpperMaxSpeed"].as<float>();
-    windSensor->setUpperSpeedMax(windUpperMax / 3.6);
+    tracker->windSensor.setUpperSpeedMax(windUpperMax / 3.6);
   }
 
   if (params["windUpperWait"])
   {
     float windUpperWait = params["windUpperWait"].as<float>();
-    windSensor->setUpperSpeedDelay(windUpperWait * 6000);
+    tracker->windSensor.setUpperSpeedDelay(windUpperWait * 6000);
   }
 
   if (params["windLowerSpeedMax"])
   {
     float windLowerMax = params["windLowerSpeedMax"].as<float>();
-    windSensor->setLowerSpeedMax(windLowerMax / 3.6);
+    tracker->windSensor.setLowerSpeedMax(windLowerMax / 3.6);
   }
 
   if (params["windLowerWait"])
   {
     int windLowerWait = params["windLowerWait"].as<float>();
-    windSensor->setLowerSpeedDelay(windLowerWait * 6000);
+    tracker->windSensor.setLowerSpeedDelay(windLowerWait * 6000);
   }
 
   if (params["setTime"].is<String>())
@@ -238,12 +238,12 @@ void WifiModule::actOnParameter(JsonDocument params)
     Serial.println(index);
     int hour = timeStr.substring(0, index).toInt();
     int minute = timeStr.substring(index + 3).toInt();
-    clockModule->setSimpleTime(hour, minute);
+    tracker->clockModule.setSimpleTime(hour, minute);
   }
 
   if (params["recalibrateTime"].is<bool>())
   {
-    clockModule->wifiRecalibrate();
+    tracker->clockModule.wifiRecalibrate();
   }
 }
 
@@ -283,19 +283,19 @@ void WifiModule::sendDashboardTo(WiFiClient client)
 
   client.print(R"(<section><p style="font-size:5vw;">)");
   client.print("Wind speed: ");
-  client.print(windSensor->getSpeed()); // Placeholder: wind speed from sensor
+  client.print(tracker->windSensor.getSpeed()); // Placeholder: wind speed from sensor
   client.print("<br/>");
 
   client.print("Extended to: ");
-  client.print(actuator->getPercentExtended()); // Placeholder: percent extended from actuator
+  client.print(tracker->actuator.getPercentExtended()); // Placeholder: percent extended from actuator
   client.print("%<br/>");
 
   client.print("Time: ");
-  client.print(clockModule->getFullTimeString()); // Placeholder: current time from clock module
+  client.print(tracker->clockModule.getFullTimeString()); // Placeholder: current time from clock module
   client.print("<br/>");
 
   client.print("Status: ");
-  client.print(trackerStatusStrings[*trackerStatus]); // Placeholder: tracker status, e.g., HIGH_WIND, ACTIVE, etc.
+  client.print(tracker->getStatusString()); // Placeholder: tracker status, e.g., HIGH_WIND,
   client.print(R"(</p></section>)");
 
   client.print(R"(<section><form action="/" method="POST">)");
@@ -313,7 +313,7 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Extend To ");
   client.print(R"(<input style="font-size:5vw;" type="number" max="100" min="0" name="extendToPercent" value=")");
-  client.print(actuator->getPercentExtended());
+  client.print(tracker->actuator.getPercentExtended());
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
@@ -322,28 +322,28 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Set upper threshold wind speed max (km/h): ");
   client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windUpperMaxSpeed" value=")");
-  client.print(windSensor->getUpperSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
+  client.print(tracker->windSensor.getUpperSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Set upper threshold wait period (minutes): ");
   client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windUpperWait" value=")");
-  client.print(windSensor->getUpperSpeedDelay() / 6000); // upper wind threshold wait period miliseconds converted to minutes
+  client.print(tracker->windSensor.getUpperSpeedDelay() / 6000); // upper wind threshold wait period miliseconds converted to minutes
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Set lower threshold wind speed max (km/h): ");
   client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windLowerSpeedMax" value=")");
-  client.print(windSensor->getLowerSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
+  client.print(tracker->windSensor.getLowerSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Set lower threshold wait period (minutes): ");
   client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windLowerWait" value=")");
-  client.print(windSensor->getLowerSpeedDelay() / 6000); // lower wind threshold wait period miliseconds converted to minutes
+  client.print(tracker->windSensor.getLowerSpeedDelay() / 6000); // lower wind threshold wait period miliseconds converted to minutes
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
@@ -352,7 +352,7 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Set time (HH:MM - 24 hour format): ");
   client.print(R"(<input style="font-size:5vw;" type="text" pattern="^([01]\d|2[0-3]):([0-5]\d)$" name="setTime" value=")");
-  client.print(clockModule->getSimpleTimeString());
+  client.print(tracker->clockModule.getSimpleTimeString());
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
@@ -361,7 +361,7 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   // client.print(R"(</form></section>)");
 
   client.print("Timestamp: ");
-  client.print(clockModule->getTimestamp());
+  client.print(tracker->clockModule.getTimestamp());
   client.print(R"(</body></html>)");
 
   // The HTTP response ends with another blank line:

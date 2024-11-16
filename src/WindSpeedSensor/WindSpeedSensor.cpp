@@ -1,7 +1,25 @@
 #include "./WindSpeedSensor.h"
 
+WindSpeedSensor::WindSpeedSensor()
+{
+  pinMode(WIND_SENSOR_ENABLE_PIN, INPUT);
+}
+
+bool WindSpeedSensor::isEnabled()
+{
+  int read = digitalRead(WIND_SENSOR_ENABLE_PIN);
+  if(read == HIGH){
+    return true;
+  } 
+  status = DISABLED;
+  return false;
+}
+
 int WindSpeedSensor::getSpeed()
 {
+  if(!isEnabled()){
+    return 0;
+  }
   float sensorValue = analogRead(WIND_SENSOR_PIN);
   float sensorVoltage = sensorValue * voltageConversionConstant;
   if (sensorVoltage <= windVoltageMin)
@@ -10,6 +28,7 @@ int WindSpeedSensor::getSpeed()
   }
   else
   {
+    Serial.println(sensorVoltage); 
     return (sensorVoltage - windVoltageMin) * windSpeedMax / (windVoltageMax - windVoltageMin);
   }
 }
@@ -117,7 +136,7 @@ bool WindSpeedSensor::exitingHighWind()
   return status != ACTIVE && isMaintainingLowerSpeed();
 }
 
-void WindSpeedSensor::setStatus(int inputStatus)
+void WindSpeedSensor::setStatus(Status inputStatus)
 {
   status = inputStatus;
 }

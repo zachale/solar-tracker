@@ -1,13 +1,11 @@
 #include "./SolarTracker.h"
 
-const String SolarTracker::statusStrings[] = {"Active", "Night Mode", "Safe Mode", "Away Mode"};
+const String SolarTracker::statusStrings[4] = {"ACTIVE", "NIGHT", "SAFE", "AWAY"};
 
 SolarTracker::SolarTracker(void (*callback)())
 {
   // Initialize the linear actuator
   actuator.setExtensionCallBack(callback);
-  // Initialize the status
-  setStatus(ACTIVE);
 }
 
 void SolarTracker::setup()
@@ -16,13 +14,13 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  setStatus(ACTIVE);
 }
 
 void SolarTracker::pollSensorData()
 {
   if (millis() - sensorTimer > 10000)
   {
-    updateStatus();
     float windSpeed = windSensor.getSpeed();
     Serial.print("Wind Speed: ");
     Serial.print(windSpeed);
@@ -37,9 +35,10 @@ void SolarTracker::pollSensorData()
     Serial.println();
     Serial.println(clockModule.getFullTimeString());
     Serial.println(clockModule.getTimestamp());
-    Serial.print("Status:");
-    Serial.println(status);
+    Serial.print("Status: ");
+    Serial.println(getStatusString());
     sensorTimer = millis();
+    updateStatus();
   }
 }
 
@@ -65,6 +64,8 @@ SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
 {
   status = inputStatus;
   actOnStatus(status);
+  Serial.print("Set status to: ");
+  Serial.println(getStatusString());
   return status;
 }
 
@@ -73,23 +74,20 @@ SolarTracker::Status SolarTracker::getStatus()
   return status;
 }
 
+String SolarTracker::getStatusString()
+{
+  return statusStrings[getStatus()];
+} 
+
 void SolarTracker::updateStatus()
 {
-  if (status == ACTIVE && windSensor.enteringHighWind())
+  if (windSensor.enteringHighWind())
   {
     setStatus(SAFE);
   }
   else if (status == SAFE && windSensor.exitingHighWind())
   {
     setStatus(ACTIVE);
-  }
-  else if (clockModule.isActiveHours())
-  {
-    setStatus(ACTIVE);
-  }
-  else if (status == ACTIVE)
-  {
-    setStatus(NIGHT);
   }
   else if (status == NIGHT && clockModule.isActiveHours())
   {
@@ -98,10 +96,6 @@ void SolarTracker::updateStatus()
   else if (status == ACTIVE && !clockModule.isActiveHours())
   {
     setStatus(NIGHT);
-  }
-  else
-  {
-    setStatus(AWAY);
   }
 }
 
@@ -117,6 +111,6 @@ void SolarTracker::actOnStatus(Status inputStatus)
   }
   else if (inputStatus == NIGHT)
   {
-    // Do nothing, stay extended, temporary addition
+    // Do nothing, temporary addition
   }
 }
