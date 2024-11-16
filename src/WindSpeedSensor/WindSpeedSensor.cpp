@@ -28,7 +28,6 @@ int WindSpeedSensor::getSpeed()
   }
   else
   {
-    Serial.println(sensorVoltage); 
     return (sensorVoltage - windVoltageMin) * windSpeedMax / (windVoltageMax - windVoltageMin);
   }
 }
