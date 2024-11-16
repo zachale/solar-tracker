@@ -1,7 +1,25 @@
 #include "./WindSpeedSensor.h"
 
+WindSpeedSensor::WindSpeedSensor()
+{
+  pinMode(WIND_SENSOR_ENABLE_PIN, INPUT);
+}
+
+bool WindSpeedSensor::isEnabled()
+{
+  int read = digitalRead(WIND_SENSOR_ENABLE_PIN);
+  if(read == HIGH){
+    return true;
+  } 
+  status = DISABLED;
+  return false;
+}
+
 int WindSpeedSensor::getSpeed()
 {
+  if(!isEnabled()){
+    return 0;
+  }
   float sensorValue = analogRead(WIND_SENSOR_PIN);
   float sensorVoltage = sensorValue * voltageConversionConstant;
   if (sensorVoltage <= windVoltageMin)
@@ -89,6 +107,11 @@ bool WindSpeedSensor::isMaintainingUpperSpeed()
   return false;
 }
 
+bool WindSpeedSensor::enteringHighWind()
+{
+  return status != HIGH_WIND && isMaintainingUpperSpeed();
+}
+
 bool WindSpeedSensor::isMaintainingLowerSpeed()
 {
   if (getSpeed() < getLowerSpeedMax())
@@ -97,7 +120,7 @@ bool WindSpeedSensor::isMaintainingLowerSpeed()
     {
       lowerSpeedTimer = millis();
     }
-    else if (millis() - upperSpeedTimer > lowerSpeedDelay)
+    else if (millis() - lowerSpeedTimer > lowerSpeedDelay)
     {
       setStatus(ACTIVE);
       lowerSpeedTimer = 0;
@@ -107,27 +130,12 @@ bool WindSpeedSensor::isMaintainingLowerSpeed()
   return false;
 }
 
-// If windspeed is high for 1 minute -> flatten
-// If windspeed is low for 15 minutes -> go back to normal
-bool WindSpeedSensor::highWindCheck()
+bool WindSpeedSensor::exitingHighWind()
 {
-
-  // if wind is high, start 1 minute timer
-  // if wind stays high -> continue
-  // if wind goes low -> cancel timer
-  if (status != HIGH_WIND && isMaintainingUpperSpeed())
-  {
-    return true;
-  }
-  else if (status == HIGH_WIND && isMaintainingLowerSpeed())
-  {
-    return false;
-  }
-
-  return false;
+  return status != ACTIVE && isMaintainingLowerSpeed();
 }
 
-void WindSpeedSensor::setStatus(int inputStatus)
+void WindSpeedSensor::setStatus(Status inputStatus)
 {
   status = inputStatus;
 }

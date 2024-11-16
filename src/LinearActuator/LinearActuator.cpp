@@ -3,12 +3,11 @@
 long LinearActuator::steps = 0;
 unsigned long LinearActuator::lastStepTime = 0;
 
-LinearActuator::LinearActuator(void (*inputCallBack)())
+LinearActuator::LinearActuator()
 {
   pinMode(2, INPUT);
   pinMode(PWMBackwardPin, OUTPUT);
   pinMode(PWMForwardPin, OUTPUT);
-  extensionCallBack = inputCallBack;
 }
 
 void LinearActuator::countSteps()
@@ -121,6 +120,7 @@ void LinearActuator::extendToPercent(float percent)
   Serial.print(percent);
   Serial.print("\n");
   updatePos();
+
   if (percent == 0)
   {
     home();
@@ -131,10 +131,12 @@ void LinearActuator::extendToPercent(float percent)
     max();
     return;
   }
+
   if (maxPos == 0)
   {
     recalibrate();
   }
+
   float targetPos = getPosFromPercent(percent);
   if (pos < targetPos)
   {
@@ -144,8 +146,7 @@ void LinearActuator::extendToPercent(float percent)
   {
     extend(BACKWARD);
   }
-  int difference;
-  for (difference = 1; difference > 0; difference = (targetPos - pos) * dir)
+  for (int difference = 1; difference > 0; difference = (targetPos - pos) * dir)
   {
     if (hitBoundary())
     {
@@ -169,6 +170,10 @@ void LinearActuator::extendToPercent(float percent)
     updatePos();
   }
   extend(STOP);
+  if (percent == 50)
+  {
+    setStatus(HALF);
+  }
 }
 
 void LinearActuator::setSpeed(int input)
@@ -211,4 +216,9 @@ void LinearActuator::setDirection(int direction)
 {
   setStatus(direction);
   dir = direction;
+}
+
+void LinearActuator::setExtensionCallBack(void (*inputCallBack)())
+{
+  extensionCallBack = inputCallBack;
 }

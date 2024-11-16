@@ -6,10 +6,14 @@
 class WindSpeedSensor
 {
 public:
-  int status;
-  const static int ACTIVE = 1;
-  const static int GUST_DETECTED = 2;
-  const static int HIGH_WIND = 3;
+  enum Status {
+    DISABLED,
+    ACTIVE,
+    GUST_DETECTED,
+    HIGH_WIND
+  };
+  Status status;
+  WindSpeedSensor();
   int getSpeed();
   void setUpperSpeedMax(float);
   float getUpperSpeedMax();
@@ -19,12 +23,15 @@ public:
   unsigned long getUpperSpeedDelay();
   void setLowerSpeedDelay(unsigned long);
   unsigned long getLowerSpeedDelay();
-  bool highWindCheck();
+  bool enteringHighWind();
+  bool exitingHighWind();
+  bool isEnabled();
 
 private:
   const static int WIND_SENSOR_PIN = A3;
+  const static int WIND_SENSOR_ENABLE_PIN = 4;
   const float voltageConversionConstant = 0.004882814;
-  unsigned long upperSpeedDelay = 60000;
+  unsigned long upperSpeedDelay = 6000;
   unsigned long lowerSpeedDelay = 90000;
   unsigned long upperSpeedTimer = 0;
   unsigned long lowerSpeedTimer = 0;
@@ -34,7 +41,7 @@ private:
   float windSpeedMax = 32.0;
   float windSpeedMin = 0;
   float windVoltageMax = 2.0;
-  void setStatus(int);
+  void setStatus(Status);
   bool isMaintainingUpperSpeed();
   bool isMaintainingLowerSpeed();
 };

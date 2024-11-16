@@ -9,15 +9,18 @@ public:
   int percentExtended = 0;
   bool isHomed = 0;
   bool isMaxed = 0;
+  int status = 0;
   static const int FORWARD = 1;
   static const int STOP = 0;
   static const int BACKWARD = -1;
   static const int HOMING = 2;
   static const int MAXING = 3;
+  static const int HALF = 4;
   static long steps; // pulses from hall effect sensors
   static void countSteps();
-  LinearActuator(void (*callback)());
+  LinearActuator();
   int getPercentExtended();
+  void setExtensionCallBack(void (*)());
   void recalibrate();
   void extendToPercent(float percent);
   void home();
@@ -34,7 +37,6 @@ private:
   int speed = 255;
   unsigned long prevTimer = 0;
   long prevSteps = -1;
-  int status = 0;
   int dir = 0;
   void setStatus(int statusCode);
   void setDirection(int direction);
