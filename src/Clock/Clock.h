@@ -17,8 +17,9 @@ public:
   String getFullTimeString();
   String getSimpleTimeString();
   uint32_t getTimestamp();
+  void setDateTime(const char* dateTimeString);
   void setSimpleTime(int hour, int minute);
-  void wifiRecalibrate();
+  bool requireSync();
 
 private:
   static bool alarmTriggered;
@@ -29,10 +30,13 @@ private:
   float hourFinish = 20;
   float percentStart = 20;
   float percentFinish = 80;
+  int syncInterval = 86400000; // 24 hours in milliseconds
+  unsigned long syncTimer = 0;
   int getPercentOfDay(float hour);
   int normalizePercentage(float percent);
   uint8_t getHour();
   uint8_t getMinute();
   uint8_t getSecond();
+  void resetAlarm();
 };
 #endif
