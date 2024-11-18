@@ -10,7 +10,7 @@ class WifiClient
 {
 public:
   void setup();
-  void get(String);
+  String get(String);
   void post(String, JsonDocument);  
 private:
   WiFiSSLClient client;
