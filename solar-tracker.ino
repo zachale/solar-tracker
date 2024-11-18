@@ -1,8 +1,10 @@
 #include "./src/Wifi/Wifi.h"
+#include "./src/ButtonPanel/ButtonPanel.h"
 #include "./src/SolarTracker/SolarTracker.h"
 
 SolarTracker tracker(loop);
-// WifiModule wifi(&tracker);
+ButtonPanel buttonPanel;
+WifiModule wifi(&tracker);
 
 void setup()
 {
@@ -14,13 +16,19 @@ void setup()
     ; // wait for serial port to connect. Needed for native USB
 #endif
 
+  buttonPanel.setup();
   tracker.setup();
-  // wifi.setup();
+  if(ButtonPanel::settingsServerEnabled()){
+    Serial.println("Wifi server enabled.");
+    wifi.setup();
+  }
   Serial.println("Setup complete.");
 }
 
 void loop()
 {
   tracker.pollSensorData();
-  // wifi.checkForClient();
+  if(ButtonPanel::settingsServerEnabled()){
+    wifi.checkForClient();
+  }
 }
