@@ -15,6 +15,7 @@ void SolarTracker::setup()
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
   wifiClient.setup();
+  syncClock();
   setStatus(ACTIVE);
 }
 
@@ -113,5 +114,24 @@ void SolarTracker::actOnStatus(Status inputStatus)
   else if (inputStatus == NIGHT)
   {
     // Do nothing, temporary addition
+  }
+}
+
+void SolarTracker::sync(){
+  if(clockModule.requireSync() && !ButtonPanel::settingsServerEnabled()){
+    syncClock();
+  }
+  // TODO: Logic to sync logged data to API
+}
+
+void SolarTracker::syncClock(){
+  String body = wifiClient.get(timeAPIUrl);
+  if(body != ""){
+    StaticJsonDocument<200> doc;
+    deserializeJson(doc, body);
+    const char * timestamp = doc["datetime"];
+    Serial.print("Syncing Clock to: ");
+    Serial.println(timestamp);
+    clockModule.setDateTime(timestamp);
   }
 }

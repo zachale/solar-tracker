@@ -5,6 +5,7 @@
 #include "../LinearActuator/LinearActuator.h"
 #include "../WindSpeedSensor/WindSpeedSensor.h"
 #include "../WifiClient/WifiClient.h"
+#include "../ButtonPanel/ButtonPanel.h"
 #include <Arduino.h>
 
 class SolarTracker
@@ -27,6 +28,8 @@ public:
   Status getStatus();
   String getStatusString(); 
   void pollSensorData();
+  void sync();
+  void syncClock();
 
 private:
   Status status = ACTIVE;
@@ -35,6 +38,7 @@ private:
   unsigned long sensorTimer;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
+  const String timeAPIUrl = "https://worldtimeapi.org/api/timezone/America/Toronto";
   void extendActuatorOnHour();
   void extendActuatorToHalf();
   void updateStatus();
