@@ -21,6 +21,10 @@ void SolarTracker::setup()
 
 void SolarTracker::pollSensorData()
 {
+  if (clockModule.isAlarmTriggered() && status == ACTIVE){
+    extendActuatorOnHour();
+  }
+
   if (millis() - sensorTimer > 10000)
   {
     float windSpeed = windSensor.getSpeed();
@@ -46,11 +50,8 @@ void SolarTracker::pollSensorData()
 
 void SolarTracker::extendActuatorOnHour()
 {
-  if (clockModule.isAlarmTriggered())
-  {
-    int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
-    actuator.extendToPercent(dayCompletePercentage);
-  }
+  int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
+  actuator.extendToPercent(dayCompletePercentage);
 }
 
 void SolarTracker::extendActuatorToHalf()
