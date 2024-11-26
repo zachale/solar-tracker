@@ -7,13 +7,8 @@ void ButtonPanel::setup()
 }
 
 bool ButtonPanel::settingsServerEnabled()
-{   
-    bool test = digitalRead(WIFI_SERVER_ENABLE_PIN) == HIGH;
-    if(test){
-        Serial.println("Settings server enabled");
-        return true;
-    }
-    return false;
+{
+    return digitalRead(WIFI_SERVER_ENABLE_PIN) == HIGH;
 }
 
 bool ButtonPanel::isWindSensorEnabled()
