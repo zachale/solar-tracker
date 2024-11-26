@@ -11,7 +11,8 @@ class WifiClient
 public:
   void setup();
   String get(String);
-  void post(String, JsonDocument);  
+  void post(String, JsonDocument);
+
 private:
   WiFiSSLClient client;
   R4HttpClient http;

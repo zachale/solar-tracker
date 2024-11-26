@@ -26,7 +26,7 @@ public:
   void setup();
   Status setStatus(Status);
   Status getStatus();
-  String getStatusString(); 
+  String getStatusString();
   void pollSensorData();
   void sync();
   void syncClock();
@@ -38,7 +38,6 @@ private:
   unsigned long sensorTimer;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
-  const String timeAPIUrl = "https://worldtimeapi.org/api/timezone/America/Toronto";
   void extendActuatorOnHour();
   void extendActuatorToHalf();
   void updateStatus();

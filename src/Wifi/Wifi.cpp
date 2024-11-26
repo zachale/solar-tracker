@@ -240,6 +240,11 @@ void WifiModule::actOnParameter(JsonDocument params)
     int minute = timeStr.substring(index + 3).toInt();
     tracker->clockModule.setSimpleTime(hour, minute);
   }
+
+  if (params["setStartHour"])
+  {
+    tracker->clockModule.setSchedule(params);
+  }
 }
 
 void WifiModule::endConnection(WiFiClient client)
@@ -312,44 +317,8 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
 
-  client.print(R"(<h1 style="font-size:7vw;">Wind Sensor</h1>)");
-
-  client.print(R"(<section><form action="/" method="POST">)");
-  client.print("Set upper threshold wind speed max (km/h): ");
-  client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windUpperMaxSpeed" value=")");
-  client.print(tracker->windSensor.getUpperSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
-  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
-  client.print(R"(</form></section>)");
-
-  client.print(R"(<section><form action="/" method="POST">)");
-  client.print("Set upper threshold wait period (minutes): ");
-  client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windUpperWait" value=")");
-  client.print(tracker->windSensor.getUpperSpeedDelay() / 6000); // upper wind threshold wait period miliseconds converted to minutes
-  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
-  client.print(R"(</form></section>)");
-
-  client.print(R"(<section><form action="/" method="POST">)");
-  client.print("Set lower threshold wind speed max (km/h): ");
-  client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windLowerSpeedMax" value=")");
-  client.print(tracker->windSensor.getLowerSpeedMax() * 3.6); // lower wind threshold speed m/s converted to km/h
-  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
-  client.print(R"(</form></section>)");
-
-  client.print(R"(<section><form action="/" method="POST">)");
-  client.print("Set lower threshold wait period (minutes): ");
-  client.print(R"(<input style="font-size:5vw;" type="number" min="0" name="windLowerWait" value=")");
-  client.print(tracker->windSensor.getLowerSpeedDelay() / 6000); // lower wind threshold wait period miliseconds converted to minutes
-  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
-  client.print(R"(</form></section>)");
-
-  client.print(R"(<h1 style="font-size:7vw;">Clock</h1>)");
-
-  client.print(R"(<section><form action="/" method="POST">)");
-  client.print("Set time (HH:MM - 24 hour format): ");
-  client.print(R"(<input style="font-size:5vw;" type="text" pattern="^([01]\d|2[0-3]):([0-5]\d)$" name="setTime" value=")");
-  client.print(tracker->clockModule.getSimpleTimeString());
-  client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
-  client.print(R"(</form></section>)");
+  client.print(tracker->windSensor.toHtml());
+  client.print(tracker->clockModule.toHtml());
 
   // The HTTP response ends with another blank line:
   client.println();

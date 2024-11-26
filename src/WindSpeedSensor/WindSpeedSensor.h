@@ -7,7 +7,8 @@
 class WindSpeedSensor
 {
 public:
-  enum Status {
+  enum Status
+  {
     DISABLED,
     ACTIVE,
     GUST_DETECTED,
@@ -26,6 +27,7 @@ public:
   bool enteringHighWind();
   bool exitingHighWind();
   bool isEnabled();
+  String toHtml();
 
 private:
   const static int WIND_SENSOR_PIN = A3;
