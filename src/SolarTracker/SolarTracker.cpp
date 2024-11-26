@@ -17,7 +17,7 @@ void SolarTracker::setup()
   clockModule.setup();
   wifiClient.setup();
   syncClock();
-  setStatus(AWAY);
+  status = ACTIVE;
   updateStatus();
 }
 
