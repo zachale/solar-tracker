@@ -1,14 +1,8 @@
 #include "./WindSpeedSensor.h"
 
-WindSpeedSensor::WindSpeedSensor()
-{
-  pinMode(WIND_SENSOR_ENABLE_PIN, INPUT);
-}
-
 bool WindSpeedSensor::isEnabled()
 {
-  int read = digitalRead(WIND_SENSOR_ENABLE_PIN);
-  if(read == HIGH){
+  if(ButtonPanel::isWindSensorEnabled()){
     return true;
   } 
   status = DISABLED;

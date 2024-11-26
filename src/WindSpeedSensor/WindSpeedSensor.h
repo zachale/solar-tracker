@@ -2,6 +2,7 @@
 #define WS_H
 
 #include <Arduino.h>
+#include "../ButtonPanel/ButtonPanel.h"
 
 class WindSpeedSensor
 {
@@ -13,7 +14,6 @@ public:
     HIGH_WIND
   };
   Status status;
-  WindSpeedSensor();
   int getSpeed();
   void setUpperSpeedMax(float);
   float getUpperSpeedMax();

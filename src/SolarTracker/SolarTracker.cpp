@@ -14,11 +14,17 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  wifiClient.setup();
+  syncClock();
   setStatus(ACTIVE);
 }
 
 void SolarTracker::pollSensorData()
 {
+  if (clockModule.isAlarmTriggered() && status == ACTIVE){
+    extendActuatorOnHour();
+  }
+
   if (millis() - sensorTimer > 10000)
   {
     float windSpeed = windSensor.getSpeed();
@@ -44,11 +50,8 @@ void SolarTracker::pollSensorData()
 
 void SolarTracker::extendActuatorOnHour()
 {
-  if (clockModule.isAlarmTriggered())
-  {
-    int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
-    actuator.extendToPercent(dayCompletePercentage);
-  }
+  int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
+  actuator.extendToPercent(dayCompletePercentage);
 }
 
 void SolarTracker::extendActuatorToHalf()
@@ -112,5 +115,24 @@ void SolarTracker::actOnStatus(Status inputStatus)
   else if (inputStatus == NIGHT)
   {
     // Do nothing, temporary addition
+  }
+}
+
+void SolarTracker::sync(){
+  if(clockModule.requireSync() && !ButtonPanel::settingsServerEnabled()){
+    syncClock();
+  }
+  // TODO: Logic to sync logged data to API
+}
+
+void SolarTracker::syncClock(){
+  String body = wifiClient.get(timeAPIUrl);
+  if(body != ""){
+    StaticJsonDocument<200> doc;
+    deserializeJson(doc, body);
+    const char * timestamp = doc["datetime"];
+    Serial.print("Syncing Clock to: ");
+    Serial.println(timestamp);
+    clockModule.setDateTime(timestamp);
   }
 }

@@ -6,19 +6,17 @@ void ClockModule::setup()
 {
 
   pinMode(RTC_POWER_PIN, OUTPUT);
-  digitalWrite(RTC_POWER_PIN, HIGH);
 
   for (int i = 0; i < 3; i++)
   {
+    digitalWrite(RTC_POWER_PIN, HIGH);
     if (rtc.begin())
     {
       break;
     }
     digitalWrite(RTC_POWER_PIN, LOW);
     Serial.println("Couldn't find RTC");
-    Serial.flush();
     delay(5000);
-    digitalWrite(RTC_POWER_PIN, HIGH);
   }
 
   if (!rtc.begin())
@@ -37,19 +35,9 @@ void ClockModule::setup()
   if (rtc.lostPower())
   {
     Serial.println("RTC lost power, let's set the time!");
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
-  if (!rtc.setAlarm1(
-          DateTime(2024, 10, 1, 0, 0, 0),
-          DS3231_A1_Minute))
-  {
-    Serial.println("Error, alarm wasn't set!");
-  }
-  else
-  {
-    Serial.println("Alarm was set.");
-  }
+  resetAlarm();
 
   Serial.println("Setup Clock Module.");
 }
@@ -62,6 +50,11 @@ bool ClockModule::isAlarmTriggered()
   }
 
   alarmTriggered = false;
+  resetAlarm();
+}
+
+void ClockModule::resetAlarm()
+{
   rtc.clearAlarm(1);
   Serial.println("Alarm detected and cleared.");
   if (!rtc.setAlarm1(
@@ -160,6 +153,11 @@ uint32_t ClockModule::getTimestamp()
   return rtc.now().unixtime();
 }
 
+void ClockModule::setDateTime(const char* dateTimeString)
+{
+  rtc.adjust(DateTime(dateTimeString));
+}
+
 void ClockModule::setSimpleTime(int hour, int minute)
 {
   uint16_t year = rtc.now().year();
@@ -168,7 +166,11 @@ void ClockModule::setSimpleTime(int hour, int minute)
   rtc.adjust(DateTime(year, month, day, hour, minute, 0));
 }
 
-void ClockModule::wifiRecalibrate()
+bool ClockModule::requireSync()
 {
-  Serial.println("TODO: Call API for time");
+  bool needSync = syncTimer - syncInterval > 0;
+  if(needSync){
+    syncTimer = millis();
+  }
+  return needSync ;
 }

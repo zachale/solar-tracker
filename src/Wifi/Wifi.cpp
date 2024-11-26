@@ -240,11 +240,6 @@ void WifiModule::actOnParameter(JsonDocument params)
     int minute = timeStr.substring(index + 3).toInt();
     tracker->clockModule.setSimpleTime(hour, minute);
   }
-
-  if (params["recalibrateTime"].is<bool>())
-  {
-    tracker->clockModule.wifiRecalibrate();
-  }
 }
 
 void WifiModule::endConnection(WiFiClient client)
@@ -355,14 +350,6 @@ void WifiModule::sendDashboardTo(WiFiClient client)
   client.print(tracker->clockModule.getSimpleTimeString());
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
-
-  // client.print(R"(<section><form action="/" method="POST">)");
-  // client.print(R"(<button type="submit" style="font-size:5vw;" name="recalibrateTime" value="true">Recalibrate using internet</button>)");
-  // client.print(R"(</form></section>)");
-
-  client.print("Timestamp: ");
-  client.print(tracker->clockModule.getTimestamp());
-  client.print(R"(</body></html>)");
 
   // The HTTP response ends with another blank line:
   client.println();
