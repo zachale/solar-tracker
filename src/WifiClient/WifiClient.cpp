@@ -19,7 +19,7 @@ void WifiClient::setup()
     WiFi.begin(credential.first, credential.second);
     Serial.print(F("Connecting to WiFi"));
     Serial.println(credential.first);
-    for (int i = 0; i < 5 || WiFi.status() != WL_CONNECTED; i++)
+    for (int i = 0; i < 5 && WiFi.status() != WL_CONNECTED; i++)
     {
       delay(1000);
       Serial.print(F("."));
