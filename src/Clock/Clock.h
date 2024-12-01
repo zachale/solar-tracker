@@ -20,7 +20,6 @@ public:
   uint32_t getTimestamp();
   void setDateTime(const char *dateTimeString);
   void setSimpleTime(int hour, int minute);
-  bool requireSync();
   String toHtml();
   void setSchedule(JsonDocument &doc);
   uint8_t getHour();
@@ -43,5 +42,6 @@ private:
   uint8_t getMinute();
   uint8_t getSecond();
   void resetAlarm();
+  int mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent);
 };
 #endif
