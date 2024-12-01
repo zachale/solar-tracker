@@ -1,11 +1,11 @@
-#include "./Wifi.h"
+#include "./SettingsServer.h"
 
-WifiModule::WifiModule(SolarTracker *inputTracker) : server(80)
+SettingsServer::SettingsServer(SolarTracker *inputTracker) : server(80)
 {
   tracker = inputTracker;
 }
 
-void WifiModule::setup()
+void SettingsServer::setup()
 {
   // Initialize serial and wait for port to open:
   Serial.println("Access Point Web Server");
@@ -25,7 +25,6 @@ void WifiModule::setup()
     Serial.println("Please upgrade the firmware");
   }
 
-  // attemptConnection(DEVSSID, DEVPASS);
   attemptCreation();
   // wait 10 seconds for connection:
   delay(10000);
@@ -37,19 +36,7 @@ void WifiModule::setup()
   printWiFiStatus();
 }
 
-void WifiModule::attemptConnection(char *ssid, char *pass)
-{
-  if (status != WL_CONNECTED)
-  {
-    Serial.print("Attempting to connect to SSID: ");
-    Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-    status = WiFi.begin(ssid, pass);
-    delay(3000);
-  }
-}
-
-void WifiModule::attemptCreation()
+void SettingsServer::attemptCreation()
 {
   // print the network name (SSID);
   Serial.print("Creating access point named: ");
@@ -65,7 +52,7 @@ void WifiModule::attemptCreation()
   }
 }
 
-void WifiModule::checkForClient()
+void SettingsServer::checkForClient()
 {
 
   bool isPost = false;
@@ -149,7 +136,7 @@ void WifiModule::checkForClient()
   }
 }
 
-void WifiModule::getParams(String params)
+void SettingsServer::getParams(String params)
 {
   int index = params.indexOf("&");
   bool parseMultiParams = index == -1 ? false : true;
@@ -181,7 +168,7 @@ void WifiModule::getParams(String params)
   actOnParameter(docParams);
 }
 
-void WifiModule::actOnParameter(JsonDocument params)
+void SettingsServer::actOnParameter(JsonDocument params)
 {
 
   Serial.println("Acting on param");
@@ -247,13 +234,13 @@ void WifiModule::actOnParameter(JsonDocument params)
   }
 }
 
-void WifiModule::endConnection(WiFiClient client)
+void SettingsServer::endConnection(WiFiClient client)
 {
   client.stop();
   Serial.println("client disconnected");
 }
 
-void WifiModule::printWiFiStatus()
+void SettingsServer::printWiFiStatus()
 {
   // print the SSID of the network you're attached to:
   Serial.print("SSID: ");
@@ -270,7 +257,7 @@ void WifiModule::printWiFiStatus()
 }
 
 // Prints dashboard HTML to connected client
-void WifiModule::sendDashboardTo(WiFiClient client)
+void SettingsServer::sendDashboardTo(WiFiClient client)
 {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-type:text/html");

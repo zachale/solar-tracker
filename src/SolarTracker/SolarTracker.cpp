@@ -23,7 +23,7 @@ void SolarTracker::pollSensorData()
 {
   if (clockModule.isAlarmTriggered() && status == ACTIVE)
   {
-    if (clockModule.getHour() == 8)
+    if (clockModule.getHour() == 8 && !ButtonPanel::settingsServerEnabled())
     {
       dailySync();
     }
@@ -134,13 +134,10 @@ void SolarTracker::actOnStatus(Status inputStatus)
 
 void SolarTracker::dailySync()
 {
-  if (!ButtonPanel::settingsServerEnabled())
+  syncClock();
+  if (ota.updateAvailable())
   {
-    syncClock();
-    if (ota.updateAvailable())
-    {
-      ota.update();
-    }
+    ota.update();
   }
 }
 
