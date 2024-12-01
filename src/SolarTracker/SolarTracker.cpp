@@ -15,16 +15,18 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
-  wifiClient.setup();
-  syncClock();
-  status = ACTIVE;
-  updateStatus();
+  dailySync();
+  initializeStatus();
 }
 
 void SolarTracker::pollSensorData()
 {
   if (clockModule.isAlarmTriggered() && status == ACTIVE)
   {
+    if (clockModule.getHour() == 8)
+    {
+      dailySync();
+    }
     extendActuatorOnHour();
   }
 
@@ -47,7 +49,6 @@ void SolarTracker::pollSensorData()
     Serial.print("Status: ");
     Serial.println(getStatusString());
     sensorTimer = millis();
-    setStatus(ACTIVE);
     updateStatus();
   }
 }
@@ -60,11 +61,8 @@ void SolarTracker::extendActuatorOnHour()
 
 void SolarTracker::extendActuatorToHalf()
 {
-  if (actuator.status)
-  {
-    int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
-    actuator.extendToPercent(halfDayPercentage);
-  }
+  int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
+  actuator.extendToPercent(halfDayPercentage);
 }
 
 SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
@@ -84,6 +82,18 @@ SolarTracker::Status SolarTracker::getStatus()
 String SolarTracker::getStatusString()
 {
   return statusStrings[getStatus()];
+}
+
+void SolarTracker::initializeStatus()
+{
+  if (clockModule.isActiveHours())
+  {
+    setStatus(ACTIVE);
+  }
+  else
+  {
+    setStatus(NIGHT);
+  }
 }
 
 void SolarTracker::updateStatus()
@@ -122,13 +132,16 @@ void SolarTracker::actOnStatus(Status inputStatus)
   }
 }
 
-void SolarTracker::sync()
+void SolarTracker::dailySync()
 {
-  if (clockModule.requireSync() && !ButtonPanel::settingsServerEnabled())
+  if (!ButtonPanel::settingsServerEnabled())
   {
     syncClock();
+    if (ota.updateAvailable())
+    {
+      ota.update();
+    }
   }
-  // TODO: Logic to sync logged data to API
 }
 
 void SolarTracker::syncClock()

@@ -1,7 +1,7 @@
 #include "WifiClient.h"
 #include "../../secrets.h"
 
-void WifiClient::setup()
+bool WifiClient::ensureWifiConnection()
 {
   String fv = WiFi.firmwareVersion();
   if (fv < WIFI_FIRMWARE_LATEST_VERSION)
@@ -10,8 +10,7 @@ void WifiClient::setup()
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println(F("Communication with WiFi module failed!"));
-    while (true)
-      ;
+    return false;
   }
 
   for (const auto &credential : wifiCredentials)
@@ -32,23 +31,28 @@ void WifiClient::setup()
   }
   Serial.println();
   Serial.println(F("Successfully connected to WiFi!"));
+  return true;
 }
 
 String WifiClient::get(String url)
 {
+  if (!ensureWifiConnection())
+  {
+    return "";
+  }
   Serial.println("GET Request");
+  url = ensureHTTPS(url);
   Serial.println(url);
   http.begin(client, url, 443);
   http.setTimeout(15000);
-  // http.addHeader("User-Agent: Arduino UNO R4 WiFi");
+  http.addHeader("User-Agent: Arduino UNO R4 WiFi");
   http.addHeader("Content-Type: application/json");
-  // http.addHeader("Connection: close");
+  http.addHeader("Connection: close");
 
   int responseNum = http.GET();
   if (responseNum > 0)
   {
     String responseBody = http.getBody();
-    Serial.println(responseBody);
     Serial.println("Response code: " + String(responseNum));
     http.close();
     return responseBody;
@@ -57,7 +61,17 @@ String WifiClient::get(String url)
   Serial.println(responseBody);
   Serial.println("Request Failed: " + String(responseNum));
   http.close();
+  WiFi.disconnect();
   return "";
+}
+
+String WifiClient::ensureHTTPS(String url)
+{
+  if (url.startsWith("https://"))
+  {
+    return url;
+  }
+  return "https://" + url;
 }
 
 void WifiClient::post(String url, JsonDocument doc)
