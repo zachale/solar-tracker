@@ -127,13 +127,13 @@ int ClockModule::normalizePercentage(float percentDayComplete)
     int finishHour = hourMiddle;
   }
 
-  int intervalizedPercent = mapPercentToInterval(startHour, finishHour, percentDayComplete);
+  float intervalizedPercent = mapPercentToInterval(startHour, finishHour, percentDayComplete);
 
   float difference = finishPercentExtended - startPercentExtended;
   return (difference * (intervalizedPercent / 100)) + startPercentExtended;
 }
 
-int ClockModule::mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent)
+float ClockModule::mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent)
 {
   return (percent - getPercentOfDay(intervalStartHour)) * 100 / (getPercentOfDay(intervalEndHour) - getPercentOfDay(intervalStartHour));
 }

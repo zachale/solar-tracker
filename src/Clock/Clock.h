@@ -42,6 +42,6 @@ private:
   uint8_t getMinute();
   uint8_t getSecond();
   void resetAlarm();
-  int mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent);
+  float mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent);
 };
 #endif
