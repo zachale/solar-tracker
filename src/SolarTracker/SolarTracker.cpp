@@ -46,6 +46,7 @@ void SolarTracker::pollSensorData()
     Serial.println();
     Serial.println(clockModule.getFullTimeString());
     Serial.println(clockModule.getTimestamp());
+    Serial.println(ButtonPanel::getButtonStatus());
     Serial.print("Status: ");
     Serial.println(getStatusString());
     sensorTimer = millis();
