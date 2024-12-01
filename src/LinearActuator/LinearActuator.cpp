@@ -114,8 +114,27 @@ void LinearActuator::setSpeeds(int forward, int backward)
   analogWrite(PWMForwardPin, forward);
 }
 
+bool LinearActuator::isExtending()
+{
+  return status == FORWARD || status == BACKWARD || status == HOMING || status == MAXING;
+}
+
 void LinearActuator::extendToPercent(float percent)
 {
+  if (percent == currentPercentTarget)
+  {
+    Serial.println("Same extension target detected, ignoring");
+    return;
+  }
+
+  // If the actuator is already extending, then we should update the target percent to cancel the current extension
+  if (isExtending())
+  {
+    Serial.println("New extension target detected, cancelling previous target");
+    currentPercentTarget = percent;
+    return;
+  }
+
   Serial.print("Extending to");
   Serial.print(percent);
   Serial.print("\n");
@@ -146,8 +165,10 @@ void LinearActuator::extendToPercent(float percent)
   {
     extend(BACKWARD);
   }
+
   for (int difference = 1; difference > 0; difference = (targetPos - pos) * dir)
   {
+    // If the actuator hits an unexpected boundary, then we should recalibrate
     if (hitBoundary())
     {
       Serial.println("Recalibrating because of unexpected Boundary");
@@ -155,10 +176,20 @@ void LinearActuator::extendToPercent(float percent)
       extendToPercent(percent);
       return;
     }
+
     if (extensionCallBack)
     {
       extensionCallBack();
+      // If the extension callback changes the target percent, then we should override the current extension
+      if (percent != currentPercentTarget)
+      {
+        extend(STOP);
+        extendToPercent(currentPercentTarget);
+        return;
+      }
     }
+
+    // When the actuator is approaching the target, slow down the speed
     if (difference < 255)
     {
       setSpeed(difference + 100);
@@ -167,6 +198,7 @@ void LinearActuator::extendToPercent(float percent)
     {
       setSpeed(255);
     }
+
     updatePos();
   }
   extend(STOP);

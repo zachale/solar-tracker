@@ -16,6 +16,7 @@ public:
   static const int HOMING = 2;
   static const int MAXING = 3;
   static const int HALF = 4;
+  int currentPercentTarget = -1;
   static long steps; // pulses from hall effect sensors
   static void countSteps();
   LinearActuator();
@@ -46,6 +47,7 @@ private:
   int getPosFromPercent(float percent);
   bool hitBoundary();
   void setSpeed(int input);
+  bool isExtending();
 };
 
 #endif
