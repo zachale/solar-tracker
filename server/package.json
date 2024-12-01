@@ -1,0 +1,15 @@
+{
+  "name": "solar-tracker",
+  "version": "1.0.0",
+  "description": "A work in progress IOT Solar Tracker",
+  "main": "routes.js",
+  "scripts": {
+    "serve": "node routes.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "type": "module"
+}
