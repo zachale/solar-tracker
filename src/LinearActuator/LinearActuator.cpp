@@ -102,10 +102,16 @@ void LinearActuator::extend(int inputDir)
   }
   else
   {
+    stop();
     speed = 255;
-    setSpeeds(0, 0);
-    delay(500);
   }
+}
+
+void LinearActuator::stop()
+{
+  setSpeeds(0, 0);
+  setStatus(STOP);
+  delay(500);
 }
 
 void LinearActuator::setSpeeds(int forward, int backward)
@@ -127,17 +133,15 @@ void LinearActuator::extendToPercent(float percent)
     return;
   }
 
-  // If the actuator is already extending, then we should update the target percent to cancel the current extension
-  if (isExtending())
+  currentPercentTarget = percent;
+
+  // If the actuator is already extending, then we should update the target percent to redirect the current extension
+  if (status != STOP)
   {
-    Serial.println("New extension target detected, cancelling previous target");
-    currentPercentTarget = percent;
+    Serial.println("New extension target detected, aborting current request, and updated target");
     return;
   }
 
-  Serial.print("Extending to");
-  Serial.print(percent);
-  Serial.print("\n");
   updatePos();
 
   if (percent == 0)
@@ -156,38 +160,35 @@ void LinearActuator::extendToPercent(float percent)
     recalibrate();
   }
 
-  float targetPos = getPosFromPercent(percent);
-  if (pos < targetPos)
+  for (int i = 0; i < 2; i++)
   {
-    extend(FORWARD);
-  }
-  else
-  {
-    extend(BACKWARD);
-  }
+    if (moveTo(percent))
+    {
+      return;
+    }
+    Serial.println("Failed to move to target, recalibrating and retrying");
+    recalibrate();
+  };
+  Serial.println("Failed to move to target.");
+  return;
+}
+
+// Move the actuator to a target percentage, and return true if successful
+// Automatically retries if the actuator hits an unexpected boundary or if the target percentage changes
+bool LinearActuator::moveTo(int targetPercent)
+{
+  // Ensure all extensions have stopped
+  extend(STOP);
+
+  Serial.println("Extending to " + String(targetPercent));
+
+  float targetPos = getPosFromPercent(targetPercent);
+
+  // Determine direction of target from current position
+  extendTowardsPos(targetPos);
 
   for (int difference = 1; difference > 0; difference = (targetPos - pos) * dir)
   {
-    // If the actuator hits an unexpected boundary, then we should recalibrate
-    if (hitBoundary())
-    {
-      Serial.println("Recalibrating because of unexpected Boundary");
-      recalibrate();
-      extendToPercent(percent);
-      return;
-    }
-
-    if (extensionCallBack)
-    {
-      extensionCallBack();
-      // If the extension callback changes the target percent, then we should override the current extension
-      if (percent != currentPercentTarget)
-      {
-        extend(STOP);
-        extendToPercent(currentPercentTarget);
-        return;
-      }
-    }
 
     // When the actuator is approaching the target, slow down the speed
     if (difference < 255)
@@ -199,12 +200,40 @@ void LinearActuator::extendToPercent(float percent)
       setSpeed(255);
     }
 
+    // If the actuator hits an unexpected boundary, then we should recalibrate and exit
+    if (hitBoundary())
+    {
+      Serial.println("Unexpected boundary hit");
+      return false;
+    }
+
+    if (extensionCallBack)
+    {
+      extensionCallBack();
+      if (targetPercent != currentPercentTarget)
+      {
+        targetPos = getPosFromPercent(currentPercentTarget);
+        extendTowardsPos(targetPos);
+      }
+    }
     updatePos();
   }
   extend(STOP);
-  if (percent == 50)
+  return true;
+}
+
+void LinearActuator::extendTowardsPos(int targetPos)
+{
+  Serial.println("Extending towards " + String(targetPos));
+  Serial.println("Starting Position " + String(pos));
+  // Determine direction of target from current position
+  if (pos < targetPos)
   {
-    setStatus(HALF);
+    extend(FORWARD);
+  }
+  else
+  {
+    extend(BACKWARD);
   }
 }
 
