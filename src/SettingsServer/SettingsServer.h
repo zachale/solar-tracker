@@ -4,6 +4,7 @@
 #include "WiFiS3.h"
 #include <ArduinoJson.h>
 #include "../SolarTracker/SolarTracker.h"
+#include "../ConfigManager/ConfigManager.h"
 
 class SettingsServer
 {
@@ -19,6 +20,7 @@ private:
   int status = WL_IDLE_STATUS;
   SolarTracker *tracker;
   WiFiServer server;
+  ConfigManager config;
   static const String trackerStatusStrings[];
   void endConnection(WiFiClient client);
   void getParams(String params);
