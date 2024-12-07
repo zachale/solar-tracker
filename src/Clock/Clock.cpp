@@ -112,23 +112,30 @@ int ClockModule::getHourlyExtensionPercent()
 }
 
 // Normalises a percentage calculated between 'working hours' to an actuator extension percentage
-int ClockModule::normalizePercentage(float percent)
+int ClockModule::normalizePercentage(float percentDayComplete)
 {
-  float start;
-  float finish;
-  if (percent < percentMiddle)
+  float startPercentExtended = percentMiddle;
+  float finishPercentExtended = percentFinish;
+  int startHour = hourMiddle;
+  int finishHour = hourFinish;
+
+  if (percentDayComplete < getPercentOfDay(hourMiddle))
   {
-    start = percentStart;
-    finish = percentMiddle;
-  }
-  else
-  {
-    start = percentMiddle;
-    finish = percentFinish;
+    startPercentExtended = percentStart;
+    finishPercentExtended = percentMiddle;
+    int startHour = hourStart;
+    int finishHour = hourMiddle;
   }
 
-  float difference = finish - start;
-  return (difference * (percent / 100)) + start;
+  float intervalizedPercent = mapPercentToInterval(startHour, finishHour, percentDayComplete);
+
+  float difference = finishPercentExtended - startPercentExtended;
+  return (difference * (intervalizedPercent / 100)) + startPercentExtended;
+}
+
+float ClockModule::mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent)
+{
+  return (percent - getPercentOfDay(intervalStartHour)) * 100 / (getPercentOfDay(intervalEndHour) - getPercentOfDay(intervalStartHour));
 }
 
 bool ClockModule::isActiveHours()
@@ -177,16 +184,6 @@ void ClockModule::setSimpleTime(int hour, int minute)
   uint8_t month = rtc.now().month();
   uint8_t day = rtc.now().day();
   rtc.adjust(DateTime(year, month, day, hour, minute, 0));
-}
-
-bool ClockModule::requireSync()
-{
-  bool needSync = syncTimer - syncInterval > 0;
-  if (needSync)
-  {
-    syncTimer = millis();
-  }
-  return needSync;
 }
 
 void ClockModule::setSchedule(JsonDocument &doc)
