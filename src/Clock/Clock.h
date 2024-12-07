@@ -23,6 +23,7 @@ public:
   bool requireSync();
   String toHtml();
   void setSchedule(JsonDocument &doc);
+  uint8_t getHour();
 
 private:
   static bool alarmTriggered;
@@ -39,7 +40,6 @@ private:
   unsigned long syncTimer = 0;
   int getPercentOfDay(float hour);
   int normalizePercentage(float percent);
-  uint8_t getHour();
   uint8_t getMinute();
   uint8_t getSecond();
   void resetAlarm();
