@@ -16,6 +16,7 @@ public:
 private:
   WiFiSSLClient client;
   R4HttpClient http;
+  static std::pair<const char *, const char *> savedCredentials;
   String ensureHTTPS(String);
 };
 
