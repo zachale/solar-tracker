@@ -8,6 +8,7 @@
 #include "../ButtonPanel/ButtonPanel.h"
 #include <Arduino.h>
 #include "../OTA/OTAUpdater.h"
+#include "Arduino_LED_Matrix.h"
 
 class SolarTracker
 {
@@ -45,6 +46,7 @@ private:
   void updateStatus();
   void actOnStatus(Status);
   void initializeStatus();
+  ArduinoLEDMatrix matrix;
 };
 
 #endif

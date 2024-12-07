@@ -11,10 +11,14 @@ SolarTracker::SolarTracker(void (*callback)())
 
 void SolarTracker::setup()
 {
+  matrix.begin();
+  matrix.loadSequence(LEDMATRIX_ANIMATION_SPINNING_COIN);
+  matrix.play(true);
   attachInterrupt(digitalPinToInterrupt(ACTUATOR_INTERRUPT_PIN), actuator.countSteps, RISING);
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  matrix.clear();
   dailySync();
   initializeStatus();
 }
@@ -135,11 +139,23 @@ void SolarTracker::actOnStatus(Status inputStatus)
 
 void SolarTracker::dailySync()
 {
-  syncClock();
+  matrix.clear();
+  // If true, this will update the firmware and reboot the device
   if (ota.updateAvailable())
   {
+    matrix.loadSequence(LEDMATRIX_ANIMATION_DOWNLOAD);
+    matrix.play(true);
     ota.update();
   }
+
+  matrix.loadSequence(LEDMATRIX_ANIMATION_LOAD_CLOCK);
+  matrix.play(true);
+  syncClock();
+  matrix.clear();
+  matrix.loadSequence(LEDMATRIX_ANIMATION_ARROWS_COMPASS);
+  matrix.play(true);
+  actuator.recalibrate();
+  matrix.clear();
 }
 
 void SolarTracker::syncClock()
