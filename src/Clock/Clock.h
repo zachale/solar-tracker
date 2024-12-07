@@ -22,7 +22,7 @@ public:
   void setSimpleTime(int hour, int minute);
   String toHtml();
   void setSchedule(JsonDocument &doc);
-  uint8_t getHour();
+  uint8_t hour();
 
 private:
   static bool alarmTriggered;
@@ -39,9 +39,11 @@ private:
   unsigned long syncTimer = 0;
   int getPercentOfDay(float hour);
   int normalizePercentage(float percent);
-  uint8_t getMinute();
-  uint8_t getSecond();
+  DateTime now();
+  uint8_t minute();
+  uint8_t second();
   void resetAlarm();
   float mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent);
+  bool powerCycle();
 };
 #endif

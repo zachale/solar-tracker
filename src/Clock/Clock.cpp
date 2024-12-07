@@ -7,17 +7,7 @@ void ClockModule::setup()
 
   pinMode(RTC_POWER_PIN, OUTPUT);
 
-  for (int i = 0; i < 3; i++)
-  {
-    digitalWrite(RTC_POWER_PIN, HIGH);
-    if (rtc.begin())
-    {
-      break;
-    }
-    digitalWrite(RTC_POWER_PIN, LOW);
-    Serial.println("Couldn't find RTC");
-    delay(5000);
-  }
+  powerCycle();
 
   if (!rtc.begin())
   {
@@ -42,6 +32,23 @@ void ClockModule::setup()
   Serial.println("Setup Clock Module.");
 }
 
+bool ClockModule::powerCycle()
+{
+  digitalWrite(RTC_POWER_PIN, LOW);
+  for (int i = 0; i < 5; i++)
+  {
+    digitalWrite(RTC_POWER_PIN, HIGH);
+    if (rtc.begin())
+    {
+      return true;
+    }
+    digitalWrite(RTC_POWER_PIN, LOW);
+    Serial.println("Couldn't find RTC");
+    delay(5000);
+  }
+  return false;
+}
+
 bool ClockModule::isAlarmTriggered()
 {
   if (!alarmTriggered)
@@ -58,7 +65,7 @@ void ClockModule::resetAlarm()
   rtc.clearAlarm(1);
   Serial.println("Alarm detected and cleared.");
   if (!rtc.setAlarm1(
-          DateTime(2024, 10, 1, 0, 0, 0),
+          DateTime(2024, 10, 1, 8, 0, 0),
           DS3231_A1_Minute))
   {
     Serial.println("Error, alarm wasn't set!");
@@ -74,19 +81,35 @@ void ClockModule::setAlarmTriggered()
   alarmTriggered = true;
 }
 
-uint8_t ClockModule::getHour()
+DateTime ClockModule::now()
 {
-  return rtc.now().hour();
+  DateTime currentTime = rtc.now();
+  // If the clock returns this time, it has malfunctioned and needs to be power cycled
+  if (currentTime == DateTime(1332900840))
+  {
+    Serial.println("RTC Malfunctioned! Power cycling.");
+    Serial.println("Lost Power: " + String(rtc.lostPower()));
+    Serial.println("Temperature: " + String(rtc.getTemperature()));
+    Serial.println("TimeStamp: " + String(getTimestamp()));
+    Serial.println("Time: " + String(getFullTimeString()));
+    powerCycle();
+  }
+  return currentTime;
 }
 
-uint8_t ClockModule::getMinute()
+uint8_t ClockModule::hour()
 {
-  return rtc.now().minute();
+  return now().hour();
 }
 
-uint8_t ClockModule::getSecond()
+uint8_t ClockModule::minute()
 {
-  return rtc.now().second();
+  return now().minute();
+}
+
+uint8_t ClockModule::second()
+{
+  return now().second();
 }
 
 int ClockModule::getPercentOfDay(float hour)
@@ -96,7 +119,7 @@ int ClockModule::getPercentOfDay(float hour)
 
 int ClockModule::getDayCompletionPercent()
 {
-  uint8_t currentHour = getHour();
+  uint8_t currentHour = hour();
   return getPercentOfDay(currentHour);
 }
 
@@ -140,7 +163,7 @@ float ClockModule::mapPercentToInterval(float intervalStartHour, float intervalE
 
 bool ClockModule::isActiveHours()
 {
-  return (getHour() >= hourStart && getHour() <= hourFinish);
+  return (hour() >= hourStart && hour() <= hourFinish);
 }
 
 float ClockModule::getClockTemp()
@@ -151,26 +174,26 @@ float ClockModule::getClockTemp()
 String ClockModule::getSimpleTimeString()
 {
   String result = "";
-  result.concat(getHour());
+  result.concat(hour());
   result.concat(":");
-  result.concat(getMinute());
+  result.concat(minute());
   return result;
 }
 
 String ClockModule::getFullTimeString()
 {
   String result = "";
-  result.concat(getHour());
+  result.concat(hour());
   result.concat(":");
-  result.concat(getMinute());
+  result.concat(minute());
   result.concat(":");
-  result.concat(getSecond());
+  result.concat(second());
   return result;
 }
 
 uint32_t ClockModule::getTimestamp()
 {
-  return rtc.now().unixtime();
+  return now().unixtime();
 }
 
 void ClockModule::setDateTime(const char *dateTimeString)
@@ -180,9 +203,9 @@ void ClockModule::setDateTime(const char *dateTimeString)
 
 void ClockModule::setSimpleTime(int hour, int minute)
 {
-  uint16_t year = rtc.now().year();
-  uint8_t month = rtc.now().month();
-  uint8_t day = rtc.now().day();
+  uint16_t year = now().year();
+  uint8_t month = now().month();
+  uint8_t day = now().day();
   rtc.adjust(DateTime(year, month, day, hour, minute, 0));
 }
 
