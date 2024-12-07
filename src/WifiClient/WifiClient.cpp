@@ -10,15 +10,25 @@ void WifiClient::setup()
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println(F("Communication with WiFi module failed!"));
-    while (true);
+    while (true)
+      ;
   }
 
-  WiFi.begin(SSID, PASS);
-  Serial.print(F("Connecting to WiFi"));
-  while (WiFi.status() != WL_CONNECTED)
+  for (const auto &credential : wifiCredentials)
   {
-    delay(1000);
-    Serial.print(F("."));
+    WiFi.begin(credential.first, credential.second);
+    Serial.print(F("Connecting to WiFi"));
+    Serial.println(credential.first);
+    for (int i = 0; i < 5 && WiFi.status() != WL_CONNECTED; i++)
+    {
+      delay(1000);
+      Serial.print(F("."));
+    }
+
+    if (WiFi.status() == WL_CONNECTED)
+    {
+      break;
+    }
   }
   Serial.println();
   Serial.println(F("Successfully connected to WiFi!"));
@@ -27,7 +37,7 @@ void WifiClient::setup()
 String WifiClient::get(String url)
 {
   Serial.println("GET Request");
-  Serial.println(url);  
+  Serial.println(url);
   http.begin(client, url, 443);
   http.setTimeout(15000);
   // http.addHeader("User-Agent: Arduino UNO R4 WiFi");

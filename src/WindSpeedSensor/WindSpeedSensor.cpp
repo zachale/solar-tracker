@@ -2,16 +2,18 @@
 
 bool WindSpeedSensor::isEnabled()
 {
-  if(ButtonPanel::isWindSensorEnabled()){
+  if (ButtonPanel::isWindSensorEnabled())
+  {
     return true;
-  } 
+  }
   status = DISABLED;
   return false;
 }
 
 int WindSpeedSensor::getSpeed()
 {
-  if(!isEnabled()){
+  if (!isEnabled())
+  {
     return 0;
   }
   float sensorValue = analogRead(WIND_SENSOR_PIN);
@@ -132,4 +134,49 @@ bool WindSpeedSensor::exitingHighWind()
 void WindSpeedSensor::setStatus(Status inputStatus)
 {
   status = inputStatus;
+}
+
+String WindSpeedSensor::toHtml()
+{
+  String html;
+  html.concat(R"(
+    <h1 style="font-size:7vw;">Wind Sensor</h1>
+    <section>
+      <form action="/" method="POST">
+        Set upper threshold wind speed max (km/h):
+        <input style="font-size:5vw;" type="number" min="0" name="windUpperMaxSpeed" value=")");
+  html.concat(String(getUpperSpeedMax() * 3.6)); // upper wind threshold speed m/s converted to km/h
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">
+      </form>
+    </section>
+    <section>
+      <form action="/" method="POST">
+        Set upper threshold wait period (minutes):
+        <input style="font-size:5vw;" type="number" min="0" name="windUpperWait" value=")");
+  html.concat(String(getUpperSpeedDelay() / 6000)); // upper wind threshold wait period milliseconds converted to minutes
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">
+      </form>
+    </section>
+    <section>
+      <form action="/" method="POST">
+        Set lower threshold wind speed max (km/h):
+        <input style="font-size:5vw;" type="number" min="0" name="windLowerSpeedMax" value=")");
+  html.concat(String(getLowerSpeedMax() * 3.6)); // lower wind threshold speed m/s converted to km/h
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">
+      </form>
+    </section>
+    <section>
+      <form action="/" method="POST">
+        Set lower threshold wait period (minutes):
+        <input style="font-size:5vw;" type="number" min="0" name="windLowerWait" value=")");
+  html.concat(String(getLowerSpeedDelay() / 6000)); // lower wind threshold wait period milliseconds converted to minutes
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">
+      </form>
+    </section>
+  )");
+  return html;
 }

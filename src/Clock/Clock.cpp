@@ -114,8 +114,21 @@ int ClockModule::getHourlyExtensionPercent()
 // Normalises a percentage calculated between 'working hours' to an actuator extension percentage
 int ClockModule::normalizePercentage(float percent)
 {
-  float difference = percentFinish - percentStart;
-  return (difference * (percent / 100)) + percentStart;
+  float start;
+  float finish;
+  if (percent < percentMiddle)
+  {
+    start = percentStart;
+    finish = percentMiddle;
+  }
+  else
+  {
+    start = percentMiddle;
+    finish = percentFinish;
+  }
+
+  float difference = finish - start;
+  return (difference * (percent / 100)) + start;
 }
 
 bool ClockModule::isActiveHours()
@@ -153,7 +166,7 @@ uint32_t ClockModule::getTimestamp()
   return rtc.now().unixtime();
 }
 
-void ClockModule::setDateTime(const char* dateTimeString)
+void ClockModule::setDateTime(const char *dateTimeString)
 {
   rtc.adjust(DateTime(dateTimeString));
 }
@@ -169,8 +182,73 @@ void ClockModule::setSimpleTime(int hour, int minute)
 bool ClockModule::requireSync()
 {
   bool needSync = syncTimer - syncInterval > 0;
-  if(needSync){
+  if (needSync)
+  {
     syncTimer = millis();
   }
-  return needSync ;
+  return needSync;
+}
+
+void ClockModule::setSchedule(JsonDocument &doc)
+{
+  hourStart = doc["setStartHour"].as<float>();
+  hourMiddle = doc["setMiddleHour"].as<float>();
+  hourFinish = doc["setEndPercent"].as<float>();
+  percentStart = doc["setStartPercent"].as<float>();
+  percentMiddle = doc["setMiddlePercent"].as<float>();
+  percentFinish = doc["setEndHour"].as<float>();
+}
+
+String ClockModule::toHtml()
+{
+  String html;
+  html.concat(R"(
+    <h1 style="font-size:7vw;">Clock</h1>
+    <section>
+      <form action="/" method="POST">
+        Set time (HH:MM - 24 hour format): 
+        <input style="font-size:5vw;" type="text" pattern="^([01]\d|2[0-3]):([0-5]\d)$" name="setTime" value=")");
+  html.concat(getSimpleTimeString());
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">      
+      </form>
+    </section>
+  )");
+
+  html.concat(R"(
+    <h1 style="font-size:7vw;">Schedule</h1>
+    <section>
+      <form action="/" method="POST">
+        <br/> 
+        Set start hour (HH): 
+        <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setStartHour" value=")");
+  html.concat(hourStart);
+  html.concat(R"(">
+        at 
+        <input style="font-size:5vw;" type="number" max="100" min="0" name="setStartPercent" value=")");
+  html.concat(percentStart);
+  html.concat(R"(">
+        <br/> 
+        Set middle hour (HH): 
+        <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setMiddleHour" value=")");
+  html.concat(hourMiddle);
+  html.concat(R"(">
+        at 
+        <input style="font-size:5vw;" type="number" max="100" min="0" name="setMiddlePercent" value=")");
+  html.concat(percentMiddle);
+  html.concat(R"(">
+        <br/> 
+        Set end hour (HH): 
+        <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setEndHour" value=")");
+  html.concat(hourFinish);
+  html.concat(R"(">
+        at 
+        <input style="font-size:5vw;" type="number" max="100" min="0" name="setEndPercent" value=")");
+  html.concat(percentFinish);
+  html.concat(R"(">
+        <input type="submit" style="font-size:5vw;" value="Submit">    
+      </form>
+    </section>
+  )");
+  return html;
 }

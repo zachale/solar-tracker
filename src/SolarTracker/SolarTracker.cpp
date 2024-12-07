@@ -1,4 +1,5 @@
 #include "./SolarTracker.h"
+#include "../../secrets.h"
 
 const String SolarTracker::statusStrings[4] = {"ACTIVE", "NIGHT", "SAFE", "AWAY"};
 
@@ -16,12 +17,14 @@ void SolarTracker::setup()
   clockModule.setup();
   wifiClient.setup();
   syncClock();
-  setStatus(ACTIVE);
+  status = ACTIVE;
+  updateStatus();
 }
 
 void SolarTracker::pollSensorData()
 {
-  if (clockModule.isAlarmTriggered() && status == ACTIVE){
+  if (clockModule.isAlarmTriggered() && status == ACTIVE)
+  {
     extendActuatorOnHour();
   }
 
@@ -44,6 +47,7 @@ void SolarTracker::pollSensorData()
     Serial.print("Status: ");
     Serial.println(getStatusString());
     sensorTimer = millis();
+    setStatus(ACTIVE);
     updateStatus();
   }
 }
@@ -80,7 +84,7 @@ SolarTracker::Status SolarTracker::getStatus()
 String SolarTracker::getStatusString()
 {
   return statusStrings[getStatus()];
-} 
+}
 
 void SolarTracker::updateStatus()
 {
@@ -118,21 +122,25 @@ void SolarTracker::actOnStatus(Status inputStatus)
   }
 }
 
-void SolarTracker::sync(){
-  if(clockModule.requireSync() && !ButtonPanel::settingsServerEnabled()){
+void SolarTracker::sync()
+{
+  if (clockModule.requireSync() && !ButtonPanel::settingsServerEnabled())
+  {
     syncClock();
   }
   // TODO: Logic to sync logged data to API
 }
 
-void SolarTracker::syncClock(){
-  String body = wifiClient.get(timeAPIUrl);
-  if(body != ""){
+void SolarTracker::syncClock()
+{
+  String body = wifiClient.get(EST_TIME_API);
+  if (body != "")
+  {
     StaticJsonDocument<200> doc;
     deserializeJson(doc, body);
-    const char * timestamp = doc["datetime"];
+    const char *ISOdateTime = doc["datetime"];
     Serial.print("Syncing Clock to: ");
-    Serial.println(timestamp);
-    clockModule.setDateTime(timestamp);
+    Serial.println(ISOdateTime);
+    clockModule.setDateTime(ISOdateTime);
   }
 }

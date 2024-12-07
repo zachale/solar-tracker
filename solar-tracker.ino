@@ -18,8 +18,8 @@ void setup()
 
   buttonPanel.setup();
   tracker.setup();
-  if(ButtonPanel::settingsServerEnabled()){
-    Serial.println("Wifi server enabled.");
+  if (ButtonPanel::settingsServerEnabled())
+  {
     wifi.setup();
   }
   Serial.println("Setup complete.");
@@ -28,7 +28,8 @@ void setup()
 void loop()
 {
   tracker.pollSensorData();
-  if(ButtonPanel::settingsServerEnabled()){
+  if (ButtonPanel::settingsServerEnabled())
+  {
     wifi.checkForClient();
   }
 }
