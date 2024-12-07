@@ -60,7 +60,7 @@ void SolarTracker::extendActuatorOnHour()
 
 void SolarTracker::extendActuatorToHalf()
 {
-  if (actuator.status != LinearActuator::HALF)
+  if (actuator.status)
   {
     int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
     actuator.extendToPercent(halfDayPercentage);
@@ -133,7 +133,7 @@ void SolarTracker::sync()
 
 void SolarTracker::syncClock()
 {
-  String body = wifiClient.get(EST_TIME_API);
+  String body = wifiClient.get(API + String("/time/est"));
   if (body != "")
   {
     StaticJsonDocument<200> doc;
