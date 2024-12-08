@@ -26,12 +26,12 @@ bool WifiClient::ensureWifiConnection()
 
     if (WiFi.status() == WL_CONNECTED)
     {
-      break;
+      Serial.println(F("Successfully connected to WiFi!"));
+      return true;
     }
   }
-  Serial.println();
-  Serial.println(F("Successfully connected to WiFi!"));
-  return true;
+  Serial.println(F("Failed to connect to WiFi!"));
+  return false;
 }
 
 String WifiClient::get(String url)
@@ -54,6 +54,7 @@ String WifiClient::get(String url)
   {
     String responseBody = http.getBody();
     Serial.println("Response code: " + String(responseNum));
+    Serial.println(responseBody);
     http.close();
     return responseBody;
   }
