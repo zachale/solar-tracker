@@ -179,6 +179,7 @@ void SettingsServer::actOnParameter(JsonDocument params)
   if (params["status"])
   {
     tracker->setStatus(params["status"].as<SolarTracker::Status>());
+    config.registerSettings("trackerStatus", params["status"].as<int>());
   }
 
   if (params["recalibrateActuator"])
@@ -196,24 +197,28 @@ void SettingsServer::actOnParameter(JsonDocument params)
   {
     float windUpperMax = params["windUpperMaxSpeed"].as<float>();
     tracker->windSensor.setUpperSpeedMax(windUpperMax / 3.6);
+    config.registerSettings("windUpperMaxSpeed", windUpperMax);
   }
 
   if (params["windUpperWait"])
   {
     float windUpperWait = params["windUpperWait"].as<float>();
     tracker->windSensor.setUpperSpeedDelay(windUpperWait * 6000);
+    config.registerSettings("windUpperWait", windUpperWait);
   }
 
   if (params["windLowerSpeedMax"])
   {
     float windLowerMax = params["windLowerSpeedMax"].as<float>();
     tracker->windSensor.setLowerSpeedMax(windLowerMax / 3.6);
+    config.registerSettings("windLowerSpeedMax", windLowerMax);
   }
 
   if (params["windLowerWait"])
   {
     int windLowerWait = params["windLowerWait"].as<float>();
     tracker->windSensor.setLowerSpeedDelay(windLowerWait * 6000);
+    config.registerSettings("windLowerWait", windLowerWait);
   }
 
   if (params["setTime"].is<String>())
@@ -231,7 +236,12 @@ void SettingsServer::actOnParameter(JsonDocument params)
   if (params["setStartHour"])
   {
     tracker->clockModule.setSchedule(params);
+    String output;
+    serializeJson(params, output);
+    config.registerSettings("schedule", output);
   }
+
+  config.saveSettings();
 }
 
 void SettingsServer::endConnection(WiFiClient client)
@@ -282,21 +292,24 @@ void SettingsServer::sendDashboardTo(WiFiClient client)
   client.print("<br/>");
 
   client.print("Status: ");
+
   client.print(tracker->getStatusString()); // Placeholder: tracker status, e.g., HIGH_WIND,
+
   client.print(R"(</p></section>)");
 
   client.print(R"(<section><form action="/" method="POST">)");
-  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="0">Set Active</button>)");
-  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="2">Set Safe</button>)");
-  client.print(R"(<button type="submit" style="font-size:5vw;" name="status" value="3">Set Away</button>)");
-  client.print(R"(</form></section>)");
 
+  client.print(htmlButton("status", "0", "Set Active"));
+
+  client.print(htmlButton("status", "3", "Set Away"));
+
+  client.print(R"(</form></section>)");
   client.print(R"(<h1 style="font-size:7vw;">Actuator</h1>)");
-
   client.print(R"(<section><form action="/" method="POST">)");
-  client.print(R"(<button type="submit" style="font-size:5vw;" name="recalibrateActuator" value="true">Recalibrate</button>)");
-  client.print(R"(</form></section>)");
 
+  client.print(htmlButton("recalibrateActuator", "true", "Recalibrate"));
+
+  client.print(R"(</form></section>)");
   client.print(R"(<section><form action="/" method="POST">)");
   client.print("Extend To ");
   client.print(R"(<input style="font-size:5vw;" type="number" max="100" min="0" name="extendToPercent" value=")");
@@ -309,4 +322,9 @@ void SettingsServer::sendDashboardTo(WiFiClient client)
 
   // The HTTP response ends with another blank line:
   client.println();
+}
+
+String SettingsServer::htmlButton(String name, String value, String label)
+{
+  return R"(<button type="submit" style="font-size:5vw;" name=")" + name + R"(" value=")" + value + R"(">)" + label + R"(</button>)";
 }
