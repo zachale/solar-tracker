@@ -23,7 +23,7 @@ void SolarTracker::pollSensorData()
 {
   if (clockModule.isAlarmTriggered() && status == ACTIVE)
   {
-    if (clockModule.getHour() == 8)
+    if (clockModule.getHour() == 8 && !ButtonPanel::settingsServerEnabled())
     {
       dailySync();
     }
@@ -46,6 +46,7 @@ void SolarTracker::pollSensorData()
     Serial.println();
     Serial.println(clockModule.getFullTimeString());
     Serial.println(clockModule.getTimestamp());
+    Serial.println(ButtonPanel::getButtonStatus());
     Serial.print("Status: ");
     Serial.println(getStatusString());
     sensorTimer = millis();
@@ -134,13 +135,10 @@ void SolarTracker::actOnStatus(Status inputStatus)
 
 void SolarTracker::dailySync()
 {
-  if (!ButtonPanel::settingsServerEnabled())
+  syncClock();
+  if (ota.updateAvailable())
   {
-    syncClock();
-    if (ota.updateAvailable())
-    {
-      ota.update();
-    }
+    ota.update();
   }
 }
 

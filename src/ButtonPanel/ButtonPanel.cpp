@@ -15,3 +15,8 @@ bool ButtonPanel::isWindSensorEnabled()
 {
     return digitalRead(WIND_SENSOR_ENABLE_PIN) == HIGH;
 }
+
+String ButtonPanel::getButtonStatus()
+{
+    return "Settings Server: " + String(settingsServerEnabled()) + " Wind Sensor: " + String(isWindSensorEnabled());
+}

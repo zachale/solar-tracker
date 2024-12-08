@@ -190,10 +190,10 @@ void ClockModule::setSchedule(JsonDocument &doc)
 {
   hourStart = doc["setStartHour"].as<float>();
   hourMiddle = doc["setMiddleHour"].as<float>();
-  hourFinish = doc["setEndPercent"].as<float>();
+  hourFinish = doc["setEndHour"].as<float>();
   percentStart = doc["setStartPercent"].as<float>();
   percentMiddle = doc["setMiddlePercent"].as<float>();
-  percentFinish = doc["setEndHour"].as<float>();
+  percentFinish = doc["setEndPercent"].as<float>();
 }
 
 String ClockModule::toHtml()
@@ -219,29 +219,29 @@ String ClockModule::toHtml()
         <br/> 
         Set start hour (HH): 
         <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setStartHour" value=")");
-  html.concat(hourStart);
+  html.concat((int)hourStart);
   html.concat(R"(">
         at 
         <input style="font-size:5vw;" type="number" max="100" min="0" name="setStartPercent" value=")");
-  html.concat(percentStart);
+  html.concat((int)percentStart);
   html.concat(R"(">
         <br/> 
         Set middle hour (HH): 
         <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setMiddleHour" value=")");
-  html.concat(hourMiddle);
+  html.concat((int)hourMiddle);
   html.concat(R"(">
         at 
         <input style="font-size:5vw;" type="number" max="100" min="0" name="setMiddlePercent" value=")");
-  html.concat(percentMiddle);
+  html.concat((int)percentMiddle);
   html.concat(R"(">
         <br/> 
         Set end hour (HH): 
         <input style="font-size:5vw;" type="number" pattern="^([1-9]|1[0-9]|2[0-4])$" name="setEndHour" value=")");
-  html.concat(hourFinish);
+  html.concat((int)hourFinish);
   html.concat(R"(">
         at 
         <input style="font-size:5vw;" type="number" max="100" min="0" name="setEndPercent" value=")");
-  html.concat(percentFinish);
+  html.concat((int)percentFinish);
   html.concat(R"(">
         <input type="submit" style="font-size:5vw;" value="Submit">    
       </form>

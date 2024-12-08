@@ -1,10 +1,10 @@
-#include "./src/Wifi/Wifi.h"
+#include "./src/SettingsServer/SettingsServer.h"
 #include "./src/ButtonPanel/ButtonPanel.h"
 #include "./src/SolarTracker/SolarTracker.h"
 
 SolarTracker tracker(loop);
 ButtonPanel buttonPanel;
-WifiModule wifi(&tracker);
+SettingsServer server(&tracker);
 
 void setup()
 {
@@ -20,7 +20,7 @@ void setup()
   tracker.setup();
   if (ButtonPanel::settingsServerEnabled())
   {
-    wifi.setup();
+    server.setup();
   }
   Serial.println("Setup complete.");
 }
@@ -30,6 +30,6 @@ void loop()
   tracker.pollSensorData();
   if (ButtonPanel::settingsServerEnabled())
   {
-    wifi.checkForClient();
+    server.checkForClient();
   }
 }
