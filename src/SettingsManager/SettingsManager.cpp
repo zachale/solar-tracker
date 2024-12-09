@@ -1,13 +1,16 @@
-#include "./ConfigManager.h"
+#include "./SettingsManager.h"
+
+StaticJsonDocument<1024> SettingsManager::configDocument;
+constexpr const char *SettingsManager::storageFile; // Define storageFile
 
 // Initialize the SD card
-bool ConfigManager::begin(uint8_t csPin)
+bool SettingsManager::begin(uint8_t csPin)
 {
   return SD.begin(csPin);
 }
 
 // Save settings to file
-bool ConfigManager::saveSettings()
+bool SettingsManager::save()
 {
   SD.remove(storageFile);
   File configFile = SD.open(storageFile, FILE_WRITE);
@@ -23,7 +26,7 @@ bool ConfigManager::saveSettings()
 }
 
 // Load settings from file
-bool ConfigManager::loadSettings()
+bool SettingsManager::load()
 {
   File configFile = SD.open(storageFile, FILE_READ);
   if (!configFile)

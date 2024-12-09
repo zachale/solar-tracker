@@ -3,6 +3,8 @@
 
 #include <RTClib.h>
 #include <ArduinoJson.h>
+#include "../SettingsManager/SettingsManager.h"
+#include <ArduinoJson.h>
 
 class ClockModule
 {
@@ -25,8 +27,8 @@ public:
   uint8_t getHour();
 
 private:
-  static bool alarmTriggered;
   RTC_DS3231 rtc;
+  static bool alarmTriggered;
   const int RTC_POWER_PIN = 8;
   const int HALF_DAY_PERCENT = 50; // 50 Percent to describe 1/2 of a day
   float hourStart = 8;

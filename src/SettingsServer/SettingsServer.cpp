@@ -179,7 +179,6 @@ void SettingsServer::actOnParameter(JsonDocument params)
   if (params["status"])
   {
     tracker->setStatus(params["status"].as<SolarTracker::Status>());
-    config.registerSettings("trackerStatus", params["status"].as<int>());
   }
 
   if (params["recalibrateActuator"])
@@ -197,28 +196,24 @@ void SettingsServer::actOnParameter(JsonDocument params)
   {
     float windUpperMax = params["windUpperMaxSpeed"].as<float>();
     tracker->windSensor.setUpperSpeedMax(windUpperMax / 3.6);
-    config.registerSettings("windUpperMaxSpeed", windUpperMax);
   }
 
   if (params["windUpperWait"])
   {
     float windUpperWait = params["windUpperWait"].as<float>();
     tracker->windSensor.setUpperSpeedDelay(windUpperWait * 6000);
-    config.registerSettings("windUpperWait", windUpperWait);
   }
 
   if (params["windLowerSpeedMax"])
   {
     float windLowerMax = params["windLowerSpeedMax"].as<float>();
     tracker->windSensor.setLowerSpeedMax(windLowerMax / 3.6);
-    config.registerSettings("windLowerSpeedMax", windLowerMax);
   }
 
   if (params["windLowerWait"])
   {
     int windLowerWait = params["windLowerWait"].as<float>();
     tracker->windSensor.setLowerSpeedDelay(windLowerWait * 6000);
-    config.registerSettings("windLowerWait", windLowerWait);
   }
 
   if (params["setTime"].is<String>())
@@ -238,10 +233,9 @@ void SettingsServer::actOnParameter(JsonDocument params)
     tracker->clockModule.setSchedule(params);
     String output;
     serializeJson(params, output);
-    config.registerSettings("schedule", output);
   }
 
-  config.saveSettings();
+  SettingsManager::save();
 }
 
 void SettingsServer::endConnection(WiFiClient client)

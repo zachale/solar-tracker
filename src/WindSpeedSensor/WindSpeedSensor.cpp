@@ -1,5 +1,29 @@
 #include "./WindSpeedSensor.h"
 
+WindSpeedSensor::WindSpeedSensor()
+{
+  float savedUpperSpeedMax = SettingsManager::getSetting<float>("windUpperMaxSpeed");
+  float savedLowerSpeedMax = SettingsManager::getSetting<float>("windLowerSpeedMax");
+  unsigned long savedUpperSpeedDelay = SettingsManager::getSetting<unsigned long>("windUpperWait");
+  unsigned long savedLowerSpeedDelay = SettingsManager::getSetting<unsigned long>("windLowerWait");
+  if (savedUpperSpeedMax)
+  {
+    setUpperSpeedMax(savedUpperSpeedMax);
+  }
+  if (savedLowerSpeedMax)
+  {
+    setLowerSpeedMax(savedLowerSpeedMax);
+  }
+  if (savedUpperSpeedDelay)
+  {
+    setUpperSpeedDelay(savedUpperSpeedDelay);
+  }
+  if (savedLowerSpeedDelay)
+  {
+    setLowerSpeedDelay(savedLowerSpeedDelay);
+  }
+}
+
 bool WindSpeedSensor::isEnabled()
 {
   if (ButtonPanel::isWindSensorEnabled())
@@ -35,11 +59,8 @@ float WindSpeedSensor::getUpperSpeedMax()
 
 void WindSpeedSensor::setUpperSpeedMax(float inputSpeed)
 {
-  Serial.println("Updated upper wind speed to");
-  Serial.print(inputSpeed);
-  Serial.print(" from ");
-  Serial.print(upperSpeedMax);
   upperSpeedMax = inputSpeed;
+  SettingsManager::upsertSetting("windUpperMaxSpeed", inputSpeed);
 }
 
 float WindSpeedSensor::getLowerSpeedMax()
@@ -49,20 +70,8 @@ float WindSpeedSensor::getLowerSpeedMax()
 
 void WindSpeedSensor::setLowerSpeedMax(float inputSpeed)
 {
-  Serial.println("Updated upper wind speed to");
-  Serial.print(inputSpeed);
-  Serial.print(" from ");
-  Serial.print(lowerSpeedMax);
   lowerSpeedMax = inputSpeed;
-}
-
-void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay)
-{
-  Serial.println("Updated upper wind speed to");
-  Serial.print(inputDelay);
-  Serial.print(" from ");
-  Serial.print(upperSpeedDelay);
-  upperSpeedDelay = inputDelay;
+  SettingsManager::upsertSetting("windLowerSpeedMax", inputSpeed);
 }
 
 unsigned long WindSpeedSensor::getUpperSpeedDelay()
@@ -70,18 +79,21 @@ unsigned long WindSpeedSensor::getUpperSpeedDelay()
   return upperSpeedDelay;
 }
 
-void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay)
+void WindSpeedSensor::setUpperSpeedDelay(unsigned long inputDelay)
 {
-  Serial.println("Updated upper wind speed to");
-  Serial.print(inputDelay);
-  Serial.print(" from ");
-  Serial.print(lowerSpeedDelay);
-  lowerSpeedDelay = inputDelay;
+  upperSpeedDelay = inputDelay;
+  SettingsManager::upsertSetting("windUpperWait", inputDelay);
 }
 
 unsigned long WindSpeedSensor::getLowerSpeedDelay()
 {
   return lowerSpeedDelay;
+}
+
+void WindSpeedSensor::setLowerSpeedDelay(unsigned long inputDelay)
+{
+  lowerSpeedDelay = inputDelay;
+  SettingsManager::upsertSetting("windLowerWait", inputDelay);
 }
 
 bool WindSpeedSensor::isMaintainingUpperSpeed()

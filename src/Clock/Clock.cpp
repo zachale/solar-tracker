@@ -194,6 +194,9 @@ void ClockModule::setSchedule(JsonDocument &doc)
   percentStart = doc["setStartPercent"].as<float>();
   percentMiddle = doc["setMiddlePercent"].as<float>();
   percentFinish = doc["setEndPercent"].as<float>();
+  String output;
+  serializeJson(doc, output);
+  SettingsManager::upsertSetting("schedule", output);
 }
 
 String ClockModule::toHtml()

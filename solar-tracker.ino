@@ -1,12 +1,11 @@
 #include "./src/SettingsServer/SettingsServer.h"
 #include "./src/ButtonPanel/ButtonPanel.h"
 #include "./src/SolarTracker/SolarTracker.h"
-#include "./src/ConfigManager/ConfigManager.h"
+#include "./src/SettingsManager/SettingsManager.h"
 
 SolarTracker tracker(loop);
 ButtonPanel buttonPanel;
 SettingsServer server(&tracker);
-ConfigManager config;
 
 void setup()
 {
@@ -18,15 +17,14 @@ void setup()
     ; // wait for serial port to connect. Needed for native USB
 #endif
 
-
-  if (!config.begin(10))
+  if (SettingsManager::begin(10))
   { // Adjust CS pin as needed
     Serial.println("Failed to initialize SD card");
     return;
   }
 
   // Load settings
-  if (!config.loadSettings())
+  if (!SettingsManager::load())
   {
     Serial.println("Failed to load settings, using defaults");
   }
