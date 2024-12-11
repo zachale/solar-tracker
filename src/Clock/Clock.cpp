@@ -85,7 +85,7 @@ DateTime ClockModule::now()
 {
   DateTime currentTime = rtc.now();
   // If the clock returns this time, it has malfunctioned and needs to be power cycled
-  if (currentTime == DateTime(1332900840))
+  if (currentTime.timestamp() == String(1332900840))
   {
     Serial.println("RTC Malfunctioned! Power cycling.");
     Serial.println("Lost Power: " + String(rtc.lostPower()));
@@ -146,12 +146,11 @@ int ClockModule::normalizePercentage(float percentDayComplete)
   {
     startPercentExtended = percentStart;
     finishPercentExtended = percentMiddle;
-    int startHour = hourStart;
-    int finishHour = hourMiddle;
+    startHour = hourStart;
+    finishHour = hourMiddle;
   }
 
   float intervalizedPercent = mapPercentToInterval(startHour, finishHour, percentDayComplete);
-
   float difference = finishPercentExtended - startPercentExtended;
   return (difference * (intervalizedPercent / 100)) + startPercentExtended;
 }
