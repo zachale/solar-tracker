@@ -1,2 +1,4 @@
+update-*.bin
 secrets.*
 build
+.env
