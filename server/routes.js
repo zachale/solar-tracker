@@ -5,11 +5,17 @@ import { existsSync } from "fs";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { DataLog } from "./schemas/data.js";
+import mongoose from "mongoose";
+import "dotenv/config";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+
+app.use(express.json());
+
 const PORT = 443;
 
 app.get("/", (req, res) => {
@@ -42,6 +48,19 @@ app.get("/time/est", (req, res) => {
   });
   const estDate = new Date(estTime);
   res.send({ datetime: estDate.toISOString() });
+});
+
+app.post("/data", async (req, res) => {
+  try {
+    console.log(req.body);
+    await mongoose.connect(process.env.MONGODB_URI);
+    await DataLog.create(req.body);
+    mongoose.connection.close();
+    res.status(200).send({ message: "Data saved" });
+  } catch (error) {
+    console.error("Error connecting to MongoDB: ", error);
+    res.status(500).send({ message: "Error saving data" });
+  }
 });
 
 function getLocalIp() {
