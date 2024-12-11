@@ -17,6 +17,7 @@ void SolarTracker::setup()
   clockModule.setup();
   dailySync();
   initializeStatus();
+  postSensorData();
 }
 
 void SolarTracker::pollSensorData()
@@ -28,6 +29,12 @@ void SolarTracker::pollSensorData()
       dailySync();
     }
     extendActuatorOnHour();
+  }
+
+  if (millis() - logTimer > 60000)
+  {
+    postSensorData();
+    logTimer = millis();
   }
 
   if (millis() - sensorTimer > 10000)
@@ -154,4 +161,19 @@ void SolarTracker::syncClock()
     Serial.println(ISOdateTime);
     clockModule.setDateTime(ISOdateTime);
   }
+}
+
+void SolarTracker::postSensorData()
+{
+  JsonDocument dataBody;
+  dataBody["status"] = getStatusString();
+  dataBody["wind_speed"] = windSensor.getSpeed();
+  dataBody["temperature"] = clockModule.getClockTemp();
+  dataBody["extended_percent"] = actuator.getPercentExtended();
+  dataBody["time"] = String(clockModule.getTimestamp()) + "000"; // Convert to milliseconds for JS
+  JsonObject buttonPanel = dataBody.createNestedObject("button_panel");
+  buttonPanel["wind_sensor"] = ButtonPanel::isWindSensorEnabled();
+  buttonPanel["settings"] = ButtonPanel::settingsServerEnabled();
+  buttonPanel["away"] = true; // This will be changed when the away switch is added
+  wifiClient.post(API + String("/data"), dataBody);
 }

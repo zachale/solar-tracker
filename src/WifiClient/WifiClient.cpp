@@ -73,8 +73,9 @@ String WifiClient::get(String url)
 
   for (int i = 0; i < 10; i++)
   {
+    Serial.println("Attempt: " + String(i + 1));
     responseNum = http.GET();
-    delay(100);
+    delay(1000);
     if (responseNum > 0)
     {
       String responseBody = http.getBody();
@@ -84,6 +85,8 @@ String WifiClient::get(String url)
         Serial.println("It took " + String(i + 1) + " attempts to get a response");
         Serial.println(responseBody);
         http.close();
+        client.stop();
+        WiFi.disconnect();
         return responseBody;
       }
     }
@@ -92,7 +95,63 @@ String WifiClient::get(String url)
   String responseBody = http.getBody();
   Serial.println(responseBody);
   Serial.println("Request Failed: " + String(responseNum));
+  client.stop();
   http.close();
+  WiFi.disconnect();
+  return "";
+}
+
+String WifiClient::post(String url, JsonDocument body)
+{
+  if (!ensureWifiConnection())
+  {
+    return "";
+  }
+  Serial.println("POST Request");
+  url = ensureHTTPS(url);
+  Serial.println(url);
+  http.begin(client, url, 443);
+  http.setTimeout(15000);
+  http.addHeader("User-Agent: Arduino UNO R4 WiFi");
+  http.addHeader("Content-Type: application/json");
+  http.addHeader("Connection: close");
+
+  String bodyString;
+  serializeJson(body, bodyString);
+  int responseNum;
+
+  for (int i = 0; i < 10; i++)
+  {
+    Serial.println("Attempt: " + String(i + 1));
+    responseNum = http.POST(bodyString);
+    delay(1000);
+    if (responseNum > 0 && responseNum != 500)
+    {
+      String responseBody = http.getBody();
+      if (responseBody != "")
+      {
+        Serial.println("Response code: " + String(responseNum));
+        Serial.println("It took " + String(i + 1) + " attempts to get a response");
+        Serial.println(responseBody);
+        http.close();
+        client.stop();
+        WiFi.disconnect();
+        return responseBody;
+      }
+    }
+    else if (responseNum == 500)
+    {
+      String responseBody = http.getBody();
+      Serial.println("Server Error: " + String(responseNum));
+      Serial.println(responseBody);
+    }
+  }
+
+  String responseBody = http.getBody();
+  Serial.println(responseBody);
+  Serial.println("Request Failed: " + String(responseNum));
+  http.close();
+  client.stop();
   WiFi.disconnect();
   return "";
 }
@@ -104,9 +163,4 @@ String WifiClient::ensureHTTPS(String url)
     return url;
   }
   return "https://" + url;
-}
-
-void WifiClient::post(String url, JsonDocument doc)
-{
-  // TODO: Add post request functionality
 }

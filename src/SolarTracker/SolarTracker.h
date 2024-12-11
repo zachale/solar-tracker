@@ -37,7 +37,8 @@ private:
   WifiClient wifiClient;
   OTAUpdater ota;
   static const String statusStrings[];
-  unsigned long sensorTimer;
+  unsigned long sensorTimer = 0;
+  unsigned long logTimer = 0;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
   void extendActuatorOnHour();
@@ -45,6 +46,7 @@ private:
   void updateStatus();
   void actOnStatus(Status);
   void initializeStatus();
+  void postSensorData();
 };
 
 #endif
