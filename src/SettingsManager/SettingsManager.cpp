@@ -31,7 +31,6 @@ bool SettingsManager::load()
   File configFile = SD.open(storageFile, FILE_READ);
   if (!configFile)
   {
-    Serial.println("error opening config file");
     return false;
   }
   DeserializationError error = deserializeJson(configDocument, configFile);
