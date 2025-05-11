@@ -30,5 +30,10 @@ public:
   {
     return configDocument[key].as<T>();
   }
+
+  static String getConfigDoc()
+  {
+    return configDocument.as<String>();
+  }
 };
 #endif

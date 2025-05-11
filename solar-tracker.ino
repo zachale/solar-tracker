@@ -17,18 +17,19 @@ void setup()
     ; // wait for serial port to connect. Needed for native USB
 #endif
 
-  if (SettingsManager::begin(10))
-  { // Adjust CS pin as needed
-    Serial.println("Failed to initialize SD card");
-    return;
-  }
+  SettingsManager::begin(10);
+  SettingsManager::load();
 
-  // Load settings
-  if (!SettingsManager::load())
+  Serial.println("Config doc:");
+  String configDoc = SettingsManager::getConfigDoc();
+  if (configDoc.length() > 0)
   {
-    Serial.println("Failed to load settings, using defaults");
+    Serial.println(configDoc);
   }
-
+  else
+  {
+    Serial.println("No config doc found");
+  }
   buttonPanel.setup();
   tracker.setup();
   if (ButtonPanel::settingsServerEnabled())

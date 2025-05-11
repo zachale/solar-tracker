@@ -1,6 +1,6 @@
 #include "./WindSpeedSensor.h"
 
-WindSpeedSensor::WindSpeedSensor()
+void WindSpeedSensor::setup()
 {
   float savedUpperSpeedMax = SettingsManager::getSetting<float>("windUpperMaxSpeed");
   float savedLowerSpeedMax = SettingsManager::getSetting<float>("windLowerSpeedMax");

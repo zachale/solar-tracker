@@ -131,7 +131,6 @@ void SettingsServer::checkForClient()
         }
       }
     }
-
     endConnection(client);
   }
 }
@@ -235,7 +234,9 @@ void SettingsServer::actOnParameter(JsonDocument params)
     serializeJson(params, output);
   }
 
+  Serial.println("Saving settings...");
   SettingsManager::save();
+  Serial.print("...DONE!");
 }
 
 void SettingsServer::endConnection(WiFiClient client)

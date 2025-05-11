@@ -40,6 +40,16 @@ void ClockModule::setup()
   resetAlarm();
 
   Serial.println("Setup Clock Module.");
+
+  if (SettingsManager::getSetting<String>("schedule") != "null")
+  {
+    JsonDocument doc;
+    DeserializationError error = deserializeJson(doc, SettingsManager::getSetting<String>("schedule"));
+    if (!error)
+    {
+      setSchedule(doc);
+    }
+  }
 }
 
 bool ClockModule::isAlarmTriggered()

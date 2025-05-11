@@ -16,7 +16,7 @@ public:
     HIGH_WIND
   };
   Status status;
-  WindSpeedSensor();
+  void setup();
   int getSpeed();
   void setUpperSpeedMax(float);
   float getUpperSpeedMax();

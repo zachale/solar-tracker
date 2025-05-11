@@ -15,6 +15,7 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  windSensor.setup();
   dailySync();
   initializeStatus();
 }
@@ -136,10 +137,7 @@ void SolarTracker::actOnStatus(Status inputStatus)
 void SolarTracker::dailySync()
 {
   syncClock();
-  if (ota.updateAvailable())
-  {
-    ota.update();
-  }
+  // REMOVED OTA UPDATER FOR NOW
 }
 
 void SolarTracker::syncClock()
