@@ -22,13 +22,26 @@ void SolarTracker::setup()
 
 void SolarTracker::pollSensorData()
 {
-  if (clockModule.isAlarmTriggered() && status == ACTIVE)
+
+  if (status != AWAY && ButtonPanel::isAwayModeOverride())
+  {
+    setStatus(AWAY);
+  }
+  else if (status == AWAY && !ButtonPanel::isAwayModeOverride())
+  {
+    setStatus(ACTIVE);
+  }
+
+  if (clockModule.isAlarmTriggered())
   {
     if (clockModule.getHour() == 8 && !ButtonPanel::settingsServerEnabled())
     {
       dailySync();
     }
-    extendActuatorOnHour();
+    if (status == ACTIVE)
+    {
+      extendActuatorOnHour();
+    }
   }
 
   if (millis() - sensorTimer > 10000)
@@ -61,10 +74,10 @@ void SolarTracker::extendActuatorOnHour()
   actuator.extendToPercent(dayCompletePercentage);
 }
 
-void SolarTracker::extendActuatorToHalf()
+void SolarTracker::extendActuatorToSafe()
 {
-  int halfDayPercentage = clockModule.getHalfDayExtensionPercent();
-  actuator.extendToPercent(halfDayPercentage);
+  int safePercentage = clockModule.getSafeExtensionPercent();
+  actuator.extendToPercent(safePercentage);
 }
 
 SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
@@ -126,7 +139,7 @@ void SolarTracker::actOnStatus(Status inputStatus)
   }
   else if (inputStatus == AWAY || inputStatus == SAFE)
   {
-    extendActuatorToHalf();
+    extendActuatorToSafe();
   }
   else if (inputStatus == NIGHT)
   {
@@ -136,6 +149,7 @@ void SolarTracker::actOnStatus(Status inputStatus)
 
 void SolarTracker::dailySync()
 {
+  actuator.checkWeeklyRecalibration();
   syncClock();
   // REMOVED OTA UPDATER FOR NOW
 }

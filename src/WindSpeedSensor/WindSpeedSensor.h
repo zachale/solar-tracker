@@ -35,8 +35,8 @@ private:
   const static int WIND_SENSOR_PIN = A3;
   const static int WIND_SENSOR_ENABLE_PIN = 4;
   const float voltageConversionConstant = 0.004882814;
-  unsigned long upperSpeedDelay = 6000;
-  unsigned long lowerSpeedDelay = 90000;
+  unsigned long upperSpeedDelay = 600000;
+  unsigned long lowerSpeedDelay = 1200000;
   unsigned long upperSpeedTimer = 0;
   unsigned long lowerSpeedTimer = 0;
   float upperSpeedMax = 24.0;

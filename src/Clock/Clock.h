@@ -13,7 +13,7 @@ public:
   static void setAlarmTriggered();
   bool isAlarmTriggered();
   int getDayCompletionPercent();
-  int getHalfDayExtensionPercent();
+  int getSafeExtensionPercent();
   int getHourlyExtensionPercent();
   bool isActiveHours();
   float getClockTemp();
@@ -37,13 +37,19 @@ private:
   float percentStart = 20;
   float percentMiddle = 66;
   float percentFinish = 80;
-  int syncInterval = 86400000; // 24 hours in milliseconds
+  float safeExtensionPercent = 50; // Default safe extension percentage
+  int syncInterval = 86400000;     // 24 hours in milliseconds
   unsigned long syncTimer = 0;
+  DateTime lastTimeCheck;
+  bool wasZeroTime = false;
   int getPercentOfDay(float hour);
   int normalizePercentage(float percent);
   uint8_t getMinute();
   uint8_t getSecond();
   void resetAlarm();
   float mapPercentToInterval(float intervalStartHour, float intervalEndHour, float percent);
+  void powerCycleRTC();
+  bool checkForZeroTime();
+  bool initializeRTC();
 };
 #endif

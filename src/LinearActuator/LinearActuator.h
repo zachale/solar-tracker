@@ -25,12 +25,15 @@ public:
   void extendToPercent(float percent);
   void home();
   void max();
+  void checkWeeklyRecalibration();
 
 private:
   static const int PWMBackwardPin = 5;
   static const int PWMForwardPin = 6;
   static unsigned long lastStepTime;
   static const int trigDelay = 500;
+  static unsigned long lastRecalibrationTime;                    // Track when we last recalibrated
+  static const unsigned long RECALIBRATION_INTERVAL = 604800000; // 7 days in milliseconds
   void (*extensionCallBack)() = nullptr;
   long pos = 0; // Actuator Position in Pulses
   long maxPos = 0;

@@ -2,12 +2,14 @@
 
 long LinearActuator::steps = 0;
 unsigned long LinearActuator::lastStepTime = 0;
+unsigned long LinearActuator::lastRecalibrationTime = 0;
 
 LinearActuator::LinearActuator()
 {
   pinMode(2, INPUT);
   pinMode(PWMBackwardPin, OUTPUT);
   pinMode(PWMForwardPin, OUTPUT);
+  lastRecalibrationTime = millis(); // Initialize last recalibration time
 }
 
 void LinearActuator::countSteps()
@@ -282,4 +284,15 @@ void LinearActuator::setDirection(int direction)
 void LinearActuator::setExtensionCallBack(void (*inputCallBack)())
 {
   extensionCallBack = inputCallBack;
+}
+
+void LinearActuator::checkWeeklyRecalibration()
+{
+  unsigned long currentTime = millis();
+  if (currentTime - lastRecalibrationTime >= RECALIBRATION_INTERVAL)
+  {
+    Serial.println("Weekly recalibration triggered");
+    recalibrate();
+    lastRecalibrationTime = currentTime;
+  }
 }

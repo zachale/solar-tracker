@@ -166,7 +166,7 @@ String WindSpeedSensor::toHtml()
       <form action="/" method="POST">
         Set upper threshold wait period (minutes):
         <input style="font-size:5vw;" type="number" min="0" name="windUpperWait" value=")");
-  html.concat(String(getUpperSpeedDelay() / 6000)); // upper wind threshold wait period milliseconds converted to minutes
+  html.concat(String(getUpperSpeedDelay() / 60000)); // upper wind threshold wait period milliseconds converted to minutes
   html.concat(R"(">
         <input type="submit" style="font-size:5vw;" value="Submit">
       </form>
@@ -184,7 +184,7 @@ String WindSpeedSensor::toHtml()
       <form action="/" method="POST">
         Set lower threshold wait period (minutes):
         <input style="font-size:5vw;" type="number" min="0" name="windLowerWait" value=")");
-  html.concat(String(getLowerSpeedDelay() / 6000)); // lower wind threshold wait period milliseconds converted to minutes
+  html.concat(String(getLowerSpeedDelay() / 60000)); // lower wind threshold wait period milliseconds converted to minutes
   html.concat(R"(">
         <input type="submit" style="font-size:5vw;" value="Submit">
       </form>

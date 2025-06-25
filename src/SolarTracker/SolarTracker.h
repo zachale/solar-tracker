@@ -6,9 +6,8 @@
 #include "../WindSpeedSensor/WindSpeedSensor.h"
 #include "../WifiClient/WifiClient.h"
 #include "../ButtonPanel/ButtonPanel.h"
+#include "../SettingsManager/SettingsManager.h"
 #include <Arduino.h>
-#include "../OTA/OTAUpdater.h"
-
 class SolarTracker
 {
 public:
@@ -35,13 +34,12 @@ public:
 private:
   Status status = ACTIVE;
   WifiClient wifiClient;
-  OTAUpdater ota;
   static const String statusStrings[];
   unsigned long sensorTimer;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
   void extendActuatorOnHour();
-  void extendActuatorToHalf();
+  void extendActuatorToSafe();
   void updateStatus();
   void actOnStatus(Status);
   void initializeStatus();

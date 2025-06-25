@@ -4,29 +4,16 @@ bool ClockModule::alarmTriggered = false;
 
 void ClockModule::setup()
 {
-
   pinMode(RTC_POWER_PIN, OUTPUT);
+  digitalWrite(RTC_POWER_PIN, HIGH);
 
-  for (int i = 0; i < 3; i++)
+  if (!initializeRTC())
   {
-    digitalWrite(RTC_POWER_PIN, HIGH);
-    if (rtc.begin())
-    {
-      break;
-    }
-    digitalWrite(RTC_POWER_PIN, LOW);
-    Serial.println("Couldn't find RTC");
-    delay(5000);
-  }
-
-  if (!rtc.begin())
-  {
-    while (1)
-      delay(10);
+    Serial.println("Failed to initialize RTC after multiple attempts");
+    return;
   }
 
   rtc.disable32K();
-
   rtc.clearAlarm(1);
   rtc.clearAlarm(2);
   rtc.writeSqwPinMode(DS3231_OFF);
@@ -38,6 +25,8 @@ void ClockModule::setup()
   }
 
   resetAlarm();
+  lastTimeCheck = rtc.now();
+  wasZeroTime = false;
 
   Serial.println("Setup Clock Module.");
 
@@ -50,6 +39,56 @@ void ClockModule::setup()
       setSchedule(doc);
     }
   }
+}
+
+void ClockModule::powerCycleRTC()
+{
+  Serial.println("Power cycling RTC...");
+  digitalWrite(RTC_POWER_PIN, LOW);
+  delay(1000); // Wait for power to fully discharge
+  digitalWrite(RTC_POWER_PIN, HIGH);
+  delay(1000); // Wait for power to stabilize
+}
+
+bool ClockModule::initializeRTC()
+{
+  for (int i = 0; i < 3; i++)
+  {
+    if (rtc.begin())
+    {
+      return true;
+    }
+    powerCycleRTC();
+    Serial.println("Couldn't find RTC, retrying...");
+    delay(1000);
+  }
+  return false;
+}
+
+bool ClockModule::checkForZeroTime()
+{
+  DateTime currentTime = rtc.now();
+
+  // Check if current time is 0:0:0
+  bool isZeroTime = (currentTime.hour() == 0 && currentTime.minute() == 0 && currentTime.second() == 0);
+
+  if (isZeroTime && wasZeroTime)
+  {
+    // Two consecutive zero time readings detected
+    Serial.println("Two consecutive zero time readings detected, power cycling RTC");
+    powerCycleRTC();
+    if (!rtc.begin())
+    {
+      Serial.println("Failed to reinitialize RTC after power cycle");
+      return false;
+    }
+    wasZeroTime = false;
+    return true;
+  }
+
+  wasZeroTime = isZeroTime;
+  lastTimeCheck = currentTime;
+  return true;
 }
 
 bool ClockModule::isAlarmTriggered()
@@ -110,9 +149,9 @@ int ClockModule::getDayCompletionPercent()
   return getPercentOfDay(currentHour);
 }
 
-int ClockModule::getHalfDayExtensionPercent()
+int ClockModule::getSafeExtensionPercent()
 {
-  return normalizePercentage(HALF_DAY_PERCENT);
+  return safeExtensionPercent;
 }
 
 int ClockModule::getHourlyExtensionPercent()
@@ -133,8 +172,8 @@ int ClockModule::normalizePercentage(float percentDayComplete)
   {
     startPercentExtended = percentStart;
     finishPercentExtended = percentMiddle;
-    int startHour = hourStart;
-    int finishHour = hourMiddle;
+    startHour = hourStart;
+    finishHour = hourMiddle;
   }
 
   float intervalizedPercent = mapPercentToInterval(startHour, finishHour, percentDayComplete);
@@ -169,6 +208,10 @@ String ClockModule::getSimpleTimeString()
 
 String ClockModule::getFullTimeString()
 {
+  if (!checkForZeroTime())
+  {
+    return "RTC Error";
+  }
   String result = "";
   result.concat(getHour());
   result.concat(":");
@@ -204,6 +247,7 @@ void ClockModule::setSchedule(JsonDocument &doc)
   percentStart = doc["setStartPercent"].as<float>();
   percentMiddle = doc["setMiddlePercent"].as<float>();
   percentFinish = doc["setEndPercent"].as<float>();
+  safeExtensionPercent = doc["setSafePercent"].as<float>();
   String output;
   serializeJson(doc, output);
   SettingsManager::upsertSetting("schedule", output);
@@ -219,11 +263,17 @@ String ClockModule::toHtml()
         Set time (HH:MM - 24 hour format): 
         <input style="font-size:5vw;" type="text" pattern="^([01]\d|2[0-3]):([0-5]\d)$" name="setTime" value=")");
   html.concat(getSimpleTimeString());
-  html.concat(R"(">
+  html.concat(R"%%(">
         <input type="submit" style="font-size:5vw;" value="Submit">      
       </form>
     </section>
-  )");
+
+    <section>
+      <form action="/" method="POST">
+        <input type="hidden" name="setTime" id="browserTime">
+        <input type="submit" style="font-size:5vw;" value="Calibrate with Phone Time" onclick="document.getElementById('browserTime').value = new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })">
+      </form>
+    </section>)%%");
 
   html.concat(R"(
     <h1 style="font-size:7vw;">Schedule</h1>
@@ -255,6 +305,11 @@ String ClockModule::toHtml()
         at 
         <input style="font-size:5vw;" type="number" max="100" min="0" name="setEndPercent" value=")");
   html.concat((int)percentFinish);
+  html.concat(R"(">
+        <br/>
+        Set safe extension percent: 
+        <input style="font-size:5vw;" type="number" max="100" min="0" name="setSafePercent" value=")");
+  html.concat((int)safeExtensionPercent);
   html.concat(R"(">
         <input type="submit" style="font-size:5vw;" value="Submit">    
       </form>

@@ -169,7 +169,7 @@ void SettingsServer::getParams(String params)
 
 void SettingsServer::actOnParameter(JsonDocument params)
 {
-
+  bool needsSave = false;
   Serial.println("Acting on param");
   String output;
   serializeJson(params, output);
@@ -195,24 +195,28 @@ void SettingsServer::actOnParameter(JsonDocument params)
   {
     float windUpperMax = params["windUpperMaxSpeed"].as<float>();
     tracker->windSensor.setUpperSpeedMax(windUpperMax / 3.6);
+    needsSave = true;
   }
 
   if (params["windUpperWait"])
   {
     float windUpperWait = params["windUpperWait"].as<float>();
-    tracker->windSensor.setUpperSpeedDelay(windUpperWait * 6000);
+    tracker->windSensor.setUpperSpeedDelay(windUpperWait * 60000);
+    needsSave = true;
   }
 
   if (params["windLowerSpeedMax"])
   {
     float windLowerMax = params["windLowerSpeedMax"].as<float>();
     tracker->windSensor.setLowerSpeedMax(windLowerMax / 3.6);
+    needsSave = true;
   }
 
   if (params["windLowerWait"])
   {
     int windLowerWait = params["windLowerWait"].as<float>();
-    tracker->windSensor.setLowerSpeedDelay(windLowerWait * 6000);
+    tracker->windSensor.setLowerSpeedDelay(windLowerWait * 60000);
+    needsSave = true;
   }
 
   if (params["setTime"].is<String>())
@@ -232,11 +236,23 @@ void SettingsServer::actOnParameter(JsonDocument params)
     tracker->clockModule.setSchedule(params);
     String output;
     serializeJson(params, output);
+    needsSave = true;
   }
 
-  Serial.println("Saving settings...");
-  SettingsManager::save();
-  Serial.print("...DONE!");
+  if (params["setSafePercent"])
+  {
+    tracker->clockModule.setSchedule(params);
+    String output;
+    serializeJson(params, output);
+    needsSave = true;
+  }
+
+  if (needsSave)
+  {
+    Serial.println("Saving settings...");
+    SettingsManager::save();
+    Serial.print("...DONE!");
+  }
 }
 
 void SettingsServer::endConnection(WiFiClient client)
