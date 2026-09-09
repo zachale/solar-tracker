@@ -51,7 +51,10 @@ String WifiClient::get(String url)
   http.setTimeout(15000);
   http.addHeader("User-Agent: Arduino UNO R4 WiFi");
   http.addHeader("Content-Type: application/json");
-  http.addHeader("Connection: close");
+  // Deliberately no "Connection: close". R4HttpClient reads the response inside
+  // a `while (client->connected() ...)` loop, so a server that hangs up as soon
+  // as it has replied ends the read part-way through the headers and the body is
+  // discarded. Leaving the connection alive lets the whole response be read.
 
   int responseNum;
 
