@@ -12,7 +12,7 @@ class SettingsManager
 private:
   static StaticJsonDocument<1024> configDocument;
   static constexpr const char *storageFile = "config";
-  static constexpr const char *wifiStorageFile = "wifi_credentials.json";
+  static constexpr const char *wifiStorageFile = "wifi.jsn";
 
 public:
   static std::vector<std::pair<String, String>> wifiCredentials;

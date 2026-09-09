@@ -80,3 +80,26 @@ TEST_SUITE("settings: wifi credentials") {
     CHECK(SettingsManager::getWifiCredentials().size() == 1);
   }
 }
+
+TEST_SUITE("settings: filenames") {
+
+  TEST_CASE("every storage filename fits the SD library's 8.3 limit") {
+    // The Arduino SD library uses the legacy short-name FAT API. A longer name
+    // fails at SD.open() in both directions, and the firmware reports it as
+    // "error opening ... file" — which reads like a card fault rather than a
+    // name that was never openable.
+    CHECK(isValid83(SettingsManager::storageFile));
+    CHECK(isValid83(SettingsManager::wifiStorageFile));
+  }
+
+  TEST_CASE("the 8.3 check itself is right") {
+    CHECK(isValid83("config"));
+    CHECK(isValid83("wifi.jsn"));
+    CHECK(isValid83("12345678.abc"));
+    CHECK_FALSE(isValid83("wifi_credentials.json"));
+    CHECK_FALSE(isValid83("123456789"));          // nine characters
+    CHECK_FALSE(isValid83("name.abcd"));          // four character extension
+    CHECK_FALSE(isValid83("two.dots.x"));
+    CHECK_FALSE(isValid83(""));
+  }
+}
