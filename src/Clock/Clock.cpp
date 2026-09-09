@@ -100,6 +100,7 @@ bool ClockModule::isAlarmTriggered()
 
   alarmTriggered = false;
   resetAlarm();
+  return true;
 }
 
 void ClockModule::resetAlarm()
