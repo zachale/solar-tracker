@@ -247,6 +247,24 @@ void SettingsServer::actOnParameter(JsonDocument params)
     needsSave = true;
   }
 
+  if (params["addWifiCredential"])
+  {
+    String ssid = params["addWifiCredential"];
+    String pass = params["wifiPassword"];
+    if (ssid.length() > 0)
+    {
+      SettingsManager::addWifiCredential(ssid, pass);
+      needsSave = true;
+    }
+  }
+
+  if (params["removeWifiCredential"])
+  {
+    int index = params["removeWifiCredential"].as<int>();
+    SettingsManager::removeWifiCredential(index);
+    needsSave = true;
+  }
+
   if (needsSave)
   {
     Serial.println("Saving settings...");
@@ -324,9 +342,32 @@ void SettingsServer::sendDashboardTo(WiFiClient client)
   client.print(tracker->actuator.getPercentExtended());
   client.print(R"("> <input type="submit" style="font-size:5vw;" value="Submit">)");
   client.print(R"(</form></section>)");
-
   client.print(tracker->windSensor.toHtml());
   client.print(tracker->clockModule.toHtml());
+
+  client.print(R"(<h1 style="font-size:7vw;">WiFi Credentials</h1>)");
+  client.print(R"(<section><form action="/" method="POST">)");
+  client.print(R"(SSID: <input style="font-size:5vw;" type="text" name="addWifiCredential" value=""><br/>)");
+  client.print(R"(Password: <input style="font-size:5vw;" type="password" name="wifiPassword" value=""><br/>)");
+  client.print(R"(<input type="submit" style="font-size:5vw;" value="Add Credential">)");
+  client.print(R"(</form></section>)");
+
+  client.print(R"(<section>)");
+  auto credentials = SettingsManager::getWifiCredentials();
+  if (credentials.size() > 0)
+  {
+    client.print(R"(<p>Saved Credentials:</p>)");
+    for (unsigned int i = 0; i < credentials.size(); i++)
+    {
+      client.print(R"(<form action="/" method="POST" style="margin-bottom: 8px;">)");
+      client.print(credentials[i].first);
+      client.print(R"(&nbsp;<button type="submit" style="font-size:5vw;" name="removeWifiCredential" value=")");
+      client.print(i);
+      client.print(R"(">Remove</button>)");
+      client.print("</form>");
+    }
+  }
+  client.print(R"(</section>)");
 
   // The HTTP response ends with another blank line:
   client.println();

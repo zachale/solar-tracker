@@ -1,7 +1,5 @@
 #include "WifiClient.h"
-#include "../../secrets.h"
-
-std::pair<const char *, const char *> WifiClient::savedCredentials = {"Default", "Default"};
+#include "../SettingsManager/SettingsManager.h"
 
 bool WifiClient::ensureWifiConnection()
 {
@@ -18,24 +16,11 @@ bool WifiClient::ensureWifiConnection()
     Serial.println(F("Communication with WiFi module failed!"));
     return false;
   }
-  if (strcmp(WifiClient::savedCredentials.first, WifiClient::savedCredentials.second) != 0)
+
+  auto credentials = SettingsManager::getWifiCredentials();
+  for (const auto &credential : credentials)
   {
-    WiFi.begin(WifiClient::savedCredentials.first, WifiClient::savedCredentials.second);
-    Serial.println(F("Reconnecting to WiFi"));
-    for (int i = 0; i < 5; i++)
-    {
-      delay(1000);
-      Serial.print(F("."));
-    }
-    if (WiFi.status() == WL_CONNECTED)
-    {
-      Serial.println(F("Successfully reconnected to WiFi!"));
-      return true;
-    }
-  }
-  for (const auto &credential : wifiCredentials)
-  {
-    WiFi.begin(credential.first, credential.second);
+    WiFi.begin(credential.first.c_str(), credential.second.c_str());
     Serial.print(F("Connecting to WiFi"));
     Serial.println(credential.first);
     for (int i = 0; i < 5; i++)
@@ -45,7 +30,6 @@ bool WifiClient::ensureWifiConnection()
       if (WiFi.status() == WL_CONNECTED)
       {
         Serial.println("Successfully connected to" + String(credential.first));
-        WifiClient::savedCredentials = credential;
         return true;
       }
     }
