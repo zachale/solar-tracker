@@ -162,7 +162,7 @@ void SettingsServer::getParams(String params)
   {
     String title = strtok(collection[i], "=");
     String description = strtok(NULL, "");
-    docParams[title] = description;
+    docParams[title] = urlDecode(description);
   }
   actOnParameter(docParams);
 }
@@ -222,12 +222,9 @@ void SettingsServer::actOnParameter(JsonDocument params)
   if (params["setTime"].is<String>())
   {
     String timeStr = params["setTime"];
-    char *delimiter = "%3A"; // This delimiter is the character ':' url encoded
-    int index = timeStr.indexOf(delimiter);
-    Serial.println(timeStr);
-    Serial.println(index);
+    int index = timeStr.indexOf(":");
     int hour = timeStr.substring(0, index).toInt();
-    int minute = timeStr.substring(index + 3).toInt();
+    int minute = timeStr.substring(index + 1).toInt();
     tracker->clockModule.setSimpleTime(hour, minute);
   }
 

@@ -19,6 +19,7 @@ SOURCES=(
   test/test_wind.cpp
   test/test_actuator.cpp
   test/test_settings.cpp
+  test/test_urldecode.cpp
   test/stubs/mock.cpp
   src/Clock/Clock.cpp
   src/WindSpeedSensor/WindSpeedSensor.cpp

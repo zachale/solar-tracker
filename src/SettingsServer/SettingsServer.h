@@ -4,6 +4,7 @@
 #include "WiFiS3.h"
 #include <ArduinoJson.h>
 #include "../SolarTracker/SolarTracker.h"
+#include "../Http/UrlDecode.h"
 #include "../SettingsManager/SettingsManager.h"
 
 class SettingsServer
