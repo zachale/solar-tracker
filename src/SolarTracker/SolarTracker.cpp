@@ -34,7 +34,7 @@ void SolarTracker::pollSensorData()
 
   if (clockModule.isAlarmTriggered())
   {
-    if (clockModule.getHour() == 8 && !ButtonPanel::settingsServerEnabled())
+    if (clockModule.getHour() == 0 && !ButtonPanel::settingsServerEnabled())
     {
       dailySync();
     }
@@ -54,6 +54,10 @@ void SolarTracker::pollSensorData()
     Serial.print("Temperature: ");
     Serial.print(temperature);
     Serial.println();
+    if (windSpeed > windPeak)
+    {
+      windPeak = (int)windSpeed;
+    }
     int percentExtended = actuator.getPercentExtended();
     Serial.print("PercentExtended: ");
     Serial.print(percentExtended);
@@ -66,6 +70,25 @@ void SolarTracker::pollSensorData()
     sensorTimer = millis();
     updateStatus();
   }
+
+  if (millis() - telemetryTimer > TELEMETRY_INTERVAL)
+  {
+    spoolTelemetryRow();
+    telemetryTimer = millis();
+  }
+}
+
+void SolarTracker::spoolTelemetryRow()
+{
+  Telemetry::append(Telemetry::formatRow(clockModule.getTimestamp(),
+                                         clockModule.getClockTemp(),
+                                         actuator.getPercentExtended(),
+                                         getStatusString(),
+                                         windPeak,
+                                         ButtonPanel::settingsServerEnabled(),
+                                         ButtonPanel::isWindSensorEnabled(),
+                                         ButtonPanel::isAwayModeOverride()));
+  windPeak = 0;
 }
 
 void SolarTracker::extendActuatorOnHour()
@@ -151,7 +174,30 @@ void SolarTracker::dailySync()
 {
   actuator.checkWeeklyRecalibration();
   syncClock();
+  uploadLogs();
   // REMOVED OTA UPDATER FOR NOW
+}
+
+// The spool is only discarded on a confirmed 200, so a failed upload costs
+// nothing beyond the delay until the next sync. setup() calls dailySync(), which
+// means a power cycle also flushes whatever the card is holding.
+void SolarTracker::uploadLogs()
+{
+  String body = Telemetry::readAll();
+  if (body == "")
+  {
+    return;
+  }
+  Serial.println("Uploading " + String(body.length()) + " bytes of telemetry");
+  if (wifiClient.post(API + String("/data"), body, "text/csv") == 200)
+  {
+    Telemetry::clear();
+    Serial.println("Telemetry uploaded, spool cleared");
+  }
+  else
+  {
+    Serial.println("Telemetry upload failed, keeping spool");
+  }
 }
 
 void SolarTracker::syncClock()

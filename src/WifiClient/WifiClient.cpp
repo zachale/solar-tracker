@@ -93,7 +93,26 @@ String WifiClient::ensureHTTPS(String url)
   return "https://" + url;
 }
 
-void WifiClient::post(String url, JsonDocument doc)
+// Returns the HTTP status code, or 0 when the request never got off the board.
+// Deliberately a single attempt: the body can be several kilobytes, and anything
+// that fails here is retried at the next sync without losing data, because the
+// caller only clears the spool on a 200.
+int WifiClient::post(String url, const String &body, const char *contentType)
 {
-  // TODO: Add post request functionality
+  if (!ensureWifiConnection())
+  {
+    return 0;
+  }
+  url = ensureHTTPS(url);
+  Serial.println("POST Request");
+  Serial.println(url);
+  http.begin(client, url, 443);
+  http.setTimeout(15000);
+  http.addHeader("User-Agent: Arduino UNO R4 WiFi");
+  http.addHeader(String("Content-Type: ") + contentType);
+
+  int responseNum = http.POST(body);
+  Serial.println("Response code: " + String(responseNum));
+  http.close();
+  return responseNum;
 }

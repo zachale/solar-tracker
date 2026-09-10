@@ -20,12 +20,14 @@ SOURCES=(
   test/test_actuator.cpp
   test/test_settings.cpp
   test/test_urldecode.cpp
+  test/test_telemetry.cpp
   test/stubs/mock.cpp
   src/Clock/Clock.cpp
   src/WindSpeedSensor/WindSpeedSensor.cpp
   src/LinearActuator/LinearActuator.cpp
   src/ButtonPanel/ButtonPanel.cpp
   src/SettingsManager/SettingsManager.cpp
+  src/Telemetry/Telemetry.cpp
 )
 
 c++ -std=c++17 -g -O0 \

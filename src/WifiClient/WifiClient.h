@@ -11,7 +11,7 @@ class WifiClient
 public:
   static bool ensureWifiConnection();
   String get(String);
-  void post(String, JsonDocument);
+  int post(String url, const String &body, const char *contentType);
 
 private:
   WiFiSSLClient client;
