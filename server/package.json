@@ -4,14 +4,14 @@
   "description": "A work in progress IOT Solar Tracker",
   "main": "routes.js",
   "scripts": {
-    "serve": "node routes.js"
+    "serve": "node routes.js",
+    "test": "NODE_ENV=test node --test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "express": "^4.21.1",
-    "mongoose": "^8.8.4"
+    "@google-cloud/storage": "^7.14.0",
+    "express": "^4.21.1"
   },
   "type": "module"
 }

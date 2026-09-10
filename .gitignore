@@ -2,3 +2,4 @@ update-*.bin
 secrets.*
 build
 .env
+server/node_modules
