@@ -60,11 +60,6 @@ bool SettingsServer::isRunning()
   return (bool)server;
 }
 
-bool SettingsServer::isClientConnected()
-{
-  return WiFi.status() == WL_AP_CONNECTED;
-}
-
 bool SettingsServer::attemptCreation()
 {
   // print the network name (SSID);

@@ -7,6 +7,46 @@ SolarTracker tracker(loop);
 ButtonPanel buttonPanel;
 SettingsServer server(&tracker);
 
+// Last acted-on position of the settings switch, so the two transitions can be
+// handled rather than the position being re-read as if nothing had changed.
+bool settingsSwitchWasOn = false;
+
+// A mechanical switch bounces, and a bounce acted on bare would tear the radio
+// down and build it back up several times in one second. Observed on hardware:
+// three transitions inside one second. A new position has to hold this long
+// before it counts.
+bool settingsSwitchCandidate = false;
+unsigned long settingsSwitchSince = 0;
+const unsigned long SETTINGS_SWITCH_DEBOUNCE = 500;
+
+// The card is the only place telemetry and WiFi credentials live, so losing it is
+// worth shouting about and worth retrying. Without the retry a card that comes
+// back needs a power cycle, which is the one repair nobody can do remotely.
+bool sdReady = false;
+unsigned long lastSdRetry = 0;
+const unsigned long SD_RETRY_INTERVAL = 30000;
+const uint8_t SD_CHIP_SELECT = 10;
+
+bool beginStorage()
+{
+  if (!SettingsManager::begin(SD_CHIP_SELECT))
+  {
+    Serial.println("SD CARD UNAVAILABLE: telemetry cannot be written and WiFi credentials cannot be read");
+    return false;
+  }
+  SettingsManager::load();
+  Serial.println("Config doc:");
+  String configDoc = SettingsManager::getConfigDoc();
+  if (configDoc.length() > 0 && configDoc != "null")
+  {
+    Serial.println(configDoc);
+  }
+  else
+  {
+    Serial.println("SD CARD READABLE BUT CONFIG IS EMPTY: no saved settings or WiFi credentials");
+  }
+  return true;
+}
 
 void setup()
 {
@@ -18,40 +58,101 @@ void setup()
     ; // wait for serial port to connect. Needed for native USB
 #endif
 
-  SettingsManager::begin(10);
-  SettingsManager::load();
+  sdReady = beginStorage();
 
-  Serial.println("Config doc:");
-  String configDoc = SettingsManager::getConfigDoc();
-  if (configDoc.length() > 0)
+  buttonPanel.setup();
+
+  // Settle the switch before tracker.setup(), because that runs the first sync and
+  // the sync has to already know whether it is allowed to use the radio.
+  settingsSwitchWasOn = ButtonPanel::settingsServerEnabled();
+  settingsSwitchCandidate = settingsSwitchWasOn;
+  tracker.setAppMode(settingsSwitchWasOn);
+
+  tracker.setup();
+
+  if (settingsSwitchWasOn)
   {
-    Serial.println(configDoc);
+    Serial.println("App mode: serving the dashboard, telemetry is spooled but not shipped");
+    server.start();
   }
   else
   {
-    Serial.println("No config doc found");
-  }
-  buttonPanel.setup();
-  tracker.setup();
-  if (ButtonPanel::settingsServerEnabled())
-  {
-    server.start();
+    Serial.println("Field mode: no access point, telemetry will be shipped on schedule");
   }
   Serial.println("Setup complete.");
 }
 
-// The access point is brought up once, at boot, and never taken down. The radio
-// cannot be an access point and a station at the same time, and the ESP32 will
-// only accept four access point bring-ups per power session before it stops
-// handing out listening sockets altogether, measured on this hardware. So the
-// tracker does not cycle it: while the settings switch is on it spools telemetry
-// and talks to nobody, and all server traffic waits until the switch is off.
+// The radio can only do one job at a time: WiFiS3 writes +WIFIMODE=2 for
+// beginAP() and +WIFIMODE=1 for begin(), never the combined mode. So while the
+// settings switch is on the tracker serves the dashboard and ships nothing, and
+// when it is off there is no access point and telemetry goes to the server.
+//
+// The switch is honoured in both directions, because the normal way to get a
+// dashboard is to walk up to a running tracker and flip it on.
 void loop()
 {
   tracker.pollSensorData();
 
-  if (ButtonPanel::settingsServerEnabled())
+  if (!sdReady && millis() - lastSdRetry > SD_RETRY_INTERVAL)
+  {
+    lastSdRetry = millis();
+    sdReady = beginStorage();
+  }
+
+  if (readSettingsSwitch() != settingsSwitchWasOn)
+  {
+    settingsSwitchWasOn = !settingsSwitchWasOn;
+    onSettingsSwitchChanged(settingsSwitchWasOn);
+  }
+
+  if (settingsSwitchWasOn)
   {
     server.checkForClient();
   }
+}
+
+// Debounced read. The raw pin has to agree with itself for SETTINGS_SWITCH_DEBOUNCE
+// before a new position is reported.
+bool readSettingsSwitch()
+{
+  bool raw = ButtonPanel::settingsServerEnabled();
+  if (raw != settingsSwitchCandidate)
+  {
+    settingsSwitchCandidate = raw;
+    settingsSwitchSince = millis();
+    return settingsSwitchWasOn;
+  }
+  if (raw != settingsSwitchWasOn && millis() - settingsSwitchSince > SETTINGS_SWITCH_DEBOUNCE)
+  {
+    return raw;
+  }
+  return settingsSwitchWasOn;
+}
+
+void onSettingsSwitchChanged(bool isOn)
+{
+  // The tracker has to know before anything else, so a sync already queued cannot
+  // reach for a radio that is about to become an access point.
+  tracker.setAppMode(isOn);
+
+  if (isOn)
+  {
+    Serial.println("Settings switch turned on, starting the access point");
+    // Release the radio first. A station association holds a socket, and beginAP()
+    // without this is the case that stops working after four tries; with it the
+    // same test ran twelve for twelve reusing one socket.
+    server.stop();
+    WiFi.end();
+    if (!server.start())
+    {
+      Serial.println("Access point failed to start, will retry on the next switch read");
+      settingsSwitchWasOn = false;
+    }
+    return;
+  }
+
+  Serial.println("Settings switch turned off, releasing the access point");
+  // Closing the listener keeps this object honest about not running. The socket
+  // itself comes back on the WiFi.end() inside the next station association.
+  server.stop();
 }

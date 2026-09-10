@@ -38,9 +38,9 @@ void SolarTracker::pollSensorData()
     // an access point, and reaching the server would mean putting it into station
     // mode, which tears the access point down for good: the ESP32 stops handing
     // out listening sockets after four bring-ups in a power session.
-    if (clockModule.getHour() % SYNC_EVERY_HOURS == 0 && !ButtonPanel::settingsServerEnabled())
+    if (clockModule.getHour() % SYNC_EVERY_HOURS == 0 && !appMode)
     {
-      dailySync();
+      syncPending = true;
     }
     if (status == ACTIVE)
     {
@@ -82,12 +82,40 @@ void SolarTracker::pollSensorData()
   }
 
 #if BENCH_TEST
-  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL && !ButtonPanel::settingsServerEnabled())
+  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL && !appMode)
   {
-    dailySync();
+    syncPending = true;
     benchSyncTimer = millis();
   }
 #endif
+
+  serviceSync();
+}
+
+// A sync blocks the loop for as long as a WiFi association and a handful of POSTs
+// take, which can be most of a minute. That is harmless when the tracker is idle
+// and dangerous when it is not:
+//
+//   - moveTo() calls back into loop() on every iteration of its drive loop, with
+//     the motor still energised. A sync started from inside that call would hold
+//     the motor on for the whole request and drive the panel past its target.
+//   - dailySync() runs checkWeeklyRecalibration(), and a full home-and-max sweep
+//     is the last thing wanted in the wind it was trying to get away from.
+//
+// So the sync waits for the actuator to stop and for the tracker to be out of SAFE.
+// It is queued rather than dropped, so the window is delayed, never lost.
+void SolarTracker::serviceSync()
+{
+  if (!syncPending || appMode)
+  {
+    return;
+  }
+  if (status == SAFE || actuator.status != LinearActuator::STOP)
+  {
+    return;
+  }
+  syncPending = false;
+  dailySync();
 }
 
 void SolarTracker::spoolTelemetryRow()
@@ -193,6 +221,11 @@ void SolarTracker::actOnStatus(Status inputStatus)
   }
 }
 
+void SolarTracker::setAppMode(bool isAppMode)
+{
+  appMode = isAppMode;
+}
+
 void SolarTracker::dailySync()
 {
 #if BENCH_TEST
@@ -214,9 +247,9 @@ void SolarTracker::dailySync()
 // tracker does not touch it.
 void SolarTracker::uploadLogs()
 {
-  if (ButtonPanel::settingsServerEnabled())
+  if (appMode)
   {
-    Serial.println("Settings switch is on, holding telemetry on the card");
+    Serial.println("App mode: holding telemetry on the card");
     return;
   }
 

@@ -14,6 +14,6 @@
 //     access point is never started.
 //
 // Set it back to 0 before flashing the tracker for real.
-#define BENCH_TEST 1
+#define BENCH_TEST 0
 
 #endif

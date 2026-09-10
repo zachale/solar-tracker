@@ -17,6 +17,14 @@ bool WifiClient::ensureWifiConnection()
     return false;
   }
 
+  // Soft reset the radio before associating. An access point listening socket
+  // survives the switch into station mode and keeps its socket, and the ESP32 has
+  // few enough of them that one held listener is the difference between a request
+  // that works and one that cannot connect at all. Measured on this hardware:
+  // without this the clock sync succeeds and the upload immediately after it fails
+  // with a connection refused. WiFi.end() is the only call that reclaims them.
+  WiFi.end();
+
   auto credentials = SettingsManager::getWifiCredentials();
   for (const auto &credential : credentials)
   {

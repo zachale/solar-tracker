@@ -33,6 +33,9 @@ public:
   void dailySync();
   void syncClock();
   void uploadLogs();
+  // Latched at boot by the sketch. Decides whether this power session is allowed
+  // to use the radio as a station at all.
+  void setAppMode(bool);
 
 private:
   Status status = ACTIVE;
@@ -44,6 +47,10 @@ private:
   // are too coarse to average usefully, and a gust that triggers the safety
   // logic matters far more than the mean, so the peak is what gets recorded.
   int windPeak = 0;
+  bool appMode = false;
+  // A sync is queued rather than run the moment its hour arrives, because the hour
+  // can arrive while the actuator is driving. See serviceSync().
+  bool syncPending = false;
 #if BENCH_TEST
   static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
   static const unsigned long BENCH_SYNC_INTERVAL = 120000;  // two minutes
@@ -64,6 +71,7 @@ private:
   void actOnStatus(Status);
   void initializeStatus();
   void spoolTelemetryRow();
+  void serviceSync();
 };
 
 #endif

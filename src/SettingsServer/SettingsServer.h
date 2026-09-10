@@ -16,12 +16,9 @@ public:
   // wedging a device that cannot be serviced remotely.
   bool start();
   // Closes the listening socket. The radio is left alone; whoever calls this is
-  // about to put it into station mode.
+  // about to hand it to the station path.
   void stop();
   bool isRunning();
-  // True while a phone or laptop is actually attached to the access point, which
-  // is the one time it should not be torn down underneath them.
-  bool isClientConnected();
   void checkForClient();
   void printWiFiStatus();
 
