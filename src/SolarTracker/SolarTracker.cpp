@@ -107,18 +107,29 @@ void SolarTracker::spoolTelemetryRow()
                                          ButtonPanel::isWindSensorEnabled(),
                                          ButtonPanel::isAwayModeOverride()));
   windPeak = 0;
+#if BENCH_TEST
+  Serial.println("Spooled telemetry row, spool is now " + String(Telemetry::size()) + " bytes");
+#endif
 }
 
 void SolarTracker::extendActuatorOnHour()
 {
   int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
+#if BENCH_TEST
+  Serial.println("BENCH_TEST: would extend to " + String(dayCompletePercentage) + "%");
+#else
   actuator.extendToPercent(dayCompletePercentage);
+#endif
 }
 
 void SolarTracker::extendActuatorToSafe()
 {
   int safePercentage = clockModule.getSafeExtensionPercent();
+#if BENCH_TEST
+  Serial.println("BENCH_TEST: would extend to safe " + String(safePercentage) + "%");
+#else
   actuator.extendToPercent(safePercentage);
+#endif
 }
 
 SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
