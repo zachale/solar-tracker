@@ -34,9 +34,9 @@ void SolarTracker::pollSensorData()
 
   if (clockModule.isAlarmTriggered())
   {
-    if (clockModule.getHour() == 0 && !ButtonPanel::settingsServerEnabled())
+    if (clockModule.getHour() == 0)
     {
-      dailySync();
+      syncDue = true;
     }
     if (status == ACTIVE)
     {
@@ -76,6 +76,24 @@ void SolarTracker::pollSensorData()
     spoolTelemetryRow();
     telemetryTimer = millis();
   }
+
+#if BENCH_TEST
+  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL)
+  {
+    syncDue = true;
+    benchSyncTimer = millis();
+  }
+#endif
+}
+
+bool SolarTracker::isSyncDue()
+{
+  if (!syncDue)
+  {
+    return false;
+  }
+  syncDue = false;
+  return true;
 }
 
 void SolarTracker::spoolTelemetryRow()
@@ -172,7 +190,11 @@ void SolarTracker::actOnStatus(Status inputStatus)
 
 void SolarTracker::dailySync()
 {
+#if BENCH_TEST
+  Serial.println("BENCH_TEST: skipping actuator recalibration");
+#else
   actuator.checkWeeklyRecalibration();
+#endif
   syncClock();
   uploadLogs();
   // REMOVED OTA UPDATER FOR NOW

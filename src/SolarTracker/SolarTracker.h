@@ -8,6 +8,7 @@
 #include "../ButtonPanel/ButtonPanel.h"
 #include "../SettingsManager/SettingsManager.h"
 #include "../Telemetry/Telemetry.h"
+#include "../BenchTest.h"
 #include <Arduino.h>
 class SolarTracker
 {
@@ -32,6 +33,11 @@ public:
   void dailySync();
   void syncClock();
   void uploadLogs();
+  // Set when the hourly alarm lands on the sync hour, cleared by reading it. The
+  // sketch reads this so it can take the access point down, run the sync in
+  // station mode and bring the access point back up; the tracker itself knows
+  // nothing about the access point.
+  bool isSyncDue();
 
 private:
   Status status = ACTIVE;
@@ -43,7 +49,14 @@ private:
   // are too coarse to average usefully, and a gust that triggers the safety
   // logic matters far more than the mean, so the peak is what gets recorded.
   int windPeak = 0;
+#if BENCH_TEST
+  static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
+  static const unsigned long BENCH_SYNC_INTERVAL = 120000;  // two minutes
+  unsigned long benchSyncTimer = 0;
+#else
   static const unsigned long TELEMETRY_INTERVAL = 600000;   // ten minutes
+#endif
+  bool syncDue = false;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
   void extendActuatorOnHour();

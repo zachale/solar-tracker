@@ -11,7 +11,17 @@ class SettingsServer
 {
 public:
   SettingsServer(SolarTracker *tracker);
-  void setup();
+  // Brings the access point up and starts listening. Returns false rather than
+  // hanging if the radio refuses, so a failed restart costs one cycle instead of
+  // wedging a device that cannot be serviced remotely.
+  bool start();
+  // Closes the listening socket. The radio is left alone; whoever calls this is
+  // about to put it into station mode.
+  void stop();
+  bool isRunning();
+  // True while a phone or laptop is actually attached to the access point, which
+  // is the one time it should not be torn down underneath them.
+  bool isClientConnected();
   void checkForClient();
   void printWiFiStatus();
 
@@ -19,12 +29,13 @@ private:
   const char *ssid = "Solar-Tracker";
   int keyIndex = 0;
   int status = WL_IDLE_STATUS;
+  static const unsigned long AP_START_TIMEOUT = 5000;
   SolarTracker *tracker;
   WiFiServer server;
   static const String trackerStatusStrings[];
   void endConnection(WiFiClient client);
   void getParams(String params);
-  void attemptCreation();
+  bool attemptCreation();
   void sendDashboardTo(WiFiClient client);
   void actOnParameter(JsonDocument params);
 };

@@ -5,18 +5,15 @@ SettingsServer::SettingsServer(SolarTracker *inputTracker) : server(80)
   tracker = inputTracker;
 }
 
-void SettingsServer::setup()
+bool SettingsServer::start()
 {
-  // Initialize serial and wait for port to open:
   Serial.println("Access Point Web Server");
 
   // check for the WiFi module:
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println("Communication with WiFi module failed!");
-    // don't continue
-    while (true)
-      ;
+    return false;
   }
 
   String fv = WiFi.firmwareVersion();
@@ -25,18 +22,51 @@ void SettingsServer::setup()
     Serial.println("Please upgrade the firmware");
   }
 
-  attemptCreation();
-  // wait 10 seconds for connection:
-  delay(10000);
+  if (!attemptCreation())
+  {
+    return false;
+  }
+
+  // Wait for the access point to report itself listening rather than sleeping a
+  // flat ten seconds. beginAP() already returns WL_AP_LISTENING synchronously, so
+  // this normally falls straight through; the bound exists so a radio that never
+  // settles costs five seconds instead of blocking the tracker indefinitely.
+  unsigned long startedAt = millis();
+  while (WiFi.status() != WL_AP_LISTENING && millis() - startedAt < AP_START_TIMEOUT)
+  {
+    delay(100);
+  }
 
   // start the web server on port 80
   server.begin();
+  if (!server)
+  {
+    Serial.println("Access point listening socket failed to open");
+    return false;
+  }
 
-  // you're connected now, so print out the status
   printWiFiStatus();
+  return true;
 }
 
-void SettingsServer::attemptCreation()
+void SettingsServer::stop()
+{
+  server.end();
+  status = WL_IDLE_STATUS;
+  Serial.println("Access point listener stopped");
+}
+
+bool SettingsServer::isRunning()
+{
+  return (bool)server;
+}
+
+bool SettingsServer::isClientConnected()
+{
+  return WiFi.status() == WL_AP_CONNECTED;
+}
+
+bool SettingsServer::attemptCreation()
 {
   // print the network name (SSID);
   Serial.print("Creating access point named: ");
@@ -47,9 +77,9 @@ void SettingsServer::attemptCreation()
   if (status != WL_AP_LISTENING)
   {
     Serial.println("Creating access point failed");
-    while (true)
-      ;
+    return false;
   }
+  return true;
 }
 
 void SettingsServer::checkForClient()
