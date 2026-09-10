@@ -7,6 +7,11 @@ SolarTracker tracker(loop);
 ButtonPanel buttonPanel;
 SettingsServer server(&tracker);
 
+// Throttle for the access point restore in loop(), so a radio that keeps refusing
+// costs one attempt every few seconds rather than one per loop iteration.
+unsigned long lastAccessPointAttempt = 0;
+const unsigned long ACCESS_POINT_RETRY_INTERVAL = 10000;
+
 void setup()
 {
 
@@ -55,7 +60,30 @@ void loop()
 
   if (ButtonPanel::settingsServerEnabled())
   {
+    // Self heal. The radio sometimes needs longer than expected to accept a
+    // listening socket after a mode switch, and if that happens the access point
+    // has to come back on its own rather than waiting for the next sync. Without
+    // this the dashboard could stay missing until somebody power cycles the unit,
+    // which is the one repair that cannot be done remotely.
+    if (!server.isRunning())
+    {
+      restoreAccessPoint();
+    }
     server.checkForClient();
+  }
+}
+
+void restoreAccessPoint()
+{
+  if (millis() - lastAccessPointAttempt < ACCESS_POINT_RETRY_INTERVAL)
+  {
+    return;
+  }
+  lastAccessPointAttempt = millis();
+  Serial.println("Access point is not listening, bringing it back");
+  if (!server.start())
+  {
+    Serial.println("Access point restore failed, retrying shortly");
   }
 }
 
@@ -69,23 +97,25 @@ void syncWithServer()
     return;
   }
 
-  bool restoreAccessPoint = server.isRunning();
-  if (restoreAccessPoint)
+  if (server.isRunning())
   {
     server.stop();
   }
 
   tracker.dailySync();
 
-  // Only restore it if the switch is still on; it may have been flipped off
-  // during the sync, in which case the tracker should stay a station.
-  if (restoreAccessPoint && ButtonPanel::settingsServerEnabled())
+  // Whether the access point should exist is the switch's business, not a
+  // reflection of whether the listening socket happens to be open right now. A
+  // previous failed restore leaves the socket closed, and reading intent from
+  // that state would mean never trying again.
+  if (ButtonPanel::settingsServerEnabled())
   {
+    lastAccessPointAttempt = millis();
     if (!server.start())
     {
-      // A failed restart is logged and left alone. The next sync tries again, and
-      // the tracker keeps doing its real job in the meantime.
-      Serial.println("Failed to restore the access point, will retry next sync");
+      // Logged and left alone. loop() retries on its own, so the access point
+      // comes back without waiting for the next sync.
+      Serial.println("Failed to restore the access point, loop will retry");
     }
   }
 }

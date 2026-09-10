@@ -27,26 +27,25 @@ bool SettingsServer::start()
     return false;
   }
 
-  // Wait for the access point to report itself listening rather than sleeping a
-  // flat ten seconds. beginAP() already returns WL_AP_LISTENING synchronously, so
-  // this normally falls straight through; the bound exists so a radio that never
-  // settles costs five seconds instead of blocking the tracker indefinitely.
+  // Retry opening the listening socket rather than waiting on WiFi.status() and
+  // then trying once. The thing that actually has to succeed is the socket, and
+  // after a switch from station mode the radio can refuse it for several seconds;
+  // a single attempt was observed failing on hardware. WiFiServer::begin() is
+  // guarded by its own socket check, so calling it again is free once it worked.
   unsigned long startedAt = millis();
-  while (WiFi.status() != WL_AP_LISTENING && millis() - startedAt < AP_START_TIMEOUT)
+  while (millis() - startedAt < AP_START_TIMEOUT)
   {
-    delay(100);
+    server.begin();
+    if (server)
+    {
+      printWiFiStatus();
+      return true;
+    }
+    delay(250);
   }
 
-  // start the web server on port 80
-  server.begin();
-  if (!server)
-  {
-    Serial.println("Access point listening socket failed to open");
-    return false;
-  }
-
-  printWiFiStatus();
-  return true;
+  Serial.println("Access point listening socket failed to open");
+  return false;
 }
 
 void SettingsServer::stop()

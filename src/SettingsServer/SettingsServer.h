@@ -29,7 +29,9 @@ private:
   const char *ssid = "Solar-Tracker";
   int keyIndex = 0;
   int status = WL_IDLE_STATUS;
-  static const unsigned long AP_START_TIMEOUT = 5000;
+  // The radio can take over ten seconds to accept a listening socket after a
+  // mode switch. Observed failing at five seconds on hardware.
+  static const unsigned long AP_START_TIMEOUT = 20000;
   SolarTracker *tracker;
   WiFiServer server;
   static const String trackerStatusStrings[];
