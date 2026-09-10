@@ -39,107 +39,168 @@ TEST_SUITE("telemetry")
   TEST_CASE("a row is stored with a single newline and no carriage return")
   {
     mock::reset();
+    Telemetry::resume();
     Telemetry::append("1,2.00,3,ACTIVE,4,1,1,0");
-    String stored = Telemetry::readAll();
+    String stored = Telemetry::readChunk(0);
     CHECK(stored.s == "1,2.00,3,ACTIVE,4,1,1,0\n");
     CHECK(stored.indexOf('\r') == -1);
   }
 
-  TEST_CASE("appended rows accumulate in order")
+  TEST_CASE("appended rows accumulate in order inside one chunk")
   {
     mock::reset();
+    Telemetry::resume();
     Telemetry::append("first");
     Telemetry::append("second");
     Telemetry::append("third");
-    CHECK(Telemetry::readAll().s == "first\nsecond\nthird\n");
-    CHECK(countLines(Telemetry::readAll()) == 3);
+    CHECK(Telemetry::readChunk(0).s == "first\nsecond\nthird\n");
+    CHECK(countLines(Telemetry::readChunk(0)) == 3);
   }
 
-  TEST_CASE("the log file name fits the SD library's 8.3 limit")
+  TEST_CASE("chunk file names fit the SD library's 8.3 limit")
   {
-    // A name the hardware rejects would make every append silently fail, so this
-    // is checked against the same rule the SD stub enforces.
-    CHECK(isValid83(Telemetry::logFile));
+    // A name the hardware rejects would make every append silently fail, so each
+    // one is checked against the same rule the SD stub enforces.
+    mock::reset();
+    Telemetry::resume();
+    for (int i = 0; i < Telemetry::maxChunks; i++)
+    {
+      CHECK(isValid83(("tlm" + std::to_string(i) + ".csv")));
+    }
   }
 
-  TEST_CASE("reading an absent spool yields an empty string, not a failure")
+  TEST_CASE("reading an absent chunk yields an empty string, not a failure")
   {
     mock::reset();
-    CHECK(Telemetry::readAll().s == "");
-    CHECK(Telemetry::size() == 0);
+    Telemetry::resume();
+    CHECK(Telemetry::readChunk(0).s == "");
+    CHECK(Telemetry::chunkSize(0) == 0);
+    CHECK(Telemetry::nextChunk(0) == -1);
   }
 
-  TEST_CASE("clear removes the spool")
+  TEST_CASE("clearing a chunk removes it, and clearing an absent one is harmless")
   {
     mock::reset();
+    Telemetry::resume();
     Telemetry::append("a row");
-    REQUIRE(Telemetry::size() > 0);
-    Telemetry::clear();
-    CHECK(Telemetry::size() == 0);
-    CHECK(Telemetry::readAll().s == "");
+    REQUIRE(Telemetry::chunkSize(0) > 0);
+    Telemetry::clearChunk(0);
+    CHECK(Telemetry::chunkSize(0) == 0);
+    Telemetry::clearChunk(0);
+    CHECK(Telemetry::chunkSize(0) == 0);
   }
 
-  TEST_CASE("clearing an already absent spool is harmless")
+  TEST_CASE("chunkSize tracks the bytes written")
   {
     mock::reset();
-    Telemetry::clear();
-    Telemetry::clear();
-    CHECK(Telemetry::size() == 0);
-  }
-
-  TEST_CASE("size tracks the bytes written")
-  {
-    mock::reset();
+    Telemetry::resume();
     Telemetry::append("12345");            // five characters plus newline
-    CHECK(Telemetry::size() == 6);
+    CHECK(Telemetry::chunkSize(0) == 6);
     Telemetry::append("678");
-    CHECK(Telemetry::size() == 10);
+    CHECK(Telemetry::chunkSize(0) == 10);
   }
 
-  TEST_CASE("the spool is dropped once it reaches the cap instead of growing")
+  TEST_CASE("a full chunk rolls over to the next one instead of overflowing")
   {
     mock::reset();
+    Telemetry::resume();
     String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3, true, true, false);
     size_t rowBytes = row.length() + 1;
 
-    while (Telemetry::size() + rowBytes < Telemetry::maxBytes)
+    while (Telemetry::currentIndex() == 0)
     {
       REQUIRE(Telemetry::append(row));
     }
-    size_t beforeCap = Telemetry::size();
-    REQUIRE(beforeCap < Telemetry::maxBytes);
 
-    // Push it over the line; the next append has to start a fresh spool.
-    while (Telemetry::size() < Telemetry::maxBytes)
+    CHECK(Telemetry::currentIndex() == 1);
+    CHECK(Telemetry::chunkSize(0) <= Telemetry::chunkBytes);
+    CHECK(Telemetry::chunkSize(0) + rowBytes > Telemetry::chunkBytes);
+    CHECK(Telemetry::chunkSize(1) == rowBytes);
+  }
+
+  TEST_CASE("no chunk ever exceeds the upload budget")
+  {
+    mock::reset();
+    Telemetry::resume();
+    String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 31, true, true, false);
+    for (int i = 0; i < 500; i++)
     {
       Telemetry::append(row);
     }
-    REQUIRE(Telemetry::size() >= Telemetry::maxBytes);
-
-    Telemetry::append(row);
-    CHECK(Telemetry::size() == rowBytes);
-    CHECK(countLines(Telemetry::readAll()) == 1);
+    for (int i = 0; i < Telemetry::maxChunks; i++)
+    {
+      CHECK(Telemetry::chunkSize(i) <= Telemetry::chunkBytes);
+    }
   }
 
-  TEST_CASE("a spool at the cap still reads back whole and fits the upload budget")
+  TEST_CASE("nextChunk walks only the chunks that hold data")
   {
     mock::reset();
+    Telemetry::resume();
     String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3, true, true, false);
-    while (Telemetry::size() + row.length() + 1 < Telemetry::maxBytes)
+    while (Telemetry::currentIndex() < 3)
     {
       Telemetry::append(row);
     }
-    String body = Telemetry::readAll();
-    CHECK(body.length() == Telemetry::size());
-    CHECK(body.length() <= Telemetry::maxBytes);
-    CHECK(body.s.back() == '\n');
+
+    CHECK(Telemetry::nextChunk(0) == 0);
+
+    // Uploading deletes out of order once a wrap has happened, so gaps have to be
+    // skipped rather than assumed away.
+    Telemetry::clearChunk(0);
+    Telemetry::clearChunk(1);
+    CHECK(Telemetry::nextChunk(0) == 2);
+    CHECK(Telemetry::nextChunk(3) == 3);
+    CHECK(Telemetry::nextChunk(4) == -1);
   }
 
-  TEST_CASE("ten minute sampling keeps a day of readings inside the cap")
+  TEST_CASE("every chunk read back is whole and newline terminated")
   {
     mock::reset();
+    Telemetry::resume();
+    String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3, true, true, false);
+    for (int i = 0; i < 200; i++)
+    {
+      Telemetry::append(row);
+    }
+    for (int i = Telemetry::nextChunk(0); i >= 0; i = Telemetry::nextChunk(i + 1))
+    {
+      String body = Telemetry::readChunk(i);
+      CHECK(body.length() == Telemetry::chunkSize(i));
+      CHECK(body.s.back() == '\n');
+    }
+  }
+
+  TEST_CASE("wrapping past the last chunk drops the oldest rather than growing")
+  {
+    mock::reset();
+    Telemetry::resume();
+    String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3, true, true, false);
+
+    // Fill every chunk, then keep going so the write index has to wrap onto 0.
+    while (Telemetry::currentIndex() < Telemetry::maxChunks - 1)
+    {
+      Telemetry::append(row);
+    }
+    while (Telemetry::currentIndex() != 0)
+    {
+      Telemetry::append(row);
+    }
+
+    // Chunk 0 was reset on the wrap, so it holds only what has been written since.
+    CHECK(Telemetry::chunkSize(0) > 0);
+    CHECK(Telemetry::chunkSize(0) <= Telemetry::chunkBytes);
+    for (int i = 0; i < Telemetry::maxChunks; i++)
+    {
+      CHECK(Telemetry::chunkSize(i) <= Telemetry::chunkBytes);
+    }
+  }
+
+  TEST_CASE("a day of ten minute rows fits well inside the chunk ring")
+  {
     String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 31, true, true, false);
     const int rowsPerDay = 24 * 6;
-    CHECK((row.length() + 1) * rowsPerDay < Telemetry::maxBytes);
+    size_t perDay = (row.length() + 1) * rowsPerDay;
+    CHECK(perDay < Telemetry::chunkBytes * Telemetry::maxChunks);
   }
 }

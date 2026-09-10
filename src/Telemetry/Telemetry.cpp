@@ -1,5 +1,7 @@
 #include "./Telemetry.h"
 
+int Telemetry::writeIndex = -1;
+
 String Telemetry::formatRow(uint32_t timestamp,
                             float temperature,
                             int extendedPercent,
@@ -29,9 +31,14 @@ String Telemetry::formatRow(uint32_t timestamp,
   return row;
 }
 
-size_t Telemetry::size()
+String Telemetry::pathFor(int index)
 {
-  File file = SD.open(logFile, FILE_READ);
+  return "tlm" + String(index) + ".csv";
+}
+
+size_t Telemetry::chunkSize(int index)
+{
+  File file = SD.open(pathFor(index).c_str(), FILE_READ);
   if (!file)
   {
     return 0;
@@ -41,42 +48,92 @@ size_t Telemetry::size()
   return bytes;
 }
 
-bool Telemetry::append(const String &row)
+int Telemetry::currentIndex()
 {
-  // Drop the spool rather than let it grow past what can be held in memory for
-  // the upload. This only happens when uploads have been failing for over a
-  // day, in which case losing the backlog is preferable to running out of heap.
-  if (size() >= maxBytes)
+  return writeIndex < 0 ? 0 : writeIndex;
+}
+
+void Telemetry::resume()
+{
+  writeIndex = -1;
+}
+
+int Telemetry::nextChunk(int from)
+{
+  for (int i = from; i < maxChunks; i++)
   {
-    clear();
+    if (chunkSize(i) > 0)
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// Decide which chunk the next row belongs in. On the first call after a reboot the
+// card is the only record of where writing left off, so the highest numbered chunk
+// that already exists is resumed rather than starting again at zero and
+// overwriting it.
+void Telemetry::selectWriteIndex(size_t incoming)
+{
+  if (writeIndex < 0)
+  {
+    writeIndex = 0;
+    for (int i = maxChunks - 1; i >= 0; i--)
+    {
+      if (chunkSize(i) > 0)
+      {
+        writeIndex = i;
+        break;
+      }
+    }
   }
 
-  File file = SD.open(logFile, FILE_WRITE);
+  if (chunkSize(writeIndex) + incoming <= chunkBytes)
+  {
+    return;
+  }
+
+  writeIndex = (writeIndex + 1) % maxChunks;
+  // Wrapping onto a chunk that still holds unsent rows means the card has more
+  // backlog than maxChunks will keep. The oldest goes, because recent readings
+  // are the ones worth having.
+  if (chunkSize(writeIndex) > 0)
+  {
+    clearChunk(writeIndex);
+  }
+}
+
+bool Telemetry::append(const String &row)
+{
+  selectWriteIndex(row.length() + 1);
+
+  File file = SD.open(pathFor(writeIndex).c_str(), FILE_WRITE);
   if (!file)
   {
     return false;
   }
   // print() twice rather than println(): Arduino's println() terminates with
-  // CRLF, and a stray carriage return at the end of every field set is one more
-  // thing the server has to strip.
+  // CRLF, and a stray carriage return at the end of every row is one more thing
+  // the server has to strip.
   file.print(row);
   file.print("\n");
   file.close();
   return true;
 }
 
-String Telemetry::readAll()
+String Telemetry::readChunk(int index)
 {
-  File file = SD.open(logFile, FILE_READ);
+  File file = SD.open(pathFor(index).c_str(), FILE_READ);
   if (!file)
   {
     return "";
   }
 
   size_t bytes = file.size();
-  if (bytes > maxBytes)
+  if (bytes > chunkBytes)
   {
-    bytes = maxBytes;
+    bytes = chunkBytes;
   }
 
   // Read a known number of bytes rather than using readString(), which waits out
@@ -97,7 +154,7 @@ String Telemetry::readAll()
   return contents;
 }
 
-void Telemetry::clear()
+void Telemetry::clearChunk(int index)
 {
-  SD.remove(logFile);
+  SD.remove(pathFor(index).c_str());
 }

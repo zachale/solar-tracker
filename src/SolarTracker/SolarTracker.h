@@ -33,11 +33,6 @@ public:
   void dailySync();
   void syncClock();
   void uploadLogs();
-  // Set when the hourly alarm lands on the sync hour, cleared by reading it. The
-  // sketch reads this so it can take the access point down, run the sync in
-  // station mode and bring the access point back up; the tracker itself knows
-  // nothing about the access point.
-  bool isSyncDue();
 
 private:
   Status status = ACTIVE;
@@ -53,10 +48,14 @@ private:
   static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
   static const unsigned long BENCH_SYNC_INTERVAL = 120000;  // two minutes
   unsigned long benchSyncTimer = 0;
+  static const int SYNC_EVERY_HOURS = 1;
 #else
   static const unsigned long TELEMETRY_INTERVAL = 600000;   // ten minutes
+  // Four uploads a day. Only reachable with the settings switch off, where a sync
+  // costs nothing but a station association, so more of them is strictly safer:
+  // smaller bodies, and a failure retried in hours rather than a day.
+  static const int SYNC_EVERY_HOURS = 6;
 #endif
-  bool syncDue = false;
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
   void extendActuatorOnHour();

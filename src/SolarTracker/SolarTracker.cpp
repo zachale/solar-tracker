@@ -34,9 +34,13 @@ void SolarTracker::pollSensorData()
 
   if (clockModule.isAlarmTriggered())
   {
-    if (clockModule.getHour() == 0)
+    // Only ever while the settings switch is off. With the switch on the radio is
+    // an access point, and reaching the server would mean putting it into station
+    // mode, which tears the access point down for good: the ESP32 stops handing
+    // out listening sockets after four bring-ups in a power session.
+    if (clockModule.getHour() % SYNC_EVERY_HOURS == 0 && !ButtonPanel::settingsServerEnabled())
     {
-      syncDue = true;
+      dailySync();
     }
     if (status == ACTIVE)
     {
@@ -78,22 +82,12 @@ void SolarTracker::pollSensorData()
   }
 
 #if BENCH_TEST
-  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL)
+  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL && !ButtonPanel::settingsServerEnabled())
   {
-    syncDue = true;
+    dailySync();
     benchSyncTimer = millis();
   }
 #endif
-}
-
-bool SolarTracker::isSyncDue()
-{
-  if (!syncDue)
-  {
-    return false;
-  }
-  syncDue = false;
-  return true;
 }
 
 void SolarTracker::spoolTelemetryRow()
@@ -108,7 +102,7 @@ void SolarTracker::spoolTelemetryRow()
                                          ButtonPanel::isAwayModeOverride()));
   windPeak = 0;
 #if BENCH_TEST
-  Serial.println("Spooled telemetry row, spool is now " + String(Telemetry::size()) + " bytes");
+  Serial.println("Spooled row into chunk " + String(Telemetry::currentIndex()) + ", now " + String(Telemetry::chunkSize(Telemetry::currentIndex())) + " bytes");
 #endif
 }
 
@@ -211,25 +205,51 @@ void SolarTracker::dailySync()
   // REMOVED OTA UPDATER FOR NOW
 }
 
-// The spool is only discarded on a confirmed 200, so a failed upload costs
-// nothing beyond the delay until the next sync. setup() calls dailySync(), which
-// means a power cycle also flushes whatever the card is holding.
+// Uploads every chunk the card is holding, one request each, stopping at the first
+// failure so nothing is lost and the order stays sane. A chunk is only deleted on
+// a confirmed 200.
+//
+// Nothing is pushed while the settings switch is on. That is the whole point of
+// the arrangement: in that mode the radio belongs to the access point and the
+// tracker does not touch it.
 void SolarTracker::uploadLogs()
 {
-  String body = Telemetry::readAll();
-  if (body == "")
+  if (ButtonPanel::settingsServerEnabled())
   {
+    Serial.println("Settings switch is on, holding telemetry on the card");
     return;
   }
-  Serial.println("Uploading " + String(body.length()) + " bytes of telemetry");
-  if (wifiClient.post(API + String("/data"), body, "text/csv") == 200)
+
+  int uploaded = 0;
+  for (int index = Telemetry::nextChunk(0); index >= 0; index = Telemetry::nextChunk(index + 1))
   {
-    Telemetry::clear();
-    Serial.println("Telemetry uploaded, spool cleared");
+    String body = Telemetry::readChunk(index);
+    if (body == "")
+    {
+      continue;
+    }
+
+    Serial.println("Uploading chunk " + String(index) + ", " + String(body.length()) + " bytes");
+    if (wifiClient.post(API + String("/data"), body, "text/csv") != 200)
+    {
+      Serial.println("Chunk " + String(index) + " failed, keeping it and stopping here");
+      break;
+    }
+
+    Telemetry::clearChunk(index);
+    uploaded++;
   }
-  else
+
+  if (uploaded > 0)
   {
-    Serial.println("Telemetry upload failed, keeping spool");
+    Serial.println("Uploaded " + String(uploaded) + " chunk(s)");
+  }
+
+  // With the card empty, start the ring again from the beginning rather than
+  // carrying on from wherever the write position had reached.
+  if (Telemetry::nextChunk(0) < 0)
+  {
+    Telemetry::resume();
   }
 }
 
