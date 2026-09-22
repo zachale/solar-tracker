@@ -32,6 +32,25 @@ void SolarTracker::pollSensorData()
     setStatus(ACTIVE);
   }
 
+  // Bus health first: everything below reads the RTC, and a wedged bus returns
+  // register addresses and stack residue rather than failing loudly.
+  if (!clockModule.isHealthy())
+  {
+    ClockModule::wedgeCount++;
+    Serial.println("I2C bus unhealthy (code " + String(ClockModule::lastI2cCode) +
+                   "), attempting bus clear #" + String(ClockModule::wedgeCount));
+    bool freed = clockModule.busClear();
+    bool back = clockModule.isHealthy();
+    if (back)
+    {
+      ClockModule::recoverCount++;
+    }
+    Serial.println("Bus clear: sda_freed=" + String(freed ? 1 : 0) +
+                   " recovered=" + String(back ? 1 : 0) +
+                   " total_wedges=" + String(ClockModule::wedgeCount) +
+                   " total_recovered=" + String(ClockModule::recoverCount));
+  }
+
   if (clockModule.isAlarmTriggered())
   {
     // Only ever while the settings switch is off. With the switch on the radio is
@@ -89,6 +108,14 @@ void SolarTracker::pollSensorData()
   }
 #endif
 
+  // Wall-clock sync fallback. Survives a wedged bus, so the unit keeps
+  // reporting even while the clock is unreadable.
+  if (millis() - monitorSyncTimer > MONITOR_SYNC_MS && !appMode)
+  {
+    monitorSyncTimer = millis();
+    syncPending = true;
+  }
+
   serviceSync();
 }
 
@@ -124,7 +151,9 @@ void SolarTracker::spoolTelemetryRow()
                                          clockModule.getClockTemp(),
                                          actuator.getPercentExtended(),
                                          getStatusString(),
-                                         windPeak,
+                                         ButtonPanel::isWindSensorEnabled()
+                                             ? windPeak
+                                             : (int)(ClockModule::wedgeCount > 99 ? 99 : ClockModule::wedgeCount),
                                          ButtonPanel::settingsServerEnabled(),
                                          ButtonPanel::isWindSensorEnabled(),
                                          ButtonPanel::isAwayModeOverride()));

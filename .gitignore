@@ -1,3 +1,14 @@
 secrets.*
 build
 .test-build
+
+# bench build artifacts: copies of shared headers and of secrets.h
+bench/*/bench_common.h
+bench/*/secrets.h
+bench/logs/
+
+# node deps
+server/node_modules/
+
+# server lives on feature/telemetry-api
+server/

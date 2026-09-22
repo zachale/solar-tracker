@@ -1,0 +1,700 @@
+[
+  {
+    "httpRequest": {
+      "latency": "0.003398481s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.3.31",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8c8ec500049ff07cdde578",
+    "labels": {
+      "instanceId": "00a41e8c1da4389f64a8abc64ebcd1d7066f8af356236dc3b0d75cb1876d9caa03b0eab72fc12514f7941ae385b26c23d21954917e40f6622330e25aef2a9fff84d5d9456b5545c7aca10d4464c7447756917e77"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-24T18:34:45.314372928Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "ab8b7a7595b2b6b8",
+    "timestamp": "2026-08-24T18:34:45.297871Z",
+    "trace": "projects/solar-tracker-442903/traces/f0d7bb0a19a705c8977d900048f8abec",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.004204450s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.3.31",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8c8eb9000c8439478c5db3",
+    "labels": {
+      "instanceId": "00a41e8c1da4389f64a8abc64ebcd1d7066f8af356236dc3b0d75cb1876d9caa03b0eab72fc12514f7941ae385b26c23d21954917e40f6622330e25aef2a9fff84d5d9456b5545c7aca10d4464c7447756917e77"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-24T18:34:33.860694739Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "613dcf16dfbaee2e",
+    "timestamp": "2026-08-24T18:34:33.814515Z",
+    "trace": "projects/solar-tracker-442903/traces/702c1475721c5527c3a8828f24a73469",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "5.163191948s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.3.31",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8c8eb3000d193f2193c801",
+    "labels": {
+      "instanceId": "00a41e8c1da4389f64a8abc64ebcd1d7066f8af356236dc3b0d75cb1876d9caa03b0eab72fc12514f7941ae385b26c23d21954917e40f6622330e25aef2a9fff84d5d9456b5545c7aca10d4464c7447756917e77"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-24T18:34:27.864460180Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "ca0617c72d0072c6",
+    "timestamp": "2026-08-24T18:34:22.443998Z",
+    "trace": "projects/solar-tracker-442903/traces/64459a1967c391ed257a37535df71888",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002798300s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2607:fea8:21b:fa00:81e0:cb39:bec6:ab84",
+      "requestMethod": "GET",
+      "requestSize": "309",
+      "requestUrl": "https://test-image-564yg4s2pa-uc.a.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "2600:1901:81d4:200::",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8a32df00065e8add7ad716",
+    "labels": {
+      "instanceId": "00a41e8c1dc8189fee619c354b98e632366292e35184c89dc6aa8e40b04a15dd8cdf7a5e3046672f19c5726ffd222a44b121bf0ee5c0031fffcd9843cf9568482103f29561d84cba228711028c770ce1c1c89794"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T23:38:07.745394710Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "aca241b5c9f64579",
+    "timestamp": "2026-08-22T23:38:07.411870Z",
+    "trace": "projects/solar-tracker-442903/traces/78a9c2df1257ac39a53eecc983de35fe"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002886561s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2607:fea8:21b:fa00:81e0:cb39:bec6:ab84",
+      "requestMethod": "GET",
+      "requestSize": "268",
+      "requestUrl": "https://test-image-564yg4s2pa-uc.a.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "2600:1900:4241:200::",
+      "status": 200,
+      "userAgent": "curl/8.7.1"
+    },
+    "insertId": "6a8a32df0003a4782a32ae06",
+    "labels": {
+      "instanceId": "00a41e8c1dc8189fee619c354b98e632366292e35184c89dc6aa8e40b04a15dd8cdf7a5e3046672f19c5726ffd222a44b121bf0ee5c0031fffcd9843cf9568482103f29561d84cba228711028c770ce1c1c89794"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T23:38:07.413937490Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "9eb3c216600f36c2",
+    "timestamp": "2026-08-22T23:38:07.234393Z",
+    "trace": "projects/solar-tracker-442903/traces/ab7e5b191f167732e42819838cfa7ee8"
+  },
+  {
+    "httpRequest": {
+      "latency": "0.004016920s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2607:fea8:21b:fa00:81e0:cb39:bec6:ab84",
+      "requestMethod": "GET",
+      "requestSize": "267",
+      "requestUrl": "https://test-image-564yg4s2pa-uc.a.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "2600:1901:81d5:200::",
+      "status": 200,
+      "userAgent": "curl/8.7.1"
+    },
+    "insertId": "6a8a32df00011798d0ee2347",
+    "labels": {
+      "instanceId": "00a41e8c1dc8189fee619c354b98e632366292e35184c89dc6aa8e40b04a15dd8cdf7a5e3046672f19c5726ffd222a44b121bf0ee5c0031fffcd9843cf9568482103f29561d84cba228711028c770ce1c1c89794"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T23:38:07.080573390Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "ccf8c08d3de2ed3c",
+    "timestamp": "2026-08-22T23:38:07.061151Z",
+    "trace": "projects/solar-tracker-442903/traces/7b2b5217f013263aee8ce43800725eab",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "5.066273885s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "2607:fea8:21b:fa00:81e0:cb39:bec6:ab84",
+      "requestMethod": "GET",
+      "requestSize": "268",
+      "requestUrl": "https://test-image-564yg4s2pa-uc.a.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "2600:1901:81d5:200::",
+      "status": 200,
+      "userAgent": "curl/8.7.1"
+    },
+    "insertId": "6a8a32ac0004451a17dac1a1",
+    "labels": {
+      "instanceId": "00a41e8c1dc8189fee619c354b98e632366292e35184c89dc6aa8e40b04a15dd8cdf7a5e3046672f19c5726ffd222a44b121bf0ee5c0031fffcd9843cf9568482103f29561d84cba228711028c770ce1c1c89794"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T23:37:16.285690047Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "5489e8108d51f965",
+    "timestamp": "2026-08-22T23:37:11.024874Z",
+    "trace": "projects/solar-tracker-442903/traces/5f3cf509b3038c63ccdae7c64405437e",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002897860s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8992230004f30e33724da0",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:12:19.498064421Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "2e12f59dc999022c",
+    "timestamp": "2026-08-22T12:12:19.320081Z",
+    "trace": "projects/solar-tracker-442903/traces/e1539aa6fd56e0842f3e78435a256a5d",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.003709820s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a899217000cbca4d5391338",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:12:07.843402918Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "fc00d24157e1ca4f",
+    "timestamp": "2026-08-22T12:12:07.828764Z",
+    "trace": "projects/solar-tracker-442903/traces/e1269cf876e2e2e4f410eb007ecd314d",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002777350s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a89920c000146e2a15dcd28",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:11:56.264511454Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "cfc263b221642706",
+    "timestamp": "2026-08-22T12:11:56.079104Z",
+    "trace": "projects/solar-tracker-442903/traces/67b1e3051f31fd4f3f347de79e3da766",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.003492390s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8992000008cb20a1526785",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:11:44.609506345Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "99810fbff460c0eb",
+    "timestamp": "2026-08-22T12:11:44.570889Z",
+    "trace": "projects/solar-tracker-442903/traces/394d172748a4e67014937d9a4c726a3e",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002938589s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991f4000e6eed5d3c6077",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:11:32.951960465Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "c019d62aac7d606f",
+    "timestamp": "2026-08-22T12:11:32.941164Z",
+    "trace": "projects/solar-tracker-442903/traces/910c47c2c785d85f6be0a1381d1341e9",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.003454981s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991e900078afac0671fe4",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:11:21.761416881Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "db2f155f1716b38b",
+    "timestamp": "2026-08-22T12:11:21.488865Z",
+    "trace": "projects/solar-tracker-442903/traces/a3e7cf2922e97658b8f7762ad2e4cbf6",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.002976430s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "313",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991de00017d38c273d901",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:11:10.105481582Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "edb2eb588d2ef9b3",
+    "timestamp": "2026-08-22T12:11:10.093235Z",
+    "trace": "projects/solar-tracker-442903/traces/30d5266059dd77461f0e1dcb6ad1a4cb",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.026279630s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991d20005f1a757468d29",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:10:58.397803340Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "ddb20613e761929b",
+    "timestamp": "2026-08-22T12:10:58.361082Z",
+    "trace": "projects/solar-tracker-442903/traces/c6f3c88fbcc90443d43185229ff3f7d7",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.008095962s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991c60009e576b2ff3e2e",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:10:46.959410054Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "279d00493938e16c",
+    "timestamp": "2026-08-22T12:10:46.638865Z",
+    "trace": "projects/solar-tracker-442903/traces/950eaafde651f4f1bc32b9733197d9cc",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "4.058527434s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.72.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a8991bf00098e2512c03e47",
+    "labels": {
+      "instanceId": "00a41e8c1d1d7c24c9caaeee1fba9fdd536655c7f0b68a1c4fc8e132e59556646d99548e0b46fd5ca8f5c46f66e973e8e16a88e56d6c9eb43165e765f71488bb42d3cbf8fcbc9249c9a6167a3612a91dac8ab6c6"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T12:10:39.633896260Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "ad6718c936aba365",
+    "timestamp": "2026-08-22T12:10:35.247572Z",
+    "trace": "projects/solar-tracker-442903/traces/dd4402bcb31b76900b56a8a2e316867d",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.006795969s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "314",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a88f42c00067cb561826706",
+    "labels": {
+      "instanceId": "00a41e8c1d5ca1e97b332376d2794bcaf86c7c0d30b57e090eaf865e6baa6bc8a66a7374c769c740c0efd6ae56eca84902f2d24c01c5f27e3110094cf6f2f89939ebca5cc9378ae6f834af06430fac4274232ad5"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T00:58:20.432659348Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "1bb401b47a367548",
+    "timestamp": "2026-08-22T00:58:20.416292Z",
+    "trace": "projects/solar-tracker-442903/traces/f8513b2aaba348bfe5bbf0ce75ed9e1b",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "0.004188021s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a88f421000169be61a523fc",
+    "labels": {
+      "instanceId": "00a41e8c1d5ca1e97b332376d2794bcaf86c7c0d30b57e090eaf865e6baa6bc8a66a7374c769c740c0efd6ae56eca84902f2d24c01c5f27e3110094cf6f2f89939ebca5cc9378ae6f834af06430fac4274232ad5"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T00:58:09.344756634Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "a31daed09af6b539",
+    "timestamp": "2026-08-22T00:58:09.086602Z",
+    "trace": "projects/solar-tracker-442903/traces/95fe5b1ce152c86e1c88ddab4a37b7ec",
+    "traceSampled": true
+  },
+  {
+    "httpRequest": {
+      "latency": "5.144825298s",
+      "protocol": "HTTP/1.1",
+      "remoteIp": "153.67.53.214",
+      "requestMethod": "GET",
+      "requestSize": "315",
+      "requestUrl": "https://test-image-188091506191.us-central1.run.app/time/est",
+      "responseSize": "237",
+      "serverIp": "34.143.77.2",
+      "status": 200,
+      "userAgent": "Arduino UNO R4 WiFi"
+    },
+    "insertId": "6a88f41b00002150a02b7c26",
+    "labels": {
+      "instanceId": "00a41e8c1d5ca1e97b332376d2794bcaf86c7c0d30b57e090eaf865e6baa6bc8a66a7374c769c740c0efd6ae56eca84902f2d24c01c5f27e3110094cf6f2f89939ebca5cc9378ae6f834af06430fac4274232ad5"
+    },
+    "logName": "projects/solar-tracker-442903/logs/run.googleapis.com%2Frequests",
+    "receiveTimestamp": "2026-08-22T00:58:03.015365616Z",
+    "resource": {
+      "labels": {
+        "configuration_name": "test-image",
+        "location": "us-central1",
+        "project_id": "solar-tracker-442903",
+        "revision_name": "test-image-00016-bwz",
+        "service_name": "test-image"
+      },
+      "type": "cloud_run_revision"
+    },
+    "severity": "INFO",
+    "spanId": "e8efbf7b28b290fd",
+    "timestamp": "2026-08-22T00:57:57.607544Z",
+    "trace": "projects/solar-tracker-442903/traces/d9e4e6a8ce23885802fb806aa7917dd0",
+    "traceSampled": true
+  }
+]

@@ -26,6 +26,15 @@ public:
   void setSchedule(JsonDocument &doc);
   uint8_t getHour();
 
+  // --- field diagnostics, added for the standalone monitoring build ---
+  // The bus can wedge with a slave holding SDA low. Detect it, clear it, and
+  // keep a count so the condition is visible from the telemetry rows.
+  bool isHealthy();              // did the last read actually reach the chip
+  bool busClear();               // 9-clock recovery; true if SDA came back high
+  static uint16_t wedgeCount;    // wedges seen this power session
+  static uint16_t recoverCount;  // of those, how many the bus clear fixed
+  static uint8_t  lastI2cCode;   // last endTransmission() result
+
 private:
   RTC_DS3231 rtc;
   static bool alarmTriggered;

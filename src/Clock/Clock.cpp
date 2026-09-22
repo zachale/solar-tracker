@@ -1,6 +1,70 @@
 #include "./Clock.h"
 
 bool ClockModule::alarmTriggered = false;
+uint16_t ClockModule::wedgeCount = 0;
+uint16_t ClockModule::recoverCount = 0;
+uint8_t ClockModule::lastI2cCode = 0;
+
+// A4/A5 on the UNO R4 WiFi. Taken back as plain GPIO only during a bus clear.
+static const uint8_t BUS_SDA_PIN = 18;
+static const uint8_t BUS_SCL_PIN = 19;
+
+// Does the DS3231 actually answer? This is the detector checkForZeroTime()
+// should always have been: the real failure returns non-zero garbage, never
+// an all-zero time, so the old test never fired.
+bool ClockModule::isHealthy()
+{
+  Wire.beginTransmission(0x68);
+  lastI2cCode = Wire.endTransmission();
+  if (lastI2cCode != 0)
+  {
+    return false;
+  }
+  DateTime now = rtc.now();
+  return now.year() >= 2020 && now.year() <= 2099;
+}
+
+// NXP UM10204 3.1.16 bus clear. If a slave was interrupted mid-byte it can sit
+// holding SDA low forever; clocking SCL lets it finish the word and release.
+// Nothing in the Renesas core does this: its abort function is never called,
+// the hardware SCL-low timeout is disabled, and setWireTimeout() discards the
+// reset flag. So it has to be done by hand.
+bool ClockModule::busClear()
+{
+  Wire.end();
+  delay(10);
+  pinMode(BUS_SDA_PIN, INPUT_PULLUP);
+  pinMode(BUS_SCL_PIN, INPUT_PULLUP);
+  delay(2);
+
+  if (digitalRead(BUS_SDA_PIN) == LOW)
+  {
+    pinMode(BUS_SCL_PIN, OUTPUT);
+    for (int i = 0; i < 9 && digitalRead(BUS_SDA_PIN) == LOW; i++)
+    {
+      digitalWrite(BUS_SCL_PIN, LOW);
+      delayMicroseconds(5);
+      digitalWrite(BUS_SCL_PIN, HIGH);
+      delayMicroseconds(5);
+    }
+    // manual STOP: SDA released while SCL is high
+    pinMode(BUS_SDA_PIN, OUTPUT);
+    digitalWrite(BUS_SDA_PIN, LOW);
+    delayMicroseconds(5);
+    pinMode(BUS_SCL_PIN, INPUT_PULLUP);
+    delayMicroseconds(5);
+    pinMode(BUS_SDA_PIN, INPUT_PULLUP);
+    delayMicroseconds(5);
+  }
+
+  pinMode(BUS_SDA_PIN, INPUT_PULLUP);
+  pinMode(BUS_SCL_PIN, INPUT_PULLUP);
+  bool freed = digitalRead(BUS_SDA_PIN) == HIGH;
+  Wire.begin();
+  delay(20);
+  rtc.begin();
+  return freed;
+}
 
 void ClockModule::setup()
 {

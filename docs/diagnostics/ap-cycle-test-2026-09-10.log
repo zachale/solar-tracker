@@ -1,0 +1,35 @@
+  iter 11: sock=-1 took=20420ms
+  iter 12: sock=-1 took=20424ms
+  PHASE A-ap-only first failure at iteration: 5
+
+=== PHASE B-with-sta-switch ===
+  iter 1: sock=-1 took=20424ms
+  iter 2: sock=-1 took=20428ms
+  iter 3: sock=-1 took=20424ms
+  iter 4: sock=-1 took=20450ms
+  iter 5: sock=-1 took=20428ms
+  iter 6: sock=-1 took=20428ms
+  iter 7: sock=-1 took=20423ms
+  iter 8: sock=-1 took=20424ms
+  iter 9: sock=-1 took=20424ms
+  iter 10: sock=-1 took=20427ms
+  iter 11: sock=-1 took=20423ms
+  iter 12: sock=-1 took=20427ms
+  PHASE B-with-sta-switch first failure at iteration: 1
+
+=== PHASE C-sta-switch-plus-reset ===
+  iter 1: sock=0 took=29ms
+  iter 2: sock=0 took=29ms
+  iter 3: sock=0 took=29ms
+  iter 4: sock=0 took=25ms
+  iter 5: sock=0 took=25ms
+  iter 6: sock=0 took=25ms
+  iter 7: sock=0 took=26ms
+  iter 8: sock=0 took=25ms
+  iter 9: sock=0 took=26ms
+  iter 10: sock=0 took=29ms
+  iter 11: sock=0 took=29ms
+  iter 12: sock=0 took=25ms
+  PHASE C-sta-switch-plus-reset first failure at iteration: none
+
+DIAGNOSTIC COMPLETE

@@ -1,0 +1,4334 @@
+2026-09-10T18:26:48Z Response code: 200
+2026-09-10T18:26:48Z It took 1 attempts to get a response
+2026-09-10T18:26:48Z {"datetime":"2026-09-10T14:26:48.000Z"}
+2026-09-10T18:26:48Z Syncing Clock to: 2026-09-10T14:26:48.000Z
+2026-09-10T18:26:48Z Attempting to recalibrate
+2026-09-10T18:26:54Z homing
+2026-09-10T18:26:54Z Wind Speed: 3.00
+2026-09-10T18:26:54Z Temperature: 22.50
+2026-09-10T18:26:54Z PercentExtended: -1
+2026-09-10T18:26:54Z 14:26:53
+2026-09-10T18:26:54Z 1789050413
+2026-09-10T18:26:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:26:54Z Status: ACTIVE
+2026-09-10T18:26:54Z Device disconnected from AP
+2026-09-10T18:27:04Z Wind Speed: 2.00
+2026-09-10T18:27:04Z Temperature: 22.50
+2026-09-10T18:27:04Z PercentExtended: -1
+2026-09-10T18:27:04Z 14:27:3
+2026-09-10T18:27:04Z 1789050423
+2026-09-10T18:27:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:04Z Status: ACTIVE
+2026-09-10T18:27:14Z Wind Speed: 0.00
+2026-09-10T18:27:14Z Temperature: 22.50
+2026-09-10T18:27:14Z PercentExtended: -1
+2026-09-10T18:27:14Z 14:27:13
+2026-09-10T18:27:14Z 1789050433
+2026-09-10T18:27:14Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:14Z Status: ACTIVE
+2026-09-10T18:27:24Z Wind Speed: 2.00
+2026-09-10T18:27:24Z Temperature: 22.50
+2026-09-10T18:27:24Z PercentExtended: -1
+2026-09-10T18:27:24Z 14:27:23
+2026-09-10T18:27:24Z 1789050443
+2026-09-10T18:27:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:24Z Status: ACTIVE
+2026-09-10T18:27:34Z Wind Speed: 1.00
+2026-09-10T18:27:34Z Temperature: 22.25
+2026-09-10T18:27:34Z PercentExtended: -1
+2026-09-10T18:27:34Z 14:27:33
+2026-09-10T18:27:34Z 1789050453
+2026-09-10T18:27:34Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:34Z Status: ACTIVE
+2026-09-10T18:27:44Z Wind Speed: 1.00
+2026-09-10T18:27:44Z Temperature: 22.25
+2026-09-10T18:27:44Z PercentExtended: -1
+2026-09-10T18:27:45Z 14:27:44
+2026-09-10T18:27:45Z 1789050464
+2026-09-10T18:27:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:45Z Status: ACTIVE
+2026-09-10T18:27:55Z Wind Speed: 2.00
+2026-09-10T18:27:55Z Temperature: 22.25
+2026-09-10T18:27:55Z PercentExtended: -1
+2026-09-10T18:27:55Z 14:27:54
+2026-09-10T18:27:55Z 1789050474
+2026-09-10T18:27:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:27:55Z Status: ACTIVE
+2026-09-10T18:28:05Z Wind Speed: 2.00
+2026-09-10T18:28:05Z Temperature: 22.25
+2026-09-10T18:28:05Z PercentExtended: -1
+2026-09-10T18:28:05Z 14:28:4
+2026-09-10T18:28:05Z 1789050484
+2026-09-10T18:28:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:05Z Status: ACTIVE
+2026-09-10T18:28:15Z Wind Speed: 1.00
+2026-09-10T18:28:15Z Temperature: 22.25
+2026-09-10T18:28:15Z PercentExtended: -1
+2026-09-10T18:28:15Z 14:28:14
+2026-09-10T18:28:15Z 1789050494
+2026-09-10T18:28:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:15Z Status: ACTIVE
+2026-09-10T18:28:16Z boundary hit
+2026-09-10T18:28:16Z maxing
+2026-09-10T18:28:25Z Wind Speed: 3.00
+2026-09-10T18:28:25Z Temperature: 22.25
+2026-09-10T18:28:25Z PercentExtended: -1
+2026-09-10T18:28:25Z 14:28:24
+2026-09-10T18:28:25Z 1789050504
+2026-09-10T18:28:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:25Z Status: ACTIVE
+2026-09-10T18:28:33Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:28:33Z GET Request
+2026-09-10T18:28:33Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:28:35Z Response code: 200
+2026-09-10T18:28:35Z It took 1 attempts to get a response
+2026-09-10T18:28:35Z {"datetime":"2026-09-10T14:28:35.000Z"}
+2026-09-10T18:28:35Z Syncing Clock to: 2026-09-10T14:28:35.000Z
+2026-09-10T18:28:35Z Uploading 245 bytes of telemetry
+2026-09-10T18:28:35Z POST Request
+2026-09-10T18:28:35Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:28:37Z Response code: 500
+2026-09-10T18:28:37Z Telemetry upload failed, keeping spool
+2026-09-10T18:28:38Z Wind Speed: 0.00
+2026-09-10T18:28:38Z Temperature: 22.00
+2026-09-10T18:28:38Z PercentExtended: -1
+2026-09-10T18:28:38Z 14:28:37
+2026-09-10T18:28:38Z 1789050517
+2026-09-10T18:28:38Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:38Z Status: ACTIVE
+2026-09-10T18:28:48Z Wind Speed: 2.00
+2026-09-10T18:28:48Z Temperature: 22.00
+2026-09-10T18:28:48Z PercentExtended: -1
+2026-09-10T18:28:48Z 14:28:47
+2026-09-10T18:28:48Z 1789050527
+2026-09-10T18:28:48Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:48Z Status: ACTIVE
+2026-09-10T18:28:58Z Wind Speed: 1.00
+2026-09-10T18:28:58Z Temperature: 22.00
+2026-09-10T18:28:58Z PercentExtended: -1
+2026-09-10T18:28:58Z 14:28:57
+2026-09-10T18:28:58Z 1789050537
+2026-09-10T18:28:58Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:28:58Z Status: ACTIVE
+2026-09-10T18:29:08Z Wind Speed: 2.00
+2026-09-10T18:29:08Z Temperature: 22.00
+2026-09-10T18:29:08Z PercentExtended: -1
+2026-09-10T18:29:08Z 14:29:7
+2026-09-10T18:29:08Z 1789050547
+2026-09-10T18:29:08Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:29:08Z Status: ACTIVE
+2026-09-10T18:29:18Z Wind Speed: 3.00
+2026-09-10T18:29:18Z Temperature: 22.00
+2026-09-10T18:29:18Z PercentExtended: -1
+2026-09-10T18:29:18Z 14:29:17
+2026-09-10T18:29:18Z 1789050557
+2026-09-10T18:29:18Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:29:18Z Status: ACTIVE
+2026-09-10T18:29:28Z Wind Speed: 4.00
+2026-09-10T18:29:28Z Temperature: 22.00
+2026-09-10T18:29:28Z PercentExtended: -1
+2026-09-10T18:29:28Z 14:29:28
+2026-09-10T18:29:28Z 1789050568
+2026-09-10T18:29:29Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:29:29Z Status: ACTIVE
+2026-09-10T18:29:39Z Wind Speed: 0.00
+2026-09-10T18:29:39Z Temperature: 22.00
+2026-09-10T18:29:39Z PercentExtended: -1
+2026-09-10T18:29:39Z 14:29:38
+2026-09-10T18:29:39Z 1789050578
+2026-09-10T18:29:39Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:29:39Z Status: ACTIVE
+2026-09-10T18:29:49Z Wind Speed: 2.00
+2026-09-10T18:29:49Z Temperature: 21.50
+2026-09-10T18:29:49Z PercentExtended: -1
+2026-09-10T18:29:49Z 14:29:48
+2026-09-10T18:29:49Z 1789050588
+2026-09-10T18:29:49Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:29:49Z Status: ACTIVE
+2026-09-10T18:32:34Z Response code: 500
+2026-09-10T18:32:34Z Telemetry upload failed, keeping spool
+2026-09-10T18:32:34Z BENCH_TEST: would extend to 72%
+2026-09-10T18:32:34Z Set status to: ACTIVE
+2026-09-10T18:32:34Z Access Point Web Server
+2026-09-10T18:32:34Z Please upgrade the firmware
+2026-09-10T18:32:34Z Creating access point named: Solar-Tracker
+2026-09-10T18:32:35Z SSID: Solar-Tracker
+2026-09-10T18:32:35Z IP Address: 192.168.4.1
+2026-09-10T18:32:35Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T18:32:35Z Setup complete.
+2026-09-10T18:32:38Z Wind Speed: 0.00
+2026-09-10T18:32:38Z Temperature: 21.25
+2026-09-10T18:32:38Z PercentExtended: -1
+2026-09-10T18:32:38Z 14:32:37
+2026-09-10T18:32:38Z 1789050757
+2026-09-10T18:32:38Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:32:38Z Status: ACTIVE
+2026-09-10T18:32:43Z Spooled telemetry row, spool is now 805 bytes
+2026-09-10T18:32:48Z Wind Speed: 1.00
+2026-09-10T18:32:48Z Temperature: 21.25
+2026-09-10T18:32:48Z PercentExtended: -1
+2026-09-10T18:32:48Z 14:32:47
+2026-09-10T18:32:48Z 1789050767
+2026-09-10T18:32:48Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:32:48Z Status: ACTIVE
+2026-09-10T18:32:58Z Spooled telemetry row, spool is now 840 bytes
+2026-09-10T18:32:58Z Wind Speed: 1.00
+2026-09-10T18:32:58Z Temperature: 21.25
+2026-09-10T18:32:58Z PercentExtended: -1
+2026-09-10T18:32:58Z 14:32:57
+2026-09-10T18:32:58Z 1789050777
+2026-09-10T18:32:58Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:32:58Z Status: ACTIVE
+2026-09-10T18:33:08Z Wind Speed: 1.00
+2026-09-10T18:33:08Z Temperature: 21.25
+2026-09-10T18:33:08Z PercentExtended: -1
+2026-09-10T18:33:09Z 14:33:7
+2026-09-10T18:33:09Z 1789050787
+2026-09-10T18:33:09Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:09Z Status: ACTIVE
+2026-09-10T18:33:13Z Spooled telemetry row, spool is now 875 bytes
+2026-09-10T18:33:19Z Wind Speed: 0.00
+2026-09-10T18:33:19Z Temperature: 21.25
+2026-09-10T18:33:19Z PercentExtended: -1
+2026-09-10T18:33:19Z 14:33:17
+2026-09-10T18:33:19Z 1789050797
+2026-09-10T18:33:19Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:19Z Status: ACTIVE
+2026-09-10T18:33:28Z Spooled telemetry row, spool is now 910 bytes
+2026-09-10T18:33:29Z Wind Speed: 0.00
+2026-09-10T18:33:29Z Temperature: 21.25
+2026-09-10T18:33:29Z PercentExtended: -1
+2026-09-10T18:33:29Z 14:33:28
+2026-09-10T18:33:29Z 1789050808
+2026-09-10T18:33:29Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:29Z Status: ACTIVE
+2026-09-10T18:33:39Z Wind Speed: 0.00
+2026-09-10T18:33:39Z Temperature: 21.25
+2026-09-10T18:33:39Z PercentExtended: -1
+2026-09-10T18:33:39Z 14:33:38
+2026-09-10T18:33:39Z 1789050818
+2026-09-10T18:33:39Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:39Z Status: ACTIVE
+2026-09-10T18:33:43Z Spooled telemetry row, spool is now 945 bytes
+2026-09-10T18:33:49Z Wind Speed: 1.00
+2026-09-10T18:33:49Z Temperature: 21.25
+2026-09-10T18:33:49Z PercentExtended: -1
+2026-09-10T18:33:49Z 14:33:48
+2026-09-10T18:33:49Z 1789050828
+2026-09-10T18:33:49Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:49Z Status: ACTIVE
+2026-09-10T18:33:58Z Spooled telemetry row, spool is now 980 bytes
+2026-09-10T18:33:59Z Wind Speed: 2.00
+2026-09-10T18:33:59Z Temperature: 21.25
+2026-09-10T18:33:59Z PercentExtended: -1
+2026-09-10T18:33:59Z 14:33:58
+2026-09-10T18:33:59Z 1789050838
+2026-09-10T18:33:59Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:33:59Z Status: ACTIVE
+2026-09-10T18:34:10Z Wind Speed: 0.00
+2026-09-10T18:34:10Z Temperature: 21.25
+2026-09-10T18:34:10Z PercentExtended: -1
+2026-09-10T18:34:10Z 14:34:8
+2026-09-10T18:34:10Z 1789050848
+2026-09-10T18:34:10Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:34:10Z Status: ACTIVE
+2026-09-10T18:34:14Z Spooled telemetry row, spool is now 1015 bytes
+2026-09-10T18:34:20Z Wind Speed: 2.00
+2026-09-10T18:34:20Z Temperature: 21.25
+2026-09-10T18:34:20Z PercentExtended: -1
+2026-09-10T18:34:20Z 14:34:19
+2026-09-10T18:34:20Z 1789050859
+2026-09-10T18:34:20Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:34:20Z Status: ACTIVE
+2026-09-10T18:34:28Z Access point listener stopped
+2026-09-10T18:34:28Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:34:28Z Please upgrade the firmware
+2026-09-10T18:34:38Z Connecting to WiFiRock Lodge
+2026-09-10T18:34:40Z ..Successfully connected toRock Lodge
+2026-09-10T18:34:40Z GET Request
+2026-09-10T18:34:40Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:34:42Z Response code: 200
+2026-09-10T18:34:42Z It took 1 attempts to get a response
+2026-09-10T18:34:42Z {"datetime":"2026-09-10T14:34:42.000Z"}
+2026-09-10T18:34:42Z Syncing Clock to: 2026-09-10T14:34:42.000Z
+2026-09-10T18:34:42Z Uploading 1015 bytes of telemetry
+2026-09-10T18:34:42Z POST Request
+2026-09-10T18:34:42Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:34:44Z Response code: 500
+2026-09-10T18:34:44Z Telemetry upload failed, keeping spool
+2026-09-10T18:34:44Z Access Point Web Server
+2026-09-10T18:34:44Z Please upgrade the firmware
+2026-09-10T18:34:44Z Creating access point named: Solar-Tracker
+2026-09-10T18:34:44Z SSID: Solar-Tracker
+2026-09-10T18:34:44Z IP Address: 192.168.4.1
+2026-09-10T18:34:44Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T18:34:44Z Wind Speed: 0.00
+2026-09-10T18:34:44Z Temperature: 21.25
+2026-09-10T18:34:44Z PercentExtended: -1
+2026-09-10T18:34:44Z 14:34:44
+2026-09-10T18:34:44Z 1789050884
+2026-09-10T18:34:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:34:44Z Status: ACTIVE
+2026-09-10T18:34:44Z Spooled telemetry row, spool is now 1050 bytes
+2026-09-10T18:34:54Z Wind Speed: 2.00
+2026-09-10T18:34:54Z Temperature: 21.25
+2026-09-10T18:34:54Z PercentExtended: -1
+2026-09-10T18:34:55Z 14:34:54
+2026-09-10T18:34:55Z 1789050894
+2026-09-10T18:34:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:34:55Z Status: ACTIVE
+2026-09-10T18:35:00Z Spooled telemetry row, spool is now 1085 bytes
+2026-09-10T18:35:05Z Wind Speed: 0.00
+2026-09-10T18:35:05Z Temperature: 21.25
+2026-09-10T18:35:05Z PercentExtended: -1
+2026-09-10T18:35:05Z 14:35:4
+2026-09-10T18:35:05Z 1789050904
+2026-09-10T18:35:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:05Z Status: ACTIVE
+2026-09-10T18:35:15Z Spooled telemetry row, spool is now 1120 bytes
+2026-09-10T18:35:15Z Wind Speed: 1.00
+2026-09-10T18:35:15Z Temperature: 21.25
+2026-09-10T18:35:15Z PercentExtended: -1
+2026-09-10T18:35:15Z 14:35:14
+2026-09-10T18:35:15Z 1789050914
+2026-09-10T18:35:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:15Z Status: ACTIVE
+2026-09-10T18:35:25Z Wind Speed: 2.00
+2026-09-10T18:35:25Z Temperature: 21.25
+2026-09-10T18:35:25Z PercentExtended: -1
+2026-09-10T18:35:25Z 14:35:24
+2026-09-10T18:35:25Z 1789050924
+2026-09-10T18:35:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:25Z Status: ACTIVE
+2026-09-10T18:35:30Z Spooled telemetry row, spool is now 1155 bytes
+2026-09-10T18:35:35Z Wind Speed: 1.00
+2026-09-10T18:35:35Z Temperature: 21.25
+2026-09-10T18:35:35Z PercentExtended: -1
+2026-09-10T18:35:35Z 14:35:35
+2026-09-10T18:35:35Z 1789050935
+2026-09-10T18:35:35Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:35Z Status: ACTIVE
+2026-09-10T18:35:45Z Spooled telemetry row, spool is now 1190 bytes
+2026-09-10T18:35:45Z Wind Speed: 0.00
+2026-09-10T18:35:45Z Temperature: 21.25
+2026-09-10T18:35:45Z PercentExtended: -1
+2026-09-10T18:35:45Z 14:35:45
+2026-09-10T18:35:45Z 1789050945
+2026-09-10T18:35:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:45Z Status: ACTIVE
+2026-09-10T18:35:56Z Wind Speed: 0.00
+2026-09-10T18:35:56Z Temperature: 21.25
+2026-09-10T18:35:56Z PercentExtended: -1
+2026-09-10T18:35:56Z 14:35:55
+2026-09-10T18:35:56Z 1789050955
+2026-09-10T18:35:56Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:35:56Z Status: ACTIVE
+2026-09-10T18:36:00Z Spooled telemetry row, spool is now 1225 bytes
+2026-09-10T18:36:06Z Wind Speed: 2.00
+2026-09-10T18:36:06Z Temperature: 21.00
+2026-09-10T18:36:06Z PercentExtended: -1
+2026-09-10T18:36:06Z 14:36:5
+2026-09-10T18:36:06Z 1789050965
+2026-09-10T18:36:06Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:36:06Z Status: ACTIVE
+2026-09-10T18:36:15Z Spooled telemetry row, spool is now 1260 bytes
+2026-09-10T18:36:16Z Wind Speed: 3.00
+2026-09-10T18:36:16Z Temperature: 21.00
+2026-09-10T18:36:16Z PercentExtended: -1
+2026-09-10T18:36:16Z 14:36:15
+2026-09-10T18:36:16Z 1789050975
+2026-09-10T18:36:16Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:36:16Z Status: ACTIVE
+2026-09-10T18:36:26Z Wind Speed: 1.00
+2026-09-10T18:36:26Z Temperature: 21.00
+2026-09-10T18:36:26Z PercentExtended: -1
+2026-09-10T18:36:26Z 14:36:26
+2026-09-10T18:36:26Z 1789050986
+2026-09-10T18:36:26Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:36:26Z Status: ACTIVE
+2026-09-10T18:36:28Z Access point listener stopped
+2026-09-10T18:36:28Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:36:28Z Please upgrade the firmware
+2026-09-10T18:36:38Z Connecting to WiFiRock Lodge
+2026-09-10T18:36:39Z .Successfully connected toRock Lodge
+2026-09-10T18:36:39Z GET Request
+2026-09-10T18:36:40Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:36:41Z Response code: 200
+2026-09-10T18:36:41Z It took 1 attempts to get a response
+2026-09-10T18:36:41Z {"datetime":"2026-09-10T14:36:41.000Z"}
+2026-09-10T18:36:41Z Syncing Clock to: 2026-09-10T14:36:41.000Z
+2026-09-10T18:36:41Z Uploading 1260 bytes of telemetry
+2026-09-10T18:36:42Z POST Request
+2026-09-10T18:36:42Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:36:43Z Response code: 500
+2026-09-10T18:36:43Z Telemetry upload failed, keeping spool
+2026-09-10T18:36:43Z Access Point Web Server
+2026-09-10T18:36:43Z Please upgrade the firmware
+2026-09-10T18:36:43Z Creating access point named: Solar-Tracker
+2026-09-10T18:36:43Z SSID: Solar-Tracker
+2026-09-10T18:36:43Z IP Address: 192.168.4.1
+2026-09-10T18:36:43Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T18:36:43Z Wind Speed: 1.00
+2026-09-10T18:36:43Z Temperature: 21.00
+2026-09-10T18:36:43Z PercentExtended: -1
+2026-09-10T18:36:44Z 14:36:43
+2026-09-10T18:36:44Z 1789051003
+2026-09-10T18:36:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:36:44Z Status: ACTIVE
+2026-09-10T18:36:44Z Spooled telemetry row, spool is now 1295 bytes
+2026-09-10T18:36:54Z Wind Speed: 0.00
+2026-09-10T18:36:54Z Temperature: 21.00
+2026-09-10T18:36:54Z PercentExtended: -1
+2026-09-10T18:36:54Z 14:36:53
+2026-09-10T18:36:54Z 1789051013
+2026-09-10T18:36:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:36:54Z Status: ACTIVE
+2026-09-10T18:36:59Z Spooled telemetry row, spool is now 1330 bytes
+2026-09-10T18:37:04Z Wind Speed: 0.00
+2026-09-10T18:37:04Z Temperature: 21.00
+2026-09-10T18:37:04Z PercentExtended: -1
+2026-09-10T18:37:04Z 14:37:3
+2026-09-10T18:37:04Z 1789051023
+2026-09-10T18:37:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:04Z Status: ACTIVE
+2026-09-10T18:37:14Z Spooled telemetry row, spool is now 1365 bytes
+2026-09-10T18:37:14Z Wind Speed: 1.00
+2026-09-10T18:37:14Z Temperature: 21.00
+2026-09-10T18:37:14Z PercentExtended: -1
+2026-09-10T18:37:14Z 14:37:13
+2026-09-10T18:37:14Z 1789051033
+2026-09-10T18:37:14Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:14Z Status: ACTIVE
+2026-09-10T18:37:24Z Wind Speed: 2.00
+2026-09-10T18:37:24Z Temperature: 21.00
+2026-09-10T18:37:24Z PercentExtended: -1
+2026-09-10T18:37:24Z 14:37:23
+2026-09-10T18:37:24Z 1789051043
+2026-09-10T18:37:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:24Z Status: ACTIVE
+2026-09-10T18:37:29Z Spooled telemetry row, spool is now 1400 bytes
+2026-09-10T18:37:34Z Wind Speed: 2.00
+2026-09-10T18:37:34Z Temperature: 21.00
+2026-09-10T18:37:34Z PercentExtended: -1
+2026-09-10T18:37:34Z 14:37:33
+2026-09-10T18:37:34Z 1789051053
+2026-09-10T18:37:34Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:34Z Status: ACTIVE
+2026-09-10T18:37:44Z Spooled telemetry row, spool is now 1435 bytes
+2026-09-10T18:37:45Z Wind Speed: 0.00
+2026-09-10T18:37:45Z Temperature: 21.00
+2026-09-10T18:37:45Z PercentExtended: -1
+2026-09-10T18:37:45Z 14:37:44
+2026-09-10T18:37:45Z 1789051064
+2026-09-10T18:37:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:45Z Status: ACTIVE
+2026-09-10T18:37:55Z Wind Speed: 0.00
+2026-09-10T18:37:55Z Temperature: 21.00
+2026-09-10T18:37:55Z PercentExtended: -1
+2026-09-10T18:37:55Z 14:37:54
+2026-09-10T18:37:55Z 1789051074
+2026-09-10T18:37:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:37:55Z Status: ACTIVE
+2026-09-10T18:37:59Z Spooled telemetry row, spool is now 1470 bytes
+2026-09-10T18:38:05Z Wind Speed: 0.00
+2026-09-10T18:38:05Z Temperature: 21.00
+2026-09-10T18:38:05Z PercentExtended: -1
+2026-09-10T18:38:05Z 14:38:4
+2026-09-10T18:38:05Z 1789051084
+2026-09-10T18:38:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:38:05Z Status: ACTIVE
+2026-09-10T18:38:14Z Spooled telemetry row, spool is now 1505 bytes
+2026-09-10T18:38:15Z Wind Speed: 1.00
+2026-09-10T18:38:15Z Temperature: 21.00
+2026-09-10T18:38:15Z PercentExtended: -1
+2026-09-10T18:38:15Z 14:38:14
+2026-09-10T18:38:15Z 1789051094
+2026-09-10T18:38:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:38:15Z Status: ACTIVE
+2026-09-10T18:38:25Z Wind Speed: 0.00
+2026-09-10T18:38:25Z Temperature: 21.00
+2026-09-10T18:38:25Z PercentExtended: -1
+2026-09-10T18:38:25Z 14:38:24
+2026-09-10T18:38:25Z 1789051104
+2026-09-10T18:38:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:38:25Z Status: ACTIVE
+2026-09-10T18:38:28Z Access point listener stopped
+2026-09-10T18:38:28Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:38:28Z Please upgrade the firmware
+2026-09-10T18:38:39Z Connecting to WiFiRock Lodge
+2026-09-10T18:38:40Z .Successfully connected toRock Lodge
+2026-09-10T18:38:40Z GET Request
+2026-09-10T18:38:40Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:38:41Z Response code: 200
+2026-09-10T18:38:41Z It took 1 attempts to get a response
+2026-09-10T18:38:41Z {"datetime":"2026-09-10T14:38:41.000Z"}
+2026-09-10T18:38:41Z Syncing Clock to: 2026-09-10T14:38:41.000Z
+2026-09-10T18:38:41Z Uploading 1505 bytes of telemetry
+2026-09-10T18:38:41Z POST Request
+2026-09-10T18:38:41Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:38:43Z Response code: 500
+2026-09-10T18:38:43Z Telemetry upload failed, keeping spool
+2026-09-10T18:38:43Z Access Point Web Server
+2026-09-10T18:38:44Z Please upgrade the firmware
+2026-09-10T18:38:44Z Creating access point named: Solar-Tracker
+2026-09-10T18:38:44Z SSID: Solar-Tracker
+2026-09-10T18:38:44Z IP Address: 192.168.4.1
+2026-09-10T18:38:44Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T18:38:44Z Wind Speed: 0.00
+2026-09-10T18:38:44Z Temperature: 21.00
+2026-09-10T18:38:44Z PercentExtended: -1
+2026-09-10T18:38:44Z 14:38:43
+2026-09-10T18:38:44Z 1789051123
+2026-09-10T18:38:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:38:44Z Status: ACTIVE
+2026-09-10T18:38:44Z Spooled telemetry row, spool is now 1540 bytes
+2026-09-10T18:38:54Z Wind Speed: 2.00
+2026-09-10T18:38:54Z Temperature: 21.00
+2026-09-10T18:38:54Z PercentExtended: -1
+2026-09-10T18:38:54Z 14:38:53
+2026-09-10T18:38:54Z 1789051133
+2026-09-10T18:38:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:38:54Z Status: ACTIVE
+2026-09-10T18:38:59Z Spooled telemetry row, spool is now 1575 bytes
+2026-09-10T18:39:04Z Wind Speed: 1.00
+2026-09-10T18:39:04Z Temperature: 21.00
+2026-09-10T18:39:04Z PercentExtended: -1
+2026-09-10T18:39:04Z 14:39:3
+2026-09-10T18:39:04Z 1789051143
+2026-09-10T18:39:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:04Z Status: ACTIVE
+2026-09-10T18:39:14Z Spooled telemetry row, spool is now 1610 bytes
+2026-09-10T18:39:14Z Wind Speed: 2.00
+2026-09-10T18:39:14Z Temperature: 21.00
+2026-09-10T18:39:14Z PercentExtended: -1
+2026-09-10T18:39:14Z 14:39:14
+2026-09-10T18:39:14Z 1789051154
+2026-09-10T18:39:14Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:14Z Status: ACTIVE
+2026-09-10T18:39:25Z Wind Speed: 0.00
+2026-09-10T18:39:25Z Temperature: 21.00
+2026-09-10T18:39:25Z PercentExtended: -1
+2026-09-10T18:39:25Z 14:39:24
+2026-09-10T18:39:25Z 1789051164
+2026-09-10T18:39:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:25Z Status: ACTIVE
+2026-09-10T18:39:29Z Spooled telemetry row, spool is now 1645 bytes
+2026-09-10T18:39:35Z Wind Speed: 0.00
+2026-09-10T18:39:35Z Temperature: 21.00
+2026-09-10T18:39:35Z PercentExtended: -1
+2026-09-10T18:39:35Z 14:39:34
+2026-09-10T18:39:35Z 1789051174
+2026-09-10T18:39:35Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:35Z Status: ACTIVE
+2026-09-10T18:39:44Z Spooled telemetry row, spool is now 1680 bytes
+2026-09-10T18:39:45Z Wind Speed: 2.00
+2026-09-10T18:39:45Z Temperature: 21.00
+2026-09-10T18:39:45Z PercentExtended: -1
+2026-09-10T18:39:45Z 14:39:44
+2026-09-10T18:39:45Z 1789051184
+2026-09-10T18:39:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:45Z Status: ACTIVE
+2026-09-10T18:39:55Z Wind Speed: 1.00
+2026-09-10T18:39:55Z Temperature: 21.00
+2026-09-10T18:39:55Z PercentExtended: -1
+2026-09-10T18:39:55Z 14:39:54
+2026-09-10T18:39:55Z 1789051194
+2026-09-10T18:39:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:39:55Z Status: ACTIVE
+2026-09-10T18:40:00Z Spooled telemetry row, spool is now 1715 bytes
+2026-09-10T18:40:05Z Wind Speed: 2.00
+2026-09-10T18:40:05Z Temperature: 21.00
+2026-09-10T18:40:05Z PercentExtended: -1
+2026-09-10T18:40:05Z 14:40:5
+2026-09-10T18:40:05Z 1789051205
+2026-09-10T18:40:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:40:05Z Status: ACTIVE
+2026-09-10T18:40:15Z Spooled telemetry row, spool is now 1750 bytes
+2026-09-10T18:40:15Z Wind Speed: 1.00
+2026-09-10T18:40:15Z Temperature: 21.00
+2026-09-10T18:40:15Z PercentExtended: -1
+2026-09-10T18:40:16Z 14:40:15
+2026-09-10T18:40:16Z 1789051215
+2026-09-10T18:40:16Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:40:16Z Status: ACTIVE
+2026-09-10T18:40:26Z Wind Speed: 0.00
+2026-09-10T18:40:26Z Temperature: 21.00
+2026-09-10T18:40:26Z PercentExtended: -1
+2026-09-10T18:40:26Z 14:40:25
+2026-09-10T18:40:26Z 1789051225
+2026-09-10T18:40:26Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:40:26Z Status: ACTIVE
+2026-09-10T18:40:29Z Access point listener stopped
+2026-09-10T18:40:29Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:40:29Z Please upgrade the firmware
+2026-09-10T18:40:29Z Connecting to WiFiRock Lodge
+2026-09-10T18:40:30Z .Successfully connected toRock Lodge
+2026-09-10T18:40:30Z GET Request
+2026-09-10T18:40:30Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:40:32Z Response code: 200
+2026-09-10T18:40:32Z It took 1 attempts to get a response
+2026-09-10T18:40:32Z {"datetime":"2026-09-10T14:40:31.000Z"}
+2026-09-10T18:40:32Z Syncing Clock to: 2026-09-10T14:40:31.000Z
+2026-09-10T18:40:32Z Uploading 1750 bytes of telemetry
+2026-09-10T18:40:32Z POST Request
+2026-09-10T18:40:32Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:40:33Z Response code: 500
+2026-09-10T18:40:33Z Telemetry upload failed, keeping spool
+2026-09-10T18:40:33Z Access Point Web Server
+2026-09-10T18:40:33Z Please upgrade the firmware
+2026-09-10T18:40:33Z Creating access point named: Solar-Tracker
+2026-09-10T18:40:44Z Access point listening socket failed to open
+2026-09-10T18:40:44Z Failed to restore the access point, will retry next sync
+2026-09-10T18:40:44Z Wind Speed: 4.00
+2026-09-10T18:40:44Z Temperature: 21.00
+2026-09-10T18:40:44Z PercentExtended: -1
+2026-09-10T18:40:44Z 14:40:43
+2026-09-10T18:40:44Z 1789051243
+2026-09-10T18:40:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:40:44Z Status: ACTIVE
+2026-09-10T18:40:44Z Spooled telemetry row, spool is now 1785 bytes
+2026-09-10T18:40:54Z Wind Speed: 2.00
+2026-09-10T18:40:54Z Temperature: 21.00
+2026-09-10T18:40:54Z PercentExtended: -1
+2026-09-10T18:40:54Z 14:40:53
+2026-09-10T18:40:54Z 1789051253
+2026-09-10T18:40:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:40:54Z Status: ACTIVE
+2026-09-10T18:40:59Z Spooled telemetry row, spool is now 1820 bytes
+2026-09-10T18:41:04Z Wind Speed: 2.00
+2026-09-10T18:41:04Z Temperature: 21.00
+2026-09-10T18:41:04Z PercentExtended: -1
+2026-09-10T18:41:04Z 14:41:3
+2026-09-10T18:41:04Z 1789051263
+2026-09-10T18:41:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:04Z Status: ACTIVE
+2026-09-10T18:41:14Z Spooled telemetry row, spool is now 1855 bytes
+2026-09-10T18:41:14Z Wind Speed: 3.00
+2026-09-10T18:41:14Z Temperature: 21.00
+2026-09-10T18:41:14Z PercentExtended: -1
+2026-09-10T18:41:14Z 14:41:13
+2026-09-10T18:41:14Z 1789051273
+2026-09-10T18:41:14Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:14Z Status: ACTIVE
+2026-09-10T18:41:24Z Wind Speed: 2.00
+2026-09-10T18:41:24Z Temperature: 21.00
+2026-09-10T18:41:24Z PercentExtended: -1
+2026-09-10T18:41:24Z 14:41:23
+2026-09-10T18:41:24Z 1789051283
+2026-09-10T18:41:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:24Z Status: ACTIVE
+2026-09-10T18:41:29Z Spooled telemetry row, spool is now 1890 bytes
+2026-09-10T18:41:35Z Wind Speed: 0.00
+2026-09-10T18:41:35Z Temperature: 21.00
+2026-09-10T18:41:35Z PercentExtended: -1
+2026-09-10T18:41:35Z 14:41:33
+2026-09-10T18:41:35Z 1789051294
+2026-09-10T18:41:35Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:35Z Status: ACTIVE
+2026-09-10T18:41:44Z Spooled telemetry row, spool is now 1925 bytes
+2026-09-10T18:41:45Z Wind Speed: 0.00
+2026-09-10T18:41:45Z Temperature: 21.00
+2026-09-10T18:41:45Z PercentExtended: -1
+2026-09-10T18:41:45Z 14:41:44
+2026-09-10T18:41:45Z 1789051304
+2026-09-10T18:41:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:45Z Status: ACTIVE
+2026-09-10T18:41:55Z Wind Speed: 0.00
+2026-09-10T18:41:55Z Temperature: 21.00
+2026-09-10T18:41:55Z PercentExtended: -1
+2026-09-10T18:41:55Z 14:41:54
+2026-09-10T18:41:55Z 1789051314
+2026-09-10T18:41:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:41:55Z Status: ACTIVE
+2026-09-10T18:41:59Z Spooled telemetry row, spool is now 1960 bytes
+2026-09-10T18:42:05Z Wind Speed: 0.00
+2026-09-10T18:42:05Z Temperature: 21.00
+2026-09-10T18:42:05Z PercentExtended: -1
+2026-09-10T18:42:05Z 14:42:4
+2026-09-10T18:42:05Z 1789051324
+2026-09-10T18:42:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:42:05Z Status: ACTIVE
+2026-09-10T18:42:14Z Spooled telemetry row, spool is now 1995 bytes
+2026-09-10T18:42:15Z Wind Speed: 0.00
+2026-09-10T18:42:15Z Temperature: 21.00
+2026-09-10T18:42:15Z PercentExtended: -1
+2026-09-10T18:42:15Z 14:42:14
+2026-09-10T18:42:15Z 1789051334
+2026-09-10T18:42:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:42:15Z Status: ACTIVE
+2026-09-10T18:42:25Z Wind Speed: 1.00
+2026-09-10T18:42:25Z Temperature: 21.00
+2026-09-10T18:42:25Z PercentExtended: -1
+2026-09-10T18:42:26Z 14:42:24
+2026-09-10T18:42:26Z 1789051344
+2026-09-10T18:42:26Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:42:26Z Status: ACTIVE
+2026-09-10T18:42:29Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T18:42:29Z Please upgrade the firmware
+2026-09-10T18:42:39Z Connecting to WiFiRock Lodge
+2026-09-10T18:42:40Z .Successfully connected toRock Lodge
+2026-09-10T18:42:40Z GET Request
+2026-09-10T18:42:40Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T18:42:52Z Response code: 200
+2026-09-10T18:42:52Z It took 1 attempts to get a response
+2026-09-10T18:42:52Z {"datetime":"2026-09-10T14:42:51.000Z"}
+2026-09-10T18:42:52Z Syncing Clock to: 2026-09-10T14:42:51.000Z
+2026-09-10T18:42:52Z Uploading 1995 bytes of telemetry
+2026-09-10T18:42:52Z POST Request
+2026-09-10T18:42:52Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:42:53Z Response code: 200
+2026-09-10T18:42:54Z Telemetry uploaded, spool cleared
+2026-09-10T18:42:54Z Device disconnected from AP
+2026-09-10T18:42:54Z Wind Speed: 0.00
+2026-09-10T18:42:54Z Temperature: 21.25
+2026-09-10T18:42:54Z PercentExtended: -1
+2026-09-10T18:42:54Z 14:42:53
+2026-09-10T18:42:54Z 1789051373
+2026-09-10T18:42:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:42:54Z Status: ACTIVE
+2026-09-10T18:42:54Z Spooled telemetry row, spool is now 35 bytes
+2026-09-10T18:43:04Z Wind Speed: 0.00
+2026-09-10T18:43:04Z Temperature: 21.25
+2026-09-10T18:43:04Z PercentExtended: -1
+2026-09-10T18:43:04Z 14:43:3
+2026-09-10T18:43:04Z 1789051383
+2026-09-10T18:43:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:04Z Status: ACTIVE
+2026-09-10T18:43:09Z Spooled telemetry row, spool is now 70 bytes
+2026-09-10T18:43:14Z Wind Speed: 1.00
+2026-09-10T18:43:14Z Temperature: 21.25
+2026-09-10T18:43:14Z PercentExtended: -1
+2026-09-10T18:43:14Z 14:43:13
+2026-09-10T18:43:14Z 1789051393
+2026-09-10T18:43:14Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:14Z Status: ACTIVE
+2026-09-10T18:43:24Z Spooled telemetry row, spool is now 105 bytes
+2026-09-10T18:43:24Z Wind Speed: 0.00
+2026-09-10T18:43:24Z Temperature: 21.25
+2026-09-10T18:43:24Z PercentExtended: -1
+2026-09-10T18:43:24Z 14:43:23
+2026-09-10T18:43:24Z 1789051403
+2026-09-10T18:43:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:24Z Status: ACTIVE
+2026-09-10T18:43:34Z Wind Speed: 1.00
+2026-09-10T18:43:34Z Temperature: 21.25
+2026-09-10T18:43:34Z PercentExtended: -1
+2026-09-10T18:43:34Z 14:43:33
+2026-09-10T18:43:34Z 1789051413
+2026-09-10T18:43:34Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:34Z Status: ACTIVE
+2026-09-10T18:43:39Z Spooled telemetry row, spool is now 140 bytes
+2026-09-10T18:43:45Z Wind Speed: 1.00
+2026-09-10T18:43:45Z Temperature: 21.25
+2026-09-10T18:43:45Z PercentExtended: -1
+2026-09-10T18:43:45Z 14:43:43
+2026-09-10T18:43:45Z 1789051423
+2026-09-10T18:43:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:45Z Status: ACTIVE
+2026-09-10T18:43:54Z Spooled telemetry row, spool is now 175 bytes
+2026-09-10T18:43:55Z Wind Speed: 2.00
+2026-09-10T18:43:55Z Temperature: 21.25
+2026-09-10T18:43:55Z PercentExtended: -1
+2026-09-10T18:43:55Z 14:43:54
+2026-09-10T18:43:55Z 1789051434
+2026-09-10T18:43:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:43:55Z Status: ACTIVE
+2026-09-10T18:44:05Z Wind Speed: 0.00
+2026-09-10T18:44:05Z Temperature: 21.25
+2026-09-10T18:44:05Z PercentExtended: -1
+2026-09-10T18:44:05Z 14:44:4
+2026-09-10T18:44:05Z 1789051444
+2026-09-10T18:44:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:44:05Z Status: ACTIVE
+2026-09-10T18:44:09Z Spooled telemetry row, spool is now 210 bytes
+2026-09-10T18:44:38Z Response code: 200
+2026-09-10T18:44:38Z It took 1 attempts to get a response
+2026-09-10T18:44:38Z {"datetime":"2026-09-10T14:44:38.000Z"}
+2026-09-10T18:44:38Z Syncing Clock to: 2026-09-10T14:44:38.000Z
+2026-09-10T18:44:38Z Uploading 210 bytes of telemetry
+2026-09-10T18:44:38Z POST Request
+2026-09-10T18:44:38Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T18:44:40Z Response code: 200
+2026-09-10T18:44:40Z Telemetry uploaded, spool cleared
+2026-09-10T18:44:40Z BENCH_TEST: would extend to 72%
+2026-09-10T18:44:40Z Set status to: ACTIVE
+2026-09-10T18:44:40Z Access Point Web Server
+2026-09-10T18:44:40Z Please upgrade the firmware
+2026-09-10T18:44:40Z Creating access point named: Solar-Tracker
+2026-09-10T18:44:40Z SSID: Solar-Tracker
+2026-09-10T18:44:41Z IP Address: 192.168.4.1
+2026-09-10T18:44:41Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T18:44:41Z Setup complete.
+2026-09-10T18:44:42Z Wind Speed: 2.00
+2026-09-10T18:44:42Z Temperature: 21.25
+2026-09-10T18:44:42Z PercentExtended: -1
+2026-09-10T18:44:42Z 14:44:41
+2026-09-10T18:44:42Z 1789051481
+2026-09-10T18:44:42Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:44:42Z Status: ACTIVE
+2026-09-10T18:44:47Z Spooled telemetry row, spool is now 35 bytes
+2026-09-10T18:44:52Z Wind Speed: 1.00
+2026-09-10T18:44:52Z Temperature: 21.25
+2026-09-10T18:44:52Z PercentExtended: -1
+2026-09-10T18:44:52Z 14:44:51
+2026-09-10T18:44:52Z 1789051491
+2026-09-10T18:44:52Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:44:52Z Status: ACTIVE
+2026-09-10T18:45:02Z Spooled telemetry row, spool is now 70 bytes
+2026-09-10T18:45:02Z Wind Speed: 0.00
+2026-09-10T18:45:02Z Temperature: 21.25
+2026-09-10T18:45:02Z PercentExtended: -1
+2026-09-10T18:45:02Z 14:45:1
+2026-09-10T18:45:02Z 1789051501
+2026-09-10T18:45:02Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:02Z Status: ACTIVE
+2026-09-10T18:45:12Z Wind Speed: 0.00
+2026-09-10T18:45:12Z Temperature: 21.25
+2026-09-10T18:45:12Z PercentExtended: -1
+2026-09-10T18:45:12Z 14:45:11
+2026-09-10T18:45:12Z 1789051511
+2026-09-10T18:45:12Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:12Z Status: ACTIVE
+2026-09-10T18:45:17Z Spooled telemetry row, spool is now 105 bytes
+2026-09-10T18:45:22Z Wind Speed: 3.00
+2026-09-10T18:45:22Z Temperature: 21.25
+2026-09-10T18:45:22Z PercentExtended: -1
+2026-09-10T18:45:23Z 14:45:22
+2026-09-10T18:45:23Z 1789051522
+2026-09-10T18:45:23Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:23Z Status: ACTIVE
+2026-09-10T18:45:32Z Spooled telemetry row, spool is now 140 bytes
+2026-09-10T18:45:33Z Wind Speed: 0.00
+2026-09-10T18:45:33Z Temperature: 21.25
+2026-09-10T18:45:33Z PercentExtended: -1
+2026-09-10T18:45:33Z 14:45:32
+2026-09-10T18:45:33Z 1789051532
+2026-09-10T18:45:33Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:33Z Status: ACTIVE
+2026-09-10T18:45:43Z Wind Speed: 0.00
+2026-09-10T18:45:43Z Temperature: 21.50
+2026-09-10T18:45:43Z PercentExtended: -1
+2026-09-10T18:45:43Z 14:45:42
+2026-09-10T18:45:43Z 1789051542
+2026-09-10T18:45:43Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:43Z Status: ACTIVE
+2026-09-10T18:45:47Z Spooled telemetry row, spool is now 175 bytes
+2026-09-10T18:45:53Z Wind Speed: 2.00
+2026-09-10T18:45:53Z Temperature: 21.50
+2026-09-10T18:45:53Z PercentExtended: -1
+2026-09-10T18:45:53Z 14:45:52
+2026-09-10T18:45:53Z 1789051552
+2026-09-10T18:45:53Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:45:53Z Status: ACTIVE
+2026-09-10T18:46:02Z Spooled telemetry row, spool is now 210 bytes
+2026-09-10T18:46:03Z Wind Speed: 1.00
+2026-09-10T18:46:03Z Temperature: 21.50
+2026-09-10T18:46:03Z PercentExtended: -1
+2026-09-10T18:46:03Z 14:46:2
+2026-09-10T18:46:03Z 1789051562
+2026-09-10T18:46:03Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:03Z Status: ACTIVE
+2026-09-10T18:46:13Z Wind Speed: 1.00
+2026-09-10T18:46:13Z Temperature: 21.50
+2026-09-10T18:46:13Z PercentExtended: -1
+2026-09-10T18:46:13Z 14:46:13
+2026-09-10T18:46:13Z 1789051573
+2026-09-10T18:46:13Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:13Z Status: ACTIVE
+2026-09-10T18:46:17Z Spooled telemetry row, spool is now 245 bytes
+2026-09-10T18:46:24Z Wind Speed: 1.00
+2026-09-10T18:46:24Z Temperature: 21.50
+2026-09-10T18:46:24Z PercentExtended: -1
+2026-09-10T18:46:24Z 14:46:23
+2026-09-10T18:46:24Z 1789051583
+2026-09-10T18:46:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:24Z Status: ACTIVE
+2026-09-10T18:46:31Z Device connected to AP
+2026-09-10T18:46:32Z Skipping sync: a device is connected to the access point
+2026-09-10T18:46:32Z Spooled telemetry row, spool is now 280 bytes
+2026-09-10T18:46:34Z Wind Speed: 0.00
+2026-09-10T18:46:34Z Temperature: 21.50
+2026-09-10T18:46:34Z PercentExtended: -1
+2026-09-10T18:46:34Z 14:46:33
+2026-09-10T18:46:34Z 1789051593
+2026-09-10T18:46:34Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:34Z Status: ACTIVE
+2026-09-10T18:46:39Z new client
+2026-09-10T18:46:40Z client disconnected
+2026-09-10T18:46:44Z Wind Speed: 1.00
+2026-09-10T18:46:44Z Temperature: 21.75
+2026-09-10T18:46:44Z PercentExtended: -1
+2026-09-10T18:46:44Z 14:46:43
+2026-09-10T18:46:44Z 1789051603
+2026-09-10T18:46:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:44Z Status: ACTIVE
+2026-09-10T18:46:46Z new client
+2026-09-10T18:46:47Z client disconnected
+2026-09-10T18:46:48Z Spooled telemetry row, spool is now 315 bytes
+2026-09-10T18:46:54Z Wind Speed: 1.00
+2026-09-10T18:46:54Z Temperature: 21.75
+2026-09-10T18:46:54Z PercentExtended: -1
+2026-09-10T18:46:54Z 14:46:53
+2026-09-10T18:46:54Z 1789051613
+2026-09-10T18:46:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:46:54Z Status: ACTIVE
+2026-09-10T18:47:03Z Spooled telemetry row, spool is now 350 bytes
+2026-09-10T18:47:04Z Wind Speed: 0.00
+2026-09-10T18:47:04Z Temperature: 21.75
+2026-09-10T18:47:04Z PercentExtended: -1
+2026-09-10T18:47:04Z 14:47:3
+2026-09-10T18:47:04Z 1789051623
+2026-09-10T18:47:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:04Z Status: ACTIVE
+2026-09-10T18:47:14Z Wind Speed: 1.00
+2026-09-10T18:47:14Z Temperature: 21.75
+2026-09-10T18:47:14Z PercentExtended: -1
+2026-09-10T18:47:15Z 14:47:14
+2026-09-10T18:47:15Z 1789051634
+2026-09-10T18:47:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:15Z Status: ACTIVE
+2026-09-10T18:47:18Z Spooled telemetry row, spool is now 385 bytes
+2026-09-10T18:47:25Z Wind Speed: 0.00
+2026-09-10T18:47:25Z Temperature: 21.75
+2026-09-10T18:47:25Z PercentExtended: -1
+2026-09-10T18:47:25Z 14:47:24
+2026-09-10T18:47:25Z 1789051644
+2026-09-10T18:47:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:25Z Status: ACTIVE
+2026-09-10T18:47:33Z Spooled telemetry row, spool is now 420 bytes
+2026-09-10T18:47:35Z Wind Speed: 1.00
+2026-09-10T18:47:35Z Temperature: 21.75
+2026-09-10T18:47:35Z PercentExtended: -1
+2026-09-10T18:47:35Z 14:47:34
+2026-09-10T18:47:35Z 1789051654
+2026-09-10T18:47:35Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:35Z Status: ACTIVE
+2026-09-10T18:47:45Z Wind Speed: 0.00
+2026-09-10T18:47:45Z Temperature: 21.75
+2026-09-10T18:47:45Z PercentExtended: -1
+2026-09-10T18:47:45Z 14:47:44
+2026-09-10T18:47:45Z 1789051664
+2026-09-10T18:47:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:45Z Status: ACTIVE
+2026-09-10T18:47:48Z Spooled telemetry row, spool is now 455 bytes
+2026-09-10T18:47:55Z Wind Speed: 3.00
+2026-09-10T18:47:55Z Temperature: 22.00
+2026-09-10T18:47:55Z PercentExtended: -1
+2026-09-10T18:47:55Z 14:47:54
+2026-09-10T18:47:55Z 1789051674
+2026-09-10T18:47:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:47:55Z Status: ACTIVE
+2026-09-10T18:48:03Z Spooled telemetry row, spool is now 490 bytes
+2026-09-10T18:48:05Z Wind Speed: 1.00
+2026-09-10T18:48:05Z Temperature: 22.00
+2026-09-10T18:48:05Z PercentExtended: -1
+2026-09-10T18:48:05Z 14:48:5
+2026-09-10T18:48:05Z 1789051685
+2026-09-10T18:48:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:05Z Status: ACTIVE
+2026-09-10T18:48:16Z Wind Speed: 1.00
+2026-09-10T18:48:16Z Temperature: 22.00
+2026-09-10T18:48:16Z PercentExtended: -1
+2026-09-10T18:48:16Z 14:48:15
+2026-09-10T18:48:16Z 1789051695
+2026-09-10T18:48:16Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:16Z Status: ACTIVE
+2026-09-10T18:48:18Z Spooled telemetry row, spool is now 525 bytes
+2026-09-10T18:48:26Z Wind Speed: 1.00
+2026-09-10T18:48:26Z Temperature: 22.00
+2026-09-10T18:48:26Z PercentExtended: -1
+2026-09-10T18:48:26Z 14:48:25
+2026-09-10T18:48:26Z 1789051705
+2026-09-10T18:48:26Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:26Z Status: ACTIVE
+2026-09-10T18:48:32Z Skipping sync: a device is connected to the access point
+2026-09-10T18:48:33Z Spooled telemetry row, spool is now 560 bytes
+2026-09-10T18:48:36Z Wind Speed: 1.00
+2026-09-10T18:48:36Z Temperature: 22.00
+2026-09-10T18:48:36Z PercentExtended: -1
+2026-09-10T18:48:36Z 14:48:35
+2026-09-10T18:48:36Z 1789051715
+2026-09-10T18:48:36Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:36Z Status: ACTIVE
+2026-09-10T18:48:46Z Wind Speed: 0.00
+2026-09-10T18:48:46Z Temperature: 22.00
+2026-09-10T18:48:46Z PercentExtended: -1
+2026-09-10T18:48:46Z 14:48:45
+2026-09-10T18:48:46Z 1789051725
+2026-09-10T18:48:46Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:46Z Status: ACTIVE
+2026-09-10T18:48:48Z Spooled telemetry row, spool is now 595 bytes
+2026-09-10T18:48:56Z Wind Speed: 1.00
+2026-09-10T18:48:56Z Temperature: 22.00
+2026-09-10T18:48:56Z PercentExtended: -1
+2026-09-10T18:48:56Z 14:48:55
+2026-09-10T18:48:56Z 1789051735
+2026-09-10T18:48:56Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:48:56Z Status: ACTIVE
+2026-09-10T18:49:03Z Spooled telemetry row, spool is now 630 bytes
+2026-09-10T18:49:06Z Wind Speed: 1.00
+2026-09-10T18:49:06Z Temperature: 22.00
+2026-09-10T18:49:06Z PercentExtended: -1
+2026-09-10T18:49:07Z 14:49:6
+2026-09-10T18:49:07Z 1789051746
+2026-09-10T18:49:07Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:07Z Status: ACTIVE
+2026-09-10T18:49:17Z Wind Speed: 0.00
+2026-09-10T18:49:17Z Temperature: 22.00
+2026-09-10T18:49:17Z PercentExtended: -1
+2026-09-10T18:49:17Z 14:49:16
+2026-09-10T18:49:17Z 1789051756
+2026-09-10T18:49:17Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:17Z Status: ACTIVE
+2026-09-10T18:49:19Z Spooled telemetry row, spool is now 665 bytes
+2026-09-10T18:49:27Z Wind Speed: 2.00
+2026-09-10T18:49:27Z Temperature: 22.00
+2026-09-10T18:49:27Z PercentExtended: -1
+2026-09-10T18:49:27Z 14:49:26
+2026-09-10T18:49:27Z 1789051766
+2026-09-10T18:49:27Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:27Z Status: ACTIVE
+2026-09-10T18:49:34Z Spooled telemetry row, spool is now 700 bytes
+2026-09-10T18:49:37Z Wind Speed: 0.00
+2026-09-10T18:49:37Z Temperature: 22.00
+2026-09-10T18:49:37Z PercentExtended: -1
+2026-09-10T18:49:37Z 14:49:36
+2026-09-10T18:49:37Z 1789051776
+2026-09-10T18:49:37Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:37Z Status: ACTIVE
+2026-09-10T18:49:47Z Wind Speed: 0.00
+2026-09-10T18:49:47Z Temperature: 22.00
+2026-09-10T18:49:47Z PercentExtended: -1
+2026-09-10T18:49:47Z 14:49:46
+2026-09-10T18:49:47Z 1789051786
+2026-09-10T18:49:47Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:47Z Status: ACTIVE
+2026-09-10T18:49:49Z Spooled telemetry row, spool is now 735 bytes
+2026-09-10T18:49:57Z Wind Speed: 1.00
+2026-09-10T18:49:57Z Temperature: 22.00
+2026-09-10T18:49:57Z PercentExtended: -1
+2026-09-10T18:49:57Z 14:49:57
+2026-09-10T18:49:57Z 1789051797
+2026-09-10T18:49:57Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:49:57Z Status: ACTIVE
+2026-09-10T18:50:04Z Spooled telemetry row, spool is now 770 bytes
+2026-09-10T18:50:08Z Wind Speed: 1.00
+2026-09-10T18:50:08Z Temperature: 22.00
+2026-09-10T18:50:08Z PercentExtended: -1
+2026-09-10T18:50:08Z 14:50:7
+2026-09-10T18:50:08Z 1789051807
+2026-09-10T18:50:08Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:08Z Status: ACTIVE
+2026-09-10T18:50:18Z Wind Speed: 0.00
+2026-09-10T18:50:18Z Temperature: 22.00
+2026-09-10T18:50:18Z PercentExtended: -1
+2026-09-10T18:50:18Z 14:50:17
+2026-09-10T18:50:18Z 1789051817
+2026-09-10T18:50:18Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:18Z Status: ACTIVE
+2026-09-10T18:50:19Z Spooled telemetry row, spool is now 805 bytes
+2026-09-10T18:50:28Z Wind Speed: 0.00
+2026-09-10T18:50:28Z Temperature: 22.00
+2026-09-10T18:50:28Z PercentExtended: -1
+2026-09-10T18:50:28Z 14:50:27
+2026-09-10T18:50:28Z 1789051827
+2026-09-10T18:50:28Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:28Z Status: ACTIVE
+2026-09-10T18:50:32Z Skipping sync: a device is connected to the access point
+2026-09-10T18:50:34Z Spooled telemetry row, spool is now 840 bytes
+2026-09-10T18:50:38Z Wind Speed: 0.00
+2026-09-10T18:50:38Z Temperature: 22.00
+2026-09-10T18:50:38Z PercentExtended: -1
+2026-09-10T18:50:38Z 14:50:37
+2026-09-10T18:50:38Z 1789051837
+2026-09-10T18:50:38Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:38Z Status: ACTIVE
+2026-09-10T18:50:48Z Wind Speed: 0.00
+2026-09-10T18:50:48Z Temperature: 22.00
+2026-09-10T18:50:48Z PercentExtended: -1
+2026-09-10T18:50:48Z 14:50:47
+2026-09-10T18:50:48Z 1789051847
+2026-09-10T18:50:48Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:48Z Status: ACTIVE
+2026-09-10T18:50:49Z Spooled telemetry row, spool is now 875 bytes
+2026-09-10T18:50:58Z Wind Speed: 1.00
+2026-09-10T18:50:58Z Temperature: 22.00
+2026-09-10T18:50:58Z PercentExtended: -1
+2026-09-10T18:50:59Z 14:50:58
+2026-09-10T18:50:59Z 1789051858
+2026-09-10T18:50:59Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:50:59Z Status: ACTIVE
+2026-09-10T18:51:04Z Spooled telemetry row, spool is now 910 bytes
+2026-09-10T18:51:09Z Wind Speed: 0.00
+2026-09-10T18:51:09Z Temperature: 22.25
+2026-09-10T18:51:09Z PercentExtended: -1
+2026-09-10T18:51:09Z 14:51:8
+2026-09-10T18:51:09Z 1789051868
+2026-09-10T18:51:09Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:51:09Z Status: ACTIVE
+2026-09-10T18:51:19Z Wind Speed: 0.00
+2026-09-10T18:51:19Z Temperature: 22.25
+2026-09-10T18:51:19Z PercentExtended: -1
+2026-09-10T18:51:19Z 14:51:18
+2026-09-10T18:51:19Z 1789051878
+2026-09-10T18:51:19Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:51:19Z Status: ACTIVE
+2026-09-10T18:51:19Z Spooled telemetry row, spool is now 945 bytes
+2026-09-10T18:51:29Z Wind Speed: 3.00
+2026-09-10T18:51:29Z Temperature: 22.25
+2026-09-10T18:51:29Z PercentExtended: -1
+2026-09-10T18:51:29Z 14:51:28
+2026-09-10T18:51:29Z 1789051888
+2026-09-10T18:51:29Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:51:29Z Status: ACTIVE
+2026-09-10T18:51:34Z Spooled telemetry row, spool is now 980 bytes
+2026-09-10T18:51:39Z Wind Speed: 3.00
+2026-09-10T18:51:39Z Temperature: 22.25
+2026-09-10T18:51:39Z PercentExtended: -1
+2026-09-10T18:51:39Z 14:51:38
+2026-09-10T18:51:39Z 1789051898
+2026-09-10T18:51:39Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:51:39Z Status: ACTIVE
+2026-09-10T18:51:49Z Wind Speed: 1.00
+2026-09-10T18:51:49Z Temperature: 22.25
+2026-09-10T18:51:49Z PercentExtended: -1
+2026-09-10T18:51:49Z 14:51:49
+2026-09-10T18:51:49Z 1789051909
+2026-09-10T18:51:49Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:51:50Z Status: ACTIVE
+2026-09-10T18:51:50Z Spooled telemetry row, spool is now 1015 bytes
+2026-09-10T18:52:00Z Wind Speed: 1.00
+2026-09-10T18:52:00Z Temperature: 22.25
+2026-09-10T18:52:00Z PercentExtended: -1
+2026-09-10T18:52:00Z 14:51:59
+2026-09-10T18:52:00Z 1789051919
+2026-09-10T18:52:00Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:00Z Status: ACTIVE
+2026-09-10T18:52:05Z Spooled telemetry row, spool is now 1050 bytes
+2026-09-10T18:52:10Z Wind Speed: 1.00
+2026-09-10T18:52:10Z Temperature: 22.25
+2026-09-10T18:52:10Z PercentExtended: -1
+2026-09-10T18:52:10Z 14:52:9
+2026-09-10T18:52:10Z 1789051929
+2026-09-10T18:52:10Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:10Z Status: ACTIVE
+2026-09-10T18:52:20Z Spooled telemetry row, spool is now 1085 bytes
+2026-09-10T18:52:20Z Wind Speed: 2.00
+2026-09-10T18:52:20Z Temperature: 22.25
+2026-09-10T18:52:20Z PercentExtended: -1
+2026-09-10T18:52:20Z 14:52:19
+2026-09-10T18:52:20Z 1789051939
+2026-09-10T18:52:20Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:20Z Status: ACTIVE
+2026-09-10T18:52:30Z Wind Speed: 0.00
+2026-09-10T18:52:30Z Temperature: 22.25
+2026-09-10T18:52:30Z PercentExtended: -1
+2026-09-10T18:52:30Z 14:52:29
+2026-09-10T18:52:30Z 1789051949
+2026-09-10T18:52:30Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:30Z Status: ACTIVE
+2026-09-10T18:52:32Z Skipping sync: a device is connected to the access point
+2026-09-10T18:52:35Z Spooled telemetry row, spool is now 1120 bytes
+2026-09-10T18:52:40Z Wind Speed: 0.00
+2026-09-10T18:52:40Z Temperature: 22.25
+2026-09-10T18:52:40Z PercentExtended: -1
+2026-09-10T18:52:40Z 14:52:39
+2026-09-10T18:52:40Z 1789051959
+2026-09-10T18:52:40Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:40Z Status: ACTIVE
+2026-09-10T18:52:50Z Spooled telemetry row, spool is now 1155 bytes
+2026-09-10T18:52:50Z Wind Speed: 1.00
+2026-09-10T18:52:50Z Temperature: 22.25
+2026-09-10T18:52:50Z PercentExtended: -1
+2026-09-10T18:52:51Z 14:52:50
+2026-09-10T18:52:51Z 1789051970
+2026-09-10T18:52:51Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:52:51Z Status: ACTIVE
+2026-09-10T18:53:01Z Wind Speed: 0.00
+2026-09-10T18:53:01Z Temperature: 22.25
+2026-09-10T18:53:01Z PercentExtended: -1
+2026-09-10T18:53:01Z 14:53:0
+2026-09-10T18:53:01Z 1789051980
+2026-09-10T18:53:01Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:53:01Z Status: ACTIVE
+2026-09-10T18:53:05Z Spooled telemetry row, spool is now 1190 bytes
+2026-09-10T18:53:11Z Wind Speed: 1.00
+2026-09-10T18:53:11Z Temperature: 22.50
+2026-09-10T18:53:11Z PercentExtended: -1
+2026-09-10T18:53:11Z 14:53:10
+2026-09-10T18:53:11Z 1789051990
+2026-09-10T18:53:11Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:53:11Z Status: ACTIVE
+2026-09-10T18:53:20Z Spooled telemetry row, spool is now 1225 bytes
+2026-09-10T18:53:21Z Wind Speed: 3.00
+2026-09-10T18:53:21Z Temperature: 22.50
+2026-09-10T18:53:21Z PercentExtended: -1
+2026-09-10T18:53:21Z 14:53:20
+2026-09-10T18:53:21Z 1789052000
+2026-09-10T18:53:21Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T18:53:21Z Status: ACTIVE
+2026-09-10T18:53:31Z Wind Speed: 0.00
+2026-09-10T18:53:31Z Temperature: 22.50
+2026-09-10T18:53:31Z PercentExtended: -1
+2026-09-10T19:05:55Z Response code: 200
+2026-09-10T19:05:55Z It took 1 attempts to get a response
+2026-09-10T19:05:55Z {"datetime":"2026-09-10T15:05:54.000Z"}
+2026-09-10T19:05:55Z Syncing Clock to: 2026-09-10T15:05:54.000Z
+2026-09-10T19:05:55Z Settings switch is on, holding telemetry on the card
+2026-09-10T19:05:55Z BENCH_TEST: would extend to 83%
+2026-09-10T19:05:55Z Set status to: ACTIVE
+2026-09-10T19:05:55Z Access Point Web Server
+2026-09-10T19:05:55Z Please upgrade the firmware
+2026-09-10T19:05:55Z Creating access point named: Solar-Tracker
+2026-09-10T19:05:55Z SSID: Solar-Tracker
+2026-09-10T19:05:55Z IP Address: 192.168.4.1
+2026-09-10T19:05:55Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:05:55Z Setup complete.
+2026-09-10T19:05:55Z Wind Speed: 0.00
+2026-09-10T19:05:55Z Temperature: 21.00
+2026-09-10T19:05:55Z PercentExtended: -1
+2026-09-10T19:05:55Z 15:5:54
+2026-09-10T19:05:55Z 1789052754
+2026-09-10T19:05:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:05:55Z Status: ACTIVE
+2026-09-10T19:05:55Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:06:05Z Wind Speed: 0.00
+2026-09-10T19:06:05Z Temperature: 21.00
+2026-09-10T19:06:05Z PercentExtended: -1
+2026-09-10T19:06:05Z 15:6:4
+2026-09-10T19:06:05Z 1789052764
+2026-09-10T19:06:05Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:05Z Status: ACTIVE
+2026-09-10T19:06:11Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:06:15Z Wind Speed: 0.00
+2026-09-10T19:06:15Z Temperature: 21.00
+2026-09-10T19:06:15Z PercentExtended: -1
+2026-09-10T19:06:15Z 15:6:14
+2026-09-10T19:06:16Z 1789052774
+2026-09-10T19:06:16Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:16Z Status: ACTIVE
+2026-09-10T19:06:26Z Wind Speed: 0.00
+2026-09-10T19:06:26Z Temperature: 21.00
+2026-09-10T19:06:26Z PercentExtended: -1
+2026-09-10T19:06:26Z 15:6:25
+2026-09-10T19:06:26Z 1789052785
+2026-09-10T19:06:26Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:26Z Status: ACTIVE
+2026-09-10T19:06:26Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:06:36Z Wind Speed: 1.00
+2026-09-10T19:06:36Z Temperature: 21.00
+2026-09-10T19:06:36Z PercentExtended: -1
+2026-09-10T19:06:36Z 15:6:35
+2026-09-10T19:06:36Z 1789052795
+2026-09-10T19:06:36Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:36Z Status: ACTIVE
+2026-09-10T19:06:41Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:06:46Z Wind Speed: 0.00
+2026-09-10T19:06:46Z Temperature: 21.00
+2026-09-10T19:06:46Z PercentExtended: -1
+2026-09-10T19:06:46Z 15:6:45
+2026-09-10T19:06:46Z 1789052805
+2026-09-10T19:06:46Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:46Z Status: ACTIVE
+2026-09-10T19:06:56Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:06:56Z Wind Speed: 1.00
+2026-09-10T19:06:56Z Temperature: 21.00
+2026-09-10T19:06:56Z PercentExtended: -1
+2026-09-10T19:06:56Z 15:6:55
+2026-09-10T19:06:56Z 1789052815
+2026-09-10T19:06:56Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:06:56Z Status: ACTIVE
+2026-09-10T19:07:06Z Wind Speed: 1.00
+2026-09-10T19:07:06Z Temperature: 21.25
+2026-09-10T19:07:06Z PercentExtended: -1
+2026-09-10T19:07:06Z 15:7:5
+2026-09-10T19:07:06Z 1789052825
+2026-09-10T19:07:06Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:06Z Status: ACTIVE
+2026-09-10T19:07:11Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:07:17Z Wind Speed: 3.00
+2026-09-10T19:07:17Z Temperature: 21.25
+2026-09-10T19:07:17Z PercentExtended: -1
+2026-09-10T19:07:17Z 15:7:15
+2026-09-10T19:07:17Z 1789052835
+2026-09-10T19:07:17Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:17Z Status: ACTIVE
+2026-09-10T19:07:26Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:07:27Z Wind Speed: 3.00
+2026-09-10T19:07:27Z Temperature: 21.25
+2026-09-10T19:07:27Z PercentExtended: -1
+2026-09-10T19:07:27Z 15:7:26
+2026-09-10T19:07:27Z 1789052846
+2026-09-10T19:07:27Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:27Z Status: ACTIVE
+2026-09-10T19:07:37Z Wind Speed: 0.00
+2026-09-10T19:07:37Z Temperature: 21.25
+2026-09-10T19:07:37Z PercentExtended: -1
+2026-09-10T19:07:37Z 15:7:36
+2026-09-10T19:07:37Z 1789052856
+2026-09-10T19:07:37Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:37Z Status: ACTIVE
+2026-09-10T19:07:41Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:07:47Z Wind Speed: 0.00
+2026-09-10T19:07:47Z Temperature: 21.25
+2026-09-10T19:07:47Z PercentExtended: -1
+2026-09-10T19:07:47Z 15:7:46
+2026-09-10T19:07:47Z 1789052866
+2026-09-10T19:07:47Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:47Z Status: ACTIVE
+2026-09-10T19:07:56Z Spooled row into chunk 1, now 70 bytes
+2026-09-10T19:07:57Z Wind Speed: 0.00
+2026-09-10T19:07:57Z Temperature: 21.25
+2026-09-10T19:07:57Z PercentExtended: -1
+2026-09-10T19:07:57Z 15:7:56
+2026-09-10T19:07:57Z 1789052876
+2026-09-10T19:07:57Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:07:57Z Status: ACTIVE
+2026-09-10T19:08:07Z Wind Speed: 0.00
+2026-09-10T19:08:07Z Temperature: 21.00
+2026-09-10T19:08:07Z PercentExtended: -1
+2026-09-10T19:08:08Z 15:8:6
+2026-09-10T19:08:08Z 1789052886
+2026-09-10T19:08:08Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:08:08Z Status: ACTIVE
+2026-09-10T19:08:11Z Spooled row into chunk 1, now 105 bytes
+2026-09-10T19:08:18Z Wind Speed: 1.00
+2026-09-10T19:08:18Z Temperature: 21.00
+2026-09-10T19:08:18Z PercentExtended: -1
+2026-09-10T19:08:18Z 15:8:17
+2026-09-10T19:08:18Z 1789052897
+2026-09-10T19:08:18Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:08:18Z Status: ACTIVE
+2026-09-10T19:08:27Z Spooled row into chunk 1, now 140 bytes
+2026-09-10T19:08:28Z Wind Speed: 3.00
+2026-09-10T19:08:28Z Temperature: 21.00
+2026-09-10T19:08:28Z PercentExtended: -1
+2026-09-10T19:08:28Z 15:8:27
+2026-09-10T19:08:28Z 1789052907
+2026-09-10T19:08:28Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:08:28Z Status: ACTIVE
+2026-09-10T19:08:38Z Wind Speed: 1.00
+2026-09-10T19:08:38Z Temperature: 21.00
+2026-09-10T19:08:38Z PercentExtended: -1
+2026-09-10T19:08:38Z 15:8:37
+2026-09-10T19:08:38Z 1789052917
+2026-09-10T19:08:38Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:08:38Z Status: ACTIVE
+2026-09-10T19:08:42Z Spooled row into chunk 1, now 175 bytes
+2026-09-10T19:08:47Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:08:47Z Please upgrade the firmware
+2026-09-10T19:08:48Z Connecting to WiFiRock Lodge
+2026-09-10T19:08:49Z .Successfully connected toRock Lodge
+2026-09-10T19:08:49Z GET Request
+2026-09-10T19:08:49Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:08:55Z Response code: 200
+2026-09-10T19:08:55Z It took 1 attempts to get a response
+2026-09-10T19:08:55Z {"datetime":"2026-09-10T15:08:54.000Z"}
+2026-09-10T19:08:55Z Syncing Clock to: 2026-09-10T15:08:54.000Z
+2026-09-10T19:08:55Z Uploading chunk 0, 245 bytes
+2026-09-10T19:08:55Z POST Request
+2026-09-10T19:08:55Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:09:18Z Response code: -1
+2026-09-10T19:09:19Z Chunk 0 failed, keeping it and stopping here
+2026-09-10T19:09:19Z Wind Speed: 0.00
+2026-09-10T19:09:19Z Temperature: 21.00
+2026-09-10T19:09:19Z PercentExtended: -1
+2026-09-10T19:09:19Z 15:9:17
+2026-09-10T19:09:19Z 1789052957
+2026-09-10T19:09:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:09:19Z Status: ACTIVE
+2026-09-10T19:09:19Z Spooled row into chunk 1, now 210 bytes
+2026-09-10T19:09:29Z Wind Speed: 1.00
+2026-09-10T19:09:29Z Temperature: 21.00
+2026-09-10T19:09:29Z PercentExtended: -1
+2026-09-10T19:09:29Z 15:9:27
+2026-09-10T19:09:29Z 1789052968
+2026-09-10T19:09:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:09:29Z Status: ACTIVE
+2026-09-10T19:09:34Z Spooled row into chunk 1, now 245 bytes
+2026-09-10T19:09:39Z Wind Speed: 0.00
+2026-09-10T19:09:39Z Temperature: 21.00
+2026-09-10T19:09:39Z PercentExtended: -1
+2026-09-10T19:09:39Z 15:9:38
+2026-09-10T19:09:39Z 1789052978
+2026-09-10T19:09:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:09:39Z Status: ACTIVE
+2026-09-10T19:09:49Z Spooled row into chunk 2, now 35 bytes
+2026-09-10T19:09:49Z Wind Speed: 2.00
+2026-09-10T19:09:49Z Temperature: 21.00
+2026-09-10T19:09:49Z PercentExtended: -1
+2026-09-10T19:09:49Z 15:9:48
+2026-09-10T19:09:49Z 1789052988
+2026-09-10T19:09:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:09:49Z Status: ACTIVE
+2026-09-10T19:09:59Z Wind Speed: 3.00
+2026-09-10T19:09:59Z Temperature: 21.00
+2026-09-10T19:09:59Z PercentExtended: -1
+2026-09-10T19:09:59Z 15:9:58
+2026-09-10T19:09:59Z 1789052998
+2026-09-10T19:09:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:09:59Z Status: ACTIVE
+2026-09-10T19:10:04Z Spooled row into chunk 2, now 70 bytes
+2026-09-10T19:10:10Z Wind Speed: 1.00
+2026-09-10T19:10:10Z Temperature: 21.00
+2026-09-10T19:10:10Z PercentExtended: -1
+2026-09-10T19:10:10Z 15:10:8
+2026-09-10T19:10:10Z 1789053008
+2026-09-10T19:10:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:10:10Z Status: ACTIVE
+2026-09-10T19:10:19Z Spooled row into chunk 2, now 105 bytes
+2026-09-10T19:10:20Z Wind Speed: 1.00
+2026-09-10T19:10:20Z Temperature: 21.25
+2026-09-10T19:10:20Z PercentExtended: -1
+2026-09-10T19:10:20Z 15:10:18
+2026-09-10T19:10:20Z 1789053018
+2026-09-10T19:10:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:10:20Z Status: ACTIVE
+2026-09-10T19:10:30Z Wind Speed: 2.00
+2026-09-10T19:10:30Z Temperature: 21.25
+2026-09-10T19:10:30Z PercentExtended: -1
+2026-09-10T19:10:30Z 15:10:29
+2026-09-10T19:10:30Z 1789053029
+2026-09-10T19:10:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:10:30Z Status: ACTIVE
+2026-09-10T19:10:34Z Spooled row into chunk 2, now 140 bytes
+2026-09-10T19:10:40Z Wind Speed: 1.00
+2026-09-10T19:10:40Z Temperature: 21.25
+2026-09-10T19:10:40Z PercentExtended: -1
+2026-09-10T19:10:40Z 15:10:39
+2026-09-10T19:10:40Z 1789053039
+2026-09-10T19:10:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:10:40Z Status: ACTIVE
+2026-09-10T19:10:49Z Spooled row into chunk 2, now 175 bytes
+2026-09-10T19:10:50Z Wind Speed: 0.00
+2026-09-10T19:10:50Z Temperature: 21.25
+2026-09-10T19:10:50Z PercentExtended: -1
+2026-09-10T19:10:50Z 15:10:49
+2026-09-10T19:10:50Z 1789053049
+2026-09-10T19:10:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:10:50Z Status: ACTIVE
+2026-09-10T19:11:00Z Wind Speed: 3.00
+2026-09-10T19:11:00Z Temperature: 21.25
+2026-09-10T19:11:00Z PercentExtended: -1
+2026-09-10T19:11:01Z 15:10:59
+2026-09-10T19:11:01Z 1789053059
+2026-09-10T19:11:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:01Z Status: ACTIVE
+2026-09-10T19:11:04Z Spooled row into chunk 2, now 210 bytes
+2026-09-10T19:11:11Z Wind Speed: 2.00
+2026-09-10T19:11:11Z Temperature: 21.25
+2026-09-10T19:11:11Z PercentExtended: -1
+2026-09-10T19:11:11Z 15:11:9
+2026-09-10T19:11:11Z 1789053069
+2026-09-10T19:11:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:11Z Status: ACTIVE
+2026-09-10T19:11:19Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:11:19Z GET Request
+2026-09-10T19:11:19Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:11:22Z Response code: 200
+2026-09-10T19:11:22Z It took 1 attempts to get a response
+2026-09-10T19:11:22Z {"datetime":"2026-09-10T15:11:22.000Z"}
+2026-09-10T19:11:22Z Syncing Clock to: 2026-09-10T15:11:22.000Z
+2026-09-10T19:11:22Z Uploading chunk 0, 245 bytes
+2026-09-10T19:11:22Z POST Request
+2026-09-10T19:11:22Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:11:24Z Response code: 200
+2026-09-10T19:11:24Z Uploading chunk 1, 245 bytes
+2026-09-10T19:11:25Z POST Request
+2026-09-10T19:11:25Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:11:26Z Response code: 200
+2026-09-10T19:11:26Z Uploading chunk 2, 210 bytes
+2026-09-10T19:11:26Z POST Request
+2026-09-10T19:11:26Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:11:28Z Response code: 200
+2026-09-10T19:11:28Z Uploaded 3 chunk(s)
+2026-09-10T19:11:29Z Wind Speed: 0.00
+2026-09-10T19:11:29Z Temperature: 21.25
+2026-09-10T19:11:29Z PercentExtended: -1
+2026-09-10T19:11:29Z 15:11:28
+2026-09-10T19:11:29Z 1789053088
+2026-09-10T19:11:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:29Z Status: ACTIVE
+2026-09-10T19:11:29Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:11:39Z Wind Speed: 0.00
+2026-09-10T19:11:39Z Temperature: 21.25
+2026-09-10T19:11:39Z PercentExtended: -1
+2026-09-10T19:11:39Z 15:11:38
+2026-09-10T19:11:39Z 1789053098
+2026-09-10T19:11:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:39Z Status: ACTIVE
+2026-09-10T19:11:44Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:11:49Z Wind Speed: 2.00
+2026-09-10T19:11:49Z Temperature: 21.25
+2026-09-10T19:11:49Z PercentExtended: -1
+2026-09-10T19:11:49Z 15:11:48
+2026-09-10T19:11:49Z 1789053108
+2026-09-10T19:11:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:49Z Status: ACTIVE
+2026-09-10T19:11:59Z Wind Speed: 3.00
+2026-09-10T19:11:59Z Temperature: 21.25
+2026-09-10T19:11:59Z PercentExtended: -1
+2026-09-10T19:11:59Z 15:11:59
+2026-09-10T19:11:59Z 1789053119
+2026-09-10T19:11:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:11:59Z Status: ACTIVE
+2026-09-10T19:11:59Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:12:09Z Wind Speed: 0.00
+2026-09-10T19:12:09Z Temperature: 21.25
+2026-09-10T19:12:09Z PercentExtended: -1
+2026-09-10T19:12:10Z 15:12:9
+2026-09-10T19:12:10Z 1789053129
+2026-09-10T19:12:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:12:10Z Status: ACTIVE
+2026-09-10T19:12:14Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:12:20Z Wind Speed: 1.00
+2026-09-10T19:12:20Z Temperature: 21.25
+2026-09-10T19:12:20Z PercentExtended: -1
+2026-09-10T19:12:20Z 15:12:19
+2026-09-10T19:12:20Z 1789053139
+2026-09-10T19:12:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:12:20Z Status: ACTIVE
+2026-09-10T19:12:30Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:12:30Z Wind Speed: 1.00
+2026-09-10T19:12:30Z Temperature: 21.25
+2026-09-10T19:12:30Z PercentExtended: -1
+2026-09-10T19:12:30Z 15:12:29
+2026-09-10T19:12:30Z 1789053149
+2026-09-10T19:12:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:12:30Z Status: ACTIVE
+2026-09-10T19:12:40Z Wind Speed: 2.00
+2026-09-10T19:12:40Z Temperature: 21.25
+2026-09-10T19:12:40Z PercentExtended: -1
+2026-09-10T19:12:40Z 15:12:39
+2026-09-10T19:12:40Z 1789053159
+2026-09-10T19:12:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:12:40Z Status: ACTIVE
+2026-09-10T19:12:45Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:12:50Z Wind Speed: 0.00
+2026-09-10T19:12:50Z Temperature: 21.25
+2026-09-10T19:12:50Z PercentExtended: -1
+2026-09-10T19:12:50Z 15:12:49
+2026-09-10T19:12:50Z 1789053169
+2026-09-10T19:12:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:12:50Z Status: ACTIVE
+2026-09-10T19:13:00Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:13:00Z Wind Speed: 0.00
+2026-09-10T19:13:00Z Temperature: 21.25
+2026-09-10T19:13:00Z PercentExtended: -1
+2026-09-10T19:13:00Z 15:13:0
+2026-09-10T19:13:00Z 1789053180
+2026-09-10T19:13:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:00Z Status: ACTIVE
+2026-09-10T19:13:10Z Wind Speed: 0.00
+2026-09-10T19:13:10Z Temperature: 21.25
+2026-09-10T19:13:10Z PercentExtended: -1
+2026-09-10T19:13:11Z 15:13:10
+2026-09-10T19:13:11Z 1789053190
+2026-09-10T19:13:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:11Z Status: ACTIVE
+2026-09-10T19:13:15Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:13:21Z Wind Speed: 0.00
+2026-09-10T19:13:21Z Temperature: 21.25
+2026-09-10T19:13:21Z PercentExtended: -1
+2026-09-10T19:13:21Z 15:13:20
+2026-09-10T19:13:21Z 1789053200
+2026-09-10T19:13:21Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:21Z Status: ACTIVE
+2026-09-10T19:13:26Z Device disconnected from AP
+2026-09-10T19:13:30Z Spooled row into chunk 1, now 70 bytes
+2026-09-10T19:13:31Z Wind Speed: 3.00
+2026-09-10T19:13:31Z Temperature: 21.25
+2026-09-10T19:13:31Z PercentExtended: -1
+2026-09-10T19:13:31Z 15:13:30
+2026-09-10T19:13:31Z 1789053210
+2026-09-10T19:13:31Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:31Z Status: ACTIVE
+2026-09-10T19:13:41Z Wind Speed: 1.00
+2026-09-10T19:13:41Z Temperature: 21.25
+2026-09-10T19:13:41Z PercentExtended: -1
+2026-09-10T19:13:41Z 15:13:40
+2026-09-10T19:13:41Z 1789053220
+2026-09-10T19:13:41Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:41Z Status: ACTIVE
+2026-09-10T19:13:45Z Spooled row into chunk 1, now 105 bytes
+2026-09-10T19:13:51Z Wind Speed: 2.00
+2026-09-10T19:13:51Z Temperature: 21.25
+2026-09-10T19:13:51Z PercentExtended: -1
+2026-09-10T19:13:51Z 15:13:51
+2026-09-10T19:13:51Z 1789053231
+2026-09-10T19:13:51Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:13:51Z Status: ACTIVE
+2026-09-10T19:14:00Z Spooled row into chunk 1, now 140 bytes
+2026-09-10T19:14:01Z Wind Speed: 2.00
+2026-09-10T19:14:01Z Temperature: 21.25
+2026-09-10T19:14:01Z PercentExtended: -1
+2026-09-10T19:14:01Z 15:14:1
+2026-09-10T19:14:01Z 1789053241
+2026-09-10T19:14:01Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:14:01Z Status: ACTIVE
+2026-09-10T19:14:12Z Wind Speed: 3.00
+2026-09-10T19:14:12Z Temperature: 21.25
+2026-09-10T19:14:12Z PercentExtended: -1
+2026-09-10T19:14:12Z 15:14:11
+2026-09-10T19:14:12Z 1789053251
+2026-09-10T19:14:12Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:14:12Z Status: ACTIVE
+2026-09-10T19:14:15Z Spooled row into chunk 1, now 175 bytes
+2026-09-10T19:14:22Z Wind Speed: 1.00
+2026-09-10T19:14:22Z Temperature: 21.25
+2026-09-10T19:14:22Z PercentExtended: -1
+2026-09-10T19:14:22Z 15:14:21
+2026-09-10T19:14:22Z 1789053261
+2026-09-10T19:14:22Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:14:22Z Status: ACTIVE
+2026-09-10T19:14:53Z Wind Speed: 2.00
+2026-09-10T19:14:53Z Temperature: 21.25
+2026-09-10T19:14:53Z PercentExtended: -1
+2026-09-10T19:14:53Z 15:14:52
+2026-09-10T19:14:53Z 1789053292
+2026-09-10T19:14:53Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:14:53Z Status: ACTIVE
+2026-09-10T19:14:58Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:15:03Z Wind Speed: 2.00
+2026-09-10T19:15:03Z Temperature: 21.25
+2026-09-10T19:15:03Z PercentExtended: -1
+2026-09-10T19:15:03Z 15:15:3
+2026-09-10T19:15:03Z 1789053303
+2026-09-10T19:15:03Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:03Z Status: ACTIVE
+2026-09-10T19:15:13Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:15:13Z Wind Speed: 0.00
+2026-09-10T19:15:13Z Temperature: 21.25
+2026-09-10T19:15:13Z PercentExtended: -1
+2026-09-10T19:15:13Z 15:15:13
+2026-09-10T19:15:13Z 1789053313
+2026-09-10T19:15:13Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:13Z Status: ACTIVE
+2026-09-10T19:15:24Z Wind Speed: 2.00
+2026-09-10T19:15:24Z Temperature: 21.25
+2026-09-10T19:15:24Z PercentExtended: -1
+2026-09-10T19:15:24Z 15:15:23
+2026-09-10T19:15:24Z 1789053323
+2026-09-10T19:15:24Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:24Z Status: ACTIVE
+2026-09-10T19:15:28Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:15:34Z Wind Speed: 0.00
+2026-09-10T19:15:34Z Temperature: 21.25
+2026-09-10T19:15:34Z PercentExtended: -1
+2026-09-10T19:15:34Z 15:15:33
+2026-09-10T19:15:34Z 1789053333
+2026-09-10T19:15:34Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:34Z Status: ACTIVE
+2026-09-10T19:15:43Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:15:44Z Wind Speed: 2.00
+2026-09-10T19:15:44Z Temperature: 21.25
+2026-09-10T19:15:44Z PercentExtended: -1
+2026-09-10T19:15:44Z 15:15:43
+2026-09-10T19:15:44Z 1789053343
+2026-09-10T19:15:44Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:44Z Status: ACTIVE
+2026-09-10T19:15:54Z Wind Speed: 1.00
+2026-09-10T19:15:54Z Temperature: 21.25
+2026-09-10T19:15:54Z PercentExtended: -1
+2026-09-10T19:15:54Z 15:15:53
+2026-09-10T19:15:54Z 1789053353
+2026-09-10T19:15:54Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:15:54Z Status: ACTIVE
+2026-09-10T19:15:58Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:16:04Z Wind Speed: 1.00
+2026-09-10T19:16:04Z Temperature: 21.25
+2026-09-10T19:16:04Z PercentExtended: -1
+2026-09-10T19:16:04Z 15:16:4
+2026-09-10T19:16:04Z 1789053364
+2026-09-10T19:16:04Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:04Z Status: ACTIVE
+2026-09-10T19:16:13Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:16:14Z Wind Speed: 1.00
+2026-09-10T19:16:14Z Temperature: 21.25
+2026-09-10T19:16:14Z PercentExtended: -1
+2026-09-10T19:16:15Z 15:16:14
+2026-09-10T19:16:15Z 1789053374
+2026-09-10T19:16:15Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:15Z Status: ACTIVE
+2026-09-10T19:16:25Z Wind Speed: 0.00
+2026-09-10T19:16:25Z Temperature: 21.25
+2026-09-10T19:16:25Z PercentExtended: -1
+2026-09-10T19:16:25Z 15:16:24
+2026-09-10T19:16:25Z 1789053384
+2026-09-10T19:16:25Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:25Z Status: ACTIVE
+2026-09-10T19:16:28Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:16:35Z Wind Speed: 4.00
+2026-09-10T19:16:35Z Temperature: 21.25
+2026-09-10T19:16:35Z PercentExtended: -1
+2026-09-10T19:16:35Z 15:16:34
+2026-09-10T19:16:35Z 1789053394
+2026-09-10T19:16:35Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:35Z Status: ACTIVE
+2026-09-10T19:16:43Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:16:45Z Wind Speed: 2.00
+2026-09-10T19:16:45Z Temperature: 21.25
+2026-09-10T19:16:45Z PercentExtended: -1
+2026-09-10T19:16:45Z 15:16:44
+2026-09-10T19:16:45Z 1789053404
+2026-09-10T19:16:45Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:45Z Status: ACTIVE
+2026-09-10T19:16:55Z Wind Speed: 1.00
+2026-09-10T19:16:55Z Temperature: 21.25
+2026-09-10T19:16:55Z PercentExtended: -1
+2026-09-10T19:16:55Z 15:16:55
+2026-09-10T19:16:55Z 1789053415
+2026-09-10T19:16:55Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:16:55Z Status: ACTIVE
+2026-09-10T19:17:00Z Config doc:
+2026-09-10T19:17:00Z null
+2026-09-10T19:17:00Z Alarm detected and cleared.
+2026-09-10T19:17:00Z Alarm was set.
+2026-09-10T19:17:00Z Setup Clock Module.
+2026-09-10T19:17:00Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:17:01Z Please upgrade the firmware
+2026-09-10T19:17:01Z Failed to connect to WiFi!
+2026-09-10T19:17:01Z Settings switch is on, holding telemetry on the card
+2026-09-10T19:17:01Z BENCH_TEST: would extend to 71%
+2026-09-10T19:17:01Z Set status to: ACTIVE
+2026-09-10T19:17:01Z Access Point Web Server
+2026-09-10T19:17:01Z Please upgrade the firmware
+2026-09-10T19:17:01Z Creating access point named: Solar-Tracker
+2026-09-10T19:17:01Z SSID: Solar-Tracker
+2026-09-10T19:17:01Z IP Address: 192.168.4.1
+2026-09-10T19:17:01Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:17:01Z Setup complete.
+2026-09-10T19:17:08Z Wind Speed: 2.00
+2026-09-10T19:17:08Z Temperature: 21.25
+2026-09-10T19:17:08Z PercentExtended: -1
+2026-09-10T19:17:08Z 15:17:7
+2026-09-10T19:17:08Z 1789053428
+2026-09-10T19:17:08Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:08Z Status: ACTIVE
+2026-09-10T19:17:13Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:17:18Z Wind Speed: 1.00
+2026-09-10T19:17:18Z Temperature: 21.25
+2026-09-10T19:17:18Z PercentExtended: -1
+2026-09-10T19:17:18Z 15:17:18
+2026-09-10T19:17:18Z 1789053438
+2026-09-10T19:17:18Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:18Z Status: ACTIVE
+2026-09-10T19:17:28Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:17:28Z Wind Speed: 1.00
+2026-09-10T19:17:28Z Temperature: 21.25
+2026-09-10T19:17:28Z PercentExtended: -1
+2026-09-10T19:17:29Z 15:17:28
+2026-09-10T19:17:29Z 1789053448
+2026-09-10T19:17:29Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:29Z Status: ACTIVE
+2026-09-10T19:17:39Z Wind Speed: 2.00
+2026-09-10T19:17:39Z Temperature: 21.25
+2026-09-10T19:17:39Z PercentExtended: -1
+2026-09-10T19:17:39Z 15:17:38
+2026-09-10T19:17:39Z 1789053458
+2026-09-10T19:17:39Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:39Z Status: ACTIVE
+2026-09-10T19:17:43Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:17:43Z Settings switch turned off, releasing the access point
+2026-09-10T19:17:43Z Access point listener stopped
+2026-09-10T19:17:49Z Wind Speed: 3.00
+2026-09-10T19:17:49Z Temperature: 21.00
+2026-09-10T19:17:49Z PercentExtended: -1
+2026-09-10T19:17:49Z 15:17:48
+2026-09-10T19:17:49Z 1789053468
+2026-09-10T19:17:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:49Z Status: ACTIVE
+2026-09-10T19:17:50Z Settings switch turned on, starting the access point
+2026-09-10T19:17:50Z Access point listener stopped
+2026-09-10T19:17:50Z Access Point Web Server
+2026-09-10T19:17:51Z Please upgrade the firmware
+2026-09-10T19:17:51Z Creating access point named: Solar-Tracker
+2026-09-10T19:17:51Z SSID: Solar-Tracker
+2026-09-10T19:17:51Z IP Address: 192.168.4.1
+2026-09-10T19:17:51Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:17:51Z Settings switch turned off, releasing the access point
+2026-09-10T19:17:51Z Access point listener stopped
+2026-09-10T19:17:51Z Settings switch turned on, starting the access point
+2026-09-10T19:17:51Z Access point listener stopped
+2026-09-10T19:17:51Z Access Point Web Server
+2026-09-10T19:17:51Z Please upgrade the firmware
+2026-09-10T19:17:51Z Creating access point named: Solar-Tracker
+2026-09-10T19:17:51Z SSID: Solar-Tracker
+2026-09-10T19:17:51Z IP Address: 192.168.4.1
+2026-09-10T19:17:51Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:17:51Z Settings switch turned off, releasing the access point
+2026-09-10T19:17:51Z Access point listener stopped
+2026-09-10T19:17:58Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:17:59Z Wind Speed: 1.00
+2026-09-10T19:17:59Z Temperature: 21.00
+2026-09-10T19:17:59Z PercentExtended: -1
+2026-09-10T19:17:59Z 15:17:58
+2026-09-10T19:17:59Z 1789053478
+2026-09-10T19:17:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:17:59Z Status: ACTIVE
+2026-09-10T19:18:01Z Settings switch turned on, starting the access point
+2026-09-10T19:18:01Z Access point listener stopped
+2026-09-10T19:18:01Z Access Point Web Server
+2026-09-10T19:18:01Z Please upgrade the firmware
+2026-09-10T19:18:01Z Creating access point named: Solar-Tracker
+2026-09-10T19:18:01Z SSID: Solar-Tracker
+2026-09-10T19:18:01Z IP Address: 192.168.4.1
+2026-09-10T19:18:01Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:18:01Z Settings switch turned off, releasing the access point
+2026-09-10T19:18:01Z Access point listener stopped
+2026-09-10T19:18:09Z Wind Speed: 2.00
+2026-09-10T19:18:09Z Temperature: 21.00
+2026-09-10T19:18:09Z PercentExtended: -1
+2026-09-10T19:18:09Z 15:18:9
+2026-09-10T19:18:09Z 1789053489
+2026-09-10T19:18:09Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:18:09Z Status: ACTIVE
+2026-09-10T19:18:13Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:18:19Z Wind Speed: 3.00
+2026-09-10T19:18:19Z Temperature: 21.00
+2026-09-10T19:18:19Z PercentExtended: -1
+2026-09-10T19:18:19Z 15:18:19
+2026-09-10T19:18:19Z 1789053499
+2026-09-10T19:18:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:18:19Z Status: ACTIVE
+2026-09-10T19:18:28Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:18:30Z Wind Speed: 3.00
+2026-09-10T19:18:30Z Temperature: 21.00
+2026-09-10T19:18:30Z PercentExtended: -1
+2026-09-10T19:18:30Z 15:18:29
+2026-09-10T19:18:30Z 1789053509
+2026-09-10T19:18:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:18:30Z Status: ACTIVE
+2026-09-10T19:18:40Z Wind Speed: 0.00
+2026-09-10T19:18:40Z Temperature: 21.00
+2026-09-10T19:18:40Z PercentExtended: -1
+2026-09-10T19:18:40Z 15:18:39
+2026-09-10T19:18:40Z 1789053519
+2026-09-10T19:18:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:18:40Z Status: ACTIVE
+2026-09-10T19:18:44Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:18:50Z Wind Speed: 3.00
+2026-09-10T19:18:50Z Temperature: 21.00
+2026-09-10T19:18:50Z PercentExtended: -1
+2026-09-10T19:18:50Z 15:18:49
+2026-09-10T19:18:50Z 1789053529
+2026-09-10T19:18:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:18:50Z Status: ACTIVE
+2026-09-10T19:18:58Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:18:58Z Please upgrade the firmware
+2026-09-10T19:18:58Z Failed to connect to WiFi!
+2026-09-10T19:18:59Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:19:00Z Wind Speed: 1.00
+2026-09-10T19:19:00Z Temperature: 21.00
+2026-09-10T19:19:00Z PercentExtended: -1
+2026-09-10T19:19:00Z 15:18:59
+2026-09-10T19:19:00Z 1789053539
+2026-09-10T19:19:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:00Z Status: ACTIVE
+2026-09-10T19:19:10Z Wind Speed: 3.00
+2026-09-10T19:19:10Z Temperature: 21.00
+2026-09-10T19:19:10Z PercentExtended: -1
+2026-09-10T19:19:10Z 15:19:10
+2026-09-10T19:19:10Z 1789053550
+2026-09-10T19:19:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:10Z Status: ACTIVE
+2026-09-10T19:19:14Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:19:20Z Wind Speed: 0.00
+2026-09-10T19:19:20Z Temperature: 21.00
+2026-09-10T19:19:20Z PercentExtended: -1
+2026-09-10T19:19:21Z 15:19:20
+2026-09-10T19:19:21Z 1789053560
+2026-09-10T19:19:21Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:21Z Status: ACTIVE
+2026-09-10T19:19:29Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:19:31Z Wind Speed: 0.00
+2026-09-10T19:19:31Z Temperature: 21.00
+2026-09-10T19:19:31Z PercentExtended: -1
+2026-09-10T19:19:31Z 15:19:30
+2026-09-10T19:19:31Z 1789053570
+2026-09-10T19:19:31Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:31Z Status: ACTIVE
+2026-09-10T19:19:41Z Wind Speed: 1.00
+2026-09-10T19:19:41Z Temperature: 21.00
+2026-09-10T19:19:41Z PercentExtended: -1
+2026-09-10T19:19:41Z 15:19:40
+2026-09-10T19:19:41Z 1789053580
+2026-09-10T19:19:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:41Z Status: ACTIVE
+2026-09-10T19:19:44Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:19:51Z Wind Speed: 3.00
+2026-09-10T19:19:51Z Temperature: 20.75
+2026-09-10T19:19:51Z PercentExtended: -1
+2026-09-10T19:19:51Z 15:19:50
+2026-09-10T19:19:51Z 1789053590
+2026-09-10T19:19:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:19:51Z Status: ACTIVE
+2026-09-10T19:19:59Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:20:01Z Wind Speed: 1.00
+2026-09-10T19:20:01Z Temperature: 20.75
+2026-09-10T19:20:01Z PercentExtended: -1
+2026-09-10T19:20:01Z 15:20:1
+2026-09-10T19:20:01Z 1789053601
+2026-09-10T19:20:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:01Z Status: ACTIVE
+2026-09-10T19:20:11Z Wind Speed: 0.00
+2026-09-10T19:20:11Z Temperature: 20.75
+2026-09-10T19:20:11Z PercentExtended: -1
+2026-09-10T19:20:11Z 15:20:11
+2026-09-10T19:20:11Z 1789053611
+2026-09-10T19:20:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:11Z Status: ACTIVE
+2026-09-10T19:20:14Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:20:20Z Config doc:
+2026-09-10T19:20:20Z null
+2026-09-10T19:20:20Z Alarm detected and cleared.
+2026-09-10T19:20:20Z Alarm was set.
+2026-09-10T19:20:20Z Setup Clock Module.
+2026-09-10T19:20:20Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:20:20Z Please upgrade the firmware
+2026-09-10T19:20:20Z Failed to connect to WiFi!
+2026-09-10T19:20:20Z BENCH_TEST: would extend to 71%
+2026-09-10T19:20:20Z Set status to: ACTIVE
+2026-09-10T19:20:20Z Setup complete.
+2026-09-10T19:20:28Z Wind Speed: 1.00
+2026-09-10T19:20:28Z Temperature: 20.75
+2026-09-10T19:20:28Z PercentExtended: -1
+2026-09-10T19:20:28Z 15:20:27
+2026-09-10T19:20:28Z 1789053627
+2026-09-10T19:20:28Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:28Z Status: ACTIVE
+2026-09-10T19:20:33Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:20:38Z Wind Speed: 3.00
+2026-09-10T19:20:38Z Temperature: 20.75
+2026-09-10T19:20:38Z PercentExtended: -1
+2026-09-10T19:20:38Z 15:20:37
+2026-09-10T19:20:38Z 1789053637
+2026-09-10T19:20:38Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:38Z Status: ACTIVE
+2026-09-10T19:20:48Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:20:48Z Wind Speed: 1.00
+2026-09-10T19:20:48Z Temperature: 20.75
+2026-09-10T19:20:48Z PercentExtended: -1
+2026-09-10T19:20:48Z 15:20:47
+2026-09-10T19:20:48Z 1789053647
+2026-09-10T19:20:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:48Z Status: ACTIVE
+2026-09-10T19:20:49Z Settings switch turned on, starting the access point
+2026-09-10T19:20:49Z Access point listener stopped
+2026-09-10T19:20:49Z Access Point Web Server
+2026-09-10T19:20:49Z Please upgrade the firmware
+2026-09-10T19:20:49Z Creating access point named: Solar-Tracker
+2026-09-10T19:20:49Z SSID: Solar-Tracker
+2026-09-10T19:20:49Z IP Address: 192.168.4.1
+2026-09-10T19:20:49Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:20:49Z Settings switch turned off, releasing the access point
+2026-09-10T19:20:49Z Access point listener stopped
+2026-09-10T19:20:58Z Wind Speed: 0.00
+2026-09-10T19:20:58Z Temperature: 20.75
+2026-09-10T19:20:58Z PercentExtended: -1
+2026-09-10T19:20:58Z 15:20:58
+2026-09-10T19:20:58Z 1789053658
+2026-09-10T19:20:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:20:58Z Status: ACTIVE
+2026-09-10T19:21:03Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:21:08Z Wind Speed: 1.00
+2026-09-10T19:21:08Z Temperature: 20.75
+2026-09-10T19:21:08Z PercentExtended: -1
+2026-09-10T19:21:08Z 15:21:8
+2026-09-10T19:21:08Z 1789053668
+2026-09-10T19:21:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:08Z Status: ACTIVE
+2026-09-10T19:21:18Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:21:19Z Wind Speed: 1.00
+2026-09-10T19:21:19Z Temperature: 20.75
+2026-09-10T19:21:19Z PercentExtended: -1
+2026-09-10T19:21:19Z 15:21:18
+2026-09-10T19:21:19Z 1789053678
+2026-09-10T19:21:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:19Z Status: ACTIVE
+2026-09-10T19:21:29Z Wind Speed: 2.00
+2026-09-10T19:21:29Z Temperature: 20.75
+2026-09-10T19:21:29Z PercentExtended: -1
+2026-09-10T19:21:29Z 15:21:28
+2026-09-10T19:21:29Z 1789053688
+2026-09-10T19:21:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:29Z Status: ACTIVE
+2026-09-10T19:21:33Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:21:39Z Wind Speed: 1.00
+2026-09-10T19:21:39Z Temperature: 20.75
+2026-09-10T19:21:39Z PercentExtended: -1
+2026-09-10T19:21:39Z 15:21:38
+2026-09-10T19:21:39Z 1789053698
+2026-09-10T19:21:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:39Z Status: ACTIVE
+2026-09-10T19:21:48Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:21:49Z Wind Speed: 0.00
+2026-09-10T19:21:49Z Temperature: 20.75
+2026-09-10T19:21:49Z PercentExtended: -1
+2026-09-10T19:21:49Z 15:21:48
+2026-09-10T19:21:49Z 1789053708
+2026-09-10T19:21:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:49Z Status: ACTIVE
+2026-09-10T19:21:59Z Wind Speed: 3.00
+2026-09-10T19:21:59Z Temperature: 20.50
+2026-09-10T19:21:59Z PercentExtended: -1
+2026-09-10T19:21:59Z 15:21:59
+2026-09-10T19:21:59Z 1789053719
+2026-09-10T19:21:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:21:59Z Status: ACTIVE
+2026-09-10T19:22:03Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:22:04Z Settings switch turned on, starting the access point
+2026-09-10T19:22:04Z Access point listener stopped
+2026-09-10T19:22:04Z Access Point Web Server
+2026-09-10T19:22:05Z Please upgrade the firmware
+2026-09-10T19:22:05Z Creating access point named: Solar-Tracker
+2026-09-10T19:22:05Z SSID: Solar-Tracker
+2026-09-10T19:22:05Z IP Address: 192.168.4.1
+2026-09-10T19:22:05Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:22:09Z Wind Speed: 2.00
+2026-09-10T19:22:09Z Temperature: 20.50
+2026-09-10T19:22:09Z PercentExtended: -1
+2026-09-10T19:22:10Z 15:22:9
+2026-09-10T19:22:10Z 1789053729
+2026-09-10T19:22:10Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:22:10Z Status: ACTIVE
+2026-09-10T19:22:18Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:22:20Z Wind Speed: 0.00
+2026-09-10T19:22:20Z Temperature: 20.50
+2026-09-10T19:22:20Z PercentExtended: -1
+2026-09-10T19:22:20Z 15:22:19
+2026-09-10T19:22:20Z 1789053739
+2026-09-10T19:22:20Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:22:20Z Status: ACTIVE
+2026-09-10T19:22:30Z Wind Speed: 1.00
+2026-09-10T19:22:30Z Temperature: 20.50
+2026-09-10T19:22:30Z PercentExtended: -1
+2026-09-10T19:22:30Z 15:22:29
+2026-09-10T19:22:30Z 1789053749
+2026-09-10T19:22:30Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:22:30Z Status: ACTIVE
+2026-09-10T19:22:33Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:22:43Z Config doc:
+2026-09-10T19:22:43Z null
+2026-09-10T19:22:43Z Alarm detected and cleared.
+2026-09-10T19:22:43Z Alarm was set.
+2026-09-10T19:22:43Z Setup Clock Module.
+2026-09-10T19:22:43Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:22:43Z Please upgrade the firmware
+2026-09-10T19:22:43Z Failed to connect to WiFi!
+2026-09-10T19:22:43Z Settings switch is on, holding telemetry on the card
+2026-09-10T19:22:43Z BENCH_TEST: would extend to 71%
+2026-09-10T19:22:43Z Set status to: ACTIVE
+2026-09-10T19:22:43Z Access Point Web Server
+2026-09-10T19:22:43Z Please upgrade the firmware
+2026-09-10T19:22:43Z Creating access point named: Solar-Tracker
+2026-09-10T19:22:44Z SSID: Solar-Tracker
+2026-09-10T19:22:44Z IP Address: 192.168.4.1
+2026-09-10T19:22:44Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T19:22:44Z Setup complete.
+2026-09-10T19:22:50Z Wind Speed: 0.00
+2026-09-10T19:22:50Z Temperature: 20.50
+2026-09-10T19:22:50Z PercentExtended: -1
+2026-09-10T19:22:51Z 15:22:50
+2026-09-10T19:22:51Z 1789053770
+2026-09-10T19:22:51Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:22:51Z Status: ACTIVE
+2026-09-10T19:22:55Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:23:01Z Wind Speed: 3.00
+2026-09-10T19:23:01Z Temperature: 20.25
+2026-09-10T19:23:01Z PercentExtended: -1
+2026-09-10T19:23:01Z 15:23:0
+2026-09-10T19:23:01Z 1789053780
+2026-09-10T19:23:01Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:01Z Status: ACTIVE
+2026-09-10T19:23:11Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:23:11Z Wind Speed: 2.00
+2026-09-10T19:23:11Z Temperature: 20.25
+2026-09-10T19:23:11Z PercentExtended: -1
+2026-09-10T19:23:11Z 15:23:10
+2026-09-10T19:23:11Z 1789053790
+2026-09-10T19:23:11Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:11Z Status: ACTIVE
+2026-09-10T19:23:21Z Wind Speed: 0.00
+2026-09-10T19:23:21Z Temperature: 20.25
+2026-09-10T19:23:21Z PercentExtended: -1
+2026-09-10T19:23:21Z 15:23:20
+2026-09-10T19:23:21Z 1789053800
+2026-09-10T19:23:21Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:21Z Status: ACTIVE
+2026-09-10T19:23:26Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:23:31Z Wind Speed: 0.00
+2026-09-10T19:23:31Z Temperature: 20.25
+2026-09-10T19:23:31Z PercentExtended: -1
+2026-09-10T19:23:31Z 15:23:31
+2026-09-10T19:23:31Z 1789053811
+2026-09-10T19:23:31Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:31Z Status: ACTIVE
+2026-09-10T19:23:41Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:23:41Z Wind Speed: 0.00
+2026-09-10T19:23:41Z Temperature: 20.25
+2026-09-10T19:23:41Z PercentExtended: -1
+2026-09-10T19:23:41Z 15:23:41
+2026-09-10T19:23:41Z 1789053821
+2026-09-10T19:23:41Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:41Z Status: ACTIVE
+2026-09-10T19:23:52Z Wind Speed: 0.00
+2026-09-10T19:23:52Z Temperature: 20.25
+2026-09-10T19:23:52Z PercentExtended: -1
+2026-09-10T19:23:52Z 15:23:51
+2026-09-10T19:23:52Z 1789053831
+2026-09-10T19:23:52Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:23:52Z Status: ACTIVE
+2026-09-10T19:23:56Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:24:02Z Wind Speed: 0.00
+2026-09-10T19:24:02Z Temperature: 20.25
+2026-09-10T19:24:02Z PercentExtended: -1
+2026-09-10T19:24:02Z 15:24:1
+2026-09-10T19:24:02Z 1789053841
+2026-09-10T19:24:02Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:02Z Status: ACTIVE
+2026-09-10T19:24:09Z Settings switch turned off, releasing the access point
+2026-09-10T19:24:09Z Access point listener stopped
+2026-09-10T19:24:11Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:24:12Z Wind Speed: 0.00
+2026-09-10T19:24:12Z Temperature: 17.00
+2026-09-10T19:24:12Z PercentExtended: -1
+2026-09-10T19:24:12Z 0:0:0
+2026-09-10T19:24:12Z 1495506120
+2026-09-10T19:24:12Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:12Z Status: ACTIVE
+2026-09-10T19:24:12Z Set status to: NIGHT
+2026-09-10T19:24:22Z Wind Speed: 0.00
+2026-09-10T19:24:22Z Temperature: 17.00
+2026-09-10T19:24:22Z PercentExtended: -1
+2026-09-10T19:24:22Z 0:0:0
+2026-09-10T19:24:22Z 1495506120
+2026-09-10T19:24:22Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:22Z Status: NIGHT
+2026-09-10T19:24:26Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:24:32Z Wind Speed: 0.00
+2026-09-10T19:24:32Z Temperature: 17.00
+2026-09-10T19:24:32Z PercentExtended: -1
+2026-09-10T19:24:32Z 0:0:0
+2026-09-10T19:24:32Z 1495506120
+2026-09-10T19:24:32Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:32Z Status: NIGHT
+2026-09-10T19:24:41Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:24:41Z Please upgrade the firmware
+2026-09-10T19:24:41Z Failed to connect to WiFi!
+2026-09-10T19:24:41Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:24:42Z Wind Speed: 1.00
+2026-09-10T19:24:42Z Temperature: 17.00
+2026-09-10T19:24:42Z PercentExtended: -1
+2026-09-10T19:24:43Z 0:0:0
+2026-09-10T19:24:43Z 1495506120
+2026-09-10T19:24:43Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:43Z Status: NIGHT
+2026-09-10T19:24:53Z Wind Speed: 1.00
+2026-09-10T19:24:53Z Temperature: 17.00
+2026-09-10T19:24:53Z PercentExtended: -1
+2026-09-10T19:24:53Z 0:0:0
+2026-09-10T19:24:53Z 1495506120
+2026-09-10T19:24:53Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:24:53Z Status: NIGHT
+2026-09-10T19:24:56Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:25:03Z Wind Speed: 1.00
+2026-09-10T19:25:03Z Temperature: 17.00
+2026-09-10T19:25:03Z PercentExtended: -1
+2026-09-10T19:25:03Z 0:0:0
+2026-09-10T19:25:03Z 1495506120
+2026-09-10T19:25:03Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:03Z Status: NIGHT
+2026-09-10T19:25:11Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:25:13Z Wind Speed: 4.00
+2026-09-10T19:25:13Z Temperature: 17.00
+2026-09-10T19:25:13Z PercentExtended: -1
+2026-09-10T19:25:13Z 0:0:0
+2026-09-10T19:25:13Z 1495506120
+2026-09-10T19:25:13Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:13Z Status: NIGHT
+2026-09-10T19:25:23Z Wind Speed: 2.00
+2026-09-10T19:25:23Z Temperature: 17.00
+2026-09-10T19:25:23Z PercentExtended: -1
+2026-09-10T19:25:23Z 0:0:0
+2026-09-10T19:25:23Z 1495506120
+2026-09-10T19:25:23Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:23Z Status: NIGHT
+2026-09-10T19:25:26Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:25:33Z Wind Speed: 0.00
+2026-09-10T19:25:33Z Temperature: 17.00
+2026-09-10T19:25:33Z PercentExtended: -1
+2026-09-10T19:25:34Z 0:0:0
+2026-09-10T19:25:34Z 1495506120
+2026-09-10T19:25:34Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:34Z Status: NIGHT
+2026-09-10T19:25:41Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:25:44Z Wind Speed: 2.00
+2026-09-10T19:25:44Z Temperature: 17.00
+2026-09-10T19:25:44Z PercentExtended: -1
+2026-09-10T19:25:44Z 0:0:0
+2026-09-10T19:25:44Z 1495506120
+2026-09-10T19:25:44Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:44Z Status: NIGHT
+2026-09-10T19:25:54Z Wind Speed: 1.00
+2026-09-10T19:25:54Z Temperature: 17.00
+2026-09-10T19:25:54Z PercentExtended: -1
+2026-09-10T19:25:54Z 0:0:0
+2026-09-10T19:25:54Z 1495506120
+2026-09-10T19:25:54Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:25:54Z Status: NIGHT
+2026-09-10T19:25:56Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:26:04Z Wind Speed: 0.00
+2026-09-10T19:26:04Z Temperature: 17.00
+2026-09-10T19:26:04Z PercentExtended: -1
+2026-09-10T19:26:04Z 0:0:0
+2026-09-10T19:26:04Z 1495506120
+2026-09-10T19:26:04Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:04Z Status: NIGHT
+2026-09-10T19:26:11Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:26:14Z Wind Speed: 1.00
+2026-09-10T19:26:14Z Temperature: 17.00
+2026-09-10T19:26:14Z PercentExtended: -1
+2026-09-10T19:26:14Z 0:0:0
+2026-09-10T19:26:14Z 1495506120
+2026-09-10T19:26:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:14Z Status: NIGHT
+2026-09-10T19:26:24Z Wind Speed: 1.00
+2026-09-10T19:26:24Z Temperature: 17.00
+2026-09-10T19:26:24Z PercentExtended: -1
+2026-09-10T19:26:24Z 0:0:0
+2026-09-10T19:26:24Z 1495506120
+2026-09-10T19:26:24Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:24Z Status: NIGHT
+2026-09-10T19:26:26Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:26:35Z Wind Speed: 1.00
+2026-09-10T19:26:35Z Temperature: 17.00
+2026-09-10T19:26:35Z PercentExtended: -1
+2026-09-10T19:26:35Z 0:0:0
+2026-09-10T19:26:35Z 1495506120
+2026-09-10T19:26:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:35Z Status: NIGHT
+2026-09-10T19:26:41Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:26:41Z Please upgrade the firmware
+2026-09-10T19:26:41Z Failed to connect to WiFi!
+2026-09-10T19:26:41Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:26:45Z Wind Speed: 1.00
+2026-09-10T19:26:45Z Temperature: 17.00
+2026-09-10T19:26:45Z PercentExtended: -1
+2026-09-10T19:26:45Z 0:0:0
+2026-09-10T19:26:45Z 1495506120
+2026-09-10T19:26:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:45Z Status: NIGHT
+2026-09-10T19:26:55Z Wind Speed: 2.00
+2026-09-10T19:26:55Z Temperature: 17.00
+2026-09-10T19:26:55Z PercentExtended: -1
+2026-09-10T19:26:55Z 0:0:0
+2026-09-10T19:26:55Z 1495506120
+2026-09-10T19:26:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:26:55Z Status: NIGHT
+2026-09-10T19:26:57Z Spooled row into chunk 0, now 0 bytes
+2026-09-10T19:41:57Z Response code: 200
+2026-09-10T19:41:57Z Uploading chunk 1, 210 bytes
+2026-09-10T19:41:58Z POST Request
+2026-09-10T19:41:58Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:41:59Z Response code: 200
+2026-09-10T19:42:00Z Uploaded 2 chunk(s)
+2026-09-10T19:42:00Z BENCH_TEST: would extend to 83%
+2026-09-10T19:42:00Z Set status to: ACTIVE
+2026-09-10T19:42:00Z Setup complete.
+2026-09-10T19:42:00Z Wind Speed: 0.00
+2026-09-10T19:42:00Z Temperature: 20.75
+2026-09-10T19:42:00Z PercentExtended: -1
+2026-09-10T19:42:00Z 15:41:59
+2026-09-10T19:42:00Z 1789054919
+2026-09-10T19:42:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:00Z Status: ACTIVE
+2026-09-10T19:42:05Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:42:10Z Wind Speed: 0.00
+2026-09-10T19:42:10Z Temperature: 20.75
+2026-09-10T19:42:10Z PercentExtended: -1
+2026-09-10T19:42:10Z 15:42:9
+2026-09-10T19:42:10Z 1789054929
+2026-09-10T19:42:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:10Z Status: ACTIVE
+2026-09-10T19:42:20Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:42:20Z Wind Speed: 2.00
+2026-09-10T19:42:20Z Temperature: 21.00
+2026-09-10T19:42:20Z PercentExtended: -1
+2026-09-10T19:42:20Z 15:42:19
+2026-09-10T19:42:20Z 1789054939
+2026-09-10T19:42:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:20Z Status: ACTIVE
+2026-09-10T19:42:31Z Wind Speed: 0.00
+2026-09-10T19:42:31Z Temperature: 21.00
+2026-09-10T19:42:31Z PercentExtended: -1
+2026-09-10T19:42:31Z 15:42:29
+2026-09-10T19:42:31Z 1789054949
+2026-09-10T19:42:31Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:31Z Status: ACTIVE
+2026-09-10T19:42:35Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:42:41Z Wind Speed: 1.00
+2026-09-10T19:42:41Z Temperature: 21.00
+2026-09-10T19:42:41Z PercentExtended: -1
+2026-09-10T19:42:41Z 15:42:40
+2026-09-10T19:42:41Z 1789054960
+2026-09-10T19:42:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:41Z Status: ACTIVE
+2026-09-10T19:42:50Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:42:51Z Wind Speed: 2.00
+2026-09-10T19:42:51Z Temperature: 21.00
+2026-09-10T19:42:51Z PercentExtended: -1
+2026-09-10T19:42:51Z 15:42:50
+2026-09-10T19:42:51Z 1789054970
+2026-09-10T19:42:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:42:51Z Status: ACTIVE
+2026-09-10T19:43:01Z Wind Speed: 3.00
+2026-09-10T19:43:01Z Temperature: 21.00
+2026-09-10T19:43:01Z PercentExtended: -1
+2026-09-10T19:43:01Z 15:43:0
+2026-09-10T19:43:01Z 1789054980
+2026-09-10T19:43:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:01Z Status: ACTIVE
+2026-09-10T19:43:05Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:43:11Z Wind Speed: 1.00
+2026-09-10T19:43:11Z Temperature: 21.00
+2026-09-10T19:43:11Z PercentExtended: -1
+2026-09-10T19:43:11Z 15:43:10
+2026-09-10T19:43:11Z 1789054990
+2026-09-10T19:43:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:11Z Status: ACTIVE
+2026-09-10T19:43:20Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:43:21Z Wind Speed: 2.00
+2026-09-10T19:43:21Z Temperature: 21.25
+2026-09-10T19:43:21Z PercentExtended: -1
+2026-09-10T19:43:22Z 15:43:20
+2026-09-10T19:43:22Z 1789055000
+2026-09-10T19:43:22Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:22Z Status: ACTIVE
+2026-09-10T19:43:32Z Wind Speed: 3.00
+2026-09-10T19:43:32Z Temperature: 21.25
+2026-09-10T19:43:32Z PercentExtended: -1
+2026-09-10T19:43:32Z 15:43:31
+2026-09-10T19:43:32Z 1789055011
+2026-09-10T19:43:32Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:32Z Status: ACTIVE
+2026-09-10T19:43:35Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:43:42Z Wind Speed: 0.00
+2026-09-10T19:43:42Z Temperature: 21.25
+2026-09-10T19:43:42Z PercentExtended: -1
+2026-09-10T19:43:42Z 15:43:41
+2026-09-10T19:43:42Z 1789055021
+2026-09-10T19:43:42Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:42Z Status: ACTIVE
+2026-09-10T19:43:50Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:43:50Z GET Request
+2026-09-10T19:43:50Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:43:51Z Response code: 200
+2026-09-10T19:43:51Z It took 1 attempts to get a response
+2026-09-10T19:43:51Z {"datetime":"2026-09-10T15:43:51.000Z"}
+2026-09-10T19:43:51Z Syncing Clock to: 2026-09-10T15:43:51.000Z
+2026-09-10T19:43:52Z Uploading chunk 0, 245 bytes
+2026-09-10T19:43:52Z POST Request
+2026-09-10T19:43:52Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:43:53Z Response code: 200
+2026-09-10T19:43:54Z Uploaded 1 chunk(s)
+2026-09-10T19:43:54Z Wind Speed: 0.00
+2026-09-10T19:43:54Z Temperature: 21.25
+2026-09-10T19:43:54Z PercentExtended: -1
+2026-09-10T19:43:54Z 15:43:53
+2026-09-10T19:43:54Z 1789055033
+2026-09-10T19:43:54Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:43:54Z Status: ACTIVE
+2026-09-10T19:43:54Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:44:04Z Wind Speed: 3.00
+2026-09-10T19:44:04Z Temperature: 21.25
+2026-09-10T19:44:04Z PercentExtended: -1
+2026-09-10T19:44:04Z 15:44:3
+2026-09-10T19:44:04Z 1789055043
+2026-09-10T19:44:04Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:04Z Status: ACTIVE
+2026-09-10T19:44:10Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:44:14Z Wind Speed: 3.00
+2026-09-10T19:44:14Z Temperature: 21.25
+2026-09-10T19:44:14Z PercentExtended: -1
+2026-09-10T19:44:14Z 15:44:13
+2026-09-10T19:44:14Z 1789055053
+2026-09-10T19:44:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:14Z Status: ACTIVE
+2026-09-10T19:44:25Z Wind Speed: 1.00
+2026-09-10T19:44:25Z Temperature: 21.25
+2026-09-10T19:44:25Z PercentExtended: -1
+2026-09-10T19:44:25Z 15:44:24
+2026-09-10T19:44:25Z 1789055064
+2026-09-10T19:44:25Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:25Z Status: ACTIVE
+2026-09-10T19:44:25Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:44:35Z Wind Speed: 0.00
+2026-09-10T19:44:35Z Temperature: 21.25
+2026-09-10T19:44:35Z PercentExtended: -1
+2026-09-10T19:44:35Z 15:44:34
+2026-09-10T19:44:35Z 1789055074
+2026-09-10T19:44:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:35Z Status: ACTIVE
+2026-09-10T19:44:40Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:44:45Z Wind Speed: 2.00
+2026-09-10T19:44:45Z Temperature: 21.25
+2026-09-10T19:44:45Z PercentExtended: -1
+2026-09-10T19:44:45Z 15:44:44
+2026-09-10T19:44:45Z 1789055084
+2026-09-10T19:44:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:45Z Status: ACTIVE
+2026-09-10T19:44:55Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:44:55Z Wind Speed: 0.00
+2026-09-10T19:44:55Z Temperature: 21.25
+2026-09-10T19:44:55Z PercentExtended: -1
+2026-09-10T19:44:55Z 15:44:54
+2026-09-10T19:44:55Z 1789055094
+2026-09-10T19:44:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:44:55Z Status: ACTIVE
+2026-09-10T19:45:05Z Wind Speed: 2.00
+2026-09-10T19:45:05Z Temperature: 21.25
+2026-09-10T19:45:05Z PercentExtended: -1
+2026-09-10T19:45:05Z 15:45:4
+2026-09-10T19:45:05Z 1789055104
+2026-09-10T19:45:05Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:45:05Z Status: ACTIVE
+2026-09-10T19:45:10Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:45:15Z Wind Speed: 0.00
+2026-09-10T19:45:15Z Temperature: 21.25
+2026-09-10T19:45:15Z PercentExtended: -1
+2026-09-10T19:45:16Z 15:45:14
+2026-09-10T19:45:16Z 1789055114
+2026-09-10T19:45:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:45:16Z Status: ACTIVE
+2026-09-10T19:45:25Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:45:26Z Wind Speed: 2.00
+2026-09-10T19:45:26Z Temperature: 21.50
+2026-09-10T19:45:26Z PercentExtended: -1
+2026-09-10T19:45:26Z 15:45:25
+2026-09-10T19:45:26Z 1789055125
+2026-09-10T19:45:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:45:26Z Status: ACTIVE
+2026-09-10T19:45:36Z Wind Speed: 2.00
+2026-09-10T19:45:36Z Temperature: 21.50
+2026-09-10T19:45:36Z PercentExtended: -1
+2026-09-10T19:45:36Z 15:45:35
+2026-09-10T19:45:36Z 1789055135
+2026-09-10T19:45:36Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:45:36Z Status: ACTIVE
+2026-09-10T19:45:40Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:45:46Z Wind Speed: 0.00
+2026-09-10T19:45:46Z Temperature: 21.50
+2026-09-10T19:45:46Z PercentExtended: -1
+2026-09-10T19:45:46Z 15:45:45
+2026-09-10T19:45:46Z 1789055145
+2026-09-10T19:45:46Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:45:46Z Status: ACTIVE
+2026-09-10T19:45:54Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:45:54Z GET Request
+2026-09-10T19:45:54Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:45:56Z Response code: 200
+2026-09-10T19:45:56Z It took 1 attempts to get a response
+2026-09-10T19:45:56Z {"datetime":"2026-09-10T15:45:55.000Z"}
+2026-09-10T19:45:56Z Syncing Clock to: 2026-09-10T15:45:55.000Z
+2026-09-10T19:45:56Z Uploading chunk 0, 245 bytes
+2026-09-10T19:45:56Z POST Request
+2026-09-10T19:45:56Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:45:57Z Response code: 200
+2026-09-10T19:45:58Z Uploading chunk 1, 35 bytes
+2026-09-10T19:45:58Z POST Request
+2026-09-10T19:45:58Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:45:59Z Response code: 200
+2026-09-10T19:45:59Z Uploaded 2 chunk(s)
+2026-09-10T19:46:00Z Wind Speed: 0.00
+2026-09-10T19:46:00Z Temperature: 21.50
+2026-09-10T19:46:00Z PercentExtended: -1
+2026-09-10T19:46:00Z 15:45:58
+2026-09-10T19:46:00Z 1789055158
+2026-09-10T19:46:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:00Z Status: ACTIVE
+2026-09-10T19:46:00Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:46:10Z Wind Speed: 1.00
+2026-09-10T19:46:10Z Temperature: 21.50
+2026-09-10T19:46:10Z PercentExtended: -1
+2026-09-10T19:46:10Z 15:46:9
+2026-09-10T19:46:10Z 1789055169
+2026-09-10T19:46:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:10Z Status: ACTIVE
+2026-09-10T19:46:15Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:46:20Z Wind Speed: 1.00
+2026-09-10T19:46:20Z Temperature: 21.50
+2026-09-10T19:46:20Z PercentExtended: -1
+2026-09-10T19:46:20Z 15:46:19
+2026-09-10T19:46:20Z 1789055179
+2026-09-10T19:46:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:20Z Status: ACTIVE
+2026-09-10T19:46:30Z Wind Speed: 0.00
+2026-09-10T19:46:30Z Temperature: 21.50
+2026-09-10T19:46:30Z PercentExtended: -1
+2026-09-10T19:46:30Z 15:46:29
+2026-09-10T19:46:30Z 1789055189
+2026-09-10T19:46:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:30Z Status: ACTIVE
+2026-09-10T19:46:30Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:46:40Z Wind Speed: 1.00
+2026-09-10T19:46:40Z Temperature: 21.50
+2026-09-10T19:46:40Z PercentExtended: -1
+2026-09-10T19:46:41Z 15:46:39
+2026-09-10T19:46:41Z 1789055199
+2026-09-10T19:46:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:41Z Status: ACTIVE
+2026-09-10T19:46:46Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:46:51Z Wind Speed: 0.00
+2026-09-10T19:46:51Z Temperature: 21.50
+2026-09-10T19:46:51Z PercentExtended: -1
+2026-09-10T19:46:51Z 15:46:49
+2026-09-10T19:46:51Z 1789055209
+2026-09-10T19:46:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:46:51Z Status: ACTIVE
+2026-09-10T19:47:01Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:47:01Z Wind Speed: 1.00
+2026-09-10T19:47:01Z Temperature: 21.50
+2026-09-10T19:47:01Z PercentExtended: -1
+2026-09-10T19:47:01Z 15:47:0
+2026-09-10T19:47:01Z 1789055220
+2026-09-10T19:47:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:01Z Status: ACTIVE
+2026-09-10T19:47:11Z Wind Speed: 0.00
+2026-09-10T19:47:11Z Temperature: 21.50
+2026-09-10T19:47:11Z PercentExtended: -1
+2026-09-10T19:47:11Z 15:47:10
+2026-09-10T19:47:11Z 1789055230
+2026-09-10T19:47:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:11Z Status: ACTIVE
+2026-09-10T19:47:16Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:47:21Z Wind Speed: 0.00
+2026-09-10T19:47:21Z Temperature: 21.50
+2026-09-10T19:47:21Z PercentExtended: -1
+2026-09-10T19:47:21Z 15:47:20
+2026-09-10T19:47:21Z 1789055240
+2026-09-10T19:47:21Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:21Z Status: ACTIVE
+2026-09-10T19:47:31Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:47:31Z Wind Speed: 0.00
+2026-09-10T19:47:31Z Temperature: 21.75
+2026-09-10T19:47:31Z PercentExtended: -1
+2026-09-10T19:47:31Z 15:47:30
+2026-09-10T19:47:31Z 1789055250
+2026-09-10T19:47:31Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:31Z Status: ACTIVE
+2026-09-10T19:47:41Z Wind Speed: 0.00
+2026-09-10T19:47:41Z Temperature: 21.75
+2026-09-10T19:47:42Z PercentExtended: -1
+2026-09-10T19:47:42Z 15:47:40
+2026-09-10T19:47:42Z 1789055260
+2026-09-10T19:47:42Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:42Z Status: ACTIVE
+2026-09-10T19:47:46Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:47:52Z Wind Speed: 0.00
+2026-09-10T19:47:52Z Temperature: 21.75
+2026-09-10T19:47:52Z PercentExtended: -1
+2026-09-10T19:47:52Z 15:47:50
+2026-09-10T19:47:52Z 1789055270
+2026-09-10T19:47:52Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:47:52Z Status: ACTIVE
+2026-09-10T19:48:00Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:48:00Z GET Request
+2026-09-10T19:48:00Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:48:02Z Response code: 200
+2026-09-10T19:48:02Z It took 1 attempts to get a response
+2026-09-10T19:48:02Z {"datetime":"2026-09-10T15:48:01.000Z"}
+2026-09-10T19:48:02Z Syncing Clock to: 2026-09-10T15:48:01.000Z
+2026-09-10T19:48:02Z Uploading chunk 0, 245 bytes
+2026-09-10T19:48:02Z POST Request
+2026-09-10T19:48:02Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:48:04Z Response code: 200
+2026-09-10T19:48:04Z Uploading chunk 1, 35 bytes
+2026-09-10T19:48:04Z POST Request
+2026-09-10T19:48:04Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:48:05Z Response code: 200
+2026-09-10T19:48:06Z Uploaded 2 chunk(s)
+2026-09-10T19:48:06Z Wind Speed: 1.00
+2026-09-10T19:48:06Z Temperature: 21.75
+2026-09-10T19:48:06Z PercentExtended: -1
+2026-09-10T19:48:06Z 15:48:5
+2026-09-10T19:48:06Z 1789055285
+2026-09-10T19:48:06Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:06Z Status: ACTIVE
+2026-09-10T19:48:07Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:48:16Z Wind Speed: 0.00
+2026-09-10T19:48:16Z Temperature: 21.75
+2026-09-10T19:48:16Z PercentExtended: -1
+2026-09-10T19:48:16Z 15:48:15
+2026-09-10T19:48:16Z 1789055295
+2026-09-10T19:48:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:16Z Status: ACTIVE
+2026-09-10T19:48:22Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:48:26Z Wind Speed: 1.00
+2026-09-10T19:48:26Z Temperature: 21.75
+2026-09-10T19:48:26Z PercentExtended: -1
+2026-09-10T19:48:27Z 15:48:25
+2026-09-10T19:48:27Z 1789055305
+2026-09-10T19:48:27Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:27Z Status: ACTIVE
+2026-09-10T19:48:37Z Wind Speed: 1.00
+2026-09-10T19:48:37Z Temperature: 21.75
+2026-09-10T19:48:37Z PercentExtended: -1
+2026-09-10T19:48:37Z 15:48:35
+2026-09-10T19:48:37Z 1789055315
+2026-09-10T19:48:37Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:37Z Status: ACTIVE
+2026-09-10T19:48:37Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:48:47Z Wind Speed: 0.00
+2026-09-10T19:48:47Z Temperature: 21.75
+2026-09-10T19:48:47Z PercentExtended: -1
+2026-09-10T19:48:47Z 15:48:46
+2026-09-10T19:48:47Z 1789055326
+2026-09-10T19:48:47Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:47Z Status: ACTIVE
+2026-09-10T19:48:52Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:48:57Z Wind Speed: 1.00
+2026-09-10T19:48:57Z Temperature: 21.75
+2026-09-10T19:48:57Z PercentExtended: -1
+2026-09-10T19:48:57Z 15:48:56
+2026-09-10T19:48:57Z 1789055336
+2026-09-10T19:48:57Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:48:57Z Status: ACTIVE
+2026-09-10T19:49:07Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:49:07Z Wind Speed: 0.00
+2026-09-10T19:49:07Z Temperature: 21.75
+2026-09-10T19:49:07Z PercentExtended: -1
+2026-09-10T19:49:07Z 15:49:6
+2026-09-10T19:49:07Z 1789055346
+2026-09-10T19:49:07Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:07Z Status: ACTIVE
+2026-09-10T19:49:17Z Wind Speed: 1.00
+2026-09-10T19:49:17Z Temperature: 21.75
+2026-09-10T19:49:17Z PercentExtended: -1
+2026-09-10T19:49:17Z 15:49:16
+2026-09-10T19:49:17Z 1789055356
+2026-09-10T19:49:17Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:17Z Status: ACTIVE
+2026-09-10T19:49:22Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:49:28Z Wind Speed: 1.00
+2026-09-10T19:49:28Z Temperature: 21.75
+2026-09-10T19:49:28Z PercentExtended: -1
+2026-09-10T19:49:28Z 15:49:26
+2026-09-10T19:49:28Z 1789055366
+2026-09-10T19:49:28Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:28Z Status: ACTIVE
+2026-09-10T19:49:37Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:49:38Z Wind Speed: 1.00
+2026-09-10T19:49:38Z Temperature: 21.75
+2026-09-10T19:49:38Z PercentExtended: -1
+2026-09-10T19:49:38Z 15:49:36
+2026-09-10T19:49:38Z 1789055376
+2026-09-10T19:49:38Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:38Z Status: ACTIVE
+2026-09-10T19:49:48Z Wind Speed: 2.00
+2026-09-10T19:49:48Z Temperature: 21.75
+2026-09-10T19:49:48Z PercentExtended: -1
+2026-09-10T19:49:48Z 15:49:47
+2026-09-10T19:49:48Z 1789055387
+2026-09-10T19:49:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:48Z Status: ACTIVE
+2026-09-10T19:49:52Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:49:58Z Wind Speed: 1.00
+2026-09-10T19:49:58Z Temperature: 21.75
+2026-09-10T19:49:58Z PercentExtended: -1
+2026-09-10T19:49:58Z 15:49:57
+2026-09-10T19:49:58Z 1789055397
+2026-09-10T19:49:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:49:58Z Status: ACTIVE
+2026-09-10T19:50:06Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:50:06Z GET Request
+2026-09-10T19:50:06Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:50:09Z Response code: 200
+2026-09-10T19:50:09Z It took 2 attempts to get a response
+2026-09-10T19:50:09Z {"datetime":"2026-09-10T15:50:09.000Z"}
+2026-09-10T19:50:09Z Syncing Clock to: 2026-09-10T15:50:09.000Z
+2026-09-10T19:50:09Z Uploading chunk 0, 245 bytes
+2026-09-10T19:50:09Z POST Request
+2026-09-10T19:50:09Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:50:11Z Response code: 200
+2026-09-10T19:50:11Z Uploading chunk 1, 35 bytes
+2026-09-10T19:50:11Z POST Request
+2026-09-10T19:50:11Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:50:13Z Response code: 200
+2026-09-10T19:50:13Z Uploaded 2 chunk(s)
+2026-09-10T19:50:13Z Wind Speed: 1.00
+2026-09-10T19:50:13Z Temperature: 21.75
+2026-09-10T19:50:13Z PercentExtended: -1
+2026-09-10T19:50:13Z 15:50:13
+2026-09-10T19:50:13Z 1789055413
+2026-09-10T19:50:13Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:50:13Z Status: ACTIVE
+2026-09-10T19:50:14Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:50:23Z Wind Speed: 1.00
+2026-09-10T19:50:23Z Temperature: 21.75
+2026-09-10T19:50:23Z PercentExtended: -1
+2026-09-10T19:50:24Z 15:50:23
+2026-09-10T19:50:24Z 1789055423
+2026-09-10T19:50:24Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:50:24Z Status: ACTIVE
+2026-09-10T19:50:29Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:50:34Z Wind Speed: 3.00
+2026-09-10T19:50:34Z Temperature: 21.75
+2026-09-10T19:50:34Z PercentExtended: -1
+2026-09-10T19:50:34Z 15:50:33
+2026-09-10T19:50:34Z 1789055433
+2026-09-10T19:50:34Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:50:34Z Status: ACTIVE
+2026-09-10T19:50:44Z Wind Speed: 0.00
+2026-09-10T19:50:44Z Temperature: 21.75
+2026-09-10T19:50:44Z PercentExtended: -1
+2026-09-10T19:50:44Z 15:50:43
+2026-09-10T19:50:44Z 1789055443
+2026-09-10T19:50:44Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:50:44Z Status: ACTIVE
+2026-09-10T19:50:44Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:50:54Z Wind Speed: 0.00
+2026-09-10T19:50:54Z Temperature: 21.75
+2026-09-10T19:50:54Z PercentExtended: -1
+2026-09-10T19:50:54Z 15:50:53
+2026-09-10T19:50:54Z 1789055453
+2026-09-10T19:50:54Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:50:54Z Status: ACTIVE
+2026-09-10T19:50:59Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:51:04Z Wind Speed: 0.00
+2026-09-10T19:51:04Z Temperature: 21.75
+2026-09-10T19:51:04Z PercentExtended: -1
+2026-09-10T19:51:04Z 15:51:3
+2026-09-10T19:51:04Z 1789055463
+2026-09-10T19:51:04Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:04Z Status: ACTIVE
+2026-09-10T19:51:14Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:51:14Z Wind Speed: 0.00
+2026-09-10T19:51:14Z Temperature: 21.75
+2026-09-10T19:51:14Z PercentExtended: -1
+2026-09-10T19:51:14Z 15:51:14
+2026-09-10T19:51:14Z 1789055474
+2026-09-10T19:51:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:14Z Status: ACTIVE
+2026-09-10T19:51:25Z Wind Speed: 0.00
+2026-09-10T19:51:25Z Temperature: 21.75
+2026-09-10T19:51:25Z PercentExtended: -1
+2026-09-10T19:51:25Z 15:51:24
+2026-09-10T19:51:25Z 1789055484
+2026-09-10T19:51:25Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:25Z Status: ACTIVE
+2026-09-10T19:51:29Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:51:35Z Wind Speed: 0.00
+2026-09-10T19:51:35Z Temperature: 21.75
+2026-09-10T19:51:35Z PercentExtended: -1
+2026-09-10T19:51:35Z 15:51:34
+2026-09-10T19:51:35Z 1789055494
+2026-09-10T19:51:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:35Z Status: ACTIVE
+2026-09-10T19:51:44Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:51:45Z Wind Speed: 2.00
+2026-09-10T19:51:45Z Temperature: 21.75
+2026-09-10T19:51:45Z PercentExtended: -1
+2026-09-10T19:51:45Z 15:51:44
+2026-09-10T19:51:45Z 1789055504
+2026-09-10T19:51:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:45Z Status: ACTIVE
+2026-09-10T19:51:55Z Wind Speed: 1.00
+2026-09-10T19:51:55Z Temperature: 21.75
+2026-09-10T19:51:55Z PercentExtended: -1
+2026-09-10T19:51:55Z 15:51:54
+2026-09-10T19:51:55Z 1789055514
+2026-09-10T19:51:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:51:55Z Status: ACTIVE
+2026-09-10T19:51:59Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:52:05Z Wind Speed: 2.00
+2026-09-10T19:52:05Z Temperature: 21.75
+2026-09-10T19:52:05Z PercentExtended: -1
+2026-09-10T19:52:05Z 15:52:5
+2026-09-10T19:52:05Z 1789055525
+2026-09-10T19:52:05Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:52:05Z Status: ACTIVE
+2026-09-10T19:52:13Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:52:14Z GET Request
+2026-09-10T19:52:14Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:52:15Z Response code: 200
+2026-09-10T19:52:15Z It took 1 attempts to get a response
+2026-09-10T19:52:15Z {"datetime":"2026-09-10T15:52:15.000Z"}
+2026-09-10T19:52:15Z Syncing Clock to: 2026-09-10T15:52:15.000Z
+2026-09-10T19:52:15Z Uploading chunk 0, 245 bytes
+2026-09-10T19:52:15Z POST Request
+2026-09-10T19:52:15Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:52:17Z Response code: 200
+2026-09-10T19:52:17Z Uploading chunk 1, 35 bytes
+2026-09-10T19:52:17Z POST Request
+2026-09-10T19:52:17Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:52:18Z Response code: 200
+2026-09-10T19:52:19Z Uploaded 2 chunk(s)
+2026-09-10T19:52:19Z Wind Speed: 0.00
+2026-09-10T19:52:19Z Temperature: 21.75
+2026-09-10T19:52:19Z PercentExtended: -1
+2026-09-10T19:52:19Z 15:52:19
+2026-09-10T19:52:19Z 1789055539
+2026-09-10T19:52:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:52:19Z Status: ACTIVE
+2026-09-10T19:52:20Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:52:29Z Wind Speed: 2.00
+2026-09-10T19:52:29Z Temperature: 21.75
+2026-09-10T19:52:29Z PercentExtended: -1
+2026-09-10T19:52:29Z 15:52:29
+2026-09-10T19:52:29Z 1789055549
+2026-09-10T19:52:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:52:29Z Status: ACTIVE
+2026-09-10T19:52:35Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:52:39Z Wind Speed: 0.00
+2026-09-10T19:52:39Z Temperature: 21.75
+2026-09-10T19:52:39Z PercentExtended: -1
+2026-09-10T19:52:40Z 15:52:39
+2026-09-10T19:52:40Z 1789055559
+2026-09-10T19:52:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:52:40Z Status: ACTIVE
+2026-09-10T19:52:50Z Wind Speed: 2.00
+2026-09-10T19:52:50Z Temperature: 21.75
+2026-09-10T19:52:50Z PercentExtended: -1
+2026-09-10T19:52:50Z 15:52:49
+2026-09-10T19:52:50Z 1789055569
+2026-09-10T19:52:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:52:50Z Status: ACTIVE
+2026-09-10T19:52:50Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:53:00Z Wind Speed: 2.00
+2026-09-10T19:53:00Z Temperature: 21.75
+2026-09-10T19:53:00Z PercentExtended: -1
+2026-09-10T19:53:00Z 15:52:59
+2026-09-10T19:53:00Z 1789055579
+2026-09-10T19:53:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:00Z Status: ACTIVE
+2026-09-10T19:53:05Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:53:10Z Wind Speed: 1.00
+2026-09-10T19:53:10Z Temperature: 21.75
+2026-09-10T19:53:10Z PercentExtended: -1
+2026-09-10T19:53:10Z 15:53:9
+2026-09-10T19:53:10Z 1789055589
+2026-09-10T19:53:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:10Z Status: ACTIVE
+2026-09-10T19:53:20Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:53:20Z Wind Speed: 1.00
+2026-09-10T19:53:20Z Temperature: 21.75
+2026-09-10T19:53:20Z PercentExtended: -1
+2026-09-10T19:53:20Z 15:53:20
+2026-09-10T19:53:20Z 1789055600
+2026-09-10T19:53:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:20Z Status: ACTIVE
+2026-09-10T19:53:30Z Wind Speed: 4.00
+2026-09-10T19:53:30Z Temperature: 21.75
+2026-09-10T19:53:30Z PercentExtended: -1
+2026-09-10T19:53:30Z 15:53:30
+2026-09-10T19:53:30Z 1789055610
+2026-09-10T19:53:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:30Z Status: ACTIVE
+2026-09-10T19:53:35Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:53:41Z Wind Speed: 1.00
+2026-09-10T19:53:41Z Temperature: 21.75
+2026-09-10T19:53:41Z PercentExtended: -1
+2026-09-10T19:53:41Z 15:53:40
+2026-09-10T19:53:41Z 1789055620
+2026-09-10T19:53:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:41Z Status: ACTIVE
+2026-09-10T19:53:50Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:53:51Z Wind Speed: 0.00
+2026-09-10T19:53:51Z Temperature: 21.75
+2026-09-10T19:53:51Z PercentExtended: -1
+2026-09-10T19:53:51Z 15:53:50
+2026-09-10T19:53:51Z 1789055630
+2026-09-10T19:53:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:53:51Z Status: ACTIVE
+2026-09-10T19:54:01Z Wind Speed: 3.00
+2026-09-10T19:54:01Z Temperature: 22.00
+2026-09-10T19:54:01Z PercentExtended: -1
+2026-09-10T19:54:01Z 15:54:0
+2026-09-10T19:54:01Z 1789055640
+2026-09-10T19:54:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:01Z Status: ACTIVE
+2026-09-10T19:54:05Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:54:11Z Wind Speed: 2.00
+2026-09-10T19:54:11Z Temperature: 22.00
+2026-09-10T19:54:11Z PercentExtended: -1
+2026-09-10T19:54:11Z 15:54:11
+2026-09-10T19:54:11Z 1789055651
+2026-09-10T19:54:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:11Z Status: ACTIVE
+2026-09-10T19:54:19Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:54:19Z GET Request
+2026-09-10T19:54:19Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:54:21Z Response code: 200
+2026-09-10T19:54:21Z It took 1 attempts to get a response
+2026-09-10T19:54:21Z {"datetime":"2026-09-10T15:54:21.000Z"}
+2026-09-10T19:54:21Z Syncing Clock to: 2026-09-10T15:54:21.000Z
+2026-09-10T19:54:21Z Uploading chunk 0, 245 bytes
+2026-09-10T19:54:21Z POST Request
+2026-09-10T19:54:21Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:54:23Z Response code: 200
+2026-09-10T19:54:23Z Uploading chunk 1, 35 bytes
+2026-09-10T19:54:23Z POST Request
+2026-09-10T19:54:23Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:54:24Z Response code: 200
+2026-09-10T19:54:25Z Uploaded 2 chunk(s)
+2026-09-10T19:54:25Z Wind Speed: 2.00
+2026-09-10T19:54:25Z Temperature: 22.00
+2026-09-10T19:54:25Z PercentExtended: -1
+2026-09-10T19:54:25Z 15:54:25
+2026-09-10T19:54:25Z 1789055665
+2026-09-10T19:54:25Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:25Z Status: ACTIVE
+2026-09-10T19:54:26Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:54:35Z Wind Speed: 1.00
+2026-09-10T19:54:35Z Temperature: 22.00
+2026-09-10T19:54:35Z PercentExtended: -1
+2026-09-10T19:54:35Z 15:54:35
+2026-09-10T19:54:35Z 1789055675
+2026-09-10T19:54:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:35Z Status: ACTIVE
+2026-09-10T19:54:41Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:54:45Z Wind Speed: 0.00
+2026-09-10T19:54:45Z Temperature: 22.00
+2026-09-10T19:54:45Z PercentExtended: -1
+2026-09-10T19:54:46Z 15:54:45
+2026-09-10T19:54:46Z 1789055685
+2026-09-10T19:54:46Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:46Z Status: ACTIVE
+2026-09-10T19:54:56Z Wind Speed: 1.00
+2026-09-10T19:54:56Z Temperature: 22.00
+2026-09-10T19:54:56Z PercentExtended: -1
+2026-09-10T19:54:56Z 15:54:55
+2026-09-10T19:54:56Z 1789055695
+2026-09-10T19:54:56Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:54:56Z Status: ACTIVE
+2026-09-10T19:54:56Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:55:06Z Wind Speed: 0.00
+2026-09-10T19:55:06Z Temperature: 22.00
+2026-09-10T19:55:06Z PercentExtended: -1
+2026-09-10T19:55:06Z 15:55:5
+2026-09-10T19:55:06Z 1789055705
+2026-09-10T19:55:06Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:06Z Status: ACTIVE
+2026-09-10T19:55:11Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:55:16Z Wind Speed: 2.00
+2026-09-10T19:55:16Z Temperature: 22.00
+2026-09-10T19:55:16Z PercentExtended: -1
+2026-09-10T19:55:16Z 15:55:15
+2026-09-10T19:55:16Z 1789055715
+2026-09-10T19:55:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:16Z Status: ACTIVE
+2026-09-10T19:55:26Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:55:26Z Wind Speed: 0.00
+2026-09-10T19:55:26Z Temperature: 22.00
+2026-09-10T19:55:26Z PercentExtended: -1
+2026-09-10T19:55:26Z 15:55:26
+2026-09-10T19:55:26Z 1789055726
+2026-09-10T19:55:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:26Z Status: ACTIVE
+2026-09-10T19:55:36Z Wind Speed: 2.00
+2026-09-10T19:55:36Z Temperature: 22.00
+2026-09-10T19:55:36Z PercentExtended: -1
+2026-09-10T19:55:36Z 15:55:36
+2026-09-10T19:55:36Z 1789055736
+2026-09-10T19:55:36Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:36Z Status: ACTIVE
+2026-09-10T19:55:41Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:55:47Z Wind Speed: 1.00
+2026-09-10T19:55:47Z Temperature: 22.00
+2026-09-10T19:55:47Z PercentExtended: -1
+2026-09-10T19:55:47Z 15:55:46
+2026-09-10T19:55:47Z 1789055746
+2026-09-10T19:55:47Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:47Z Status: ACTIVE
+2026-09-10T19:55:56Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:55:57Z Wind Speed: 1.00
+2026-09-10T19:55:57Z Temperature: 22.00
+2026-09-10T19:55:57Z PercentExtended: -1
+2026-09-10T19:55:57Z 15:55:56
+2026-09-10T19:55:57Z 1789055756
+2026-09-10T19:55:57Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:55:57Z Status: ACTIVE
+2026-09-10T19:56:07Z Wind Speed: 3.00
+2026-09-10T19:56:07Z Temperature: 22.00
+2026-09-10T19:56:07Z PercentExtended: -1
+2026-09-10T19:56:07Z 15:56:6
+2026-09-10T19:56:07Z 1789055766
+2026-09-10T19:56:07Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:56:07Z Status: ACTIVE
+2026-09-10T19:56:11Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:56:17Z Wind Speed: 1.00
+2026-09-10T19:56:17Z Temperature: 22.00
+2026-09-10T19:56:17Z PercentExtended: -1
+2026-09-10T19:56:17Z 15:56:17
+2026-09-10T19:56:17Z 1789055777
+2026-09-10T19:56:17Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:56:17Z Status: ACTIVE
+2026-09-10T19:56:25Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:56:25Z GET Request
+2026-09-10T19:56:25Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:56:27Z Response code: 200
+2026-09-10T19:56:27Z It took 1 attempts to get a response
+2026-09-10T19:56:27Z {"datetime":"2026-09-10T15:56:26.000Z"}
+2026-09-10T19:56:27Z Syncing Clock to: 2026-09-10T15:56:26.000Z
+2026-09-10T19:56:27Z Uploading chunk 0, 245 bytes
+2026-09-10T19:56:27Z POST Request
+2026-09-10T19:56:27Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:56:29Z Response code: 200
+2026-09-10T19:56:29Z Uploading chunk 1, 35 bytes
+2026-09-10T19:56:29Z POST Request
+2026-09-10T19:56:29Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:56:31Z Response code: 200
+2026-09-10T19:56:31Z Uploaded 2 chunk(s)
+2026-09-10T19:56:31Z Wind Speed: 0.00
+2026-09-10T19:56:31Z Temperature: 22.00
+2026-09-10T19:56:31Z PercentExtended: -1
+2026-09-10T19:56:31Z 15:56:30
+2026-09-10T19:56:31Z 1789055790
+2026-09-10T19:56:31Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:56:31Z Status: ACTIVE
+2026-09-10T19:56:32Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:56:41Z Wind Speed: 0.00
+2026-09-10T19:56:41Z Temperature: 22.00
+2026-09-10T19:56:41Z PercentExtended: -1
+2026-09-10T19:56:41Z 15:56:40
+2026-09-10T19:56:41Z 1789055800
+2026-09-10T19:56:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:56:41Z Status: ACTIVE
+2026-09-10T19:56:47Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:56:51Z Wind Speed: 0.00
+2026-09-10T19:56:51Z Temperature: 22.00
+2026-09-10T19:56:51Z PercentExtended: -1
+2026-09-10T19:56:52Z 15:56:50
+2026-09-10T19:56:52Z 1789055810
+2026-09-10T19:56:52Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:56:52Z Status: ACTIVE
+2026-09-10T19:57:02Z Wind Speed: 0.00
+2026-09-10T19:57:02Z Temperature: 22.00
+2026-09-10T19:57:02Z PercentExtended: -1
+2026-09-10T19:57:02Z 15:57:0
+2026-09-10T19:57:02Z 1789055820
+2026-09-10T19:57:02Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:02Z Status: ACTIVE
+2026-09-10T19:57:02Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:57:12Z Wind Speed: 0.00
+2026-09-10T19:57:12Z Temperature: 21.75
+2026-09-10T19:57:12Z PercentExtended: -1
+2026-09-10T19:57:12Z 15:57:10
+2026-09-10T19:57:12Z 1789055830
+2026-09-10T19:57:12Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:12Z Status: ACTIVE
+2026-09-10T19:57:17Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:57:22Z Wind Speed: 0.00
+2026-09-10T19:57:22Z Temperature: 21.75
+2026-09-10T19:57:22Z PercentExtended: -1
+2026-09-10T19:57:22Z 15:57:21
+2026-09-10T19:57:22Z 1789055841
+2026-09-10T19:57:22Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:22Z Status: ACTIVE
+2026-09-10T19:57:32Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:57:32Z Wind Speed: 2.00
+2026-09-10T19:57:32Z Temperature: 21.75
+2026-09-10T19:57:32Z PercentExtended: -1
+2026-09-10T19:57:32Z 15:57:31
+2026-09-10T19:57:32Z 1789055851
+2026-09-10T19:57:32Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:32Z Status: ACTIVE
+2026-09-10T19:57:42Z Wind Speed: 0.00
+2026-09-10T19:57:42Z Temperature: 21.75
+2026-09-10T19:57:42Z PercentExtended: -1
+2026-09-10T19:57:42Z 15:57:41
+2026-09-10T19:57:42Z 1789055861
+2026-09-10T19:57:42Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:42Z Status: ACTIVE
+2026-09-10T19:57:47Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:57:53Z Wind Speed: 1.00
+2026-09-10T19:57:53Z Temperature: 21.75
+2026-09-10T19:57:53Z PercentExtended: -1
+2026-09-10T19:57:53Z 15:57:51
+2026-09-10T19:57:53Z 1789055871
+2026-09-10T19:57:53Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:57:53Z Status: ACTIVE
+2026-09-10T19:58:02Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T19:58:03Z Wind Speed: 1.00
+2026-09-10T19:58:03Z Temperature: 21.75
+2026-09-10T19:58:03Z PercentExtended: -1
+2026-09-10T19:58:03Z 15:58:1
+2026-09-10T19:58:03Z 1789055881
+2026-09-10T19:58:03Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:03Z Status: ACTIVE
+2026-09-10T19:58:13Z Wind Speed: 1.00
+2026-09-10T19:58:13Z Temperature: 22.00
+2026-09-10T19:58:13Z PercentExtended: -1
+2026-09-10T19:58:13Z 15:58:11
+2026-09-10T19:58:13Z 1789055891
+2026-09-10T19:58:13Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:13Z Status: ACTIVE
+2026-09-10T19:58:17Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T19:58:23Z Wind Speed: 1.00
+2026-09-10T19:58:23Z Temperature: 22.00
+2026-09-10T19:58:23Z PercentExtended: -1
+2026-09-10T19:58:23Z 15:58:22
+2026-09-10T19:58:23Z 1789055902
+2026-09-10T19:58:23Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:23Z Status: ACTIVE
+2026-09-10T19:58:31Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T19:58:31Z GET Request
+2026-09-10T19:58:31Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T19:58:33Z Response code: 200
+2026-09-10T19:58:33Z It took 1 attempts to get a response
+2026-09-10T19:58:33Z {"datetime":"2026-09-10T15:58:33.000Z"}
+2026-09-10T19:58:33Z Syncing Clock to: 2026-09-10T15:58:33.000Z
+2026-09-10T19:58:33Z Uploading chunk 0, 245 bytes
+2026-09-10T19:58:33Z POST Request
+2026-09-10T19:58:33Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:58:35Z Response code: 200
+2026-09-10T19:58:35Z Uploading chunk 1, 35 bytes
+2026-09-10T19:58:35Z POST Request
+2026-09-10T19:58:35Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T19:58:37Z Response code: 200
+2026-09-10T19:58:37Z Uploaded 2 chunk(s)
+2026-09-10T19:58:37Z Wind Speed: 3.00
+2026-09-10T19:58:37Z Temperature: 22.00
+2026-09-10T19:58:37Z PercentExtended: -1
+2026-09-10T19:58:37Z 15:58:37
+2026-09-10T19:58:37Z 1789055917
+2026-09-10T19:58:37Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:37Z Status: ACTIVE
+2026-09-10T19:58:38Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T19:58:48Z Wind Speed: 0.00
+2026-09-10T19:58:48Z Temperature: 22.00
+2026-09-10T19:58:48Z PercentExtended: -1
+2026-09-10T19:58:48Z 15:58:47
+2026-09-10T19:58:48Z 1789055927
+2026-09-10T19:58:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:48Z Status: ACTIVE
+2026-09-10T19:58:53Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T19:58:58Z Wind Speed: 1.00
+2026-09-10T19:58:58Z Temperature: 22.00
+2026-09-10T19:58:58Z PercentExtended: -1
+2026-09-10T19:58:58Z 15:58:57
+2026-09-10T19:58:58Z 1789055937
+2026-09-10T19:58:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:58:58Z Status: ACTIVE
+2026-09-10T19:59:08Z Wind Speed: 1.00
+2026-09-10T19:59:08Z Temperature: 22.00
+2026-09-10T19:59:08Z PercentExtended: -1
+2026-09-10T19:59:08Z 15:59:7
+2026-09-10T19:59:08Z 1789055947
+2026-09-10T19:59:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:08Z Status: ACTIVE
+2026-09-10T19:59:08Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T19:59:18Z Wind Speed: 0.00
+2026-09-10T19:59:18Z Temperature: 22.00
+2026-09-10T19:59:18Z PercentExtended: -1
+2026-09-10T19:59:18Z 15:59:18
+2026-09-10T19:59:18Z 1789055958
+2026-09-10T19:59:18Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:18Z Status: ACTIVE
+2026-09-10T19:59:23Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T19:59:28Z Wind Speed: 1.00
+2026-09-10T19:59:28Z Temperature: 22.00
+2026-09-10T19:59:28Z PercentExtended: -1
+2026-09-10T19:59:28Z 15:59:28
+2026-09-10T19:59:28Z 1789055968
+2026-09-10T19:59:28Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:28Z Status: ACTIVE
+2026-09-10T19:59:38Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T19:59:38Z Wind Speed: 0.00
+2026-09-10T19:59:38Z Temperature: 22.00
+2026-09-10T19:59:38Z PercentExtended: -1
+2026-09-10T19:59:38Z 15:59:38
+2026-09-10T19:59:38Z 1789055978
+2026-09-10T19:59:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:39Z Status: ACTIVE
+2026-09-10T19:59:49Z Wind Speed: 1.00
+2026-09-10T19:59:49Z Temperature: 22.00
+2026-09-10T19:59:49Z PercentExtended: -1
+2026-09-10T19:59:49Z 15:59:48
+2026-09-10T19:59:49Z 1789055988
+2026-09-10T19:59:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:49Z Status: ACTIVE
+2026-09-10T19:59:53Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T19:59:59Z Wind Speed: 1.00
+2026-09-10T19:59:59Z Temperature: 22.00
+2026-09-10T19:59:59Z PercentExtended: -1
+2026-09-10T19:59:59Z 15:59:58
+2026-09-10T19:59:59Z 1789055998
+2026-09-10T19:59:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T19:59:59Z Status: ACTIVE
+2026-09-10T20:00:00Z Alarm detected and cleared.
+2026-09-10T20:00:00Z Alarm was set.
+2026-09-10T20:00:00Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:00:00Z GET Request
+2026-09-10T20:00:00Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:00:02Z Response code: 200
+2026-09-10T20:00:02Z It took 1 attempts to get a response
+2026-09-10T20:00:02Z {"datetime":"2026-09-10T16:00:01.000Z"}
+2026-09-10T20:00:02Z Syncing Clock to: 2026-09-10T16:00:01.000Z
+2026-09-10T20:00:02Z Uploading chunk 0, 210 bytes
+2026-09-10T20:00:02Z POST Request
+2026-09-10T20:00:02Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:00:04Z Response code: 200
+2026-09-10T20:00:04Z Uploaded 1 chunk(s)
+2026-09-10T20:00:04Z BENCH_TEST: would extend to 95%
+2026-09-10T20:00:09Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T20:00:09Z Wind Speed: 1.00
+2026-09-10T20:00:09Z Temperature: 22.00
+2026-09-10T20:00:09Z PercentExtended: -1
+2026-09-10T20:00:09Z 16:0:8
+2026-09-10T20:00:09Z 1789056008
+2026-09-10T20:00:09Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:00:09Z Status: ACTIVE
+2026-09-10T20:00:19Z Wind Speed: 1.00
+2026-09-10T20:00:19Z Temperature: 22.00
+2026-09-10T20:00:19Z PercentExtended: -1
+2026-09-10T20:00:19Z 16:0:18
+2026-09-10T20:00:19Z 1789056018
+2026-09-10T20:00:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:00:19Z Status: ACTIVE
+2026-09-10T20:00:24Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T20:00:29Z Wind Speed: 0.00
+2026-09-10T20:00:29Z Temperature: 22.00
+2026-09-10T20:00:29Z PercentExtended: -1
+2026-09-10T20:00:29Z 16:0:28
+2026-09-10T20:00:29Z 1789056028
+2026-09-10T20:00:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:00:29Z Status: ACTIVE
+2026-09-10T20:00:37Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:00:38Z GET Request
+2026-09-10T20:00:38Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:00:39Z Response code: 200
+2026-09-10T20:00:39Z It took 1 attempts to get a response
+2026-09-10T20:00:39Z {"datetime":"2026-09-10T16:00:39.000Z"}
+2026-09-10T20:00:39Z Syncing Clock to: 2026-09-10T16:00:39.000Z
+2026-09-10T20:00:39Z Uploading chunk 0, 70 bytes
+2026-09-10T20:00:39Z POST Request
+2026-09-10T20:00:39Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:00:41Z Response code: 200
+2026-09-10T20:00:41Z Uploaded 1 chunk(s)
+2026-09-10T20:00:42Z Wind Speed: 1.00
+2026-09-10T20:00:42Z Temperature: 22.00
+2026-09-10T20:00:42Z PercentExtended: -1
+2026-09-10T20:00:42Z 16:0:41
+2026-09-10T20:00:42Z 1789056041
+2026-09-10T20:00:42Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:00:42Z Status: ACTIVE
+2026-09-10T20:00:42Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T20:00:52Z Wind Speed: 1.00
+2026-09-10T20:00:52Z Temperature: 22.00
+2026-09-10T20:00:52Z PercentExtended: -1
+2026-09-10T20:00:52Z 16:0:51
+2026-09-10T20:00:52Z 1789056051
+2026-09-10T20:00:52Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:00:52Z Status: ACTIVE
+2026-09-10T20:00:57Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T20:01:02Z Wind Speed: 0.00
+2026-09-10T20:01:02Z Temperature: 22.00
+2026-09-10T20:01:02Z PercentExtended: -1
+2026-09-10T20:01:02Z 16:1:1
+2026-09-10T20:01:02Z 1789056061
+2026-09-10T20:01:02Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:02Z Status: ACTIVE
+2026-09-10T20:01:12Z Wind Speed: 0.00
+2026-09-10T20:01:12Z Temperature: 22.00
+2026-09-10T20:01:12Z PercentExtended: -1
+2026-09-10T20:01:12Z 16:1:11
+2026-09-10T20:01:12Z 1789056071
+2026-09-10T20:01:12Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:12Z Status: ACTIVE
+2026-09-10T20:01:12Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T20:01:22Z Wind Speed: 1.00
+2026-09-10T20:01:22Z Temperature: 22.00
+2026-09-10T20:01:22Z PercentExtended: -1
+2026-09-10T20:01:23Z 16:1:22
+2026-09-10T20:01:23Z 1789056082
+2026-09-10T20:01:23Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:23Z Status: ACTIVE
+2026-09-10T20:01:28Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T20:01:33Z Wind Speed: 2.00
+2026-09-10T20:01:33Z Temperature: 22.25
+2026-09-10T20:01:33Z PercentExtended: -1
+2026-09-10T20:01:33Z 16:1:32
+2026-09-10T20:01:33Z 1789056092
+2026-09-10T20:01:33Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:33Z Status: ACTIVE
+2026-09-10T20:01:43Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T20:01:43Z Wind Speed: 1.00
+2026-09-10T20:01:43Z Temperature: 22.25
+2026-09-10T20:01:43Z PercentExtended: -1
+2026-09-10T20:01:43Z 16:1:42
+2026-09-10T20:01:43Z 1789056102
+2026-09-10T20:01:43Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:43Z Status: ACTIVE
+2026-09-10T20:01:53Z Wind Speed: 1.00
+2026-09-10T20:01:53Z Temperature: 22.25
+2026-09-10T20:01:53Z PercentExtended: -1
+2026-09-10T20:01:53Z 16:1:52
+2026-09-10T20:01:53Z 1789056112
+2026-09-10T20:01:53Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:01:53Z Status: ACTIVE
+2026-09-10T20:01:58Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T20:02:03Z Wind Speed: 0.00
+2026-09-10T20:02:03Z Temperature: 22.25
+2026-09-10T20:02:03Z PercentExtended: -1
+2026-09-10T20:02:03Z 16:2:2
+2026-09-10T20:02:03Z 1789056122
+2026-09-10T20:02:03Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:03Z Status: ACTIVE
+2026-09-10T20:02:13Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T20:02:13Z Wind Speed: 0.00
+2026-09-10T20:02:13Z Temperature: 22.25
+2026-09-10T20:02:13Z PercentExtended: -1
+2026-09-10T20:02:13Z 16:2:13
+2026-09-10T20:02:13Z 1789056133
+2026-09-10T20:02:13Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:13Z Status: ACTIVE
+2026-09-10T20:02:23Z Wind Speed: 1.00
+2026-09-10T20:02:23Z Temperature: 22.25
+2026-09-10T20:02:23Z PercentExtended: -1
+2026-09-10T20:02:24Z 16:2:23
+2026-09-10T20:02:24Z 1789056143
+2026-09-10T20:02:24Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:24Z Status: ACTIVE
+2026-09-10T20:02:28Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T20:02:34Z Wind Speed: 3.00
+2026-09-10T20:02:34Z Temperature: 22.25
+2026-09-10T20:02:34Z PercentExtended: -1
+2026-09-10T20:02:34Z 16:2:33
+2026-09-10T20:02:34Z 1789056153
+2026-09-10T20:02:34Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:34Z Status: ACTIVE
+2026-09-10T20:02:42Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:02:42Z GET Request
+2026-09-10T20:02:42Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:02:44Z Response code: 200
+2026-09-10T20:02:44Z It took 1 attempts to get a response
+2026-09-10T20:02:44Z {"datetime":"2026-09-10T16:02:43.000Z"}
+2026-09-10T20:02:44Z Syncing Clock to: 2026-09-10T16:02:43.000Z
+2026-09-10T20:02:44Z Uploading chunk 0, 245 bytes
+2026-09-10T20:02:44Z POST Request
+2026-09-10T20:02:44Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:02:45Z Response code: 200
+2026-09-10T20:02:46Z Uploading chunk 1, 35 bytes
+2026-09-10T20:02:46Z POST Request
+2026-09-10T20:02:46Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:02:47Z Response code: 200
+2026-09-10T20:02:48Z Uploaded 2 chunk(s)
+2026-09-10T20:02:48Z Wind Speed: 2.00
+2026-09-10T20:02:48Z Temperature: 22.25
+2026-09-10T20:02:48Z PercentExtended: -1
+2026-09-10T20:02:48Z 16:2:47
+2026-09-10T20:02:48Z 1789056167
+2026-09-10T20:02:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:48Z Status: ACTIVE
+2026-09-10T20:02:48Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T20:02:58Z Wind Speed: 1.00
+2026-09-10T20:02:58Z Temperature: 22.25
+2026-09-10T20:02:58Z PercentExtended: -1
+2026-09-10T20:02:58Z 16:2:57
+2026-09-10T20:02:58Z 1789056177
+2026-09-10T20:02:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:02:58Z Status: ACTIVE
+2026-09-10T20:03:03Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T20:03:08Z Wind Speed: 0.00
+2026-09-10T20:03:08Z Temperature: 22.25
+2026-09-10T20:03:08Z PercentExtended: -1
+2026-09-10T20:03:08Z 16:3:7
+2026-09-10T20:03:08Z 1789056187
+2026-09-10T20:03:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:08Z Status: ACTIVE
+2026-09-10T20:03:18Z Wind Speed: 2.00
+2026-09-10T20:03:18Z Temperature: 22.25
+2026-09-10T20:03:18Z PercentExtended: -1
+2026-09-10T20:03:19Z 16:3:17
+2026-09-10T20:03:19Z 1789056197
+2026-09-10T20:03:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:19Z Status: ACTIVE
+2026-09-10T20:03:19Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T20:03:29Z Wind Speed: 1.00
+2026-09-10T20:03:29Z Temperature: 22.25
+2026-09-10T20:03:29Z PercentExtended: -1
+2026-09-10T20:03:29Z 16:3:27
+2026-09-10T20:03:29Z 1789056207
+2026-09-10T20:03:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:29Z Status: ACTIVE
+2026-09-10T20:03:34Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T20:03:39Z Wind Speed: 0.00
+2026-09-10T20:03:39Z Temperature: 22.25
+2026-09-10T20:03:39Z PercentExtended: -1
+2026-09-10T20:03:39Z 16:3:38
+2026-09-10T20:03:39Z 1789056218
+2026-09-10T20:03:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:39Z Status: ACTIVE
+2026-09-10T20:03:49Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T20:03:49Z Wind Speed: 1.00
+2026-09-10T20:03:49Z Temperature: 22.25
+2026-09-10T20:03:49Z PercentExtended: -1
+2026-09-10T20:03:49Z 16:3:48
+2026-09-10T20:03:49Z 1789056228
+2026-09-10T20:03:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:49Z Status: ACTIVE
+2026-09-10T20:03:59Z Wind Speed: 1.00
+2026-09-10T20:03:59Z Temperature: 22.25
+2026-09-10T20:03:59Z PercentExtended: -1
+2026-09-10T20:03:59Z 16:3:58
+2026-09-10T20:03:59Z 1789056238
+2026-09-10T20:03:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:03:59Z Status: ACTIVE
+2026-09-10T20:04:04Z Spooled row into chunk 0, now 210 bytes
+2026-09-10T20:04:09Z Wind Speed: 0.00
+2026-09-10T20:04:09Z Temperature: 22.25
+2026-09-10T20:04:09Z PercentExtended: -1
+2026-09-10T20:04:09Z 16:4:8
+2026-09-10T20:04:09Z 1789056248
+2026-09-10T20:04:09Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:04:09Z Status: ACTIVE
+2026-09-10T20:04:19Z Spooled row into chunk 0, now 245 bytes
+2026-09-10T20:04:19Z Wind Speed: 0.00
+2026-09-10T20:04:19Z Temperature: 22.25
+2026-09-10T20:04:19Z PercentExtended: -1
+2026-09-10T20:04:20Z 16:4:18
+2026-09-10T20:04:20Z 1789056258
+2026-09-10T20:04:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:04:20Z Status: ACTIVE
+2026-09-10T20:04:30Z Wind Speed: 0.00
+2026-09-10T20:04:30Z Temperature: 22.25
+2026-09-10T20:04:30Z PercentExtended: -1
+2026-09-10T20:04:30Z 16:4:29
+2026-09-10T20:04:30Z 1789056269
+2026-09-10T20:04:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:04:30Z Status: ACTIVE
+2026-09-10T20:04:34Z Spooled row into chunk 1, now 35 bytes
+2026-09-10T20:04:40Z Wind Speed: 0.00
+2026-09-10T20:04:40Z Temperature: 22.25
+2026-09-10T20:04:40Z PercentExtended: -1
+2026-09-10T20:04:40Z 16:4:39
+2026-09-10T20:04:40Z 1789056279
+2026-09-10T20:04:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:04:40Z Status: ACTIVE
+2026-09-10T20:04:48Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:04:48Z GET Request
+2026-09-10T20:04:48Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:04:50Z Response code: 200
+2026-09-10T20:04:50Z It took 1 attempts to get a response
+2026-09-10T20:04:50Z {"datetime":"2026-09-10T16:04:49.000Z"}
+2026-09-10T20:04:50Z Syncing Clock to: 2026-09-10T16:04:49.000Z
+2026-09-10T20:04:50Z Uploading chunk 0, 245 bytes
+2026-09-10T20:04:50Z POST Request
+2026-09-10T20:04:50Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:04:51Z Response code: 200
+2026-09-10T20:04:52Z Uploading chunk 1, 35 bytes
+2026-09-10T20:04:52Z POST Request
+2026-09-10T20:04:52Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:04:53Z Response code: 200
+2026-09-10T20:04:53Z Uploaded 2 chunk(s)
+2026-09-10T20:04:54Z Wind Speed: 1.00
+2026-09-10T20:04:54Z Temperature: 22.25
+2026-09-10T20:04:54Z PercentExtended: -1
+2026-09-10T20:04:54Z 16:4:53
+2026-09-10T20:04:54Z 1789056293
+2026-09-10T20:04:54Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:04:54Z Status: ACTIVE
+2026-09-10T20:04:54Z Spooled row into chunk 0, now 35 bytes
+2026-09-10T20:05:04Z Wind Speed: 1.00
+2026-09-10T20:05:04Z Temperature: 22.25
+2026-09-10T20:05:04Z PercentExtended: -1
+2026-09-10T20:05:04Z 16:5:3
+2026-09-10T20:05:04Z 1789056303
+2026-09-10T20:05:04Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:04Z Status: ACTIVE
+2026-09-10T20:05:09Z Spooled row into chunk 0, now 70 bytes
+2026-09-10T20:05:14Z Wind Speed: 0.00
+2026-09-10T20:05:14Z Temperature: 22.25
+2026-09-10T20:05:14Z PercentExtended: -1
+2026-09-10T20:05:14Z 16:5:13
+2026-09-10T20:05:14Z 1789056313
+2026-09-10T20:05:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:14Z Status: ACTIVE
+2026-09-10T20:05:24Z Wind Speed: 0.00
+2026-09-10T20:05:24Z Temperature: 22.25
+2026-09-10T20:05:24Z PercentExtended: -1
+2026-09-10T20:05:24Z 16:5:23
+2026-09-10T20:05:24Z 1789056323
+2026-09-10T20:05:24Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:24Z Status: ACTIVE
+2026-09-10T20:05:25Z Spooled row into chunk 0, now 105 bytes
+2026-09-10T20:05:35Z Wind Speed: 1.00
+2026-09-10T20:05:35Z Temperature: 22.25
+2026-09-10T20:05:35Z PercentExtended: -1
+2026-09-10T20:05:35Z 16:5:33
+2026-09-10T20:05:35Z 1789056333
+2026-09-10T20:05:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:35Z Status: ACTIVE
+2026-09-10T20:05:40Z Spooled row into chunk 0, now 140 bytes
+2026-09-10T20:05:45Z Wind Speed: 0.00
+2026-09-10T20:05:45Z Temperature: 22.25
+2026-09-10T20:05:45Z PercentExtended: -1
+2026-09-10T20:05:45Z 16:5:43
+2026-09-10T20:05:45Z 1789056344
+2026-09-10T20:05:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:45Z Status: ACTIVE
+2026-09-10T20:05:55Z Spooled row into chunk 0, now 175 bytes
+2026-09-10T20:05:55Z Wind Speed: 1.00
+2026-09-10T20:05:55Z Temperature: 22.25
+2026-09-10T20:05:55Z PercentExtended: -1
+2026-09-10T20:05:55Z 16:5:54
+2026-09-10T20:05:55Z 1789056354
+2026-09-10T20:05:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:05:55Z Status: ACTIVE
+2026-09-10T20:06:05Z Wind Speed: 0.00
+2026-09-10T20:06:05Z Temperature: 17.00
+2026-09-10T20:06:05Z PercentExtended: -1
+2026-09-10T20:06:05Z 0:0:0
+2026-09-10T20:06:05Z 1478571780
+2026-09-10T20:06:05Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:06:05Z Status: ACTIVE
+2026-09-10T20:06:05Z Set status to: NIGHT
+2026-09-10T20:06:10Z Spooled row into chunk 0, now 209 bytes
+2026-09-10T20:06:15Z Wind Speed: 2.00
+2026-09-10T20:06:15Z Temperature: 17.00
+2026-09-10T20:06:15Z PercentExtended: -1
+2026-09-10T20:06:15Z 0:0:0
+2026-09-10T20:06:15Z 1478571780
+2026-09-10T20:06:15Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:06:15Z Status: NIGHT
+2026-09-10T20:06:25Z Spooled row into chunk 0, now 243 bytes
+2026-09-10T20:06:25Z Wind Speed: 1.00
+2026-09-10T20:06:25Z Temperature: 17.00
+2026-09-10T20:06:25Z PercentExtended: -1
+2026-09-10T20:06:26Z 0:0:0
+2026-09-10T20:06:26Z 1478571780
+2026-09-10T20:06:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:06:26Z Status: NIGHT
+2026-09-10T20:06:36Z Wind Speed: 2.00
+2026-09-10T20:06:36Z Temperature: 17.00
+2026-09-10T20:06:36Z PercentExtended: -1
+2026-09-10T20:06:36Z 0:0:0
+2026-09-10T20:06:36Z 1478571780
+2026-09-10T20:06:36Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:06:36Z Status: NIGHT
+2026-09-10T20:06:40Z Spooled row into chunk 1, now 34 bytes
+2026-09-10T20:06:46Z Wind Speed: 1.00
+2026-09-10T20:06:46Z Temperature: 17.00
+2026-09-10T20:06:46Z PercentExtended: -1
+2026-09-10T20:06:46Z 0:0:0
+2026-09-10T20:06:46Z 1478571780
+2026-09-10T20:06:46Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:06:46Z Status: NIGHT
+2026-09-10T20:06:54Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:06:54Z GET Request
+2026-09-10T20:06:54Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:06:56Z Response code: 200
+2026-09-10T20:06:56Z It took 1 attempts to get a response
+2026-09-10T20:06:56Z {"datetime":"2026-09-10T16:06:55.000Z"}
+2026-09-10T20:06:56Z Syncing Clock to: 2026-09-10T16:06:55.000Z
+2026-09-10T20:06:56Z Uploading chunk 0, 243 bytes
+2026-09-10T20:06:56Z POST Request
+2026-09-10T20:06:56Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:06:57Z Response code: 200
+2026-09-10T20:06:57Z Uploading chunk 1, 34 bytes
+2026-09-10T20:06:58Z POST Request
+2026-09-10T20:06:58Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:06:59Z Response code: 200
+2026-09-10T20:06:59Z Uploaded 2 chunk(s)
+2026-09-10T20:07:00Z Wind Speed: 2.00
+2026-09-10T20:07:00Z Temperature: 17.00
+2026-09-10T20:07:00Z PercentExtended: -1
+2026-09-10T20:07:00Z 0:0:0
+2026-09-10T20:07:00Z 1478571780
+2026-09-10T20:07:00Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:00Z Status: NIGHT
+2026-09-10T20:07:00Z Spooled row into chunk 0, now 34 bytes
+2026-09-10T20:07:00Z Settings switch turned on, starting the access point
+2026-09-10T20:07:00Z Access point listener stopped
+2026-09-10T20:07:00Z Access Point Web Server
+2026-09-10T20:07:00Z Please upgrade the firmware
+2026-09-10T20:07:00Z Creating access point named: Solar-Tracker
+2026-09-10T20:07:00Z SSID: Solar-Tracker
+2026-09-10T20:07:01Z IP Address: 192.168.4.1
+2026-09-10T20:07:01Z To see this page in action, open a browser to http://192.168.4.1
+2026-09-10T20:07:10Z Wind Speed: 2.00
+2026-09-10T20:07:10Z Temperature: 17.00
+2026-09-10T20:07:10Z PercentExtended: -1
+2026-09-10T20:07:10Z 0:0:0
+2026-09-10T20:07:10Z 1478571780
+2026-09-10T20:07:10Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:10Z Status: NIGHT
+2026-09-10T20:07:15Z Spooled row into chunk 0, now 68 bytes
+2026-09-10T20:07:20Z Wind Speed: 0.00
+2026-09-10T20:07:20Z Temperature: 17.00
+2026-09-10T20:07:20Z PercentExtended: -1
+2026-09-10T20:07:20Z 0:0:0
+2026-09-10T20:07:20Z 1478571780
+2026-09-10T20:07:20Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:20Z Status: NIGHT
+2026-09-10T20:07:30Z Wind Speed: 1.00
+2026-09-10T20:07:30Z Temperature: 17.00
+2026-09-10T20:07:30Z PercentExtended: -1
+2026-09-10T20:07:30Z 0:0:0
+2026-09-10T20:07:30Z 1478571780
+2026-09-10T20:07:30Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:30Z Status: NIGHT
+2026-09-10T20:07:31Z Spooled row into chunk 0, now 102 bytes
+2026-09-10T20:07:41Z Wind Speed: 1.00
+2026-09-10T20:07:41Z Temperature: 17.00
+2026-09-10T20:07:41Z PercentExtended: -1
+2026-09-10T20:07:41Z 0:0:0
+2026-09-10T20:07:41Z 1478571780
+2026-09-10T20:07:41Z Settings Server: 1 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:41Z Status: NIGHT
+2026-09-10T20:07:46Z Spooled row into chunk 0, now 136 bytes
+2026-09-10T20:07:51Z Wind Speed: 1.00
+2026-09-10T20:07:51Z Temperature: 17.00
+2026-09-10T20:07:51Z PercentExtended: -1
+2026-09-10T20:07:51Z 0:0:0
+2026-09-10T20:07:51Z 1478571780
+2026-09-10T20:07:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:07:51Z Status: NIGHT
+2026-09-10T20:07:51Z Settings switch turned off, releasing the access point
+2026-09-10T20:07:51Z Access point listener stopped
+2026-09-10T20:08:01Z Spooled row into chunk 0, now 170 bytes
+2026-09-10T20:08:01Z Wind Speed: 0.00
+2026-09-10T20:08:01Z Temperature: 17.00
+2026-09-10T20:08:01Z PercentExtended: -1
+2026-09-10T20:08:01Z 0:0:0
+2026-09-10T20:08:01Z 1478571780
+2026-09-10T20:08:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:01Z Status: NIGHT
+2026-09-10T20:08:11Z Wind Speed: 0.00
+2026-09-10T20:08:11Z Temperature: 17.00
+2026-09-10T20:08:11Z PercentExtended: -1
+2026-09-10T20:08:11Z 0:0:0
+2026-09-10T20:08:11Z 1478571780
+2026-09-10T20:08:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:11Z Status: NIGHT
+2026-09-10T20:08:16Z Spooled row into chunk 0, now 204 bytes
+2026-09-10T20:08:21Z Wind Speed: 2.00
+2026-09-10T20:08:21Z Temperature: 17.00
+2026-09-10T20:08:21Z PercentExtended: -1
+2026-09-10T20:08:21Z 0:0:0
+2026-09-10T20:08:21Z 1478571780
+2026-09-10T20:08:21Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:21Z Status: NIGHT
+2026-09-10T20:08:31Z Spooled row into chunk 0, now 238 bytes
+2026-09-10T20:08:31Z Wind Speed: 3.00
+2026-09-10T20:08:31Z Temperature: 17.00
+2026-09-10T20:08:31Z PercentExtended: -1
+2026-09-10T20:08:32Z 0:0:0
+2026-09-10T20:08:32Z 1478571780
+2026-09-10T20:08:32Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:32Z Status: NIGHT
+2026-09-10T20:08:42Z Wind Speed: 1.00
+2026-09-10T20:08:42Z Temperature: 17.00
+2026-09-10T20:08:42Z PercentExtended: -1
+2026-09-10T20:08:42Z 0:0:0
+2026-09-10T20:08:42Z 1478571780
+2026-09-10T20:08:42Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:42Z Status: NIGHT
+2026-09-10T20:08:46Z Spooled row into chunk 1, now 34 bytes
+2026-09-10T20:08:52Z Wind Speed: 2.00
+2026-09-10T20:08:52Z Temperature: 17.00
+2026-09-10T20:08:52Z PercentExtended: -1
+2026-09-10T20:08:52Z 0:0:0
+2026-09-10T20:08:52Z 1478571780
+2026-09-10T20:08:52Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:08:52Z Status: NIGHT
+2026-09-10T20:09:00Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:09:00Z Please upgrade the firmware
+2026-09-10T20:09:00Z Connecting to WiFiRock Lodge
+2026-09-10T20:09:01Z .Successfully connected toRock Lodge
+2026-09-10T20:09:01Z GET Request
+2026-09-10T20:09:01Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:09:04Z Response code: 200
+2026-09-10T20:09:04Z It took 1 attempts to get a response
+2026-09-10T20:09:04Z {"datetime":"2026-09-10T16:09:04.000Z"}
+2026-09-10T20:09:04Z Syncing Clock to: 2026-09-10T16:09:04.000Z
+2026-09-10T20:09:04Z Uploading chunk 0, 238 bytes
+2026-09-10T20:09:04Z POST Request
+2026-09-10T20:09:04Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:09:06Z Response code: 200
+2026-09-10T20:09:06Z Uploading chunk 1, 34 bytes
+2026-09-10T20:09:06Z POST Request
+2026-09-10T20:09:06Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:09:08Z Response code: 200
+2026-09-10T20:09:08Z Uploaded 2 chunk(s)
+2026-09-10T20:09:08Z Wind Speed: 2.00
+2026-09-10T20:09:08Z Temperature: 17.00
+2026-09-10T20:09:08Z PercentExtended: -1
+2026-09-10T20:09:08Z 0:0:0
+2026-09-10T20:09:08Z 1478571780
+2026-09-10T20:09:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:08Z Status: NIGHT
+2026-09-10T20:09:09Z Spooled row into chunk 0, now 34 bytes
+2026-09-10T20:09:19Z Wind Speed: 0.00
+2026-09-10T20:09:19Z Temperature: 17.00
+2026-09-10T20:09:19Z PercentExtended: -1
+2026-09-10T20:09:19Z 0:0:0
+2026-09-10T20:09:19Z 1478571780
+2026-09-10T20:09:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:19Z Status: NIGHT
+2026-09-10T20:09:24Z Spooled row into chunk 0, now 68 bytes
+2026-09-10T20:09:29Z Wind Speed: 3.00
+2026-09-10T20:09:29Z Temperature: 17.00
+2026-09-10T20:09:29Z PercentExtended: -1
+2026-09-10T20:09:29Z 0:0:0
+2026-09-10T20:09:29Z 1478571780
+2026-09-10T20:09:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:29Z Status: NIGHT
+2026-09-10T20:09:39Z Wind Speed: 1.00
+2026-09-10T20:09:39Z Temperature: 17.00
+2026-09-10T20:09:39Z PercentExtended: -1
+2026-09-10T20:09:39Z 0:0:0
+2026-09-10T20:09:39Z 1478571780
+2026-09-10T20:09:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:39Z Status: NIGHT
+2026-09-10T20:09:39Z Spooled row into chunk 0, now 102 bytes
+2026-09-10T20:09:49Z Wind Speed: 2.00
+2026-09-10T20:09:49Z Temperature: 17.00
+2026-09-10T20:09:49Z PercentExtended: -1
+2026-09-10T20:09:49Z 0:0:0
+2026-09-10T20:09:49Z 1478571780
+2026-09-10T20:09:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:49Z Status: NIGHT
+2026-09-10T20:09:54Z Spooled row into chunk 0, now 136 bytes
+2026-09-10T20:09:59Z Wind Speed: 1.00
+2026-09-10T20:09:59Z Temperature: 17.00
+2026-09-10T20:09:59Z PercentExtended: -1
+2026-09-10T20:09:59Z 0:0:0
+2026-09-10T20:09:59Z 1478571780
+2026-09-10T20:09:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:09:59Z Status: NIGHT
+2026-09-10T20:10:09Z Spooled row into chunk 0, now 170 bytes
+2026-09-10T20:10:09Z Wind Speed: 3.00
+2026-09-10T20:10:09Z Temperature: 17.00
+2026-09-10T20:10:09Z PercentExtended: -1
+2026-09-10T20:10:10Z 0:0:0
+2026-09-10T20:10:10Z 1478571780
+2026-09-10T20:10:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:10:10Z Status: NIGHT
+2026-09-10T20:10:20Z Wind Speed: 3.00
+2026-09-10T20:10:20Z Temperature: 17.00
+2026-09-10T20:10:20Z PercentExtended: -1
+2026-09-10T20:10:20Z 0:0:0
+2026-09-10T20:10:20Z 1478571780
+2026-09-10T20:10:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:10:20Z Status: NIGHT
+2026-09-10T20:10:24Z Spooled row into chunk 0, now 204 bytes
+2026-09-10T20:10:30Z Wind Speed: 0.00
+2026-09-10T20:10:30Z Temperature: 17.00
+2026-09-10T20:10:30Z PercentExtended: -1
+2026-09-10T20:10:30Z 0:0:0
+2026-09-10T20:10:30Z 1478571780
+2026-09-10T20:10:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:10:30Z Status: NIGHT
+2026-09-10T20:10:39Z Spooled row into chunk 0, now 238 bytes
+2026-09-10T20:10:40Z Wind Speed: 0.00
+2026-09-10T20:10:40Z Temperature: 17.00
+2026-09-10T20:10:40Z PercentExtended: -1
+2026-09-10T20:10:40Z 0:0:0
+2026-09-10T20:10:40Z 1478571780
+2026-09-10T20:10:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:10:40Z Status: NIGHT
+2026-09-10T20:10:50Z Wind Speed: 0.00
+2026-09-10T20:10:50Z Temperature: 17.00
+2026-09-10T20:10:50Z PercentExtended: -1
+2026-09-10T20:10:50Z 0:0:0
+2026-09-10T20:10:50Z 1478571780
+2026-09-10T20:10:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:10:50Z Status: NIGHT
+2026-09-10T20:10:55Z Spooled row into chunk 1, now 34 bytes
+2026-09-10T20:11:00Z Wind Speed: 0.00
+2026-09-10T20:11:00Z Temperature: 17.00
+2026-09-10T20:11:00Z PercentExtended: -1
+2026-09-10T20:11:01Z 0:0:0
+2026-09-10T20:11:01Z 1478571780
+2026-09-10T20:11:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:01Z Status: NIGHT
+2026-09-10T20:11:09Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:11:09Z GET Request
+2026-09-10T20:11:09Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:11:10Z Response code: 200
+2026-09-10T20:11:10Z It took 1 attempts to get a response
+2026-09-10T20:11:10Z {"datetime":"2026-09-10T16:11:10.000Z"}
+2026-09-10T20:11:10Z Syncing Clock to: 2026-09-10T16:11:10.000Z
+2026-09-10T20:11:10Z Uploading chunk 0, 238 bytes
+2026-09-10T20:11:10Z POST Request
+2026-09-10T20:11:10Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:11:12Z Response code: 200
+2026-09-10T20:11:12Z Uploading chunk 1, 34 bytes
+2026-09-10T20:11:12Z POST Request
+2026-09-10T20:11:12Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:11:14Z Response code: 200
+2026-09-10T20:11:14Z Uploaded 2 chunk(s)
+2026-09-10T20:11:14Z Wind Speed: 1.00
+2026-09-10T20:11:14Z Temperature: 17.00
+2026-09-10T20:11:14Z PercentExtended: -1
+2026-09-10T20:11:14Z 0:0:0
+2026-09-10T20:11:14Z 1478571780
+2026-09-10T20:11:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:14Z Status: NIGHT
+2026-09-10T20:11:15Z Spooled row into chunk 0, now 34 bytes
+2026-09-10T20:11:25Z Wind Speed: 1.00
+2026-09-10T20:11:25Z Temperature: 17.00
+2026-09-10T20:11:25Z PercentExtended: -1
+2026-09-10T20:11:25Z 0:0:0
+2026-09-10T20:11:25Z 1478571780
+2026-09-10T20:11:25Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:25Z Status: NIGHT
+2026-09-10T20:11:30Z Spooled row into chunk 0, now 68 bytes
+2026-09-10T20:11:35Z Wind Speed: 0.00
+2026-09-10T20:11:35Z Temperature: 17.00
+2026-09-10T20:11:35Z PercentExtended: -1
+2026-09-10T20:11:35Z 0:0:0
+2026-09-10T20:11:35Z 1478571780
+2026-09-10T20:11:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:35Z Status: NIGHT
+2026-09-10T20:11:45Z Wind Speed: 0.00
+2026-09-10T20:11:45Z Temperature: 17.00
+2026-09-10T20:11:45Z PercentExtended: -1
+2026-09-10T20:11:45Z 0:0:0
+2026-09-10T20:11:45Z 1478571780
+2026-09-10T20:11:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:45Z Status: NIGHT
+2026-09-10T20:11:45Z Spooled row into chunk 0, now 102 bytes
+2026-09-10T20:11:55Z Wind Speed: 0.00
+2026-09-10T20:11:55Z Temperature: 17.00
+2026-09-10T20:11:55Z PercentExtended: -1
+2026-09-10T20:11:55Z 0:0:0
+2026-09-10T20:11:55Z 1478571780
+2026-09-10T20:11:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:11:55Z Status: NIGHT
+2026-09-10T20:12:00Z Spooled row into chunk 0, now 136 bytes
+2026-09-10T20:12:05Z Wind Speed: 0.00
+2026-09-10T20:12:05Z Temperature: 17.00
+2026-09-10T20:12:05Z PercentExtended: -1
+2026-09-10T20:12:05Z 0:0:0
+2026-09-10T20:12:05Z 1478571780
+2026-09-10T20:12:05Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:05Z Status: NIGHT
+2026-09-10T20:12:15Z Spooled row into chunk 0, now 170 bytes
+2026-09-10T20:12:15Z Wind Speed: 1.00
+2026-09-10T20:12:15Z Temperature: 17.00
+2026-09-10T20:12:15Z PercentExtended: -1
+2026-09-10T20:12:16Z 0:0:0
+2026-09-10T20:12:16Z 1478571780
+2026-09-10T20:12:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:16Z Status: NIGHT
+2026-09-10T20:12:26Z Wind Speed: 0.00
+2026-09-10T20:12:26Z Temperature: 17.00
+2026-09-10T20:12:26Z PercentExtended: -1
+2026-09-10T20:12:26Z 0:0:0
+2026-09-10T20:12:26Z 1478571780
+2026-09-10T20:12:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:26Z Status: NIGHT
+2026-09-10T20:12:30Z Spooled row into chunk 0, now 204 bytes
+2026-09-10T20:12:36Z Wind Speed: 1.00
+2026-09-10T20:12:36Z Temperature: 17.00
+2026-09-10T20:12:36Z PercentExtended: -1
+2026-09-10T20:12:36Z 0:0:0
+2026-09-10T20:12:36Z 1478571780
+2026-09-10T20:12:36Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:36Z Status: NIGHT
+2026-09-10T20:12:45Z Spooled row into chunk 0, now 238 bytes
+2026-09-10T20:12:46Z Wind Speed: 0.00
+2026-09-10T20:12:46Z Temperature: 17.00
+2026-09-10T20:12:46Z PercentExtended: -1
+2026-09-10T20:12:46Z 0:0:0
+2026-09-10T20:12:46Z 1478571780
+2026-09-10T20:12:46Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:46Z Status: NIGHT
+2026-09-10T20:12:56Z Wind Speed: 2.00
+2026-09-10T20:12:56Z Temperature: 17.00
+2026-09-10T20:12:56Z PercentExtended: -1
+2026-09-10T20:12:56Z 0:0:0
+2026-09-10T20:12:56Z 1478571780
+2026-09-10T20:12:56Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:12:56Z Status: NIGHT
+2026-09-10T20:13:01Z Spooled row into chunk 1, now 34 bytes
+2026-09-10T20:13:06Z Wind Speed: 0.00
+2026-09-10T20:13:06Z Temperature: 17.00
+2026-09-10T20:13:06Z PercentExtended: -1
+2026-09-10T20:13:06Z 0:0:0
+2026-09-10T20:13:06Z 1478571780
+2026-09-10T20:13:06Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:13:06Z Status: NIGHT
+2026-09-10T20:13:14Z BENCH_TEST: skipping actuator recalibration
+2026-09-10T20:13:15Z GET Request
+2026-09-10T20:13:15Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:13:16Z Response code: 200
+2026-09-10T20:13:16Z It took 1 attempts to get a response
+2026-09-10T20:13:16Z {"datetime":"2026-09-10T16:13:16.000Z"}
+2026-09-10T20:13:16Z Syncing Clock to: 2026-09-10T16:13:16.000Z
+2026-09-10T20:13:16Z Uploading chunk 0, 238 bytes
+2026-09-10T20:13:16Z POST Request
+2026-09-10T20:13:16Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:13:18Z Response code: 200
+2026-09-10T20:13:18Z Uploading chunk 1, 34 bytes
+2026-09-10T20:13:18Z POST Request
+2026-09-10T20:13:18Z https://test-image-188091506191.us-central1.run.app/data
+2026-09-10T20:13:20Z Response code: 200
+2026-09-10T20:13:20Z Uploaded 2 chunk(s)
+2026-09-10T20:13:20Z Wind Speed: 0.00
+2026-09-10T20:13:20Z Temperature: 17.00
+2026-09-10T20:13:20Z PercentExtended: -1
+2026-09-10T20:13:20Z 0:0:0
+2026-09-10T20:13:20Z 1478571780
+2026-09-10T20:13:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:13:20Z Status: NIGHT
+2026-09-10T20:13:21Z Spooled row into chunk 0, now 34 bytes
+2026-09-10T20:13:30Z Wind Speed: 2.00
+2026-09-10T20:13:30Z Temperature: 17.00
+2026-09-10T20:13:30Z PercentExtended: -1
+2026-09-10T20:13:31Z 0:0:0
+2026-09-10T20:13:31Z 1478571780
+2026-09-10T20:13:31Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:13:31Z Status: NIGHT
+2026-09-10T20:13:36Z Spooled row into chunk 0, now 68 bytes
+2026-09-10T20:13:41Z Wind Speed: 0.00
+2026-09-10T20:13:41Z Temperature: 17.00
+2026-09-10T20:13:41Z PercentExtended: -1
+2026-09-10T20:13:41Z 0:0:0
+2026-09-10T20:13:41Z 1478571780
+2026-09-10T20:13:41Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:13:41Z Status: NIGHT
+2026-09-10T20:13:51Z Wind Speed: 1.00
+2026-09-10T20:13:51Z Temperature: 17.00
+2026-09-10T20:13:51Z PercentExtended: -1
+2026-09-10T20:13:51Z 0:0:0
+2026-09-10T20:13:51Z 1478571780
+2026-09-10T20:13:51Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:13:51Z Status: NIGHT
+2026-09-10T20:13:51Z Spooled row into chunk 0, now 102 bytes
+2026-09-10T20:14:01Z Wind Speed: 0.00
+2026-09-10T20:14:01Z Temperature: 17.00
+2026-09-10T20:14:01Z PercentExtended: -1
+2026-09-10T20:14:01Z 0:0:0
+2026-09-10T20:14:01Z 1478571780
+2026-09-10T20:14:01Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:14:01Z Status: NIGHT
+2026-09-10T20:14:06Z Spooled row into chunk 0, now 136 bytes
+2026-09-10T20:14:11Z Wind Speed: 1.00
+2026-09-10T20:14:11Z Temperature: 17.00
+2026-09-10T20:14:11Z PercentExtended: -1
+2026-09-10T20:14:11Z 0:0:0
+2026-09-10T20:14:11Z 1478571780
+2026-09-10T20:14:11Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:14:11Z Status: NIGHT
+2026-09-10T20:14:54Z homing
+2026-09-10T20:14:54Z Wind Speed: 0.00
+2026-09-10T20:14:54Z Temperature: 22.25
+2026-09-10T20:14:54Z PercentExtended: -1
+2026-09-10T20:14:54Z 16:14:53
+2026-09-10T20:14:54Z 1789056893
+2026-09-10T20:14:54Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:14:54Z Status: ACTIVE
+2026-09-10T20:15:04Z Wind Speed: 0.00
+2026-09-10T20:15:04Z Temperature: 22.25
+2026-09-10T20:15:04Z PercentExtended: -1
+2026-09-10T20:15:04Z 16:15:3
+2026-09-10T20:15:04Z 1789056903
+2026-09-10T20:15:04Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:04Z Status: ACTIVE
+2026-09-10T20:15:14Z Wind Speed: 1.00
+2026-09-10T20:15:14Z Temperature: 22.25
+2026-09-10T20:15:14Z PercentExtended: -1
+2026-09-10T20:15:14Z 16:15:13
+2026-09-10T20:15:14Z 1789056913
+2026-09-10T20:15:14Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:14Z Status: ACTIVE
+2026-09-10T20:15:24Z Wind Speed: 0.00
+2026-09-10T20:15:24Z Temperature: 22.00
+2026-09-10T20:15:24Z PercentExtended: -1
+2026-09-10T20:15:24Z 16:15:23
+2026-09-10T20:15:24Z 1789056923
+2026-09-10T20:15:24Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:24Z Status: ACTIVE
+2026-09-10T20:15:35Z Wind Speed: 1.00
+2026-09-10T20:15:35Z Temperature: 22.00
+2026-09-10T20:15:35Z PercentExtended: -1
+2026-09-10T20:15:35Z 16:15:34
+2026-09-10T20:15:35Z 1789056934
+2026-09-10T20:15:35Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:35Z Status: ACTIVE
+2026-09-10T20:15:45Z Wind Speed: 1.00
+2026-09-10T20:15:45Z Temperature: 22.00
+2026-09-10T20:15:45Z PercentExtended: -1
+2026-09-10T20:15:45Z 16:15:44
+2026-09-10T20:15:45Z 1789056944
+2026-09-10T20:15:45Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:45Z Status: ACTIVE
+2026-09-10T20:15:55Z Wind Speed: 2.00
+2026-09-10T20:15:55Z Temperature: 22.00
+2026-09-10T20:15:55Z PercentExtended: -1
+2026-09-10T20:15:55Z 16:15:54
+2026-09-10T20:15:55Z 1789056954
+2026-09-10T20:15:55Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:15:55Z Status: ACTIVE
+2026-09-10T20:16:05Z Wind Speed: 2.00
+2026-09-10T20:16:05Z Temperature: 22.00
+2026-09-10T20:16:05Z PercentExtended: -1
+2026-09-10T20:16:05Z 16:16:4
+2026-09-10T20:16:05Z 1789056964
+2026-09-10T20:16:05Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:05Z Status: ACTIVE
+2026-09-10T20:16:15Z Wind Speed: 2.00
+2026-09-10T20:16:15Z Temperature: 22.00
+2026-09-10T20:16:15Z PercentExtended: -1
+2026-09-10T20:16:15Z 16:16:14
+2026-09-10T20:16:15Z 1789056974
+2026-09-10T20:16:15Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:15Z Status: ACTIVE
+2026-09-10T20:16:17Z boundary hit
+2026-09-10T20:16:17Z maxing
+2026-09-10T20:16:25Z Wind Speed: 1.00
+2026-09-10T20:16:25Z Temperature: 22.00
+2026-09-10T20:16:25Z PercentExtended: -1
+2026-09-10T20:16:26Z 16:16:25
+2026-09-10T20:16:26Z 1789056985
+2026-09-10T20:16:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:26Z Status: ACTIVE
+2026-09-10T20:16:36Z Wind Speed: 2.00
+2026-09-10T20:16:36Z Temperature: 22.00
+2026-09-10T20:16:36Z PercentExtended: -1
+2026-09-10T20:16:36Z 16:16:35
+2026-09-10T20:16:36Z 1789056995
+2026-09-10T20:16:36Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:36Z Status: ACTIVE
+2026-09-10T20:16:46Z Wind Speed: 1.00
+2026-09-10T20:16:46Z Temperature: 22.00
+2026-09-10T20:16:46Z PercentExtended: -1
+2026-09-10T20:16:46Z 16:16:45
+2026-09-10T20:16:46Z 1789057005
+2026-09-10T20:16:46Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:46Z Status: ACTIVE
+2026-09-10T20:16:56Z Wind Speed: 1.00
+2026-09-10T20:16:56Z Temperature: 22.00
+2026-09-10T20:16:56Z PercentExtended: -1
+2026-09-10T20:16:56Z 16:16:55
+2026-09-10T20:16:56Z 1789057015
+2026-09-10T20:16:56Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:16:56Z Status: ACTIVE
+2026-09-10T20:17:06Z Wind Speed: 1.00
+2026-09-10T20:17:06Z Temperature: 22.00
+2026-09-10T20:17:06Z PercentExtended: -1
+2026-09-10T20:17:06Z 16:17:5
+2026-09-10T20:17:06Z 1789057025
+2026-09-10T20:17:06Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:06Z Status: ACTIVE
+2026-09-10T20:17:16Z Wind Speed: 0.00
+2026-09-10T20:17:16Z Temperature: 22.00
+2026-09-10T20:17:16Z PercentExtended: -1
+2026-09-10T20:17:16Z 16:17:15
+2026-09-10T20:17:16Z 1789057035
+2026-09-10T20:17:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:16Z Status: ACTIVE
+2026-09-10T20:17:26Z Wind Speed: 0.00
+2026-09-10T20:17:26Z Temperature: 21.75
+2026-09-10T20:17:26Z PercentExtended: -1
+2026-09-10T20:17:27Z 16:17:26
+2026-09-10T20:17:27Z 1789057046
+2026-09-10T20:17:27Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:27Z Status: ACTIVE
+2026-09-10T20:17:37Z Wind Speed: 0.00
+2026-09-10T20:17:37Z Temperature: 21.75
+2026-09-10T20:17:37Z PercentExtended: -1
+2026-09-10T20:17:37Z 16:17:36
+2026-09-10T20:17:37Z 1789057056
+2026-09-10T20:17:37Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:37Z Status: ACTIVE
+2026-09-10T20:17:47Z Wind Speed: 0.00
+2026-09-10T20:17:47Z Temperature: 21.75
+2026-09-10T20:17:47Z PercentExtended: -1
+2026-09-10T20:17:47Z 16:17:46
+2026-09-10T20:17:47Z 1789057066
+2026-09-10T20:17:47Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:47Z Status: ACTIVE
+2026-09-10T20:17:57Z Wind Speed: 1.00
+2026-09-10T20:17:57Z Temperature: 21.75
+2026-09-10T20:17:57Z PercentExtended: -1
+2026-09-10T20:17:57Z 16:17:56
+2026-09-10T20:17:57Z 1789057076
+2026-09-10T20:17:57Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:17:57Z Status: ACTIVE
+2026-09-10T20:18:07Z Wind Speed: 1.00
+2026-09-10T20:18:07Z Temperature: 21.75
+2026-09-10T20:18:07Z PercentExtended: -1
+2026-09-10T20:18:07Z 16:18:6
+2026-09-10T20:18:07Z 1789057086
+2026-09-10T20:18:07Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:07Z Status: ACTIVE
+2026-09-10T20:18:14Z boundary hit
+2026-09-10T20:18:15Z Extending to 95
+2026-09-10T20:18:15Z Extending towards 23510
+2026-09-10T20:18:15Z Starting Position 24748
+2026-09-10T20:18:17Z Wind Speed: 0.00
+2026-09-10T20:18:17Z Temperature: 21.75
+2026-09-10T20:18:17Z PercentExtended: 99
+2026-09-10T20:18:17Z 16:18:16
+2026-09-10T20:18:17Z 1789057096
+2026-09-10T20:18:17Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:17Z Status: ACTIVE
+2026-09-10T20:18:28Z Wind Speed: 3.00
+2026-09-10T20:18:28Z Temperature: 21.75
+2026-09-10T20:18:28Z PercentExtended: 95
+2026-09-10T20:18:28Z 16:18:27
+2026-09-10T20:18:28Z 1789057107
+2026-09-10T20:18:28Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:28Z Status: ACTIVE
+2026-09-10T20:18:38Z Wind Speed: 0.00
+2026-09-10T20:18:38Z Temperature: 21.75
+2026-09-10T20:18:38Z PercentExtended: 95
+2026-09-10T20:18:38Z 16:18:37
+2026-09-10T20:18:38Z 1789057117
+2026-09-10T20:18:38Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:38Z Status: ACTIVE
+2026-09-10T20:18:48Z Wind Speed: 0.00
+2026-09-10T20:18:48Z Temperature: 21.75
+2026-09-10T20:18:48Z PercentExtended: 95
+2026-09-10T20:18:48Z 16:18:47
+2026-09-10T20:18:48Z 1789057127
+2026-09-10T20:18:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:48Z Status: ACTIVE
+2026-09-10T20:18:58Z Wind Speed: 1.00
+2026-09-10T20:18:58Z Temperature: 21.75
+2026-09-10T20:18:58Z PercentExtended: 95
+2026-09-10T20:18:58Z 16:18:57
+2026-09-10T20:18:58Z 1789057137
+2026-09-10T20:18:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:18:58Z Status: ACTIVE
+2026-09-10T20:19:08Z Wind Speed: 0.00
+2026-09-10T20:19:08Z Temperature: 21.75
+2026-09-10T20:19:08Z PercentExtended: 95
+2026-09-10T20:19:08Z 16:19:7
+2026-09-10T20:19:08Z 1789057147
+2026-09-10T20:19:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:19:08Z Status: ACTIVE
+2026-09-10T20:19:18Z Wind Speed: 1.00
+2026-09-10T20:19:18Z Temperature: 21.75
+2026-09-10T20:19:18Z PercentExtended: 95
+2026-09-10T20:19:19Z 16:19:18
+2026-09-10T20:19:19Z 1789057158
+2026-09-10T20:19:19Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:19:19Z Status: ACTIVE
+2026-09-10T20:19:29Z Wind Speed: 0.00
+2026-09-10T20:19:29Z Temperature: 21.75
+2026-09-10T20:19:29Z PercentExtended: 95
+2026-09-10T20:19:29Z 16:19:28
+2026-09-10T20:19:29Z 1789057168
+2026-09-10T20:19:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:19:29Z Status: ACTIVE
+2026-09-10T20:19:39Z Wind Speed: 1.00
+2026-09-10T20:19:39Z Temperature: 21.75
+2026-09-10T20:19:39Z PercentExtended: 95
+2026-09-10T20:19:39Z 16:19:38
+2026-09-10T20:19:39Z 1789057178
+2026-09-10T20:19:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:19:39Z Status: ACTIVE
+2026-09-10T20:19:46Z Config doc:
+2026-09-10T20:19:46Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"50\",\"setEndHour\":\"16\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-10T20:19:46Z Alarm detected and cleared.
+2026-09-10T20:19:46Z Alarm was set.
+2026-09-10T20:19:46Z Setup Clock Module.
+2026-09-10T20:19:46Z Please upgrade the firmware
+2026-09-10T20:19:47Z Connecting to WiFiRock Lodge
+2026-09-10T20:19:48Z .Successfully connected toRock Lodge
+2026-09-10T20:19:48Z GET Request
+2026-09-10T20:19:48Z https://test-image-188091506191.us-central1.run.app/time/est
+2026-09-10T20:19:49Z Response code: 200
+2026-09-10T20:19:49Z It took 1 attempts to get a response
+2026-09-10T20:19:49Z {"datetime":"2026-09-10T16:19:49.000Z"}
+2026-09-10T20:19:50Z Syncing Clock to: 2026-09-10T16:19:49.000Z
+2026-09-10T20:19:50Z Attempting to recalibrate
+2026-09-10T20:19:55Z homing
+2026-09-10T20:19:56Z Wind Speed: 4.00
+2026-09-10T20:19:56Z Temperature: 21.75
+2026-09-10T20:19:56Z PercentExtended: -1
+2026-09-10T20:19:56Z 16:19:55
+2026-09-10T20:19:56Z 1789057195
+2026-09-10T20:19:56Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:19:56Z Status: ACTIVE
+2026-09-10T20:20:06Z Wind Speed: 0.00
+2026-09-10T20:20:06Z Temperature: 21.75
+2026-09-10T20:20:06Z PercentExtended: -1
+2026-09-10T20:20:06Z 16:20:5
+2026-09-10T20:20:06Z 1789057205
+2026-09-10T20:20:06Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:06Z Status: ACTIVE
+2026-09-10T20:20:16Z Wind Speed: 0.00
+2026-09-10T20:20:16Z Temperature: 21.75
+2026-09-10T20:20:16Z PercentExtended: -1
+2026-09-10T20:20:16Z 16:20:15
+2026-09-10T20:20:16Z 1789057215
+2026-09-10T20:20:16Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:16Z Status: ACTIVE
+2026-09-10T20:20:26Z Wind Speed: 0.00
+2026-09-10T20:20:26Z Temperature: 21.75
+2026-09-10T20:20:26Z PercentExtended: -1
+2026-09-10T20:20:26Z 16:20:25
+2026-09-10T20:20:26Z 1789057225
+2026-09-10T20:20:26Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:26Z Status: ACTIVE
+2026-09-10T20:20:37Z Wind Speed: 0.00
+2026-09-10T20:20:37Z Temperature: 21.75
+2026-09-10T20:20:37Z PercentExtended: -1
+2026-09-10T20:20:37Z 16:20:36
+2026-09-10T20:20:37Z 1789057236
+2026-09-10T20:20:37Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:37Z Status: ACTIVE
+2026-09-10T20:20:47Z Wind Speed: 0.00
+2026-09-10T20:20:47Z Temperature: 21.75
+2026-09-10T20:20:47Z PercentExtended: -1
+2026-09-10T20:20:47Z 16:20:46
+2026-09-10T20:20:47Z 1789057246
+2026-09-10T20:20:47Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:47Z Status: ACTIVE
+2026-09-10T20:20:57Z Wind Speed: 2.00
+2026-09-10T20:20:57Z Temperature: 21.75
+2026-09-10T20:20:57Z PercentExtended: -1
+2026-09-10T20:20:57Z 16:20:56
+2026-09-10T20:20:57Z 1789057256
+2026-09-10T20:20:57Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:20:57Z Status: ACTIVE
+2026-09-10T20:21:07Z Wind Speed: 2.00
+2026-09-10T20:21:07Z Temperature: 21.75
+2026-09-10T20:21:07Z PercentExtended: -1
+2026-09-10T20:21:07Z 16:21:6
+2026-09-10T20:21:07Z 1789057266
+2026-09-10T20:21:07Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:07Z Status: ACTIVE
+2026-09-10T20:21:17Z Wind Speed: 1.00
+2026-09-10T20:21:17Z Temperature: 21.75
+2026-09-10T20:21:17Z PercentExtended: -1
+2026-09-10T20:21:17Z 16:21:16
+2026-09-10T20:21:17Z 1789057276
+2026-09-10T20:21:17Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:17Z Status: ACTIVE
+2026-09-10T20:21:27Z Wind Speed: 0.00
+2026-09-10T20:21:27Z Temperature: 21.75
+2026-09-10T20:21:27Z PercentExtended: -1
+2026-09-10T20:21:28Z 16:21:26
+2026-09-10T20:21:28Z 1789057286
+2026-09-10T20:21:28Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:28Z Status: ACTIVE
+2026-09-10T20:21:38Z Wind Speed: 1.00
+2026-09-10T20:21:38Z Temperature: 21.75
+2026-09-10T20:21:38Z PercentExtended: -1
+2026-09-10T20:21:38Z 16:21:37
+2026-09-10T20:21:38Z 1789057297
+2026-09-10T20:21:38Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:38Z Status: ACTIVE
+2026-09-10T20:21:39Z boundary hit
+2026-09-10T20:21:40Z maxing
+2026-09-10T20:21:48Z Wind Speed: 1.00
+2026-09-10T20:21:48Z Temperature: 22.00
+2026-09-10T20:21:48Z PercentExtended: -1
+2026-09-10T20:21:48Z 16:21:47
+2026-09-10T20:21:48Z 1789057307
+2026-09-10T20:21:48Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:48Z Status: ACTIVE
+2026-09-10T20:21:58Z Wind Speed: 2.00
+2026-09-10T20:21:58Z Temperature: 22.00
+2026-09-10T20:21:58Z PercentExtended: -1
+2026-09-10T20:21:58Z 16:21:57
+2026-09-10T20:21:58Z 1789057317
+2026-09-10T20:21:58Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:21:58Z Status: ACTIVE
+2026-09-10T20:22:08Z Wind Speed: 3.00
+2026-09-10T20:22:08Z Temperature: 22.00
+2026-09-10T20:22:08Z PercentExtended: -1
+2026-09-10T20:22:08Z 16:22:7
+2026-09-10T20:22:08Z 1789057327
+2026-09-10T20:22:08Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:08Z Status: ACTIVE
+2026-09-10T20:22:18Z Wind Speed: 0.00
+2026-09-10T20:22:18Z Temperature: 22.00
+2026-09-10T20:22:18Z PercentExtended: -1
+2026-09-10T20:22:18Z 16:22:17
+2026-09-10T20:22:18Z 1789057337
+2026-09-10T20:22:18Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:18Z Status: ACTIVE
+2026-09-10T20:22:29Z Wind Speed: 1.00
+2026-09-10T20:22:29Z Temperature: 22.00
+2026-09-10T20:22:29Z PercentExtended: -1
+2026-09-10T20:22:29Z 16:22:27
+2026-09-10T20:22:29Z 1789057347
+2026-09-10T20:22:29Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:29Z Status: ACTIVE
+2026-09-10T20:22:39Z Wind Speed: 1.00
+2026-09-10T20:22:39Z Temperature: 22.00
+2026-09-10T20:22:39Z PercentExtended: -1
+2026-09-10T20:22:39Z 16:22:38
+2026-09-10T20:22:39Z 1789057358
+2026-09-10T20:22:39Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:39Z Status: ACTIVE
+2026-09-10T20:22:49Z Wind Speed: 0.00
+2026-09-10T20:22:49Z Temperature: 22.25
+2026-09-10T20:22:49Z PercentExtended: -1
+2026-09-10T20:22:49Z 16:22:48
+2026-09-10T20:22:49Z 1789057368
+2026-09-10T20:22:49Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:49Z Status: ACTIVE
+2026-09-10T20:22:59Z Wind Speed: 1.00
+2026-09-10T20:22:59Z Temperature: 22.25
+2026-09-10T20:22:59Z PercentExtended: -1
+2026-09-10T20:22:59Z 16:22:58
+2026-09-10T20:22:59Z 1789057378
+2026-09-10T20:22:59Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:22:59Z Status: ACTIVE
+2026-09-10T20:23:09Z Wind Speed: 0.00
+2026-09-10T20:23:09Z Temperature: 22.25
+2026-09-10T20:23:09Z PercentExtended: -1
+2026-09-10T20:23:09Z 16:23:8
+2026-09-10T20:23:09Z 1789057388
+2026-09-10T20:23:09Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:23:09Z Status: ACTIVE
+2026-09-10T20:23:19Z Wind Speed: 1.00
+2026-09-10T20:23:19Z Temperature: 22.25
+2026-09-10T20:23:19Z PercentExtended: -1
+2026-09-10T20:23:20Z 16:23:18
+2026-09-10T20:23:20Z 1789057398
+2026-09-10T20:23:20Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:23:20Z Status: ACTIVE
+2026-09-10T20:23:30Z Wind Speed: 2.00
+2026-09-10T20:23:30Z Temperature: 22.25
+2026-09-10T20:23:30Z PercentExtended: -1
+2026-09-10T20:23:30Z 16:23:29
+2026-09-10T20:23:30Z 1789057409
+2026-09-10T20:23:30Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:23:30Z Status: ACTIVE
+2026-09-10T20:23:34Z boundary hit
+2026-09-10T20:23:35Z Extending to 95
+2026-09-10T20:23:35Z Extending towards 23507
+2026-09-10T20:23:35Z Starting Position 24745
+2026-09-10T20:23:40Z Wind Speed: 3.00
+2026-09-10T20:23:40Z Temperature: 22.25
+2026-09-10T20:23:40Z PercentExtended: 97
+2026-09-10T20:23:40Z 16:23:39
+2026-09-10T20:23:40Z 1789057419
+2026-09-10T20:23:40Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:23:40Z Status: ACTIVE
+2026-09-10T20:23:50Z Wind Speed: 1.00
+2026-09-10T20:23:50Z Temperature: 22.25
+2026-09-10T20:23:50Z PercentExtended: 95
+2026-09-10T20:23:50Z 16:23:49
+2026-09-10T20:23:50Z 1789057429
+2026-09-10T20:23:50Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:23:50Z Status: ACTIVE
+2026-09-10T20:23:55Z Set status to: ACTIVE
+2026-09-10T20:23:55Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-10T20:23:55Z Setup complete.
+2026-09-10T20:24:00Z Wind Speed: 1.00
+2026-09-10T20:24:00Z Temperature: 22.25
+2026-09-10T20:24:00Z PercentExtended: 94
+2026-09-10T20:24:00Z 16:23:59
+2026-09-10T20:24:00Z 1789057439
+2026-09-10T20:24:00Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:24:00Z Status: ACTIVE
+2026-09-10T20:24:10Z Wind Speed: 1.00
+2026-09-10T20:24:10Z Temperature: 22.25
+2026-09-10T20:24:10Z PercentExtended: 94
+2026-09-10T20:24:10Z 16:24:9
+2026-09-10T20:24:10Z 1789057449
+2026-09-10T20:24:10Z Settings Server: 0 Wind Sensor: 1 Safe Mode Override: 0
+2026-09-10T20:24:10Z Status: ACTIVE

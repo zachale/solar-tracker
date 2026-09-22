@@ -1,0 +1,38 @@
+
+Initializing SD card...initialization failed. Things to check:
+* is a card inserted?
+* is your wiring correct?
+* did you change the chipSelect pin to match your shield or module?
+Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!
+
+===== ReadWrite (SD.begin) =====
+
+===== ReadWrite after rewiring =====
+Initializing SD card...initialization failed. Things to check:
+1. is a card inserted?
+2. is your wiring correct?
+3. did you change the chipSelect pin to match your shield or module?
+Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!
+Initializing SD card...initialization failed. Things to check:
+1. is a card inserted?
+2. is your wiring correct?
+3. did you change the chipSelect pin to match your shield or module?
+Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!
+Initializing SD card...initialization failed. Things to check:
+1. is a card inserted?
+2. is your wiring correct?
+3. did you change the chipSelect pin to match your shield or module?
+Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!
+
+===== ReadWrite after reseating card =====
+Initializing SD card...initialization done.
+Writing to test.txt...done.
+test.txt:
+testing 1, 2, 3.
+testing 1, 2, 3.
+test
+test
+test
+test
+test
+testing 1, 2, 3.

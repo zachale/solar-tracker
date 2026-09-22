@@ -51,6 +51,12 @@ private:
   // A sync is queued rather than run the moment its hour arrives, because the hour
   // can arrive while the actuator is driving. See serviceSync().
   bool syncPending = false;
+  // The hourly sync is armed by the DS3231 alarm, and re-arming that alarm
+  // needs the I2C bus. If the bus wedges, the alarm never fires again and the
+  // unit goes silent exactly when we most want to hear from it. This wall-clock
+  // fallback is driven by millis() and is therefore immune to the fault.
+  unsigned long monitorSyncTimer = 0;
+  static const unsigned long MONITOR_SYNC_MS = 1800000;   // 30 minutes
 #if BENCH_TEST
   static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
   static const unsigned long BENCH_SYNC_INTERVAL = 120000;  // two minutes
@@ -61,7 +67,9 @@ private:
   // Four uploads a day. Only reachable with the settings switch off, where a sync
   // costs nothing but a station association, so more of them is strictly safer:
   // smaller bodies, and a failure retried in hours rather than a day.
-  static const int SYNC_EVERY_HOURS = 6;
+  // Monitoring build: hourly rather than four times a day, so a fault is
+  // visible in the cloud within an hour instead of within six.
+  static const int SYNC_EVERY_HOURS = 1;
 #endif
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
