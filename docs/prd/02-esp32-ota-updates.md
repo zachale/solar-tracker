@@ -2,7 +2,7 @@
 
 **Status:** Proposed  
 **Owner:** unassigned  
-**Depends on:** nothing  
+**Depends on:** 07 (the trigger compares a firmware version, which needs a field to carry it). **No longer blocked by 01** — the bridge is on 0.4.1 and already supports OTA, confirmed on hardware 2026-09-23.  
 **Blocks:** nothing — but every later firmware change ships more cheaply once this works  
 **Estimate:** 17–23 h (2.5–3 working days), assuming the bridge firmware is already ≥ 0.4.1. Add a USB trip if it is not.  
 **Cost:** ~$0.0007/month, i.e. rounds to zero. One 103 KB object in GCS Standard is 0.000103 GB × $0.020/GB-month = $0.0000021/month. Egress at $0.12/GB: the realistic ~12 updates/year is 1 download/month × 0.000103 GB × $0.12 = $0.000012/month; an aggressive 30 downloads/month with retries is 0.0031 GB × $0.12 = $0.00037/month. Class B GETs: zero extra requests if the version check piggybacks on a request the tracker already makes; a separate hourly GET would be 720/month × $0.004/10,000 = $0.00029/month.

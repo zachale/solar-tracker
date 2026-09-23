@@ -1,11 +1,73 @@
-# 01 — Update the ESP32-S3 bridge firmware
+# 01 — ESP32-S3 bridge firmware
 
-**Status:** Proposed
+**Status:** RESOLVED 2026-09-23 — no action required
 **Owner:** unassigned
 **Depends on:** nothing
-**Blocks:** 02 (the OTA update path) — conditionally, and only if the version read in Requirement 1 comes back below 0.4.1
-**Estimate:** 30 minutes to find out whether any work is needed. If it is: 3–4 hours of bench work (flash, re-flash the sketch, two bench regressions). Zero travel if it happens while the board is still on USB at `home`.
-**Cost:** none. The 0.6.0 image is a 1,966,080-byte free download from `downloads.arduino.cc`; no cloud resources are involved.
+**Blocks:** nothing. **This PRD previously blocked 02; it no longer does.**
+**Estimate:** done
+**Cost:** none
+
+## Outcome
+
+The bridge is on **0.4.1**, read from the hardware on 2026-09-23:
+
+```
+2026-09-23T11:31:01Z ESP32 bridge firmware: 0.4.1
+2026-09-23T11:31:11Z ESP32 bridge firmware U32: 0x636363
+```
+
+OTA support arrives in bridge firmware 0.4.1, so **the OTA path in PRD 02 is available on
+this unit today and needs no USB visit.** The premise this document was written on — that a
+site visit stood between the tracker and over-the-air updates — was wrong.
+
+### The banner meant nothing
+
+`Please upgrade the firmware` is printed by this project's own code, not by the bridge:
+`src/WifiClient/WifiClient.cpp:12` and `src/SettingsServer/SettingsServer.cpp:22`, both
+comparing against the core's hardcoded `WIFI_FIRMWARE_LATEST_VERSION "0.6.0"`
+(`libraries/WiFiS3/src/WiFi.h:20`). It is an advisory string comparison copied from the
+WiFiS3 examples and it gates nothing. It has only ever meant "below 0.6.0".
+
+### Two findings for whoever reads this next
+
+`firmwareVersionU32()` returns `0x636363`, which is `"ccc"` in ASCII — string bytes leaking
+through rather than a version number. **Compare the textual `firmwareVersion()` instead.**
+PRD 02's update trigger depends on this.
+
+Getting the version out required replacing `while (!Serial)` with a flat `delay(5000)`.
+`Serial` reads true on this board with no host attached, so the wait fell through and every
+line printed in `setup()` was gone before a capture could attach. Three attempts found
+nothing before this was understood. Committed in `e1feaad`.
+
+### The bridge cannot update itself
+
+Asked and answered: the ESP32 self-update path in the bridge firmware is broken —
+`_updating_renesas` is never cleared, so the WiFi-firmware branch writes to a null `FILE*`.
+The ESP32 can reprogram the RA4M1, never itself. `OTAUpdate`'s `file_path` variants stage
+the Renesas image; they are not a route to the bridge's own flash. **If the bridge ever
+needs 0.6.0, that is a USB procedure and there is no way around it.**
+
+## If a future upgrade to 0.6.0 is ever wanted
+
+Not needed for anything on the current roadmap. Recorded so the research is not lost.
+
+| Risk | Reality |
+|---|---|
+| Permanent brick | No confirmed case from the official procedure across ~15 traced forum threads. The ESP32-S3 ROM bootloader is mask ROM and cannot be erased |
+| **Erases the RA4M1 sketch** | **Yes, and Arduino documents it.** Save and re-flash the tracker firmware afterwards |
+| Toolchain soft-brick | Real. serial-discovery 1.5.0 (2026-06-15 to 2026-07-15) actively probes USB descriptors and corrupts the flash stream, giving `Bad data checksum`. Fixed in 1.5.1; 1.5.2 is current. **Update the IDE before starting** ([serial-discovery#128](https://github.com/arduino/serial-discovery/issues/128)) |
+| Board "dead" afterwards | Usually still parked in ESP Download mode. **Unplug and replug — RESET is not sufficient** |
+| Genuinely unrecoverable | Only via SWD/probe-rs overwriting the bootloader and option-setting memory. The official route never touches either |
+
+Recovery ladder, each step taken from a thread where it worked: unplug/replug, then jumper
+plus `espflash write-bin`, then simply retry several times, then flash 0.5.2 and upgrade
+from there, then `esptool erase_flash` + `write_flash -z 0`, then downgrade to factory 0.1.0
+and re-upgrade, then try a different OS.
+
+---
+
+<details>
+<summary>Original document, written before the version was known</summary>
 
 ## Problem
 
@@ -155,3 +217,6 @@ Do not make a trip for this alone. Batch it with PRD 03 and PRD 05, which also n
 - The 0.4.1 OTA threshold is load-bearing for PRD 02 and is **unverified against hardware** — it rests on per-tag HTTP 404/200 probes of `OTA.cpp` in the bridge repo, and the research's adversarial verification pass did not complete. Worth confirming by actually calling `OTAUpdate::begin()` once the version is known.
 - Does 0.6.0 change the SSL client slot count (currently `MAX_CLIENT_AVAILABLE` 8) or AP-mode socket behaviour? Unknown until the bench runs; it is the one thing that could make this update a net loss.
 - Should the `99.99.99` detection ship at all, and as what — a logged warning, or the forum's `NVIC_SystemReset()`? Recommend a logged warning here and the reset, if ever, in its own PRD with its own bench evidence.
+
+
+</details>
