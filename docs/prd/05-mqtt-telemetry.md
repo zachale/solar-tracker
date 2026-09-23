@@ -2,12 +2,23 @@
 
 **Status:** Proposed
 **Owner:** unassigned
-**Depends on:** a USB site visit to bring the ESP32 bridge firmware to 0.6.0, and a watchdog + bridge-health reset in firmware — both are separate PRDs in this set
+**Depends on:** 07 (schema v2 — publish the new row, not the old one), 09 (the sync window this publishes inside), 04 (watchdog). Also a USB site visit to bring the ESP32 bridge firmware to 0.6.0, and a watchdog + bridge-health reset in firmware — both are separate PRDs in this set
 **Blocks:** nothing
 **Estimate:** decision 1 hour. Recommended path (HTTPS at a 10-minute cadence): 2 hours build + 48 h bench soak. If MQTT is chosen anyway: 3–4 days build + 3–5 days soak ≈ 1.5–2 weeks wall clock, plus one mandatory site visit.
 **Cost:** $0.00/month on the recommended path. $0.00/month for MQTT via EMQX Cloud Serverless free tier (43,200 of 1,000,000 session minutes = 4.3%; ~5 MB of 1,024 MB traffic = 0.5%; 4,320 of 1,000,000 rule actions). Self-hosted Mosquitto would be $3.65/month (always-free e2-micro + $0.005/h external IPv4 × 730 h). Cloud Run as the broker would be ~$44.71/month — rejected.
 
 **Recommendation: do not run a persistent MQTT session on this unit. If "live most of the time" is the actual goal, raise the existing HTTPS upload cadence from hourly to every 10 minutes — that is a two-line change, no broker, no new library, and it delivers the same freshness MQTT-batched would.** MQTT is only worth its cost if you want a downlink channel (cloud → device commands), which the firmware does not currently use.
+
+> **Decision update (2026-09-23).** Zach has chosen MQTT, and has chosen PRD 09's
+> permanent-access-point design with scheduled 15-minute sync windows. Those two
+> decisions together settle this document: the radio is an access point except during a
+> short scheduled window, so a persistent MQTT session is not merely inadvisable here, it
+> is **impossible** — there is no station-mode connection to hold open. Option C below is
+> therefore off the table on architectural grounds rather than on the reliability grounds
+> the original analysis gave. **Build Option B**: connect, publish the batch, disconnect,
+> inside each window. Worst-case row age becomes 15 minutes, set by PRD 09's period rather
+> than by anything in this document. The rest of the analysis stands as written.
+
 
 ## Problem
 
