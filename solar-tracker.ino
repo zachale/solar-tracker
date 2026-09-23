@@ -53,10 +53,18 @@ void setup()
 
   Serial.begin(9600); // begining serial here because this is the first class initialized
 
-#ifndef ESP8266
-  while (!Serial)
-    ; // wait for serial port to connect. Needed for native USB
-#endif
+  // A fixed pause, not `while (!Serial)`. On this board Serial reads true without a
+  // host attached, so the old wait fell straight through and everything printed here
+  // was gone before a capture could open the port. Five seconds is enough to start one.
+  delay(5000);
+
+  // Which bridge firmware the ESP32 is running. Read-only: +FWVERSION and
+  // +FWVERSION_U32 are queries, so this cannot change anything on either chip.
+  // The U32 form is the one to compare against; the string is for the log.
+  Serial.print("ESP32 bridge firmware: ");
+  Serial.println(WiFi.firmwareVersion());
+  Serial.print("ESP32 bridge firmware U32: 0x");
+  Serial.println(WiFi.firmwareVersionU32(), HEX);
 
   sdReady = beginStorage();
 
