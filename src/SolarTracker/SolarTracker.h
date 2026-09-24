@@ -37,6 +37,8 @@ public:
   // Latched at boot by the sketch. Decides whether this power session is allowed
   // to use the radio as a station at all.
   void setAppMode(bool);
+  // True while an OTA download is in flight. Anything that would reset the radio waits.
+  bool otaBusy() const { return otaUpdater.busy(); }
 
 private:
   Status status = ACTIVE;

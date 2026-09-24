@@ -108,7 +108,11 @@ void loop()
     sdReady = beginStorage();
   }
 
-  if (readSettingsSwitch() != settingsSwitchWasOn)
+  // A download in flight is let finish before the switch is acted on. Bringing the access
+  // point up starts with WiFi.end(), which would kill the transfer and leave the updater
+  // waiting on a download that had already died. The wait is seconds: a whole image comes
+  // down in a few, and a stalled one gives up after a minute.
+  if (readSettingsSwitch() != settingsSwitchWasOn && !tracker.otaBusy())
   {
     settingsSwitchWasOn = !settingsSwitchWasOn;
     onSettingsSwitchChanged(settingsSwitchWasOn);
