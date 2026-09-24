@@ -4,6 +4,17 @@
 
 const String SolarTracker::statusStrings[4] = {"ACTIVE", "NIGHT", "SAFE", "AWAY"};
 
+extern "C" char *sbrk(int incr);
+
+// The RAM between the top of the heap and the stack, which nothing has claimed yet. The
+// tracker builds a lot of Strings, so a slow fall here over days is the heap fragmenting,
+// visible in the log long before it runs out.
+static int freeRam()
+{
+  char top;
+  return &top - sbrk(0);
+}
+
 SolarTracker::SolarTracker(void (*callback)())
 {
   // Initialize the linear actuator
@@ -54,14 +65,6 @@ void SolarTracker::pollSensorData()
 
   if (clockModule.isAlarmTriggered())
   {
-    // Only ever while the settings switch is off. With the switch on the radio is
-    // an access point, and reaching the server would mean putting it into station
-    // mode, which tears the access point down for good: the ESP32 stops handing
-    // out listening sockets after four bring-ups in a power session.
-    if (clockModule.getHour() % SYNC_EVERY_HOURS == 0 && !appMode)
-    {
-      syncPending = true;
-    }
     if (status == ACTIVE)
     {
       extendActuatorOnHour();
@@ -91,6 +94,8 @@ void SolarTracker::pollSensorData()
     Serial.println(ButtonPanel::getButtonStatus());
     Serial.print("Status: ");
     Serial.println(getStatusString());
+    Serial.print("Free RAM: ");
+    Serial.println(freeRam());
     sensorTimer = millis();
     updateStatus();
   }
@@ -101,19 +106,13 @@ void SolarTracker::pollSensorData()
     telemetryTimer = millis();
   }
 
-#if BENCH_TEST
-  if (millis() - benchSyncTimer > BENCH_SYNC_INTERVAL && !appMode)
+  // Only ever while the settings switch is off. With the switch on the radio is an
+  // access point, and reaching the server would mean putting it into station mode,
+  // which tears the access point down for good: the ESP32 stops handing out listening
+  // sockets after four bring-ups in a power session.
+  if (millis() - syncTimer > SYNC_INTERVAL_MS && !appMode)
   {
-    syncPending = true;
-    benchSyncTimer = millis();
-  }
-#endif
-
-  // Wall-clock sync fallback. Survives a wedged bus, so the unit keeps
-  // reporting even while the clock is unreadable.
-  if (millis() - monitorSyncTimer > MONITOR_SYNC_MS && !appMode)
-  {
-    monitorSyncTimer = millis();
+    syncTimer = millis();
     syncPending = true;
   }
 

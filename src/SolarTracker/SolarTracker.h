@@ -57,25 +57,18 @@ private:
   // A sync is queued rather than run the moment its hour arrives, because the hour
   // can arrive while the actuator is driving. See serviceSync().
   bool syncPending = false;
-  // The hourly sync is armed by the DS3231 alarm, and re-arming that alarm
-  // needs the I2C bus. If the bus wedges, the alarm never fires again and the
-  // unit goes silent exactly when we most want to hear from it. This wall-clock
-  // fallback is driven by millis() and is therefore immune to the fault.
-  unsigned long monitorSyncTimer = 0;
-  static const unsigned long MONITOR_SYNC_MS = 1800000;   // 30 minutes
+  // Syncs run on millis(), not on the DS3231 alarm. Re-arming the alarm needs the I2C
+  // bus, so a wedged bus would silence the unit exactly when we most want to hear
+  // from it. Only with the settings switch off, where a sync costs nothing but a
+  // station association: a batch every fifteen minutes keeps each body small and
+  // shows a fault in the cloud within the quarter hour.
+  unsigned long syncTimer = 0;
 #if BENCH_TEST
   static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
-  static const unsigned long BENCH_SYNC_INTERVAL = 120000;  // two minutes
-  unsigned long benchSyncTimer = 0;
-  static const int SYNC_EVERY_HOURS = 1;
+  static const unsigned long SYNC_INTERVAL_MS = 120000;     // two minutes
 #else
-  static const unsigned long TELEMETRY_INTERVAL = 600000;   // ten minutes
-  // Four uploads a day. Only reachable with the settings switch off, where a sync
-  // costs nothing but a station association, so more of them is strictly safer:
-  // smaller bodies, and a failure retried in hours rather than a day.
-  // Monitoring build: hourly rather than four times a day, so a fault is
-  // visible in the cloud within an hour instead of within six.
-  static const int SYNC_EVERY_HOURS = 1;
+  static const unsigned long TELEMETRY_INTERVAL = 300000;   // five minutes, three rows a batch
+  static const unsigned long SYNC_INTERVAL_MS = 900000;     // fifteen minutes
 #endif
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;

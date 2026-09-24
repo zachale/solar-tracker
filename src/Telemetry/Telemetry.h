@@ -37,7 +37,7 @@ public:
   static constexpr size_t chunkBytes = 4096;
 #endif
 
-  // 64 chunks is about 50 days of ten minute rows. Past that the oldest unsent
+  // 64 chunks is about 26 days of five minute rows. Past that the oldest unsent
   // chunk is overwritten rather than letting the card fill indefinitely.
   static const int maxChunks = 64;
 
