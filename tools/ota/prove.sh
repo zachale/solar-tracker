@@ -26,9 +26,9 @@ NEXT=("$@")
 
 PROOF_DIR="$HERE/proofs"
 mkdir -p "$PROOF_DIR"
-STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
-PROOF="$PROOF_DIR/$STAMP-$BASE_VERSION-to-${NEXT[${#NEXT[@]}-1]}.log"
+
 RUN_START="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+PROOF="$PROOF_DIR/early-failure.log"
 
 say() { printf '%s  %s\n' "$(date -u +%H:%M:%SZ)" "$*"; }
 die() { say "FAIL: $*"; save_proof; exit 1; }
@@ -104,6 +104,11 @@ until board_present; do sleep 10; done
 sleep 10
 board_present || die "board dropped off USB again"
 say "board present"
+
+# Stamped here, not at launch: the script may have been waiting hours for a replug.
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+PROOF="$PROOF_DIR/$STAMP-$BASE_VERSION-to-${NEXT[${#NEXT[@]}-1]}.log"
+RUN_START="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
 for v in "${NEXT[@]}"; do
   say "pre-flight: $v must boot over USB with no manifest published"

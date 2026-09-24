@@ -1,0 +1,333 @@
+2026-09-24T17:39:56Z Firmware version: v8
+2026-09-24T17:39:57Z ESP32 bridge firmware: 0.6.0
+2026-09-24T17:39:57Z ESP32 bridge firmware U32: 0x600
+2026-09-24T17:39:57Z Config doc:
+2026-09-24T17:39:58Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T17:39:58Z Alarm detected and cleared.
+2026-09-24T17:39:58Z Alarm was set.
+2026-09-24T17:39:58Z Setup Clock Module.
+2026-09-24T17:40:08Z Connecting to WiFiRock Lodge
+2026-09-24T17:40:13Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T17:40:14Z .Successfully connected toSmartRG-d0b0
+2026-09-24T17:40:14Z GET Request
+2026-09-24T17:40:30Z Response code: 200
+2026-09-24T17:40:30Z It took 1 attempts to get a response
+2026-09-24T17:40:30Z {"datetime":"2026-09-24T13:40:30.000Z"}
+2026-09-24T17:40:30Z Syncing Clock to: 2026-09-24T13:40:30.000Z
+2026-09-24T17:40:30Z Uploading chunk 0, 34 bytes
+2026-09-24T17:40:30Z POST Request
+2026-09-24T17:40:32Z Response code: 200
+2026-09-24T17:40:33Z Uploaded 1 chunk(s)
+2026-09-24T17:40:34Z Attempting to recalibrate
+2026-09-24T17:40:39Z homing
+2026-09-24T17:40:39Z Temperature: 21.75
+2026-09-24T17:40:39Z Status: ACTIVE
+2026-09-24T17:40:40Z boundary hit
+2026-09-24T17:40:41Z maxing
+2026-09-24T17:40:42Z boundary hit
+2026-09-24T17:40:43Z Extending to 65
+2026-09-24T17:40:43Z Extending towards 0
+2026-09-24T17:40:43Z Starting Position 0
+2026-09-24T17:40:43Z Set status to: ACTIVE
+2026-09-24T17:40:43Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T17:40:43Z Setup complete.
+2026-09-24T17:40:43Z GET Request
+2026-09-24T17:40:45Z Response code: 404
+2026-09-24T17:40:45Z OTA: no usable manifest, staying on v8
+2026-09-24T17:40:49Z Temperature: 21.75
+2026-09-24T17:40:49Z Status: ACTIVE
+2026-09-24T17:41:11Z Firmware version: v9
+2026-09-24T17:41:11Z ESP32 bridge firmware: 0.6.0
+2026-09-24T17:41:11Z ESP32 bridge firmware U32: 0x600
+2026-09-24T17:41:11Z Config doc:
+2026-09-24T17:41:11Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T17:41:11Z Alarm detected and cleared.
+2026-09-24T17:41:11Z Alarm was set.
+2026-09-24T17:41:11Z Setup Clock Module.
+2026-09-24T17:41:21Z Connecting to WiFiRock Lodge
+2026-09-24T17:41:26Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T17:41:27Z .Successfully connected toSmartRG-d0b0
+2026-09-24T17:41:27Z GET Request
+2026-09-24T17:41:39Z Response code: 200
+2026-09-24T17:41:39Z It took 1 attempts to get a response
+2026-09-24T17:41:39Z {"datetime":"2026-09-24T13:41:38.000Z"}
+2026-09-24T17:41:39Z Syncing Clock to: 2026-09-24T13:41:38.000Z
+2026-09-24T17:41:41Z Attempting to recalibrate
+2026-09-24T17:41:46Z homing
+2026-09-24T17:41:46Z Temperature: 21.75
+2026-09-24T17:41:46Z Status: ACTIVE
+2026-09-24T17:41:47Z boundary hit
+2026-09-24T17:41:47Z maxing
+2026-09-24T17:41:48Z boundary hit
+2026-09-24T17:41:49Z Extending to 65
+2026-09-24T17:41:49Z Extending towards 0
+2026-09-24T17:41:49Z Starting Position 0
+2026-09-24T17:41:50Z Set status to: ACTIVE
+2026-09-24T17:41:50Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T17:41:50Z Setup complete.
+2026-09-24T17:41:50Z GET Request
+2026-09-24T17:41:51Z Response code: 404
+2026-09-24T17:41:51Z OTA: no usable manifest, staying on v9
+2026-09-24T17:41:56Z Temperature: 21.75
+2026-09-24T17:41:56Z Status: ACTIVE
+2026-09-24T17:42:21Z Firmware version: v7
+2026-09-24T17:42:21Z ESP32 bridge firmware: 0.6.0
+2026-09-24T17:42:21Z ESP32 bridge firmware U32: 0x600
+2026-09-24T17:42:22Z Config doc:
+2026-09-24T17:42:22Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T17:42:22Z Alarm detected and cleared.
+2026-09-24T17:42:22Z Alarm was set.
+2026-09-24T17:42:22Z Setup Clock Module.
+2026-09-24T17:42:32Z Connecting to WiFiRock Lodge
+2026-09-24T17:42:37Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T17:42:38Z .Successfully connected toSmartRG-d0b0
+2026-09-24T17:42:38Z GET Request
+2026-09-24T17:42:40Z Response code: 200
+2026-09-24T17:42:40Z It took 1 attempts to get a response
+2026-09-24T17:42:40Z {"datetime":"2026-09-24T13:42:39.000Z"}
+2026-09-24T17:42:40Z Syncing Clock to: 2026-09-24T13:42:39.000Z
+2026-09-24T17:42:42Z Attempting to recalibrate
+2026-09-24T17:42:47Z homing
+2026-09-24T17:42:47Z Temperature: 21.75
+2026-09-24T17:42:47Z Status: ACTIVE
+2026-09-24T17:42:48Z boundary hit
+2026-09-24T17:42:48Z maxing
+2026-09-24T17:42:49Z boundary hit
+2026-09-24T17:42:50Z Extending to 65
+2026-09-24T17:42:50Z Extending towards 0
+2026-09-24T17:42:50Z Starting Position 0
+2026-09-24T17:42:51Z Set status to: ACTIVE
+2026-09-24T17:42:51Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T17:42:51Z Setup complete.
+2026-09-24T17:42:51Z GET Request
+2026-09-24T17:42:53Z Response code: 200
+2026-09-24T17:42:53Z It took 1 attempts to get a response
+2026-09-24T17:42:53Z v7
+2026-09-24T17:42:53Z OTA: up to date at v7
+2026-09-24T17:42:57Z Temperature: 21.75
+2026-09-24T17:42:57Z Status: ACTIVE
+2026-09-24T17:43:07Z Temperature: 21.75
+2026-09-24T17:43:07Z Status: ACTIVE
+2026-09-24T17:43:17Z Temperature: 21.75
+2026-09-24T17:43:17Z Status: ACTIVE
+2026-09-24T17:43:27Z Temperature: 21.75
+2026-09-24T17:43:28Z Status: ACTIVE
+2026-09-24T17:43:38Z Temperature: 21.75
+2026-09-24T17:43:38Z Status: ACTIVE
+2026-09-24T17:43:48Z Temperature: 21.75
+2026-09-24T17:43:48Z Status: ACTIVE
+2026-09-24T17:43:58Z Temperature: 21.75
+2026-09-24T17:43:58Z Status: ACTIVE
+2026-09-24T17:44:08Z Temperature: 21.75
+2026-09-24T17:44:08Z Status: ACTIVE
+2026-09-24T17:44:18Z Temperature: 21.75
+2026-09-24T17:44:18Z Status: ACTIVE
+2026-09-24T17:44:29Z Temperature: 22.00
+2026-09-24T17:44:29Z Status: ACTIVE
+2026-09-24T17:44:39Z Temperature: 22.00
+2026-09-24T17:44:39Z Status: ACTIVE
+2026-09-24T17:44:49Z Temperature: 22.00
+2026-09-24T17:44:49Z Status: ACTIVE
+2026-09-24T17:44:59Z Temperature: 22.00
+2026-09-24T17:44:59Z Status: ACTIVE
+2026-09-24T17:45:09Z Temperature: 22.00
+2026-09-24T17:45:09Z Status: ACTIVE
+2026-09-24T17:45:19Z Temperature: 22.00
+2026-09-24T17:45:20Z Status: ACTIVE
+2026-09-24T17:45:30Z Temperature: 22.00
+2026-09-24T17:45:30Z Status: ACTIVE
+2026-09-24T17:45:40Z Temperature: 22.00
+2026-09-24T17:45:40Z Status: ACTIVE
+2026-09-24T17:45:50Z Temperature: 22.00
+2026-09-24T17:45:50Z Status: ACTIVE
+2026-09-24T17:46:00Z Temperature: 22.00
+2026-09-24T17:46:00Z Status: ACTIVE
+2026-09-24T17:46:10Z Temperature: 22.00
+2026-09-24T17:46:10Z Status: ACTIVE
+2026-09-24T17:46:21Z Temperature: 22.00
+2026-09-24T17:46:21Z Status: ACTIVE
+2026-09-24T17:46:31Z Temperature: 22.00
+2026-09-24T17:46:31Z Status: ACTIVE
+2026-09-24T17:46:41Z Temperature: 22.00
+2026-09-24T17:46:41Z Status: ACTIVE
+2026-09-24T17:46:51Z Temperature: 22.00
+2026-09-24T17:46:51Z Status: ACTIVE
+2026-09-24T17:47:01Z Temperature: 22.00
+2026-09-24T17:47:01Z Status: ACTIVE
+2026-09-24T17:47:11Z Temperature: 22.00
+2026-09-24T17:47:12Z Status: ACTIVE
+2026-09-24T17:47:22Z Temperature: 22.00
+2026-09-24T17:47:22Z Status: ACTIVE
+2026-09-24T17:47:32Z Temperature: 22.00
+2026-09-24T17:47:32Z Status: ACTIVE
+2026-09-24T17:47:42Z Temperature: 22.00
+2026-09-24T17:47:42Z Status: ACTIVE
+2026-09-24T17:47:52Z GET Request
+2026-09-24T17:47:54Z Response code: 200
+2026-09-24T17:47:54Z It took 1 attempts to get a response
+2026-09-24T17:47:54Z v8
+2026-09-24T17:47:54Z OTA: manifest wants v8, running v7
+2026-09-24T17:47:55Z OTA: downloading v8, 111759 bytes, in the background (starting took 1086 ms)
+2026-09-24T17:47:55Z Temperature: 22.00
+2026-09-24T17:47:56Z Status: ACTIVE
+2026-09-24T17:47:57Z OTA: 25280/111759 bytes (22%) after 2 s; loop ran 1410 times meanwhile
+2026-09-24T17:48:00Z OTA: 41066/111759 bytes (36%) after 4 s; loop ran 2936 times meanwhile
+2026-09-24T17:48:01Z OTA: 55088/111759 bytes (49%) after 6 s; loop ran 4471 times meanwhile
+2026-09-24T17:48:03Z OTA: 70709/111759 bytes (63%) after 8 s; loop ran 5942 times meanwhile
+2026-09-24T17:48:05Z OTA: 99072/111759 bytes (88%) after 10 s; loop ran 7540 times meanwhile
+2026-09-24T17:48:06Z Temperature: 22.00
+2026-09-24T17:48:06Z Status: ACTIVE
+2026-09-24T17:48:07Z OTA: download complete, 111759 bytes in 11 s, loop ran 8441 times while it was in flight
+2026-09-24T17:48:07Z OTA: image verified, flashing v8 now; the board will restart
+2026-09-24T17:48:08Z E (526123) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T17:48:16Z E (534006) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T17:48:22Z Firmware version: v8
+2026-09-24T17:48:22Z ESP32 bridge firmware: 0.6.0
+2026-09-24T17:48:22Z ESP32 bridge firmware U32: 0x600
+2026-09-24T17:48:22Z Config doc:
+2026-09-24T17:48:22Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T17:48:22Z Alarm detected and cleared.
+2026-09-24T17:48:22Z Alarm was set.
+2026-09-24T17:48:22Z Setup Clock Module.
+2026-09-24T17:48:32Z Connecting to WiFiRock Lodge
+2026-09-24T17:48:38Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T17:48:39Z .Successfully connected toSmartRG-d0b0
+2026-09-24T17:48:39Z GET Request
+2026-09-24T17:48:40Z Response code: 200
+2026-09-24T17:48:40Z It took 1 attempts to get a response
+2026-09-24T17:48:40Z {"datetime":"2026-09-24T13:48:40.000Z"}
+2026-09-24T17:48:40Z Syncing Clock to: 2026-09-24T13:48:40.000Z
+2026-09-24T17:48:42Z Attempting to recalibrate
+2026-09-24T17:48:47Z homing
+2026-09-24T17:48:47Z Temperature: 22.00
+2026-09-24T17:48:47Z Status: ACTIVE
+2026-09-24T17:48:48Z boundary hit
+2026-09-24T17:48:49Z maxing
+2026-09-24T17:48:50Z boundary hit
+2026-09-24T17:48:51Z Extending to 65
+2026-09-24T17:48:51Z Extending towards 0
+2026-09-24T17:48:51Z Starting Position 0
+2026-09-24T17:48:52Z Set status to: ACTIVE
+2026-09-24T17:48:52Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T17:48:52Z Setup complete.
+2026-09-24T17:48:52Z GET Request
+2026-09-24T17:48:54Z Response code: 200
+2026-09-24T17:48:54Z It took 1 attempts to get a response
+2026-09-24T17:48:54Z v8
+2026-09-24T17:48:54Z OTA: up to date at v8
+2026-09-24T17:48:57Z Temperature: 22.00
+2026-09-24T17:48:58Z Status: ACTIVE
+2026-09-24T17:49:08Z Temperature: 22.00
+2026-09-24T17:49:08Z Status: ACTIVE
+2026-09-24T17:49:18Z Temperature: 22.00
+2026-09-24T17:49:18Z Status: ACTIVE
+2026-09-24T17:49:28Z Temperature: 22.00
+2026-09-24T17:49:28Z Status: ACTIVE
+2026-09-24T17:49:38Z Temperature: 22.00
+2026-09-24T17:49:38Z Status: ACTIVE
+2026-09-24T17:49:48Z Temperature: 22.00
+2026-09-24T17:49:48Z Status: ACTIVE
+2026-09-24T17:49:58Z Temperature: 22.00
+2026-09-24T17:49:59Z Status: ACTIVE
+2026-09-24T17:50:09Z Temperature: 22.00
+2026-09-24T17:50:09Z Status: ACTIVE
+2026-09-24T17:50:19Z Temperature: 17.00
+2026-09-24T17:50:19Z Status: ACTIVE
+2026-09-24T17:50:19Z Set status to: NIGHT
+2026-09-24T17:50:19Z I2C bus unhealthy (code 2), attempting bus clear #1
+2026-09-24T17:50:19Z Bus clear: sda_freed=1 recovered=1 total_wedges=1 total_recovered=1
+2026-09-24T17:50:29Z Temperature: 22.00
+2026-09-24T17:50:29Z Status: NIGHT
+2026-09-24T17:50:29Z Same extension target detected, ignoring
+2026-09-24T17:50:29Z Set status to: ACTIVE
+2026-09-24T17:50:39Z Temperature: 22.00
+2026-09-24T17:50:39Z Status: ACTIVE
+2026-09-24T17:50:49Z Temperature: 22.00
+2026-09-24T17:50:50Z Status: ACTIVE
+2026-09-24T17:51:00Z Temperature: 22.00
+2026-09-24T17:51:00Z Status: ACTIVE
+2026-09-24T17:51:10Z Temperature: 22.00
+2026-09-24T17:51:10Z Status: ACTIVE
+2026-09-24T17:51:20Z Temperature: 22.00
+2026-09-24T17:51:20Z Status: ACTIVE
+2026-09-24T17:51:40Z Temperature: 22.00
+2026-09-24T17:51:40Z Status: ACTIVE
+2026-09-24T17:51:50Z Temperature: 22.00
+2026-09-24T17:51:51Z Status: ACTIVE
+2026-09-24T17:52:01Z Temperature: 22.00
+2026-09-24T17:52:01Z Status: ACTIVE
+2026-09-24T17:52:11Z Temperature: 22.00
+2026-09-24T17:52:11Z Status: ACTIVE
+2026-09-24T17:52:21Z Temperature: 22.00
+2026-09-24T17:52:21Z Status: ACTIVE
+2026-09-24T17:52:31Z Temperature: 22.00
+2026-09-24T17:52:31Z Status: ACTIVE
+2026-09-24T17:52:41Z Temperature: 22.00
+2026-09-24T17:52:41Z Status: ACTIVE
+2026-09-24T17:52:52Z Temperature: 22.00
+2026-09-24T17:52:52Z Status: ACTIVE
+2026-09-24T17:53:02Z Temperature: 22.00
+2026-09-24T17:53:02Z Status: ACTIVE
+2026-09-24T17:53:12Z Temperature: 22.00
+2026-09-24T17:53:12Z Status: ACTIVE
+2026-09-24T17:53:22Z Temperature: 22.00
+2026-09-24T17:53:22Z Status: ACTIVE
+2026-09-24T17:53:32Z Temperature: 22.00
+2026-09-24T17:53:32Z Status: ACTIVE
+2026-09-24T17:53:42Z Temperature: 22.00
+2026-09-24T17:53:43Z Status: ACTIVE
+2026-09-24T17:53:52Z GET Request
+2026-09-24T17:53:54Z Response code: 200
+2026-09-24T17:53:54Z It took 1 attempts to get a response
+2026-09-24T17:53:54Z v9
+2026-09-24T17:53:54Z OTA: manifest wants v9, running v8
+2026-09-24T17:53:56Z OTA: downloading v9, 111795 bytes, in the background (starting took 1859 ms)
+2026-09-24T17:53:56Z Temperature: 22.00
+2026-09-24T17:53:56Z Status: ACTIVE
+2026-09-24T17:53:58Z OTA: 29640/111795 bytes (26%) after 2 s; loop ran 1472 times meanwhile
+2026-09-24T17:54:00Z OTA: 47215/111795 bytes (42%) after 4 s; loop ran 2966 times meanwhile
+2026-09-24T17:54:02Z OTA: 61601/111795 bytes (55%) after 6 s; loop ran 4496 times meanwhile
+2026-09-24T17:54:04Z OTA: 75630/111795 bytes (67%) after 8 s; loop ran 6055 times meanwhile
+2026-09-24T17:54:06Z OTA: 98102/111795 bytes (87%) after 10 s; loop ran 7647 times meanwhile
+2026-09-24T17:54:07Z Temperature: 22.00
+2026-09-24T17:54:07Z Status: ACTIVE
+2026-09-24T17:54:08Z OTA: download complete, 111795 bytes in 11 s, loop ran 8609 times while it was in flight
+2026-09-24T17:54:08Z OTA: image verified, flashing v9 now; the board will restart
+2026-09-24T17:54:09Z E (886946) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T17:54:17Z E (894832) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T17:54:23Z Firmware version: v9
+2026-09-24T17:54:23Z ESP32 bridge firmware: 0.6.0
+2026-09-24T17:54:23Z ESP32 bridge firmware U32: 0x600
+2026-09-24T17:54:23Z Config doc:
+2026-09-24T17:54:23Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T17:54:23Z Alarm detected and cleared.
+2026-09-24T17:54:23Z Alarm was set.
+2026-09-24T17:54:23Z Setup Clock Module.
+2026-09-24T17:54:33Z Connecting to WiFiRock Lodge
+2026-09-24T17:54:38Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T17:54:39Z .Successfully connected toSmartRG-d0b0
+2026-09-24T17:54:39Z GET Request
+2026-09-24T17:54:41Z Response code: 200
+2026-09-24T17:54:41Z It took 1 attempts to get a response
+2026-09-24T17:54:41Z {"datetime":"2026-09-24T13:54:40.000Z"}
+2026-09-24T17:54:41Z Syncing Clock to: 2026-09-24T13:54:40.000Z
+2026-09-24T17:54:43Z Attempting to recalibrate
+2026-09-24T17:54:48Z homing
+2026-09-24T17:54:48Z Temperature: 22.00
+2026-09-24T17:54:48Z Status: ACTIVE
+2026-09-24T17:54:49Z boundary hit
+2026-09-24T17:54:49Z maxing
+2026-09-24T17:54:50Z boundary hit
+2026-09-24T17:54:51Z Extending to 65
+2026-09-24T17:54:51Z Extending towards 0
+2026-09-24T17:54:51Z Starting Position 0
+2026-09-24T17:54:52Z Set status to: ACTIVE
+2026-09-24T17:54:52Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T17:54:52Z Setup complete.
+2026-09-24T17:54:52Z GET Request
+2026-09-24T17:54:54Z Response code: 200
+2026-09-24T17:54:54Z It took 1 attempts to get a response
+2026-09-24T17:54:54Z v9
+2026-09-24T17:54:54Z OTA: up to date at v9
+2026-09-24T17:54:58Z Temperature: 22.00
+2026-09-24T17:54:58Z Status: ACTIVE

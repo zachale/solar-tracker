@@ -21,17 +21,29 @@ BASE="https://storage.googleapis.com/$BUCKET/$TOKEN"
 
 [[ -f "$OTA" ]] || { echo "no $OTA; run build.sh $VERSION first" >&2; exit 1; }
 
+# gcloud reports every copy on stderr with the full gs:// path, token included. Its output
+# is kept and shown only on failure, with the token masked, because anything this script
+# prints can end up in a terminal log or a transcript.
+quiet() {
+  local out
+  if ! out="$("$@" 2>&1)"; then
+    printf '%s\n' "${out//$TOKEN/<token>}" >&2
+    return 1
+  fi
+}
+
 if curl -fsS -o /dev/null "$BASE/$VERSION.ota" 2>/dev/null; then
   echo "$VERSION.ota is already published; checking it matches the local build"
 else
-  gcloud storage cp "$OTA" "gs://$BUCKET/$TOKEN/$VERSION.ota" --content-type=application/octet-stream --quiet
+  quiet gcloud storage cp "$OTA" "gs://$BUCKET/$TOKEN/$VERSION.ota" --content-type=application/octet-stream --quiet
 fi
 if ! curl -fsS "$BASE/$VERSION.ota" | cmp -s - "$OTA"; then
   echo "FAIL: published $VERSION.ota differs from the local build; manifest left alone" >&2
   exit 1
 fi
 
-printf '%s\n' "$VERSION" | gcloud storage cp - "gs://$BUCKET/$TOKEN/manifest.txt" \
+printf '%s\n' "$VERSION" > "$HERE/out/manifest.txt"
+quiet gcloud storage cp "$HERE/out/manifest.txt" "gs://$BUCKET/$TOKEN/manifest.txt" \
   --cache-control=no-store --content-type=text/plain --quiet
 served="$(curl -fsS "$BASE/manifest.txt")"
 if [[ "$served" != "$VERSION" ]]; then
