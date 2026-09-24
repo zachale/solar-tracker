@@ -61,6 +61,7 @@ void setup()
   // Which bridge firmware the ESP32 is running. Read-only: +FWVERSION and
   // +FWVERSION_U32 are queries, so this cannot change anything on either chip.
   // The U32 form is the one to compare against; the string is for the log.
+  Serial.println("Firmware version: " FIRMWARE_VERSION);
   Serial.print("ESP32 bridge firmware: ");
   Serial.println(WiFi.firmwareVersion());
   Serial.print("ESP32 bridge firmware U32: 0x");

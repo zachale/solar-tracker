@@ -116,6 +116,11 @@ void SolarTracker::pollSensorData()
     syncPending = true;
   }
 
+  // The same rule as the sync: the radio is only ours with the settings switch off, out
+  // of SAFE, and with the actuator stopped. Runs before serviceSync() so a download that
+  // is in flight is seen as busy and the sync waits for it.
+  otaUpdater.service(wifiClient, !appMode && status != SAFE && actuator.status == LinearActuator::STOP);
+
   serviceSync();
 }
 
@@ -138,6 +143,12 @@ void SolarTracker::serviceSync()
     return;
   }
   if (status == SAFE || actuator.status != LinearActuator::STOP)
+  {
+    return;
+  }
+  // The sync's WiFi.end() would kill an OTA download mid-transfer. It stays queued and
+  // runs as soon as the download finishes or fails.
+  if (otaUpdater.busy())
   {
     return;
   }
@@ -264,7 +275,6 @@ void SolarTracker::dailySync()
 #endif
   syncClock();
   uploadLogs();
-  // REMOVED OTA UPDATER FOR NOW
 }
 
 // Uploads every chunk the card is holding, one request each, stopping at the first

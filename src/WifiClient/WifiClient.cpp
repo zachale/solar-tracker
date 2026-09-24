@@ -52,9 +52,10 @@ String WifiClient::get(String url)
   {
     return "";
   }
+  // The URL is deliberately not printed. Serial captures get committed to a public
+  // repo, and both the API host and the OTA path are meant to stay out of it.
   Serial.println("GET Request");
   url = ensureHTTPS(url);
-  Serial.println(url);
   http.begin(client, url, 443);
   http.setTimeout(15000);
   http.addHeader("User-Agent: Arduino UNO R4 WiFi");
@@ -73,6 +74,15 @@ String WifiClient::get(String url)
     if (responseNum > 0)
     {
       String responseBody = http.getBody();
+      // An error page is neither printed nor returned. It is not content the caller
+      // asked for, and Cloud Storage's 404 body echoes the request path back, which for
+      // the OTA manifest includes the token that keeps the images unlisted.
+      if (responseNum < 200 || responseNum >= 300)
+      {
+        Serial.println("Response code: " + String(responseNum));
+        http.close();
+        return "";
+      }
       if (responseBody != "")
       {
         Serial.println("Response code: " + String(responseNum));
@@ -84,8 +94,6 @@ String WifiClient::get(String url)
     }
   }
 
-  String responseBody = http.getBody();
-  Serial.println(responseBody);
   Serial.println("Request Failed: " + String(responseNum));
   http.close();
   WiFi.disconnect();
@@ -113,7 +121,6 @@ int WifiClient::post(String url, const String &body, const char *contentType)
   }
   url = ensureHTTPS(url);
   Serial.println("POST Request");
-  Serial.println(url);
   http.begin(client, url, 443);
   http.setTimeout(15000);
   http.addHeader("User-Agent: Arduino UNO R4 WiFi");

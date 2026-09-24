@@ -5,6 +5,7 @@ build
 # bench build artifacts: copies of shared headers and of secrets.h
 bench/*/bench_common.h
 bench/*/secrets.h
+bench/*/root_ca.h
 bench/logs/
 
 # node deps
@@ -15,3 +16,11 @@ server/
 
 # obsidian vault config
 .obsidian/
+
+# OTA tooling: local build outputs, the compiled LZSS helper, its venv, and the bucket
+# path token (the token keeps the images unlisted and this repo is public)
+tools/ota/out/
+tools/ota/.venv/
+tools/ota/lzss.dylib
+tools/ota/lzss.so
+tools/ota/.ota_token

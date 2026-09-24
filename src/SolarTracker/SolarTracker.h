@@ -8,6 +8,7 @@
 #include "../ButtonPanel/ButtonPanel.h"
 #include "../SettingsManager/SettingsManager.h"
 #include "../Telemetry/Telemetry.h"
+#include "../OtaUpdater/OtaUpdater.h"
 #include "../BenchTest.h"
 #include <Arduino.h>
 class SolarTracker
@@ -40,6 +41,7 @@ public:
 private:
   Status status = ACTIVE;
   WifiClient wifiClient;
+  OtaUpdater otaUpdater;
   static const String statusStrings[];
   unsigned long sensorTimer;
   unsigned long telemetryTimer = 0;
