@@ -1,6 +1,6 @@
 # 01 — ESP32-S3 bridge firmware
 
-**Status:** RESOLVED 2026-09-23 — no action required
+**Status:** DONE 2026-09-23 — bridge upgraded 0.4.1 → 0.6.0
 **Owner:** unassigned
 **Depends on:** nothing
 **Blocks:** nothing. **This PRD previously blocked 02; it no longer does.**
@@ -9,7 +9,64 @@
 
 ## Outcome
 
-The bridge is on **0.4.1**, read from the hardware on 2026-09-23:
+The bridge was found on 0.4.1 and has since been upgraded to **0.6.0**. Both steps are below.
+
+### Upgraded to 0.6.0
+
+```
+2026-09-24T01:31:31Z ESP32 bridge firmware: 0.6.0
+2026-09-24T01:31:31Z ESP32 bridge firmware U32: 0x600
+```
+
+54 lines of boot and steady-state after the upgrade: no `Please upgrade the firmware`, no
+wedge events, no RTC init failures, temperature reading a real 21.50 six times out of six.
+
+Done with Arduino's own `unor4wifi-update-windows.zip` for 0.6.0 (4,979,764 bytes,
+sha256 `956ACC92…`, carrying `UNOR4-WIFI-S3-0.6.0.bin` at 1,966,080 bytes). The procedure is
+two commands, not the bundled `update.bat` — that ends in `@pause` and hangs a non-interactive
+session:
+
+```
+bin\unor4wifi-reboot.exe                                      # HID command, no jumper needed
+bin\espflash.exe write-bin -b 115200 -p COM4 0x0 firmware\UNOR4-WIFI-S3-0.6.0.bin
+```
+
+Four things made it safe, and all four are worth repeating next time:
+
+1. **A restore binary was built first.** The procedure erases the RA4M1 sketch, exactly as
+   Arduino documents. `arduino-cli compile --output-dir` produced a known-good image to put
+   back afterwards.
+2. **Nothing else was touching the port.** No IDE, no serial-discovery, no Cloud Agent, and
+   the serial capture stopped. serial-discovery 1.5.0 corrupts the flash stream mid-write;
+   not running it at all is the cleanest way to avoid that.
+3. **The mode switch was verified before the write.** `unor4wifi-reboot` moves the board from
+   `VID_2341&PID_1002` to `VID_303A&PID_1001` plus a `USB JTAG/serial debug unit`. That check
+   also proves the wrong chip cannot be flashed by accident: in download mode the Arduino PID
+   is simply absent, so an upload has nothing to target.
+4. **The board was confirmed out of download mode before any sketch went near it.** Uploading
+   a sketch while still in download mode erases the firmware just written. After the physical
+   replug the Arduino PID returned as `OK` and the Espressif entries went stale.
+
+**Exiting download mode needs a physical unplug and replug. RESET does not do it, and there
+is no reliable software substitute.** Plan for someone to be at the board.
+
+### Correction to the note below: firmwareVersionU32() works now
+
+On 0.4.1 it returned `0x636363`, which is `"ccc"` — the AT command did not exist and string
+bytes leaked through. uint32 version reporting was added in 0.5.0
+([PR #54](https://github.com/arduino/uno-r4-wifi-usb-bridge/pull/54)). On 0.6.0 it returns
+`0x600`, which is usable. **PRD 02's update trigger can use either form now.**
+
+### What 0.4.1 was missing
+
+Three of the four skipped releases matter: non-blocking OTA download, `getTime` and `ping`
+(0.5.0); SPIFFS format-on-failure enabled by default (0.5.1); refreshed root certificates
+(0.5.2). 0.6.0 itself only adds USB/HID featureReport reads from a browser. The non-blocking
+download is the one that counts — on 0.4.1 an OTA fetch blocks the sketch for the whole
+image, which collides with PRD 09's bounded windows and the rule against radio work while
+the motor is energised.
+
+### Originally found on 0.4.1
 
 ```
 2026-09-23T11:31:01Z ESP32 bridge firmware: 0.4.1
