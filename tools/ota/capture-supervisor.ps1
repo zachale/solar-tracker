@@ -20,6 +20,13 @@ while ($true) {
         Where-Object { $_.CommandLine -like '*capture-serial.ps1*' }
 
     if ($port -and -not $running) {
+        # A marker in the log, so a gap there reads as a USB drop (a replug, or the ESP32
+        # restarting) rather than as a board that said nothing.
+        $log = Get-ChildItem "$repo\docs\diagnostics\serial-*.log" -ErrorAction SilentlyContinue |
+            Sort-Object LastWriteTime -Descending | Select-Object -First 1
+        if ($log) {
+            Add-Content -Path $log.FullName -Value ("{0} [capture-supervisor] board on {1}, capture (re)started" -f (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ'), $port)
+        }
         Start-Process -FilePath powershell -WindowStyle Hidden -WorkingDirectory $repo `
             -ArgumentList @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $capture, '-Port', $port)
     }

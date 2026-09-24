@@ -1,5 +1,6 @@
 #include "WifiClient.h"
 #include "../SettingsManager/SettingsManager.h"
+#include "../Watchdog/Watchdog.h"
 
 bool WifiClient::ensureWifiConnection()
 {
@@ -34,6 +35,7 @@ bool WifiClient::ensureWifiConnection()
     for (int i = 0; i < 5; i++)
     {
       delay(1000);
+      Watchdog::progress();
       Serial.print(F("."));
       if (WiFi.status() == WL_CONNECTED)
       {
@@ -70,6 +72,7 @@ String WifiClient::get(String url)
   for (int i = 0; i < 10; i++)
   {
     responseNum = http.GET();
+    Watchdog::progress();
     delay(100);
     if (responseNum > 0)
     {
@@ -127,6 +130,7 @@ int WifiClient::post(String url, const String &body, const char *contentType)
   http.addHeader(String("Content-Type: ") + contentType);
 
   int responseNum = http.POST(body);
+  Watchdog::progress();
   Serial.println("Response code: " + String(responseNum));
   http.close();
   return responseNum;

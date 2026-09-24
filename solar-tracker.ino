@@ -2,6 +2,7 @@
 #include "./src/ButtonPanel/ButtonPanel.h"
 #include "./src/SolarTracker/SolarTracker.h"
 #include "./src/SettingsManager/SettingsManager.h"
+#include "./src/Watchdog/Watchdog.h"
 
 SolarTracker tracker(loop);
 ButtonPanel buttonPanel;
@@ -53,6 +54,11 @@ void setup()
 
   Serial.begin(9600); // begining serial here because this is the first class initialized
 
+  // Before anything that can hang. Everything after this line is covered: a stall longer
+  // than the loop deadline, or a hard fault, resets the board, and a new image that keeps
+  // doing that is rolled back by tracker.otaBoot() below.
+  Watchdog::begin();
+
   // A fixed pause, not `while (!Serial)`. On this board Serial reads true without a
   // host attached, so the old wait fell straight through and everything printed here
   // was gone before a capture could open the port. Five seconds is enough to start one.
@@ -62,10 +68,29 @@ void setup()
   // +FWVERSION_U32 are queries, so this cannot change anything on either chip.
   // The U32 form is the one to compare against; the string is for the log.
   Serial.println("Firmware version: " FIRMWARE_VERSION);
+  // Printed again here: begin() ran before the pause, before any capture could hear it.
+  Serial.println(Watchdog::describe());
   Serial.print("ESP32 bridge firmware: ");
   Serial.println(WiFi.firmwareVersion());
   Serial.print("ESP32 bridge firmware U32: 0x");
   Serial.println(WiFi.firmwareVersionU32(), HEX);
+
+  // Trial bookkeeping for over-the-air updates, as early as possible: a new image that
+  // hangs or crashes further down still gets this far, so a crash loop is counted and
+  // rolled back before it can repeat for ever. Needs the modem, which the version query
+  // above has just started.
+  tracker.otaBoot();
+
+#if defined(OTA_FAULT_HANG_SETUP)
+  Serial.println("FAULT INJECTION: hanging in setup()");
+  while (true)
+  {
+  }
+#elif defined(OTA_FAULT_CRASH_SETUP)
+  Serial.println("FAULT INJECTION: hard fault in setup()");
+  Serial.flush();
+  __builtin_trap(); // an undefined instruction: a fault on every Cortex-M, guaranteed
+#endif
 
   sdReady = beginStorage();
 
@@ -100,6 +125,7 @@ void setup()
 // dashboard is to walk up to a running tracker and flip it on.
 void loop()
 {
+  Watchdog::progress();
   tracker.pollSensorData();
 
   if (!sdReady && millis() - lastSdRetry > SD_RETRY_INTERVAL)

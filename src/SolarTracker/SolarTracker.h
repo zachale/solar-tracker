@@ -39,6 +39,8 @@ public:
   void setAppMode(bool);
   // True while an OTA download is in flight. Anything that would reset the radio waits.
   bool otaBusy() const { return otaUpdater.busy(); }
+  // Over-the-air trial bookkeeping; first thing in setup() after the watchdog.
+  void otaBoot() { otaUpdater.boot(); }
 
 private:
   Status status = ACTIVE;

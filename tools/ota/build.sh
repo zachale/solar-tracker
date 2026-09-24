@@ -15,9 +15,26 @@
 # the .bin before it is allowed to count.
 set -euo pipefail
 
+# Test options, for tools/ota/verify.sh. Neither belongs in an image for the field.
+#   --fast          compress OtaUpdater's timers (check every 60 s, confirm after 60 s,
+#                   roll back after 300 s) so the fault matrix runs in minutes
+#   --fault=<name>  build a deliberately broken image: hang-setup, crash-setup, no-confirm
+EXTRA=""
+while [[ "${1:-}" == --* ]]; do
+  case "$1" in
+    --fast) EXTRA="$EXTRA -DOTA_FAST_TIMING" ;;
+    --fault=hang-setup) EXTRA="$EXTRA -DOTA_FAULT_HANG_SETUP" ;;
+    --fault=crash-setup) EXTRA="$EXTRA -DOTA_FAULT_CRASH_SETUP" ;;
+    --fault=no-confirm) EXTRA="$EXTRA -DOTA_FAULT_NO_CONFIRM" ;;
+    *) echo "unknown option $1" >&2; exit 1 ;;
+  esac
+  shift
+done
+
 VERSION="${1:-}"
-if [[ ! "$VERSION" =~ ^[A-Za-z][A-Za-z0-9._-]{0,31}$ ]]; then
-  echo "usage: $0 <version>   (a letter, then up to 31 of [A-Za-z0-9._-]; e.g. v2)" >&2
+# 15 characters at most: OtaUpdater keeps versions in 16 byte fields in data flash.
+if [[ ! "$VERSION" =~ ^[A-Za-z][A-Za-z0-9._-]{0,14}$ ]]; then
+  echo "usage: $0 [--fast] [--fault=<name>] <version>   (a letter, then up to 14 of [A-Za-z0-9._-])" >&2
   exit 1
 fi
 
@@ -32,7 +49,7 @@ PY="$HERE/.venv/bin/python"
 # time as well; this catches it before anything is built or published.
 BASE="$(sed -n 's/^#define OTA_BASE_URL "\(.*\)"$/\1/p' "$ROOT/secrets.h")"
 [[ -n "$BASE" ]] || { echo "no OTA_BASE_URL in secrets.h" >&2; exit 1; }
-LINE="AT+OTADOWNLOADSTART=$BASE/$VERSION.ota,/update.bin"
+LINE="AT+OTADOWNLOADSTART=$BASE/$VERSION.ota,/a.bin"
 if (( ${#LINE} + 2 > 127 )); then
   echo "FAIL: '$VERSION' makes the download command $(( ${#LINE} + 2 )) bytes; the modem sends at most 127" >&2
   exit 1
@@ -54,10 +71,29 @@ mkdir -p "$OUT/build"
 # to survive arduino-cli's own argument splitting.
 arduino-cli compile -b arduino:renesas_uno:unor4wifi \
   --build-path "$OUT/build" --output-dir "$OUT" \
-  --build-property "compiler.cpp.extra_flags=-DFIRMWARE_VERSION_TOKEN=$VERSION" \
+  --build-property "compiler.cpp.extra_flags=-DFIRMWARE_VERSION_TOKEN=$VERSION$EXTRA" \
   "$ROOT" | grep -E "bytes"
 
 BIN="$OUT/solar-tracker.ino.bin"
+# Two images live on the ESP32 at once, the rollback copy and the one being tried, in a
+# 512 KB SPIFFS partition that holds roughly 393 KB. 180 KB each leaves room; beyond that a
+# download could run out of space, and the bridge truncates silently when it does.
+if (( $(wc -c < "$BIN") > 184320 )); then
+  echo "FAIL: $(wc -c < "$BIN") byte image; above 180 KB two no longer fit on the ESP32 safely" >&2
+  exit 1
+fi
+# OtaUpdater works out the running image's length from these linker symbols and demands the
+# rollback copy be exactly that long. If a toolchain change ever adds another section to the
+# .bin, this is where it shows, rather than as a board that refuses every rollback copy.
+NM="$(ls ~/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/*/bin/arm-none-eabi-nm | head -1)"
+FORMULA="$("$NM" "$OUT/build/"*.elf | python3 -c '
+import sys
+sym = {p[2]: int(p[0], 16) for p in (l.split() for l in sys.stdin) if len(p) == 3}
+print((sym["__etext"] - sym["__ROM_Start"]) + (sym["__data_end__"] - sym["__data_start__"]))' 2>/dev/null)"
+if [[ "$FORMULA" != "$(wc -c < "$BIN" | tr -d ' ')" ]]; then
+  echo "FAIL: linker formula gives ${FORMULA:-nothing}, the image is $(wc -c < "$BIN" | tr -d ' ') bytes; OtaUpdater's read-back would reject every copy" >&2
+  exit 1
+fi
 if ! grep -qa "Firmware version: $VERSION" "$BIN"; then
   echo "FAIL: the image does not carry 'Firmware version: $VERSION'" >&2
   exit 1
@@ -89,4 +125,5 @@ assert body[11] == 0x40, "compression flag"
 PY
 
 rm -f "$OUT/roundtrip.lzss" "$OUT/roundtrip.bin" "$OUT/$VERSION.lzss"
-echo "built $VERSION: $(wc -c < "$BIN" | tr -d ' ') byte image, $(wc -c < "$OUT/$VERSION.ota" | tr -d ' ') byte .ota (round trip, CRC, magic checked)"
+[[ -n "$EXTRA" ]] && echo "TEST IMAGE:$EXTRA" > "$OUT/TEST-IMAGE"
+echo "built $VERSION${EXTRA:+ (test:$EXTRA)}: $(wc -c < "$BIN" | tr -d ' ') byte image, $(wc -c < "$OUT/$VERSION.ota" | tr -d ' ') byte .ota (round trip, CRC, magic checked)"

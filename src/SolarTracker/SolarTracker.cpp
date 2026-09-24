@@ -1,5 +1,6 @@
 #include "./SolarTracker.h"
 #include "../../secrets.h"
+#include "../Watchdog/Watchdog.h"
 
 const String SolarTracker::statusStrings[4] = {"ACTIVE", "NIGHT", "SAFE", "AWAY"};
 
@@ -302,7 +303,9 @@ void SolarTracker::uploadLogs()
     }
 
     Serial.println("Uploading chunk " + String(index) + ", " + String(body.length()) + " bytes");
-    if (wifiClient.post(API + String("/data"), body, "text/csv") != 200)
+    int code = wifiClient.post(API + String("/data"), body, "text/csv");
+    Watchdog::progress();
+    if (code != 200)
     {
       Serial.println("Chunk " + String(index) + " failed, keeping it and stopping here");
       break;
