@@ -1,7 +1,7 @@
 # Over-the-air updates
 
-Status 2026-09-24: **the pipeline works up to the download, and the download does not yet
-work on this unit.** Everything on this page up to "Where it stops" is verified on hardware.
+Status 2026-09-24: the download failed on this unit until the cause below was found and
+fixed. The end-to-end run on the fixed build is recorded at the bottom of this page.
 
 ## How it works
 
@@ -38,37 +38,58 @@ prints it. The manifest is served `Cache-Control: no-store` so a change is seen 
 | Version handling | images boot and report their own version; a matching manifest gives `up to date`, a blank one gives `no usable manifest` |
 | Non-blocking | the bridge runs the transfer as a task in the ESP32's own loop (`otaDownloadProgress` in `cmds_ota.h`); the RA4M1 only reads a counter |
 
-## Where it stops
+## The bug that stopped it, found 2026-09-24
 
-`OTAUpdate::startDownload()` against the bucket returns `-26` (`Error::Modem`) after exactly
-60 s, the RA4M1's `EXTENDED_MODEM_TIMEOUT`. The ESP32 accepts the command and does not answer.
-Reproduced twice. After the second attempt the ESP32 stopped answering AT commands entirely,
-`+RESET` included, while USB and sketch uploads kept working. Only a power cycle clears that.
+**WiFiS3 cuts every AT command at 127 characters, silently.** `Modem::write()` formats the
+command with `vsnprintf` into `tx_buff[MAX_BUFF_SIZE]`, and `MAX_BUFF_SIZE` is 128
+(`libraries/WiFiS3/src/Modem.h:14`, `Modem.cpp:87`). The download request is one command,
 
-What is known:
+```
+AT+OTADOWNLOADSTART=<url>,/update.bin\r\n
+```
 
-- The same host answers the manifest GET, made through the bridge's own TLS client and its
-  CA bundle. The OTA path differs in using `Arduino_ESP32_OTA`'s client with the CA passed
-  through `setCACert()`.
-- The bridge stores that CA in a buffer sized to the exact string length, with no NUL
-  (`cmds_ota.h`, `_OTA_SETCAROOT`), then hands it to the TLS layer as a C string.
-- The bridge queues its background download task even when `startDownload` has failed and
-  cleaned up, and that task dereferences the HTTP client without a null check.
-- Arduino's own example host, `downloads.arduino.cc`, chains to GTS Root R4 (ECDSA). The bucket
-  chains to GTS Root R1 (RSA-4096) through WR2. Both roots are in `src/OtaUpdater/root_ca.h`.
+and with the first bucket path it came to 129 bytes. The closing newline never left the
+RA4M1. The bridge ends a command only on `\n` (`parser.cpp`, a lone `\r` is ignored), so it
+sat waiting for the rest of a line that was never coming, the RA4M1 waited out its 60 s
+`EXTENDED_MODEM_TIMEOUT`, and startDownload returned `-26`. The unfinished line then swallowed
+the next command sent to the bridge, which is why the bridge looked wedged afterwards.
 
-Next, one variant per clean boot, from `bench/15_ota_probe` (built as `out/probe-A|B|C`):
+Found by probing one variable at a time with `bench/15_ota_probe`, each run on a freshly
+restarted bridge:
 
-| Run | Request | Separates |
-|---|---|---|
-| C | the bucket over plain http | TLS from everything else |
-| A | Arduino's reference file | whether this bridge's OTA client works at all |
-| B | the bucket over https | the failing case, with no tracker around it |
+| Probe | Request | Command | Result |
+|---|---|---|---|
+| A | Arduino's reference file, downloads.arduino.cc | 90 bytes | works, 29 KB in 5.8 s |
+| D | Arduino's file copied to the bucket, short path | 95 bytes | works, 29 KB in 2.2 s |
+| C | our image, token path, **plain http** | 128 bytes | `-26` after 60 s |
+| E | Arduino's file at our token path | 128 bytes | `-26` after 60 s |
+| B | our image, token path, https | 129 bytes | `-26` after 60 s |
 
-Each needs the ESP32 freshly powered, and a failing run may wedge it again.
+C ruled out TLS, D ruled out Cloud Storage, E ruled out the image. The one thing every
+failure shares is a command of 128 bytes or more. GCS itself answered the ESP32's exact
+request, replayed from a laptop, in 0.3 s.
 
-`bench/16_bridge_reset` asks the bridge to restart through its `+RESET` command. It does not
-help once the bridge has stopped answering, which is the case it was written for.
+The fix is to stay under the limit and to refuse, loudly, anything that would not:
+
+- the bucket path token went from 32 hex characters to 22 URL-safe ones, still 128 bits, which
+  brings the command for a two-character version to 119 bytes
+- `OtaUpdater` measures the command against the library's own `MAX_BUFF_SIZE` before sending
+  it, and fails with a message instead of hanging
+- `build.sh` refuses a version name that would push the command past 127 bytes
+
+Worth reporting upstream: the truncation is silent, and any sketch passing a long URL or
+hostname through WiFiS3 can hit it.
+
+### Tools from the investigation
+
+- `bench/15_ota_probe` runs one download variant per boot, never flashes, never prints the URL,
+  and replays its result every 10 s without touching the modem again.
+- `bench/16_bridge_reset` restarts the ESP32 through its own `+RESET` (`ESP.restart()`, an
+  ordinary boot). It clears a bridge left holding half a command. Wait for the board to drop
+  off USB and come back before uploading anything else: an upload that lands on the restart
+  left the ESP32 failing USB enumeration until a power cycle.
+- `capture-supervisor.ps1` restarts the serial capture whenever the board is present and
+  nothing is logging it, so a replug or bridge restart no longer ends the log.
 
 ## Risks that stay after it works
 

@@ -107,6 +107,21 @@ void OtaUpdater::start(const String &version)
   // learns the size; that part can take a few seconds. The transfer itself runs on the
   // ESP32 from here on, and the tracker carries on.
   String url = String(OTA_BASE_URL) + "/" + version + ".ota";
+
+  // WiFiS3 formats every AT command into a MAX_BUFF_SIZE byte buffer (128, Modem.h) with
+  // vsnprintf and sends whatever fits. A longer command loses its closing newline: the
+  // bridge never runs it, the RA4M1 waits out the 60 s timeout for an answer that is not
+  // coming, and the unfinished line corrupts the next command too. That is what a 129 byte
+  // startDownload did on this unit; see tools/ota/README.md.
+  size_t line = strlen(CMD_WRITE(_OTA_DOWNLOAD_START)) + url.length() + 1 + strlen(SPIFFS_PATH) + strlen(_ENDL);
+  if (line >= MAX_BUFF_SIZE)
+  {
+    fail("URL too long: startDownload would be " + String(line) + " bytes, the modem sends at most " +
+             String(MAX_BUFF_SIZE - 1),
+         0);
+    return;
+  }
+
   unsigned long t0 = millis();
   int size = ota.startDownload(url.c_str(), SPIFFS_PATH);
   if (size <= 0)

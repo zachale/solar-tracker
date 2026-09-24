@@ -4,13 +4,22 @@
 //   A  Arduino's own reference .ota on downloads.arduino.cc, https, GTS roots
 //   B  our .ota on storage.googleapis.com, https, GTS roots   (the failing case)
 //   C  the same object over plain http                        (takes TLS out)
+//   D  Arduino's 29 KB file copied to the bucket at a short path (GCS itself vs our path)
+//   E  Arduino's 29 KB file at our token path                  (the path alone)
+//   F  our 112 KB image at a short path                        (the file alone)
+//   G  our image under a shorter token, command line < 128 bytes (length alone)
+//
+// Result: A, D, G work; B, C, E fail. Every failing case formats an AT command of 128
+// bytes or more, and WiFiS3's Modem::write() formats into a 128 byte buffer, so the
+// line loses its closing \n and the bridge never runs it. See tools/ota/README.md.
 //
 // Runs in a clean environment: no tracker, no telemetry, no earlier TLS from the RA4M1.
 // Never calls update(), so nothing is flashed whatever happens. Never prints the URL,
 // because the OTA path carries a token and serial captures are committed.
 //
-// After the attempt, a heartbeat every 10 s asks the ESP32 for its WiFi status. If the
-// bridge crashed on the way out of a failed attempt, those queries stop answering.
+// Every result line is kept and replayed every 10 s, without touching the modem again,
+// so the outcome can be read whenever a capture attaches and even if the attempt left the
+// bridge unable to answer AT commands. That makes a power cycle run the experiment.
 
 #define BENCH_WIFI
 #include "bench_common.h"
@@ -24,7 +33,30 @@ namespace
 
 OTAUpdate ota;
 
-#if defined(PROBE_A)
+static String results[16];
+static int resultCount = 0;
+
+static void note(const String &line)
+{
+  String stamped = "PROBE [" + String(millis() / 1000) + "s] " + line;
+  Serial.println(stamped);
+  if (resultCount < 16)
+    results[resultCount++] = stamped;
+}
+
+#if defined(PROBE_G)
+static const char *VARIANT = "G (storage.googleapis.com, https, shorter token path, our 112 KB v5)";
+static String probeUrl() { return String(OTA_BASE_URL) + "/v5.ota"; }
+#elif defined(PROBE_E)
+static const char *VARIANT = "E (storage.googleapis.com, https, token path, Arduino's 29 KB file)";
+static String probeUrl() { return String(OTA_BASE_URL) + "/a.ota"; }
+#elif defined(PROBE_F)
+static const char *VARIANT = "F (storage.googleapis.com, https, short path, our 112 KB v5)";
+static String probeUrl() { return "https://storage.googleapis.com/solar-tracker-442903-ota/f.ota"; }
+#elif defined(PROBE_D)
+static const char *VARIANT = "D (storage.googleapis.com, https, short path, Arduino's 29 KB file)";
+static String probeUrl() { return "https://storage.googleapis.com/solar-tracker-442903-ota/a.ota"; }
+#elif defined(PROBE_A)
 static const char *VARIANT = "A (downloads.arduino.cc, https)";
 static String probeUrl() { return "https://downloads.arduino.cc/ota/UNOR4WIFI_Animation.ota"; }
 #elif defined(PROBE_C)
@@ -44,26 +76,24 @@ void setup()
 {
   Serial.begin(9600);
   delay(5000);
-  Serial.print("PROBE variant ");
-  Serial.println(VARIANT);
-  Serial.print("PROBE bridge ");
-  Serial.println(WiFi.firmwareVersion());
+  note(String("variant ") + VARIANT);
+  note("bridge " + String(WiFi.firmwareVersion()));
 
   SD.begin(PIN_SD_CS);
   bool wifi = benchConnectAny();
-  Serial.println(String("PROBE wifi ") + (wifi ? "connected" : "FAILED"));
+  note(String("wifi ") + (wifi ? "connected" : "FAILED"));
   if (!wifi)
     return;
 
   int r = ota.begin("/update.bin");
-  Serial.println("PROBE begin -> " + String(r));
+  note("begin -> " + String(r));
   r = ota.setCACert(root_ca);
-  Serial.println("PROBE setCACert -> " + String(r) + " (" + String(strlen(root_ca)) + " bytes)");
+  note("setCACert -> " + String(r) + " (" + String(strlen(root_ca)) + " bytes)");
 
   String url = probeUrl();
   unsigned long t0 = millis();
   int size = ota.startDownload(url.c_str(), "/update.bin");
-  Serial.println("PROBE startDownload -> " + String(size) + " after " + String(millis() - t0) + " ms");
+  note("startDownload -> " + String(size) + " after " + String(millis() - t0) + " ms");
   if (size <= 0)
     return;
 
@@ -82,10 +112,10 @@ void setup()
     }
     delay(250);
   }
-  Serial.println("PROBE final progress " + String(done) + "/" + String(size) + " after " + String(millis() - t1) + " ms");
+  note("final progress " + String(done) + "/" + String(size) + " after " + String(millis() - t1) + " ms");
   if (done >= size)
   {
-    Serial.println("PROBE verify -> " + String(ota.verify()) + " (nothing is flashed)");
+    note("verify -> " + String(ota.verify()) + " (nothing is flashed)");
   }
 }
 
@@ -95,6 +125,8 @@ void loop()
   if (millis() - last >= 10000)
   {
     last = millis();
-    Serial.println("PROBE heartbeat t=" + String(millis() / 1000) + "s wifi_status=" + String(WiFi.status()));
+    Serial.println("PROBE replay at " + String(millis() / 1000) + "s, " + String(resultCount) + " lines:");
+    for (int i = 0; i < resultCount; i++)
+      Serial.println("  " + results[i]);
   }
 }

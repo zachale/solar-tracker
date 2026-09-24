@@ -6,9 +6,9 @@
 #
 # The board is found by its USB ID (VID_2341&PID_1002), the same way capture-serial.ps1
 # finds it, because the COM number is not stable: it moved to COM4 while the bridge was
-# in download mode. The capture holds the port, so it is stopped for the upload and
-# started again straight after. The five second pause at the top of setup() is what lets
-# it catch the boot.
+# in download mode. The capture holds the port, so the capture and its supervisor are
+# stopped for the upload, and the supervisor is started again afterwards; it restarts the
+# capture within five seconds, well inside the five second pause at the top of setup().
 set -euo pipefail
 
 VERSION="${1:-}"
@@ -18,6 +18,7 @@ BIN="$HERE/out/$VERSION/solar-tracker.ino.bin"
 
 ssh -o BatchMode=yes home "if not exist \"C:\\Users\\zachl\\ota-flash\\$VERSION\" mkdir \"C:\\Users\\zachl\\ota-flash\\$VERSION\"" >/dev/null
 scp -q "$BIN" "home:C:/Users/zachl/ota-flash/$VERSION/solar-tracker.ino.bin"
+scp -q "$HERE/capture-supervisor.ps1" "home:C:/Users/zachl/ota-flash/capture-supervisor.ps1"
 
 cat > /tmp/flash-home.ps1 <<PS
 \$ErrorActionPreference = 'Stop'
@@ -30,7 +31,8 @@ cat > /tmp/flash-home.ps1 <<PS
 if (-not \$port) { Write-Output 'FAIL: no UNO R4 WiFi (VID_2341&PID_1002) on USB'; exit 1 }
 Write-Output "board on \$port"
 
-Get-CimInstance Win32_Process | Where-Object { \$_.CommandLine -like '*capture-serial.ps1*' -and \$_.ProcessId -ne \$PID } |
+Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" |
+  Where-Object { (\$_.CommandLine -like '*capture-supervisor.ps1*' -or \$_.CommandLine -like '*capture-serial.ps1*') -and \$_.ProcessId -ne \$PID } |
   ForEach-Object { Stop-Process -Id \$_.ProcessId -Force }
 Start-Sleep -Seconds 2
 
@@ -47,11 +49,12 @@ if (\$uploadFailed) { Write-Output "FAIL: upload exited \$code" }
 # everything a session started when the session ends, and a WMI-created process is
 # outside that job.
 \$r = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{
-  CommandLine = "powershell -NoProfile -ExecutionPolicy Bypass -File \`"\$capture\`" -Port \$port"
+  CommandLine = 'powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Users\zachl\ota-flash\capture-supervisor.ps1"'
   CurrentDirectory = \$repo }
-Start-Sleep -Seconds 3
-if (Get-Process -Id \$r.ProcessId -ErrorAction SilentlyContinue) { "capture running, PID \$(\$r.ProcessId)" }
-else { Write-Output 'FAIL: capture exited right after starting'; exit 1 }
+Start-Sleep -Seconds 8
+\$cap = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" | Where-Object { \$_.CommandLine -like '*capture-serial.ps1*' }
+if (\$cap) { "capture running under supervisor \$(\$r.ProcessId), capture PID \$(\$cap.ProcessId)" }
+else { Write-Output 'FAIL: supervisor did not start a capture'; exit 1 }
 if (\$uploadFailed) { exit 1 }
 PS
 scp -q /tmp/flash-home.ps1 "home:C:/Users/zachl/flash-home.ps1"

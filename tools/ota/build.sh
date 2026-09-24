@@ -26,6 +26,18 @@ ROOT="$(cd "$HERE/../.." && pwd)"
 OUT="$HERE/out/$VERSION"
 PY="$HERE/.venv/bin/python"
 
+# The tracker asks for this image with one AT command, and WiFiS3 sends at most 127
+# characters of any command (Modem.h MAX_BUFF_SIZE 128, formatted with vsnprintf). A longer
+# one loses its newline and the bridge never runs it. OtaUpdater refuses such a URL at run
+# time as well; this catches it before anything is built or published.
+BASE="$(sed -n 's/^#define OTA_BASE_URL "\(.*\)"$/\1/p' "$ROOT/secrets.h")"
+[[ -n "$BASE" ]] || { echo "no OTA_BASE_URL in secrets.h" >&2; exit 1; }
+LINE="AT+OTADOWNLOADSTART=$BASE/$VERSION.ota,/update.bin"
+if (( ${#LINE} + 2 > 127 )); then
+  echo "FAIL: '$VERSION' makes the download command $(( ${#LINE} + 2 )) bytes; the modem sends at most 127" >&2
+  exit 1
+fi
+
 if [[ ! -x "$PY" ]]; then
   python3 -m venv "$HERE/.venv"
   "$PY" -m pip install -q crccheck
