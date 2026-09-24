@@ -12,3 +12,6 @@ server/node_modules/
 
 # server lives on feature/telemetry-api
 server/
+
+# obsidian vault config
+.obsidian/
