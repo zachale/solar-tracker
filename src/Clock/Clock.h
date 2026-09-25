@@ -34,6 +34,9 @@ public:
   static uint16_t wedgeCount;    // wedges seen this power session
   static uint16_t recoverCount;  // of those, how many the bus clear fixed
   static uint8_t  lastI2cCode;   // last endTransmission() result
+#ifdef CLOCK_FAULT_WEDGE
+  bool wedgeForTest();           // test builds only: wedge the bus the way a reset mid-read does
+#endif
 
 private:
   RTC_DS3231 rtc;

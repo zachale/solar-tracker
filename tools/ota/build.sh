@@ -18,7 +18,8 @@ set -euo pipefail
 # Test options, for tools/ota/verify.sh. Neither belongs in an image for the field.
 #   --fast          compress OtaUpdater's timers (check every 60 s, confirm after 60 s,
 #                   roll back after 300 s) so the fault matrix runs in minutes
-#   --fault=<name>  build a deliberately broken image: hang-setup, crash-setup, no-confirm
+#   --fault=<name>  build a deliberately broken image: hang-setup, crash-setup, no-confirm,
+#                   wedge-clock (wedges the I2C bus every two minutes to exercise the bus clear)
 EXTRA=""
 while [[ "${1:-}" == --* ]]; do
   case "$1" in
@@ -26,6 +27,7 @@ while [[ "${1:-}" == --* ]]; do
     --fault=hang-setup) EXTRA="$EXTRA -DOTA_FAULT_HANG_SETUP" ;;
     --fault=crash-setup) EXTRA="$EXTRA -DOTA_FAULT_CRASH_SETUP" ;;
     --fault=no-confirm) EXTRA="$EXTRA -DOTA_FAULT_NO_CONFIRM" ;;
+    --fault=wedge-clock) EXTRA="$EXTRA -DCLOCK_FAULT_WEDGE" ;;
     *) echo "unknown option $1" >&2; exit 1 ;;
   esac
   shift

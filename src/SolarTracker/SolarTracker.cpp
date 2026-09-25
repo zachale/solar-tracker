@@ -44,6 +44,16 @@ void SolarTracker::pollSensorData()
     setStatus(ACTIVE);
   }
 
+#ifdef CLOCK_FAULT_WEDGE
+  static unsigned long lastWedgeAt = 0;
+  if (millis() - lastWedgeAt > 120000UL)
+  {
+    lastWedgeAt = millis();
+    Serial.println(String("FAULT INJECTION: wedging the I2C bus: ") +
+                   (clockModule.wedgeForTest() ? "the DS3231 is holding SDA low" : "could not wedge it"));
+  }
+#endif
+
   // Bus health first: everything below reads the RTC, and a wedged bus returns
   // register addresses and stack residue rather than failing loudly.
   if (!clockModule.isHealthy())

@@ -1,0 +1,209 @@
+2026-09-25T00:36:15Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-25T00:36:20Z Firmware version: w1
+2026-09-25T00:36:20Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-25T00:36:20Z ESP32 bridge firmware: 0.6.0
+2026-09-25T00:36:20Z ESP32 bridge firmware U32: 0x600
+2026-09-25T00:36:20Z OTA: running w1, phase IDLE, good q242318e copy on the SD card, 154304 bytes, rejected q242318d, record 0 gen 137
+2026-09-25T00:36:20Z OTA: w1 is the new base; a copy of it goes on the SD card first
+2026-09-25T00:36:20Z Config doc:
+2026-09-25T00:36:20Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-25T00:36:20Z Alarm detected and cleared.
+2026-09-25T00:36:20Z Alarm was set.
+2026-09-25T00:36:20Z Setup Clock Module.
+2026-09-25T00:36:31Z Connecting to WiFiRock Lodge
+2026-09-25T00:36:36Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-25T00:36:37Z .Successfully connected toSmartRG-d0b0
+2026-09-25T00:36:37Z GET Request
+2026-09-25T00:36:38Z Response code: 200
+2026-09-25T00:36:38Z It took 1 attempts to get a response
+2026-09-25T00:36:38Z {"datetime":"2026-09-24T20:36:38.000Z"}
+2026-09-25T00:36:38Z Syncing Clock to: 2026-09-24T20:36:38.000Z
+2026-09-25T00:36:40Z Set status to: NIGHT
+2026-09-25T00:36:40Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-25T00:36:40Z Setup complete.
+2026-09-25T00:36:40Z Temperature: 21.75
+2026-09-25T00:36:40Z Status: NIGHT
+2026-09-25T00:36:42Z OTA: rollback copy of w1 ready on the SD card, 154728 bytes, crc 154de922, read back identical to the running image (1 s)
+2026-09-25T00:36:45Z GET Request
+2026-09-25T00:36:46Z Response code: 200
+2026-09-25T00:36:46Z It took 1 attempts to get a response
+2026-09-25T00:36:46Z w1 154728 154de922
+2026-09-25T00:36:46Z OTA: up to date at w1
+2026-09-25T00:36:50Z Temperature: 21.75
+2026-09-25T00:36:50Z Status: NIGHT
+2026-09-25T00:37:00Z Temperature: 21.75
+2026-09-25T00:37:01Z Status: NIGHT
+2026-09-25T00:37:11Z Temperature: 21.75
+2026-09-25T00:37:11Z Status: NIGHT
+2026-09-25T00:37:21Z Temperature: 21.75
+2026-09-25T00:37:21Z Status: NIGHT
+2026-09-25T00:37:31Z Temperature: 21.75
+2026-09-25T00:37:31Z Status: NIGHT
+2026-09-25T00:37:41Z Temperature: 21.75
+2026-09-25T00:37:41Z Status: NIGHT
+2026-09-25T00:37:51Z Temperature: 21.75
+2026-09-25T00:37:52Z Status: NIGHT
+2026-09-25T00:38:02Z Temperature: 21.75
+2026-09-25T00:38:02Z Status: NIGHT
+2026-09-25T00:38:12Z Temperature: 21.75
+2026-09-25T00:38:12Z Status: NIGHT
+2026-09-25T00:38:15Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:38:15Z I2C bus unhealthy (code 2), attempting bus clear #1
+2026-09-25T00:38:15Z Bus clear: sda_freed=1 recovered=1 total_wedges=1 total_recovered=1
+2026-09-25T00:38:22Z Temperature: 21.75
+2026-09-25T00:38:22Z Status: NIGHT
+2026-09-25T00:38:32Z Temperature: 21.75
+2026-09-25T00:38:32Z Status: NIGHT
+2026-09-25T00:38:42Z Temperature: 21.75
+2026-09-25T00:38:43Z Status: NIGHT
+2026-09-25T00:38:53Z Temperature: 21.75
+2026-09-25T00:38:53Z Status: NIGHT
+2026-09-25T00:39:03Z Temperature: 21.75
+2026-09-25T00:39:03Z Status: NIGHT
+2026-09-25T00:39:13Z Temperature: 21.75
+2026-09-25T00:39:13Z Status: NIGHT
+2026-09-25T00:39:23Z Temperature: 21.75
+2026-09-25T00:39:23Z Status: NIGHT
+2026-09-25T00:39:33Z Temperature: 21.75
+2026-09-25T00:39:34Z Status: NIGHT
+2026-09-25T00:39:44Z Temperature: 21.75
+2026-09-25T00:39:44Z Status: NIGHT
+2026-09-25T00:39:54Z Temperature: 21.75
+2026-09-25T00:39:54Z Status: NIGHT
+2026-09-25T00:40:04Z Temperature: 21.75
+2026-09-25T00:40:04Z Status: NIGHT
+2026-09-25T00:40:14Z Temperature: 21.75
+2026-09-25T00:40:14Z Status: NIGHT
+2026-09-25T00:40:15Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:40:15Z I2C bus unhealthy (code 2), attempting bus clear #2
+2026-09-25T00:40:15Z Bus clear: sda_freed=1 recovered=1 total_wedges=2 total_recovered=2
+2026-09-25T00:40:24Z Temperature: 21.75
+2026-09-25T00:40:25Z Status: NIGHT
+2026-09-25T00:40:35Z Temperature: 21.75
+2026-09-25T00:40:35Z Status: NIGHT
+2026-09-25T00:40:45Z Temperature: 21.75
+2026-09-25T00:40:45Z Status: NIGHT
+2026-09-25T00:40:55Z Temperature: 21.75
+2026-09-25T00:40:55Z Status: NIGHT
+2026-09-25T00:41:05Z Temperature: 21.75
+2026-09-25T00:41:05Z Status: NIGHT
+2026-09-25T00:41:16Z Temperature: 21.75
+2026-09-25T00:41:16Z Status: NIGHT
+2026-09-25T00:41:26Z Temperature: 21.75
+2026-09-25T00:41:26Z Status: NIGHT
+2026-09-25T00:41:36Z Temperature: 21.75
+2026-09-25T00:41:36Z Status: NIGHT
+2026-09-25T00:41:45Z GET Request
+2026-09-25T00:41:47Z Response code: 200
+2026-09-25T00:41:47Z It took 1 attempts to get a response
+2026-09-25T00:41:47Z w1 154728 154de922
+2026-09-25T00:41:47Z OTA: up to date at w1
+2026-09-25T00:41:47Z Temperature: 21.75
+2026-09-25T00:41:47Z Status: NIGHT
+2026-09-25T00:41:57Z Temperature: 21.75
+2026-09-25T00:41:57Z Status: NIGHT
+2026-09-25T00:42:07Z Temperature: 21.75
+2026-09-25T00:42:07Z Status: NIGHT
+2026-09-25T00:42:15Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:42:15Z I2C bus unhealthy (code 2), attempting bus clear #3
+2026-09-25T00:42:15Z Bus clear: sda_freed=1 recovered=1 total_wedges=3 total_recovered=3
+2026-09-25T00:42:17Z Temperature: 21.75
+2026-09-25T00:42:17Z Status: NIGHT
+2026-09-25T00:42:28Z Temperature: 21.75
+2026-09-25T00:42:28Z Status: NIGHT
+2026-09-25T00:42:38Z Temperature: 21.75
+2026-09-25T00:42:38Z Status: NIGHT
+2026-09-25T00:42:48Z Temperature: 21.75
+2026-09-25T00:42:48Z Status: NIGHT
+2026-09-25T00:42:58Z Temperature: 21.75
+2026-09-25T00:42:58Z Status: NIGHT
+2026-09-25T00:43:08Z Temperature: 21.75
+2026-09-25T00:43:08Z Status: NIGHT
+2026-09-25T00:43:19Z Temperature: 21.75
+2026-09-25T00:43:19Z Status: NIGHT
+2026-09-25T00:43:29Z Temperature: 21.75
+2026-09-25T00:43:29Z Status: NIGHT
+2026-09-25T00:43:39Z Temperature: 22.00
+2026-09-25T00:43:39Z Status: NIGHT
+2026-09-25T00:43:49Z Temperature: 22.00
+2026-09-25T00:43:49Z Status: NIGHT
+2026-09-25T00:43:59Z Temperature: 22.00
+2026-09-25T00:43:59Z Status: NIGHT
+2026-09-25T00:44:09Z Temperature: 22.00
+2026-09-25T00:44:10Z Status: NIGHT
+2026-09-25T00:44:15Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:44:15Z I2C bus unhealthy (code 2), attempting bus clear #4
+2026-09-25T00:44:16Z Bus clear: sda_freed=1 recovered=1 total_wedges=4 total_recovered=4
+2026-09-25T00:44:20Z Temperature: 22.00
+2026-09-25T00:44:20Z Status: NIGHT
+2026-09-25T00:44:30Z Temperature: 22.00
+2026-09-25T00:44:30Z Status: NIGHT
+2026-09-25T00:44:40Z Temperature: 22.00
+2026-09-25T00:44:40Z Status: NIGHT
+2026-09-25T00:44:50Z Temperature: 22.00
+2026-09-25T00:44:50Z Status: NIGHT
+2026-09-25T00:45:00Z Temperature: 22.00
+2026-09-25T00:45:01Z Status: NIGHT
+2026-09-25T00:45:11Z Temperature: 22.00
+2026-09-25T00:45:11Z Status: NIGHT
+2026-09-25T00:45:21Z Temperature: 22.00
+2026-09-25T00:45:21Z Status: NIGHT
+2026-09-25T00:45:31Z Temperature: 22.00
+2026-09-25T00:45:31Z Status: NIGHT
+2026-09-25T00:45:41Z Temperature: 21.75
+2026-09-25T00:45:41Z Status: NIGHT
+2026-09-25T00:45:51Z Temperature: 21.75
+2026-09-25T00:45:52Z Status: NIGHT
+2026-09-25T00:46:02Z Temperature: 21.75
+2026-09-25T00:46:02Z Status: NIGHT
+2026-09-25T00:46:12Z Temperature: 21.75
+2026-09-25T00:46:12Z Status: NIGHT
+2026-09-25T00:46:16Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:46:16Z I2C bus unhealthy (code 2), attempting bus clear #5
+2026-09-25T00:46:16Z Bus clear: sda_freed=1 recovered=1 total_wedges=5 total_recovered=5
+2026-09-25T00:46:22Z Temperature: 21.75
+2026-09-25T00:46:22Z Status: NIGHT
+2026-09-25T00:46:32Z Temperature: 21.75
+2026-09-25T00:46:32Z Status: NIGHT
+2026-09-25T00:46:42Z Temperature: 21.75
+2026-09-25T00:46:43Z Status: NIGHT
+2026-09-25T00:46:46Z GET Request
+2026-09-25T00:46:48Z Response code: 200
+2026-09-25T00:46:48Z It took 1 attempts to get a response
+2026-09-25T00:46:48Z w1 154728 154de922
+2026-09-25T00:46:48Z OTA: up to date at w1
+2026-09-25T00:46:53Z Temperature: 21.75
+2026-09-25T00:46:53Z Status: NIGHT
+2026-09-25T00:47:03Z Temperature: 21.75
+2026-09-25T00:47:03Z Status: NIGHT
+2026-09-25T00:47:13Z Temperature: 21.75
+2026-09-25T00:47:13Z Status: NIGHT
+2026-09-25T00:47:23Z Temperature: 21.75
+2026-09-25T00:47:23Z Status: NIGHT
+2026-09-25T00:47:33Z Temperature: 21.75
+2026-09-25T00:47:34Z Status: NIGHT
+2026-09-25T00:47:44Z Temperature: 21.75
+2026-09-25T00:47:44Z Status: NIGHT
+2026-09-25T00:47:54Z Temperature: 21.75
+2026-09-25T00:47:54Z Status: NIGHT
+2026-09-25T00:48:04Z Temperature: 21.75
+2026-09-25T00:48:04Z Status: NIGHT
+2026-09-25T00:48:14Z Temperature: 21.75
+2026-09-25T00:48:14Z Status: NIGHT
+2026-09-25T00:48:16Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T00:48:16Z I2C bus unhealthy (code 2), attempting bus clear #6
+2026-09-25T00:48:16Z Bus clear: sda_freed=1 recovered=1 total_wedges=6 total_recovered=6
+2026-09-25T00:48:24Z Temperature: 21.75
+2026-09-25T00:48:25Z Status: NIGHT
+2026-09-25T00:48:35Z Temperature: 21.75
+2026-09-25T00:48:35Z Status: NIGHT
+2026-09-25T00:48:45Z Temperature: 21.75
+2026-09-25T00:48:45Z Status: NIGHT
+2026-09-25T00:48:55Z Temperature: 21.75
+2026-09-25T00:48:55Z Status: NIGHT
+2026-09-25T00:49:05Z Temperature: 21.75
+2026-09-25T00:49:05Z Status: NIGHT
+2026-09-25T00:49:15Z Temperature: 21.75
+2026-09-25T00:49:16Z Status: NIGHT
+2026-09-25T00:49:26Z Temperature: 21.75
+2026-09-25T00:49:26Z Status: NIGHT

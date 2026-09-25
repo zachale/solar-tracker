@@ -66,6 +66,69 @@ bool ClockModule::busClear()
   return freed;
 }
 
+#ifdef CLOCK_FAULT_WEDGE
+// Test builds only (tools/ota/build.sh --fault=wedge-clock), to prove the bus clear above
+// works on the real chip. Wedges the bus the way a reset in the middle of a read does: starts
+// a read from the DS3231 by hand and walks away mid-byte at a moment the chip is driving SDA
+// low, so the chip holds it low until somebody clocks it free. Only ever reads; the time in
+// the chip is not touched. Returns whether the chip was left holding SDA.
+static void sclLow() { pinMode(BUS_SCL_PIN, OUTPUT); digitalWrite(BUS_SCL_PIN, LOW); delayMicroseconds(5); }
+static void sclHigh() { pinMode(BUS_SCL_PIN, INPUT_PULLUP); delayMicroseconds(5); }
+static void sdaLow() { pinMode(BUS_SDA_PIN, OUTPUT); digitalWrite(BUS_SDA_PIN, LOW); delayMicroseconds(5); }
+static void sdaRelease() { pinMode(BUS_SDA_PIN, INPUT_PULLUP); delayMicroseconds(5); }
+
+bool ClockModule::wedgeForTest()
+{
+  Wire.end();
+  sdaRelease();
+  sclHigh();
+  sdaLow(); // START: SDA falls while SCL is high
+  sclLow();
+  const uint8_t address = (0x68 << 1) | 1; // DS3231, read
+  for (int i = 7; i >= 0; i--)
+  {
+    if (address & (1 << i))
+    {
+      sdaRelease();
+    }
+    else
+    {
+      sdaLow();
+    }
+    sclHigh();
+    sclLow();
+  }
+  sdaRelease(); // the chip acknowledges by pulling SDA low on the ninth clock
+  sclHigh();
+  bool acked = digitalRead(BUS_SDA_PIN) == LOW;
+  sclLow();
+
+  bool wedged = false;
+  for (int bit = 0; acked && bit < 8; bit++)
+  {
+    // SCL is low, so the chip has put its next bit on SDA. At a 0, release SCL and leave:
+    // the chip is mid-byte, holding SDA, waiting for a clock that never comes.
+    if (digitalRead(BUS_SDA_PIN) == LOW)
+    {
+      sclHigh();
+      wedged = true;
+      break;
+    }
+    sclHigh();
+    sclLow();
+  }
+  if (!wedged)
+  {
+    // Nothing to hold: finish politely with a STOP.
+    sdaLow();
+    sclHigh();
+    sdaRelease();
+  }
+  Wire.begin();
+  return wedged;
+}
+#endif
+
 void ClockModule::setup()
 {
   pinMode(RTC_POWER_PIN, OUTPUT);
