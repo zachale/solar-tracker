@@ -85,12 +85,13 @@ def main():
 
     # Clock: the board prints its RTC as a local-time epoch every 10 s. Compared with the
     # capture's own UTC stamp, shifted to New York time.
-    errors = []
+    readings = []
     for t, x in lines:
         if re.fullmatch(r"\d{10}", x):
             board = datetime.fromtimestamp(int(x), timezone.utc).replace(tzinfo=None)
             truth = t.astimezone(LOCAL).replace(tzinfo=None)
-            errors.append((board - truth).total_seconds())
+            readings.append((t, (board - truth).total_seconds()))
+    errors = [e for _, e in readings]
     if not errors:
         report("FAIL", "clock", "no RTC readings in the window")
     else:
@@ -100,15 +101,118 @@ def main():
                                f"over {len(errors)} readings (latest {errors[-1]:+.0f} s)")
     syncs = [x for t, x in lines if x.startswith("Syncing Clock to: ")]
 
-    # Wedges: an unhealthy I2C bus, and whether the bus clear brought it back.
-    wedges = sum(1 for t, x in lines if x.startswith("I2C bus unhealthy"))
-    fixed = sum(1 for t, x in lines if x.startswith("Bus clear:") and "recovered=1" in x)
-    unfixed = sum(1 for t, x in lines if x.startswith("Bus clear:") and "recovered=0" in x)
-    totals = next((x for t, x in reversed(lines) if x.startswith("Bus clear:")), "")
-    detail = f"{wedges} wedge(s), {fixed} healed, {unfixed} not healed"
+    # The newest batch in the cloud, for the rows check below and the wedge count it carries.
+    rows = []
+    path = os.environ.get("LATEST_BATCH")
+    if path and os.path.exists(path):
+        for line in open(path):
+            try:
+                rows.append(json.loads(line))
+            except ValueError:
+                pass
+
+    # Wedges, and proof that each one was solved rather than only attempted:
+    #   - every wedge detected has a bus clear that brought the chip back,
+    #   - the clock read true (within 10 s of New York time) in the first status block after
+    #     the heal, before any further wedge,
+    #   - no reading was wrong that the detector missed (off by more than a minute, or
+    #     "RTC Error", with no detection within a few seconds of it),
+    #   - the board's own counters agree (every wedge this power session recovered), and so
+    #     does the count the cloud rows carry while the wind sensor is off.
+    detected = [t for t, x in lines if x.startswith("I2C bus unhealthy")]
+    clears = [(t, x) for t, x in lines if x.startswith("Bus clear:")]
+    healed = [t for t, x in clears if "recovered=1" in x]
+    unhealed = [t for t, x in clears if "recovered=0" in x]
+    verified, unverified, still_wrong = 0, 0, []
+    for h in healed:
+        # The first reading after the heal and before the next wedge. Usually the next status
+        # block, 10 s on; after a boot it waits on the startup sync, about 25 s.
+        until = next((d for d in detected if d > h), h + timedelta(seconds=120))
+        until = min(until, h + timedelta(seconds=120))
+        after = next((e for t, e in readings if h <= t <= until), None)
+        if after is None:
+            unverified += 1
+        elif abs(after) <= 10:
+            verified += 1
+        else:
+            still_wrong.append(f"{h.astimezone(LOCAL):%H:%M:%S} read {after:+.0f} s after its heal")
+    bad = [t for t, e in readings if abs(e) > 60] + [t for t, x in lines if x == "RTC Error"]
+    missed = [t for t in bad if not any(-2 <= (d - t).total_seconds() <= 15 for d in detected)]
+    totals = {k: int(v) for k, v in re.findall(r"(total_\w+)=(\d+)", clears[-1][1])} if clears else {}
+    counters_off = totals and totals["total_wedges"] != totals["total_recovered"]
+    detail = (f"{len(detected)} detected, {len(healed)} healed, {len(unhealed)} not healed; "
+              f"clock read true after {verified} of {len(healed)} heal(s)")
+    if unverified:
+        detail += f" ({unverified} with no reading before the next wedge or within 2 min)"
+    detail += f"; {len(missed)} wrong reading(s) the detector missed"
     if totals:
-        detail += " (" + " ".join(p for p in totals.split() if p.startswith("total_")) + ")"
-    report("PASS" if unfixed == 0 else "FAIL", "wedges", detail)
+        detail += f"; board counts {totals['total_wedges']} wedge(s), {totals['total_recovered']} recovered this power session"
+    # Every row in the newest batch, while the wind sensor is off, carries the wedges the board
+    # had counted this boot when the row was written. Row times are the RTC's New York time
+    # labelled Z; shifting them by the clock's measured error puts them on the capture's
+    # timeline. A row within 2 s of a clear could be either side of it, so it is left out.
+    offset = timedelta(seconds=sorted(errors)[len(errors) // 2]) if errors else timedelta(0)
+    cloud_checked, cloud_wrong = 0, []
+    placed = []
+    for r in rows:
+        if r.get("button_panel", {}).get("wind_sensor", True):
+            continue
+        at = datetime.strptime(r["time"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=LOCAL) - offset
+        if at < lines[0][0] or any(abs((t - at).total_seconds()) <= 2 for t, _ in clears):
+            continue
+        placed.append((at, r))
+        boot = max((b for b in boots if b <= at), default=None)
+        before = [x for t, x in clears if t <= at and (boot is None or t >= boot)]
+        if before:
+            want = min(99, int(re.search(r"total_wedges=(\d+)", before[-1]).group(1)))
+        elif boot is not None:
+            want = 0
+        else:
+            continue  # the count before this window is not in it
+        cloud_checked += 1
+        if r["wind_peak"] != want:
+            cloud_wrong.append(f"row at {r['time'][11:19]} says {r['wind_peak']}, the board had {want}")
+    # Between two rows of the same boot the count rises by exactly the wedges detected in
+    # between, so an hour with none must leave it unchanged. This holds with no clear or boot
+    # in the window to anchor the count to, which is most hours.
+    for (a, ra), (b, rb) in zip(placed, placed[1:]):
+        if any(a <= t <= b for t in boots) or rb["wind_peak"] >= 99:
+            continue
+        between = sum(1 for d in detected if a < d < b)
+        cloud_checked += 1
+        if rb["wind_peak"] - ra["wind_peak"] != between:
+            cloud_wrong.append(f"rows at {ra['time'][11:19]} and {rb['time'][11:19]} say "
+                               f"{ra['wind_peak']} then {rb['wind_peak']}, the board detected {between} between")
+    if cloud_checked:
+        detail += f"; cloud rows agree with the board in {cloud_checked - len(cloud_wrong)} of {cloud_checked}"
+    elif rows:
+        detail += f"; newest cloud row says {rows[-1]['wind_peak']} (no clear or boot in the window to check it against)"
+    cloud_off = bool(cloud_wrong)
+    if cloud_wrong:
+        detail += " (DISAGREE: " + "; ".join(cloud_wrong) + ")"
+    if still_wrong:
+        detail += "; " + "; ".join(still_wrong)
+    if missed:
+        detail += f"; first missed at {missed[0].astimezone(LOCAL):%H:%M:%S}"
+    unaccounted = len(detected) != len(clears)
+    if unaccounted:
+        detail += f"; {len(detected)} detections but {len(clears)} bus clear line(s)"
+    failed = unhealed or still_wrong or missed or counters_off or cloud_off
+    report("FAIL" if failed else ("WARN" if unverified or unaccounted else "PASS"), "wedges", detail)
+
+    # Alarm: the DS3231 raises its alarm at every hour mark, and the tracker logs re-arming
+    # it. A wedge that left the chip half set up shows here as an hour that never rang.
+    rang, silent = [], []
+    mark = (lines[0][0] + timedelta(hours=1)).replace(minute=0, second=0)
+    while mark + timedelta(seconds=90) <= lines[-1][0]:
+        hit = any(-10 <= (t - mark).total_seconds() <= 90 for t, x in lines if x == "Alarm detected and cleared.")
+        (rang if hit else silent).append(f"{mark.astimezone(LOCAL):%H:%M}")
+        mark += timedelta(hours=1)
+    if not rang and not silent:
+        report("PASS", "alarm", "no hour mark in the window yet")
+    else:
+        report("FAIL" if silent else "PASS", "alarm",
+               f"rang at {', '.join(rang) or 'none'}" + (f"; SILENT at {', '.join(silent)}" if silent else ""))
 
     # Position: every hour mark in active hours commands exactly the scheduled extension.
     commands = [(t, int(x.split()[-1])) for t, x in lines if re.fullmatch(r"Extending to -?\d+", x)]
@@ -180,14 +284,6 @@ def main():
 
     # Rows: the newest batch's rows carry the board's local time (labelled Z by the server),
     # a status, and the extension. Each row should be recent and in order.
-    rows = []
-    path = os.environ.get("LATEST_BATCH")
-    if path and os.path.exists(path):
-        for line in open(path):
-            try:
-                rows.append(json.loads(line))
-            except ValueError:
-                pass
     if not rows:
         report("WARN", "rows", "could not read the newest batch")
     else:
