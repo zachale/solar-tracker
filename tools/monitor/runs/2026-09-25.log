@@ -128,3 +128,69 @@ PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Stor
 PASS  rows      newest batch has 3 row(s), last at 08:22 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
 PASS  memory    12052 bytes free, lowest 12052, +0 over the window
 PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T12:23:00Z (checked 2026-09-25T13:28:05Z)
+PASS  alive     status every 10 s, last 10 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 09:00
+PASS  position  09:00 35%; status ACTIVE (schedule says ACTIVE at 09:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 09:22 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 11956, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T13:22:58Z (checked 2026-09-25T14:28:04Z)
+PASS  alive     status every 10 s, last 13 s ago, 380 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 380 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 10:00
+PASS  position  10:00 43%; status ACTIVE (schedule says ACTIVE at 10:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 10:22 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T14:22:56Z (checked 2026-09-25T15:28:00Z)
+PASS  alive     status every 10 s, last 5 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 11:00
+PASS  position  11:00 51%; status ACTIVE (schedule says ACTIVE at 11:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 11:23 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 11956, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T15:22:57Z (checked 2026-09-25T16:28:02Z)
+PASS  alive     status every 10 s, last 11 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 12:00
+PASS  position  12:00 60%; status ACTIVE (schedule says ACTIVE at 12:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 12:23 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 11956, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T16:23:00Z (checked 2026-09-25T17:28:04Z)
+PASS  alive     status every 10 s, last 5 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -2 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 13:00
+PASS  position  13:00 65%; status ACTIVE (schedule says ACTIVE at 13:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 13:23 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 11956, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T17:23:00Z (checked 2026-09-25T18:28:05Z)
+PASS  alive     status every 10 s, last 12 s ago, 380 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 380 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 14:00
+PASS  position  14:00 71%; status ACTIVE (schedule says ACTIVE at 14:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 14:23 local (5 min old): status ACTIVE, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 11956, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
