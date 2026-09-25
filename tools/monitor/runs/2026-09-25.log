@@ -18,3 +18,47 @@ PASS  uploads   1 sync(s) posted 1 chunk(s), 0 failed; 1 batch(es) in Cloud Stor
 PASS  rows      newest batch has 1 row(s), last at 22:09 local (8 min old): status NIGHT, extended -1%, wind/wedge column 0
 PASS  memory    13024 bytes free, lowest 13024, +0 over the window
 PASS  ota       running v12; last: OTA: up to date at v12
+tracker health since 2026-09-25T02:22:54Z (checked 2026-09-25T03:27:58Z)
+PASS  alive     status every 10 s, last 8 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -2 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 23:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 23:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 23:21 local (7 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    13024 bytes free, lowest 13024, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T03:22:55Z (checked 2026-09-25T04:28:01Z)
+PASS  alive     status every 10 s, last 5 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 00:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 00:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 00:21 local (7 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    13024 bytes free, lowest 13024, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T04:22:57Z (checked 2026-09-25T05:28:02Z)
+PASS  alive     status every 10 s, last 10 s ago, 380 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 380 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 01:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 01:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 01:21 local (7 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    13024 bytes free, lowest 13024, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-25T05:22:58Z (checked 2026-09-25T06:28:04Z)
+PASS  alive     status every 10 s, last 7 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 02:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 02:27); actuator reports -1%
+PASS  uploads   5 sync(s) posted 5 chunk(s), 0 failed; 5 batch(es) in Cloud Storage over 65 min (expect ~4); 5 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 02:21 local (6 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    13024 bytes free, lowest 13024, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
