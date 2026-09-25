@@ -1,0 +1,20 @@
+tracker health since 2026-09-25T00:59:10Z (checked 2026-09-25T01:05:24Z)
+PASS  alive     status every 10 s, last 4 s ago, 35 blocks over 6 min
+WARN  restarts  1 (reset pin), running v11
+PASS  clock     RTC within 2 s of real New York time over 35 readings (latest -1 s)
+PASS  wedges    0 wedge(s), 0 healed, 0 not healed
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 21:05); actuator reports -1%
+PASS  uploads   1 sync(s) posted 1 chunk(s), 0 failed; 1 batch(es) in Cloud Storage over 6 min (expect ~1); 1 clock sync(s)
+PASS  rows      newest batch has 1 row(s), last at 20:57 local (8 min old): status ACTIVE, extended -1%, wind/wedge column 1
+WARN  memory    12252 bytes free, lowest 12252, -972 over the window
+PASS  ota       running v11; last: OTA: up to date at v11
+tracker health since 2026-09-25T02:11:00Z (checked 2026-09-25T02:17:34Z)
+PASS  alive     status every 10 s, last 5 s ago, 37 blocks over 6 min
+WARN  restarts  1 (reset pin), running v12
+PASS  clock     RTC within 2 s of real New York time over 37 readings (latest -1 s)
+PASS  wedges    0 wedge(s), 0 healed, 0 not healed
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 22:17); actuator reports -1%
+PASS  uploads   1 sync(s) posted 1 chunk(s), 0 failed; 1 batch(es) in Cloud Storage over 6 min (expect ~1); 1 clock sync(s)
+PASS  rows      newest batch has 1 row(s), last at 22:09 local (8 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    13024 bytes free, lowest 13024, +0 over the window
+PASS  ota       running v12; last: OTA: up to date at v12
