@@ -134,9 +134,30 @@ void ClockModule::setup()
   pinMode(RTC_POWER_PIN, OUTPUT);
   digitalWrite(RTC_POWER_PIN, HIGH);
 
+  // The schedule is on the SD card, not in the chip, so it never waits on the bus. A boot
+  // that found the bus wedged used to return before this and run the day on the defaults.
+  loadSchedule();
+
+#ifdef CLOCK_FAULT_WEDGE
+  Serial.println(String("FAULT INJECTION: wedging the I2C bus before the RTC is set up: ") +
+                 (wedgeForTest() ? "the DS3231 is holding SDA low" : "could not wedge it"));
+#endif
+
   if (!initializeRTC())
   {
-    Serial.println("Failed to initialize RTC after multiple attempts");
+    Serial.println("Failed to initialize RTC after multiple attempts; its setup finishes once the bus answers");
+    return;
+  }
+  completeSetup();
+}
+
+// Everything setup() does to the chip itself. Runs from setup() when the chip answers at boot,
+// otherwise from the tracker's bus check as soon as a bus clear brings it back; until then the
+// hourly alarm is not armed. Does nothing once it has run.
+void ClockModule::completeSetup()
+{
+  if (rtcSetUp)
+  {
     return;
   }
 
@@ -154,18 +175,26 @@ void ClockModule::setup()
   resetAlarm();
   lastTimeCheck = rtc.now();
   wasZeroTime = false;
+  rtcSetUp = true;
 
   Serial.println("Setup Clock Module.");
+}
 
-  if (SettingsManager::getSetting<String>("schedule") != "null")
+void ClockModule::loadSchedule()
+{
+  String saved = SettingsManager::getSetting<String>("schedule");
+  if (saved != "null")
   {
     JsonDocument doc;
-    DeserializationError error = deserializeJson(doc, SettingsManager::getSetting<String>("schedule"));
-    if (!error)
+    if (!deserializeJson(doc, saved))
     {
       setSchedule(doc);
     }
   }
+  Serial.println("Schedule: " + String((int)hourStart) + "h at " + String((int)percentStart) + "%, " +
+                 String((int)hourMiddle) + "h at " + String((int)percentMiddle) + "%, " +
+                 String((int)hourFinish) + "h at " + String((int)percentFinish) + "%, safe " +
+                 String((int)safeExtensionPercent) + "%");
 }
 
 void ClockModule::powerCycleRTC()

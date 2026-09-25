@@ -19,7 +19,8 @@ set -euo pipefail
 #   --fast          compress OtaUpdater's timers (check every 60 s, confirm after 60 s,
 #                   roll back after 300 s) so the fault matrix runs in minutes
 #   --fault=<name>  build a deliberately broken image: hang-setup, crash-setup, no-confirm,
-#                   wedge-clock (wedges the I2C bus every two minutes to exercise the bus clear)
+#                   wedge-clock (wedges the I2C bus at boot, before the RTC is set up, and every
+#                   two minutes after, to exercise the bus clear)
 EXTRA=""
 while [[ "${1:-}" == --* ]]; do
   case "$1" in
@@ -35,7 +36,8 @@ done
 
 VERSION="${1:-}"
 # 15 characters at most: OtaUpdater keeps versions in 16 byte fields in data flash.
-if [[ ! "$VERSION" =~ ^[A-Za-z][A-Za-z0-9._-]{0,14}$ ]]; then
+# Options go first; anything after the version would otherwise be dropped without a word.
+if (( $# != 1 )) || [[ ! "$VERSION" =~ ^[A-Za-z][A-Za-z0-9._-]{0,14}$ ]]; then
   echo "usage: $0 [--fast] [--fault=<name>] <version>   (a letter, then up to 14 of [A-Za-z0-9._-])" >&2
   exit 1
 fi

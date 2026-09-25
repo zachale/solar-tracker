@@ -79,6 +79,7 @@ private:
   void initializeStatus();
   void spoolTelemetryRow();
   void serviceSync();
+  void checkClockBus();
 };
 
 #endif

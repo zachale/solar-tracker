@@ -27,6 +27,7 @@ void SolarTracker::setup()
   pinMode(CLOCK_INTERRUPT_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(CLOCK_INTERRUPT_PIN), clockModule.setAlarmTriggered, FALLING);
   clockModule.setup();
+  checkClockBus();
   windSensor.setup();
   dailySync();
   initializeStatus();
@@ -54,24 +55,7 @@ void SolarTracker::pollSensorData()
   }
 #endif
 
-  // Bus health first: everything below reads the RTC, and a wedged bus returns
-  // register addresses and stack residue rather than failing loudly.
-  if (!clockModule.isHealthy())
-  {
-    ClockModule::wedgeCount++;
-    Serial.println("I2C bus unhealthy (code " + String(ClockModule::lastI2cCode) +
-                   "), attempting bus clear #" + String(ClockModule::wedgeCount));
-    bool freed = clockModule.busClear();
-    bool back = clockModule.isHealthy();
-    if (back)
-    {
-      ClockModule::recoverCount++;
-    }
-    Serial.println("Bus clear: sda_freed=" + String(freed ? 1 : 0) +
-                   " recovered=" + String(back ? 1 : 0) +
-                   " total_wedges=" + String(ClockModule::wedgeCount) +
-                   " total_recovered=" + String(ClockModule::recoverCount));
-  }
+  checkClockBus();
 
   if (clockModule.isAlarmTriggered())
   {
@@ -132,6 +116,35 @@ void SolarTracker::pollSensorData()
   otaUpdater.service(wifiClient, !appMode && status != SAFE && actuator.status == LinearActuator::STOP);
 
   serviceSync();
+}
+
+// Bus health first: everything in the loop reads the RTC, and a wedged bus returns register
+// addresses and stack residue rather than failing loudly. Also runs from setup(), so a boot
+// that finds the bus wedged is healed before the status is chosen from the time, and the
+// chip's setup that the wedge made the clock skip is finished there.
+void SolarTracker::checkClockBus()
+{
+  if (!clockModule.isHealthy())
+  {
+    ClockModule::wedgeCount++;
+    Serial.println("I2C bus unhealthy (code " + String(ClockModule::lastI2cCode) +
+                   "), attempting bus clear #" + String(ClockModule::wedgeCount));
+    bool freed = clockModule.busClear();
+    bool back = clockModule.isHealthy();
+    if (back)
+    {
+      ClockModule::recoverCount++;
+    }
+    Serial.println("Bus clear: sda_freed=" + String(freed ? 1 : 0) +
+                   " recovered=" + String(back ? 1 : 0) +
+                   " total_wedges=" + String(ClockModule::wedgeCount) +
+                   " total_recovered=" + String(ClockModule::recoverCount));
+    if (!back)
+    {
+      return;
+    }
+  }
+  clockModule.completeSetup();
 }
 
 // A sync blocks the loop for as long as a WiFi association and a handful of POSTs

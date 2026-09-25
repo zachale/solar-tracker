@@ -31,6 +31,7 @@ public:
   // keep a count so the condition is visible from the telemetry rows.
   bool isHealthy();              // did the last read actually reach the chip
   bool busClear();               // 9-clock recovery; true if SDA came back high
+  void completeSetup();          // the chip's share of setup(), deferred while the bus is wedged
   static uint16_t wedgeCount;    // wedges seen this power session
   static uint16_t recoverCount;  // of those, how many the bus clear fixed
   static uint8_t  lastI2cCode;   // last endTransmission() result
@@ -54,6 +55,8 @@ private:
   unsigned long syncTimer = 0;
   DateTime lastTimeCheck;
   bool wasZeroTime = false;
+  bool rtcSetUp = false;
+  void loadSchedule();
   int getPercentOfDay(float hour);
   int normalizePercentage(float percent);
   uint8_t getMinute();

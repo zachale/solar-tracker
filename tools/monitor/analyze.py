@@ -115,9 +115,14 @@ def main():
     wrong = []
     for t, pct in commands:
         hour = t.astimezone(LOCAL).hour
-        want = expected_percent(hour, schedule) if active(hour, schedule) else None
-        if want is not None and pct != want and pct != schedule["setSafePercent"]:
-            wrong.append(f"{t.astimezone(LOCAL):%H:%M} commanded {pct}%, schedule says {want}%")
+        if pct == schedule["setSafePercent"]:
+            continue
+        if not active(hour, schedule):
+            # At night the tracker holds still; the only move it makes is to the safe position.
+            wrong.append(f"{t.astimezone(LOCAL):%H:%M} commanded {pct}% outside the active hours")
+        elif pct != expected_percent(hour, schedule):
+            wrong.append(f"{t.astimezone(LOCAL):%H:%M} commanded {pct}%, "
+                         f"schedule says {expected_percent(hour, schedule)}%")
     missed = []
     mark = (lines[0][0] + timedelta(hours=1)).replace(minute=0, second=0)
     while mark + timedelta(minutes=3) <= lines[-1][0]:
@@ -133,8 +138,28 @@ def main():
     extended = [x for t, x in lines if x.startswith("PercentExtended: ")]
     if extended:
         detail += f"; actuator reports {extended[-1].split(': ')[1]}%"
-    bad_state = status and status[-1][1] not in (want_state, "SAFE", "AWAY")
-    report("FAIL" if wrong or missed or bad_state else "PASS", "position",
+    # Every status block, not only the last, must agree with the schedule for its hour. SAFE
+    # and AWAY are the tracker's own overrides. The first half minute after an hour mark is
+    # left out: the status is printed before it is updated, so one block can lag the change.
+    off = []
+    for t, s in status:
+        local = t.astimezone(LOCAL)
+        if s in ("ACTIVE", "NIGHT") and local.minute * 60 + local.second > 30 and \
+                s != ("ACTIVE" if active(local.hour, schedule) else "NIGHT"):
+            off.append((local, s))
+    if off:
+        detail += f"; status disagreed with the schedule in {len(off)} block(s), " \
+                  f"{off[0][0]:%H:%M}-{off[-1][0]:%H:%M} ({off[0][1]})"
+    # What the clock actually loaded at boot, which is what the moves follow. A boot that ran
+    # on the defaults instead of the card's schedule shows here.
+    s = {k: int(v) for k, v in schedule.items()}
+    want_loaded = (f"Schedule: {s['setStartHour']}h at {s['setStartPercent']}%, "
+                   f"{s['setMiddleHour']}h at {s['setMiddlePercent']}%, "
+                   f"{s['setEndHour']}h at {s['setEndPercent']}%, safe {s['setSafePercent']}%")
+    loaded_wrong = [x for t, x in lines if x.startswith("Schedule: ") and x != want_loaded]
+    if loaded_wrong:
+        detail += f"; booted with '{loaded_wrong[-1]}', the card says '{want_loaded}'"
+    report("FAIL" if wrong or missed or off or loaded_wrong else "PASS", "position",
            detail + ("; " + "; ".join(wrong) if wrong else "") + ("; no command at " + ", ".join(missed) if missed else ""))
 
     # Uploads: a batch every fifteen minutes, each one landing in Cloud Storage.
