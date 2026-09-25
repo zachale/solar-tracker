@@ -8,6 +8,7 @@ FAIL, and exits 1 if any FAIL.
 """
 
 import json
+import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
@@ -151,6 +152,30 @@ def main():
     report(level, "uploads", f"{len(uploaded)} sync(s) posted {sum(uploaded)} chunk(s), {failed} failed; "
                              f"{len(batches)} batch(es) in Cloud Storage over {span_min:.0f} min (expect ~{expected}); "
                              f"{len(syncs)} clock sync(s)")
+
+    # Rows: the newest batch's rows carry the board's local time (labelled Z by the server),
+    # a status, and the extension. Each row should be recent and in order.
+    rows = []
+    path = os.environ.get("LATEST_BATCH")
+    if path and os.path.exists(path):
+        for line in open(path):
+            try:
+                rows.append(json.loads(line))
+            except ValueError:
+                pass
+    if not rows:
+        report("WARN", "rows", "could not read the newest batch")
+    else:
+        stamps = [datetime.strptime(r["time"][:19], "%Y-%m-%dT%H:%M:%S") for r in rows]
+        local_now = now.astimezone(LOCAL).replace(tzinfo=None)
+        age_min = (local_now - stamps[-1]).total_seconds() / 60
+        ordered = all(a < b for a, b in zip(stamps, stamps[1:]))
+        last = rows[-1]
+        level = "PASS" if 0 <= age_min <= 25 and ordered else "FAIL"
+        report(level, "rows", f"newest batch has {len(rows)} row(s), last at {stamps[-1]:%H:%M} local "
+                              f"({age_min:.0f} min old{'' if ordered else ', OUT OF ORDER'}): "
+                              f"status {last['status']}, extended {last['extended_percent']}%, "
+                              f"wind/wedge column {last['wind_peak']}")
 
     # Memory: the free gap between heap and stack. A steady fall is a leak or fragmentation.
     free = [(t, int(x.split(": ")[1])) for t, x in lines if re.fullmatch(r"Free RAM: -?\d+", x)]

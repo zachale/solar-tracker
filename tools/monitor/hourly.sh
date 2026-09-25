@@ -44,6 +44,10 @@ while d <= e.date():
     print(d); d += timedelta(days=1)"); do
   gcloud storage ls "gs://$BUCKET/raw/$day/" 2>/dev/null
 done > "$WORK/objects"
+# The newest batch itself, to check the rows as well as their arrival.
+LATEST="$(grep "\.ndjson$" "$WORK/objects" | sort | tail -1)"
+[[ -n "$LATEST" ]] && gcloud storage cat "$LATEST" > "$WORK/latest.ndjson" 2>/dev/null
+touch "$WORK/latest.ndjson"
 
 echo "tracker health since $SINCE (checked $(date -u +%Y-%m-%dT%H:%M:%SZ))"
-python3 "$HERE/analyze.py" "$SINCE" "$WORK/log" "$WORK/objects" "$HERE/schedule.json" ${UNTIL:+"$UNTIL"}
+LATEST_BATCH="$WORK/latest.ndjson" python3 "$HERE/analyze.py" "$SINCE" "$WORK/log" "$WORK/objects" "$HERE/schedule.json" ${UNTIL:+"$UNTIL"}
