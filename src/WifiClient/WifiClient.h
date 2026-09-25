@@ -11,6 +11,7 @@ class WifiClient
 public:
   static bool ensureWifiConnection();
   String get(String);
+  int probe(String url);
   int post(String url, const String &body, const char *contentType);
 
 private:

@@ -1,0 +1,203 @@
+2026-09-24T19:26:48Z Temperature: 21.75
+2026-09-24T19:26:48Z Status: ACTIVE
+2026-09-24T19:26:58Z Temperature: 21.75
+2026-09-24T19:26:58Z Status: ACTIVE
+2026-09-24T19:27:08Z Temperature: 21.75
+2026-09-24T19:27:08Z Status: ACTIVE
+2026-09-24T19:27:18Z Temperature: 21.75
+2026-09-24T19:27:18Z Status: ACTIVE
+2026-09-24T19:27:28Z Temperature: 21.75
+2026-09-24T19:27:28Z Status: ACTIVE
+2026-09-24T19:27:35Z GET Request
+2026-09-24T19:27:37Z Response code: 200
+2026-09-24T19:27:37Z It took 1 attempts to get a response
+2026-09-24T19:27:37Z s3 151512 7f57b7ff
+2026-09-24T19:27:37Z OTA: up to date at s3
+2026-09-24T19:27:39Z Temperature: 21.75
+2026-09-24T19:27:39Z Status: ACTIVE
+2026-09-24T19:27:49Z Temperature: 21.75
+2026-09-24T19:27:49Z Status: ACTIVE
+2026-09-24T19:27:59Z Temperature: 21.75
+2026-09-24T19:27:59Z Status: ACTIVE
+2026-09-24T19:28:09Z Temperature: 21.75
+2026-09-24T19:28:09Z Status: ACTIVE
+2026-09-24T19:28:19Z Temperature: 21.75
+2026-09-24T19:28:19Z Status: ACTIVE
+2026-09-24T19:28:29Z Temperature: 21.75
+2026-09-24T19:28:30Z Status: ACTIVE
+2026-09-24T19:28:35Z GET Request
+2026-09-24T19:28:36Z Response code: 200
+2026-09-24T19:28:36Z It took 1 attempts to get a response
+2026-09-24T19:28:36Z s3 151512 7f57b7ff
+2026-09-24T19:28:36Z OTA: up to date at s3
+2026-09-24T19:28:40Z Temperature: 21.75
+2026-09-24T19:28:40Z Status: ACTIVE
+2026-09-24T19:28:50Z Temperature: 21.75
+2026-09-24T19:28:50Z Status: ACTIVE
+2026-09-24T19:29:00Z Temperature: 22.00
+2026-09-24T19:29:00Z Status: ACTIVE
+2026-09-24T19:29:10Z Temperature: 22.00
+2026-09-24T19:29:10Z Status: ACTIVE
+2026-09-24T19:29:20Z Temperature: 22.00
+2026-09-24T19:29:20Z Status: ACTIVE
+2026-09-24T19:29:31Z Temperature: 22.00
+2026-09-24T19:29:31Z Status: ACTIVE
+2026-09-24T19:29:35Z GET Request
+2026-09-24T19:29:37Z Response code: 200
+2026-09-24T19:29:37Z It took 1 attempts to get a response
+2026-09-24T19:29:37Z s3 151512 7f57b7ff
+2026-09-24T19:29:37Z OTA: up to date at s3
+2026-09-24T19:29:41Z Temperature: 22.00
+2026-09-24T19:29:41Z Status: ACTIVE
+2026-09-24T19:29:51Z Temperature: 22.00
+2026-09-24T19:29:51Z Status: ACTIVE
+2026-09-24T19:30:01Z Temperature: 22.00
+2026-09-24T19:30:01Z Status: ACTIVE
+2026-09-24T19:30:11Z Temperature: 22.00
+2026-09-24T19:30:11Z Status: ACTIVE
+2026-09-24T19:30:21Z Temperature: 22.00
+2026-09-24T19:30:22Z Status: ACTIVE
+2026-09-24T19:30:32Z Temperature: 22.00
+2026-09-24T19:30:32Z Status: ACTIVE
+2026-09-24T19:30:35Z GET Request
+2026-09-24T19:30:37Z Response code: 200
+2026-09-24T19:30:37Z It took 1 attempts to get a response
+2026-09-24T19:30:37Z s3 151512 7f57b7ff
+2026-09-24T19:30:37Z OTA: up to date at s3
+2026-09-24T19:30:42Z Temperature: 22.00
+2026-09-24T19:30:42Z Status: ACTIVE
+2026-09-24T19:30:52Z Temperature: 22.00
+2026-09-24T19:30:52Z Status: ACTIVE
+2026-09-24T19:31:02Z Temperature: 22.00
+2026-09-24T19:31:02Z Status: ACTIVE
+2026-09-24T19:31:12Z Temperature: 22.00
+2026-09-24T19:31:12Z Status: ACTIVE
+2026-09-24T19:31:22Z Temperature: 22.00
+2026-09-24T19:31:23Z Status: ACTIVE
+2026-09-24T19:31:33Z Temperature: 22.00
+2026-09-24T19:31:33Z Status: ACTIVE
+2026-09-24T19:31:35Z GET Request
+2026-09-24T19:31:37Z Response code: 200
+2026-09-24T19:31:37Z It took 1 attempts to get a response
+2026-09-24T19:31:37Z s3 151512 7f57b7ff
+2026-09-24T19:31:37Z OTA: up to date at s3
+2026-09-24T19:31:43Z Temperature: 22.00
+2026-09-24T19:31:43Z Status: ACTIVE
+2026-09-24T19:31:53Z Temperature: 22.00
+2026-09-24T19:31:53Z Status: ACTIVE
+2026-09-24T19:32:03Z Temperature: 22.00
+2026-09-24T19:32:03Z Status: ACTIVE
+2026-09-24T19:32:13Z Temperature: 22.00
+2026-09-24T19:32:13Z Status: ACTIVE
+2026-09-24T19:32:24Z Temperature: 22.00
+2026-09-24T19:32:24Z Status: ACTIVE
+2026-09-24T19:32:34Z Temperature: 22.00
+2026-09-24T19:32:34Z Status: ACTIVE
+2026-09-24T19:32:35Z GET Request
+2026-09-24T19:32:37Z Response code: 200
+2026-09-24T19:32:37Z It took 1 attempts to get a response
+2026-09-24T19:32:37Z s3 151512 7f57b7ff
+2026-09-24T19:32:37Z OTA: up to date at s3
+2026-09-24T19:32:44Z Temperature: 22.00
+2026-09-24T19:32:44Z Status: ACTIVE
+2026-09-24T19:32:54Z Temperature: 22.00
+2026-09-24T19:32:54Z Status: ACTIVE
+2026-09-24T19:33:04Z Temperature: 22.00
+2026-09-24T19:33:04Z Status: ACTIVE
+2026-09-24T19:33:21Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T19:33:25Z Firmware version: q241926a
+2026-09-24T19:33:25Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-24T19:33:25Z ESP32 bridge firmware: 0.6.0
+2026-09-24T19:33:25Z ESP32 bridge firmware U32: 0x600
+2026-09-24T19:33:25Z OTA: running q241926a, phase IDLE, good s3 copy in /b.bin, record 1 gen 4
+2026-09-24T19:33:25Z OTA: q241926a is the new base; its rollback copy will be downloaded first
+2026-09-24T19:33:25Z Config doc:
+2026-09-24T19:33:26Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T19:33:26Z Alarm detected and cleared.
+2026-09-24T19:33:26Z Alarm was set.
+2026-09-24T19:33:26Z Setup Clock Module.
+2026-09-24T19:33:36Z Connecting to WiFiRock Lodge
+2026-09-24T19:33:41Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T19:33:42Z .Successfully connected toSmartRG-d0b0
+2026-09-24T19:33:42Z GET Request
+2026-09-24T19:33:43Z Response code: 200
+2026-09-24T19:33:43Z It took 1 attempts to get a response
+2026-09-24T19:33:43Z {"datetime":"2026-09-24T15:33:43.000Z"}
+2026-09-24T19:33:43Z Syncing Clock to: 2026-09-24T15:33:43.000Z
+2026-09-24T19:33:45Z Attempting to recalibrate
+2026-09-24T19:33:50Z homing
+2026-09-24T19:33:50Z Temperature: 22.00
+2026-09-24T19:33:50Z Status: ACTIVE
+2026-09-24T19:33:51Z boundary hit
+2026-09-24T19:33:52Z maxing
+2026-09-24T19:33:53Z boundary hit
+2026-09-24T19:33:54Z Extending to 77
+2026-09-24T19:33:54Z Extending towards 0
+2026-09-24T19:33:54Z Starting Position 0
+2026-09-24T19:33:55Z Set status to: ACTIVE
+2026-09-24T19:33:55Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T19:33:55Z Setup complete.
+2026-09-24T19:33:55Z GET Request
+2026-09-24T19:33:56Z Response code: 200
+2026-09-24T19:33:56Z It took 1 attempts to get a response
+2026-09-24T19:33:56Z q241926a 151528 baa51777
+2026-09-24T19:33:56Z OTA: downloading q241926a as its own rollback copy into /a.bin
+2026-09-24T19:33:58Z OTA: downloading q241926a, 122369 bytes, in the background (starting took 1425 ms)
+2026-09-24T19:34:00Z OTA: 8310/122369 bytes (6%) after 2 s; loop ran 1485 times meanwhile
+2026-09-24T19:34:00Z Temperature: 22.00
+2026-09-24T19:34:01Z Status: ACTIVE
+2026-09-24T19:34:02Z OTA: 22771/122369 bytes (18%) after 4 s; loop ran 2945 times meanwhile
+2026-09-24T19:34:04Z OTA: 38092/122369 bytes (31%) after 6 s; loop ran 4442 times meanwhile
+2026-09-24T19:34:06Z OTA: 47005/122369 bytes (38%) after 8 s; loop ran 5952 times meanwhile
+2026-09-24T19:34:08Z OTA: 52901/122369 bytes (43%) after 10 s; loop ran 7404 times meanwhile
+2026-09-24T19:34:11Z Temperature: 22.00
+2026-09-24T19:34:11Z Status: ACTIVE
+2026-09-24T19:34:11Z OTA: 57601/122369 bytes (47%) after 12 s; loop ran 8579 times meanwhile
+2026-09-24T19:34:13Z OTA: 62070/122369 bytes (50%) after 14 s; loop ran 9787 times meanwhile
+2026-09-24T19:34:15Z OTA: 66763/122369 bytes (54%) after 16 s; loop ran 11142 times meanwhile
+2026-09-24T19:34:18Z OTA: 69465/122369 bytes (56%) after 18 s; loop ran 11838 times meanwhile
+2026-09-24T19:34:21Z OTA: 70336/122369 bytes (57%) after 21 s; loop ran 12062 times meanwhile
+2026-09-24T19:34:22Z Temperature: 21.75
+2026-09-24T19:34:22Z Status: ACTIVE
+2026-09-24T19:34:23Z OTA: 70976/122369 bytes (58%) after 24 s; loop ran 12065 times meanwhile
+2026-09-24T19:34:26Z OTA: 71655/122369 bytes (58%) after 26 s; loop ran 12068 times meanwhile
+2026-09-24T19:34:28Z OTA: 72295/122369 bytes (59%) after 29 s; loop ran 12071 times meanwhile
+2026-09-24T19:34:31Z OTA: 73102/122369 bytes (59%) after 31 s; loop ran 12294 times meanwhile
+2026-09-24T19:34:32Z Temperature: 21.75
+2026-09-24T19:34:33Z Status: ACTIVE
+2026-09-24T19:34:33Z OTA: 74101/122369 bytes (60%) after 34 s; loop ran 12297 times meanwhile
+2026-09-24T19:34:36Z OTA: 74869/122369 bytes (61%) after 36 s; loop ran 12300 times meanwhile
+2026-09-24T19:34:38Z OTA: 75484/122369 bytes (61%) after 39 s; loop ran 12303 times meanwhile
+2026-09-24T19:34:41Z OTA: 75996/122369 bytes (62%) after 41 s; loop ran 12306 times meanwhile
+2026-09-24T19:34:43Z OTA: 76675/122369 bytes (62%) after 43 s; loop ran 12309 times meanwhile
+2026-09-24T19:34:43Z Temperature: 21.75
+2026-09-24T19:34:43Z Status: ACTIVE
+2026-09-24T19:34:44Z OTA: 78122/122369 bytes (63%) after 46 s; loop ran 12312 times meanwhile
+2026-09-24T19:34:47Z OTA: 81636/122369 bytes (66%) after 48 s; loop ran 12981 times meanwhile
+2026-09-24T19:34:50Z OTA: 83762/122369 bytes (68%) after 50 s; loop ran 13713 times meanwhile
+2026-09-24T19:34:52Z OTA: 84466/122369 bytes (69%) after 53 s; loop ran 13716 times meanwhile
+2026-09-24T19:34:53Z Temperature: 21.75
+2026-09-24T19:34:53Z Status: ACTIVE
+2026-09-24T19:34:55Z OTA: 85337/122369 bytes (69%) after 55 s; loop ran 13719 times meanwhile
+2026-09-24T19:34:57Z OTA: 87104/122369 bytes (71%) after 58 s; loop ran 13849 times meanwhile
+2026-09-24T19:34:59Z OTA: 90805/122369 bytes (74%) after 60 s; loop ran 14518 times meanwhile
+2026-09-24T19:35:01Z OTA: 93891/122369 bytes (76%) after 62 s; loop ran 15145 times meanwhile
+2026-09-24T19:35:03Z OTA: 99403/122369 bytes (81%) after 64 s; loop ran 16554 times meanwhile
+2026-09-24T19:35:04Z Temperature: 21.75
+2026-09-24T19:35:04Z Status: ACTIVE
+2026-09-24T19:35:05Z OTA: 105422/122369 bytes (86%) after 66 s; loop ran 17789 times meanwhile
+2026-09-24T19:35:07Z OTA: 109955/122369 bytes (89%) after 68 s; loop ran 19082 times meanwhile
+2026-09-24T19:35:09Z OTA: 115339/122369 bytes (94%) after 70 s; loop ran 20414 times meanwhile
+2026-09-24T19:35:11Z OTA: 118489/122369 bytes (96%) after 72 s; loop ran 21705 times meanwhile
+2026-09-24T19:35:13Z OTA: 122126/122369 bytes (99%) after 74 s; loop ran 23022 times meanwhile
+2026-09-24T19:35:13Z OTA: download complete, 122369 bytes in 74 s, loop ran 23099 times while it was in flight
+2026-09-24T19:35:23Z OTA: read-back of /a.bin: differs from the running image near byte 83886
+2026-09-24T19:35:23Z OTA: read-back of the rollback copy failed (0) on q241926a, attempt 1 of 3; staying on q241926a
+2026-09-24T19:35:23Z Temperature: 21.75
+2026-09-24T19:35:23Z Status: ACTIVE
+2026-09-24T19:35:23Z GET Request
+2026-09-24T19:35:25Z Response code: 200
+2026-09-24T19:35:25Z It took 1 attempts to get a response
+2026-09-24T19:35:25Z q241926a 151528 baa51777
+2026-09-24T19:35:25Z OTA: downloading q241926a as its own rollback copy into /a.bin
+2026-09-24T19:35:27Z OTA: downloading q241926a, 122369 bytes, in the background (starting took 1139 ms)

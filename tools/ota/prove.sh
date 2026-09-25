@@ -5,13 +5,13 @@
 #
 # 1. Every image is uploaded without touching the manifest.
 # 2. Every <next> is flashed over USB with no manifest published, and must boot, arm its
-#    watchdog, download its own rollback copy, and read that copy back identical to itself.
+#    watchdog, write a copy of itself to the SD card, and read that copy back identical.
 #    Nothing that has not been seen to do all of that is ever pointed at.
 # 3. <base> is flashed over USB with the manifest naming it, saves its rollback copy, and must
 #    report "up to date".
 # 4. Each <next> in turn is named in the manifest and the board must take it by itself:
-#    download in the background, check its rollback copy, install on trial, come back as
-#    <next>, survive the trial window, confirm, and save <next> as the new rollback copy.
+#    download in the background, check the copy on the SD card, install on trial, come back
+#    as <next>, survive the trial window, confirm, and save <next> as the new rollback copy.
 #
 # For the failure cases (a bad image, a crash loop, a hang, an abort) see verify.sh.
 set -uo pipefail

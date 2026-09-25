@@ -1,0 +1,67 @@
+2026-09-24T20:35:24Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T20:35:29Z Firmware version: q242027a
+2026-09-24T20:35:29Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-24T20:35:29Z ESP32 bridge firmware: 0.6.0
+2026-09-24T20:35:29Z ESP32 bridge firmware U32: 0x600
+2026-09-24T20:35:29Z OTA: no saved state, starting fresh
+2026-09-24T20:35:29Z OTA: running q242027a, phase IDLE, good (none) copy missing, record 1 gen 0
+2026-09-24T20:35:29Z OTA: q242027a is the new base; a copy of it goes on the SD card first
+2026-09-24T20:35:29Z Config doc:
+2026-09-24T20:35:29Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T20:35:29Z Alarm detected and cleared.
+2026-09-24T20:35:29Z Alarm was set.
+2026-09-24T20:35:29Z Setup Clock Module.
+2026-09-24T20:35:39Z Connecting to WiFiRock Lodge
+2026-09-24T20:35:46Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T20:35:47Z .Successfully connected toSmartRG-d0b0
+2026-09-24T20:35:47Z GET Request
+2026-09-24T20:35:53Z Response code: 200
+2026-09-24T20:35:53Z It took 1 attempts to get a response
+2026-09-24T20:35:53Z {"datetime":"2026-09-24T16:35:52.000Z"}
+2026-09-24T20:35:53Z Syncing Clock to: 2026-09-24T16:35:52.000Z
+2026-09-24T20:35:54Z Attempting to recalibrate
+2026-09-24T20:35:59Z homing
+2026-09-24T20:35:59Z Temperature: 21.75
+2026-09-24T20:35:59Z Status: ACTIVE
+2026-09-24T20:36:00Z boundary hit
+2026-09-24T20:36:01Z maxing
+2026-09-24T20:36:02Z boundary hit
+2026-09-24T20:36:03Z Extending to 83
+2026-09-24T20:36:03Z Extending towards 0
+2026-09-24T20:36:03Z Starting Position 0
+2026-09-24T20:36:04Z Set status to: ACTIVE
+2026-09-24T20:36:04Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T20:36:04Z Setup complete.
+2026-09-24T20:36:06Z OTA: rollback copy of q242027a ready on the SD card, 153656 bytes, crc c33a15b2, read back identical to the running image (1 s)
+2026-09-24T20:36:06Z GET Request
+2026-09-24T20:36:07Z Response code: 200
+2026-09-24T20:36:07Z It took 1 attempts to get a response
+2026-09-24T20:36:07Z q242027a 153656 c33a15b2
+2026-09-24T20:36:07Z OTA: up to date at q242027a
+2026-09-24T20:36:10Z Temperature: 21.75
+2026-09-24T20:36:10Z Status: ACTIVE
+2026-09-24T20:36:20Z Temperature: 21.75
+2026-09-24T20:36:20Z Status: ACTIVE
+2026-09-24T20:36:30Z Temperature: 21.75
+2026-09-24T20:36:30Z Status: ACTIVE
+2026-09-24T20:36:40Z Temperature: 21.75
+2026-09-24T20:36:40Z Status: ACTIVE
+2026-09-24T20:36:50Z Temperature: 21.75
+2026-09-24T20:36:50Z Status: ACTIVE
+2026-09-24T20:37:00Z Temperature: 21.75
+2026-09-24T20:37:01Z Status: ACTIVE
+2026-09-24T20:37:06Z GET Request
+2026-09-24T20:37:12Z Response code: 200
+2026-09-24T20:37:12Z It took 1 attempts to get a response
+2026-09-24T20:37:12Z q242027b 153656 b4dc1d1a
+2026-09-24T20:37:13Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T20:37:13Z OTA: manifest wants q242027b (153656 bytes), running q242027a
+2026-09-24T20:37:13Z OTA: downloading q242027b into /a.bin
+2026-09-24T20:37:19Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T20:38:14Z OTA: startDownload failed (-26) on q242027b, attempt 1 of 3; staying on q242027a
+2026-09-24T20:38:14Z Temperature: 21.75
+2026-09-24T20:38:14Z Status: ACTIVE
+2026-09-24T20:38:24Z Connecting to WiFiRock Lodge
+2026-09-24T20:38:29Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T20:38:30Z .Successfully connected toSmartRG-d0b0
+2026-09-24T20:38:30Z GET Request

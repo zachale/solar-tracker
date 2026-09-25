@@ -1,0 +1,14 @@
+OTA fault matrix, run q242157, Thu 24 Sep 2026 23:00:45 UTC
+
+PASS  base      q242157a flashed over USB, watchdog armed, copy of itself saved on the SD card
+PASS  hop       installed q242157b over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242157c over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242157h0 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242157h1 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242157h2 over the air, trial confirmed, rollback copy saved
+PASS  noconfirm q242157nc never confirmed and was rolled back to q242157h2 at the deadline; rejected
+PASS  crash     q242157cr hard-faulted every boot; watchdog reset it; rolled back to q242157h2 on boot 4
+PASS  hang      q242157hg hung in setup every boot; watchdog reset it; rolled back to q242157h2 on boot 4
+PASS  abort     manifest pointed back mid-trial; rolled back from q242157d to q242157h2 from the SD card, no download
+PASS  corrupt   q242157bad with a flipped byte failed its CRC, three tries, never flashed
+FAIL  q242157mg was not refused as expected

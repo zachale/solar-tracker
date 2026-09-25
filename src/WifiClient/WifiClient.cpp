@@ -103,6 +103,33 @@ String WifiClient::get(String url)
   return "";
 }
 
+// The status code of a URL without its body, from a one byte ranged GET: 206 or 200 when
+// it is there. For checking an OTA image exists before the ESP32 is asked to download it,
+// because the bridge crashes on a download that fails, and on this unit that once reset the
+// RA4M1 too. Returns 0 when the request never got off the board. Nothing is printed but the
+// code: the URL carries the token that keeps the images unlisted.
+int WifiClient::probe(String url)
+{
+  if (!ensureWifiConnection())
+  {
+    return 0;
+  }
+  url = ensureHTTPS(url);
+  int code = 0;
+  for (int i = 0; i < 3 && code <= 0; i++)
+  {
+    http.begin(client, url, 443);
+    http.setTimeout(15000);
+    http.addHeader("User-Agent: Arduino UNO R4 WiFi");
+    http.addHeader("Range: bytes=0-0");
+    code = http.GET();
+    Watchdog::progress();
+    http.close();
+  }
+  Serial.println("Probe response code: " + String(code));
+  return code;
+}
+
 String WifiClient::ensureHTTPS(String url)
 {
   if (url.startsWith("https://"))

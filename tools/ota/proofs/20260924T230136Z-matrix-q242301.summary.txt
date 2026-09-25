@@ -1,0 +1,4 @@
+OTA fault matrix, run q242301, Thu 24 Sep 2026 23:15:18 UTC
+
+PASS  base      q242301a flashed over USB, watchdog armed, copy of itself saved on the SD card
+FAIL  q242301b was never installed

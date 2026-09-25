@@ -79,7 +79,7 @@ void setup()
   // hangs or crashes further down still gets this far, so a crash loop is counted and
   // rolled back before it can repeat for ever. Needs the modem, which the version query
   // above has just started.
-  tracker.otaBoot();
+  tracker.otaBoot(SD_CHIP_SELECT);
 
 #if defined(OTA_FAULT_HANG_SETUP)
   Serial.println("FAULT INJECTION: hanging in setup()");

@@ -1,0 +1,1555 @@
+2026-09-24T21:58:24Z OTA: startDownload failed (-26) on q242041zz, attempt 2 of 3; staying on q242041h2
+2026-09-24T21:58:24Z Temperature: 21.75
+2026-09-24T21:58:24Z Status: ACTIVE
+2026-09-24T21:58:24Z Free RAM: 12808
+2026-09-24T21:58:35Z Connecting to WiFiRock Lodge
+2026-09-24T21:58:40Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T21:58:41Z .Successfully connected toSmartRG-d0b0
+2026-09-24T21:58:41Z GET Request
+2026-09-24T21:58:43Z Response code: 200
+2026-09-24T21:58:43Z It took 1 attempts to get a response
+2026-09-24T21:58:43Z q242041h2 153720 8c0144fe
+2026-09-24T21:58:43Z OTA: up to date at q242041h2
+2026-09-24T21:58:43Z Temperature: 21.75
+2026-09-24T21:58:43Z Status: ACTIVE
+2026-09-24T21:58:43Z Free RAM: 12808
+2026-09-24T21:58:53Z Temperature: 21.75
+2026-09-24T21:58:53Z Status: ACTIVE
+2026-09-24T21:58:53Z Free RAM: 12808
+2026-09-24T21:59:03Z Temperature: 21.75
+2026-09-24T21:59:03Z Status: ACTIVE
+2026-09-24T21:59:03Z Free RAM: 12808
+2026-09-24T21:59:13Z Temperature: 21.75
+2026-09-24T21:59:13Z Status: ACTIVE
+2026-09-24T21:59:13Z Free RAM: 12808
+2026-09-24T21:59:23Z Temperature: 21.75
+2026-09-24T21:59:24Z Status: ACTIVE
+2026-09-24T21:59:24Z Free RAM: 12808
+2026-09-24T21:59:25Z GET Request
+2026-09-24T21:59:27Z Response code: 200
+2026-09-24T21:59:27Z It took 1 attempts to get a response
+2026-09-24T21:59:27Z q242041h2 153720 8c0144fe
+2026-09-24T21:59:27Z OTA: up to date at q242041h2
+2026-09-24T21:59:34Z Temperature: 21.75
+2026-09-24T21:59:34Z Status: ACTIVE
+2026-09-24T21:59:34Z Free RAM: 12808
+2026-09-24T21:59:44Z Temperature: 21.75
+2026-09-24T21:59:44Z Status: ACTIVE
+2026-09-24T21:59:44Z Free RAM: 12808
+2026-09-24T21:59:54Z Temperature: 21.75
+2026-09-24T21:59:54Z Status: ACTIVE
+2026-09-24T21:59:54Z Free RAM: 12808
+2026-09-24T22:00:01Z Alarm detected and cleared.
+2026-09-24T22:00:01Z Alarm was set.
+2026-09-24T22:00:01Z Attempting to recalibrate
+2026-09-24T22:00:06Z homing
+2026-09-24T22:00:06Z maxing
+2026-09-24T22:00:06Z Temperature: 21.75
+2026-09-24T22:00:06Z Status: ACTIVE
+2026-09-24T22:00:06Z Free RAM: 12656
+2026-09-24T22:00:07Z boundary hit
+2026-09-24T22:00:08Z Extending to 95
+2026-09-24T22:00:08Z Extending towards 0
+2026-09-24T22:00:08Z Starting Position 0
+2026-09-24T22:00:17Z Temperature: 21.75
+2026-09-24T22:00:17Z Status: ACTIVE
+2026-09-24T22:00:17Z Free RAM: 12808
+2026-09-24T22:00:25Z GET Request
+2026-09-24T22:00:26Z Response code: 200
+2026-09-24T22:00:26Z It took 1 attempts to get a response
+2026-09-24T22:00:26Z q242041h2 153720 8c0144fe
+2026-09-24T22:00:26Z OTA: up to date at q242041h2
+2026-09-24T22:00:27Z Temperature: 21.75
+2026-09-24T22:00:28Z Status: ACTIVE
+2026-09-24T22:00:28Z Free RAM: 12808
+2026-09-24T22:00:38Z Temperature: 21.75
+2026-09-24T22:00:38Z Status: ACTIVE
+2026-09-24T22:00:38Z Free RAM: 12808
+2026-09-24T22:00:48Z Temperature: 21.75
+2026-09-24T22:00:48Z Status: ACTIVE
+2026-09-24T22:00:48Z Free RAM: 12808
+2026-09-24T22:00:58Z Temperature: 21.75
+2026-09-24T22:00:58Z Status: ACTIVE
+2026-09-24T22:00:58Z Free RAM: 12808
+2026-09-24T22:01:08Z Temperature: 21.75
+2026-09-24T22:01:08Z Status: ACTIVE
+2026-09-24T22:01:08Z Free RAM: 12808
+2026-09-24T22:01:18Z Temperature: 21.75
+2026-09-24T22:01:19Z Status: ACTIVE
+2026-09-24T22:01:19Z Free RAM: 12808
+2026-09-24T22:01:25Z GET Request
+2026-09-24T22:01:26Z Response code: 200
+2026-09-24T22:01:26Z It took 1 attempts to get a response
+2026-09-24T22:01:26Z q242041h2 153720 8c0144fe
+2026-09-24T22:01:26Z OTA: up to date at q242041h2
+2026-09-24T22:01:29Z Temperature: 21.75
+2026-09-24T22:01:29Z Status: ACTIVE
+2026-09-24T22:01:29Z Free RAM: 12808
+2026-09-24T22:01:39Z Temperature: 21.75
+2026-09-24T22:01:39Z Status: ACTIVE
+2026-09-24T22:01:39Z Free RAM: 12808
+2026-09-24T22:01:49Z Temperature: 21.75
+2026-09-24T22:01:49Z Status: ACTIVE
+2026-09-24T22:01:49Z Free RAM: 12808
+2026-09-24T22:01:59Z Temperature: 21.75
+2026-09-24T22:01:59Z Status: ACTIVE
+2026-09-24T22:01:59Z Free RAM: 12808
+2026-09-24T22:02:09Z Temperature: 21.75
+2026-09-24T22:02:10Z Status: ACTIVE
+2026-09-24T22:02:10Z Free RAM: 12808
+2026-09-24T22:02:20Z Temperature: 21.75
+2026-09-24T22:02:20Z Status: ACTIVE
+2026-09-24T22:02:20Z Free RAM: 12808
+2026-09-24T22:02:25Z GET Request
+2026-09-24T22:02:27Z Response code: 200
+2026-09-24T22:02:27Z It took 1 attempts to get a response
+2026-09-24T22:02:27Z q242041h2 153720 8c0144fe
+2026-09-24T22:02:27Z OTA: up to date at q242041h2
+2026-09-24T22:02:30Z Temperature: 21.75
+2026-09-24T22:02:30Z Status: ACTIVE
+2026-09-24T22:02:30Z Free RAM: 11836
+2026-09-24T22:02:40Z Temperature: 21.75
+2026-09-24T22:02:40Z Status: ACTIVE
+2026-09-24T22:02:40Z Free RAM: 11836
+2026-09-24T22:02:50Z Temperature: 21.75
+2026-09-24T22:02:50Z Status: ACTIVE
+2026-09-24T22:02:50Z Free RAM: 11836
+2026-09-24T22:03:00Z Temperature: 21.75
+2026-09-24T22:03:00Z Status: ACTIVE
+2026-09-24T22:03:01Z Free RAM: 11836
+2026-09-24T22:03:11Z Temperature: 21.75
+2026-09-24T22:03:11Z Status: ACTIVE
+2026-09-24T22:03:11Z Free RAM: 11836
+2026-09-24T22:03:21Z Temperature: 21.75
+2026-09-24T22:03:21Z Status: ACTIVE
+2026-09-24T22:03:21Z Free RAM: 11836
+2026-09-24T22:03:25Z GET Request
+2026-09-24T22:03:26Z Response code: 200
+2026-09-24T22:03:26Z It took 1 attempts to get a response
+2026-09-24T22:03:26Z q242041h2 153720 8c0144fe
+2026-09-24T22:03:26Z OTA: up to date at q242041h2
+2026-09-24T22:03:31Z Temperature: 21.75
+2026-09-24T22:03:31Z Status: ACTIVE
+2026-09-24T22:03:31Z Free RAM: 11836
+2026-09-24T22:03:41Z Temperature: 21.75
+2026-09-24T22:03:41Z Status: ACTIVE
+2026-09-24T22:03:41Z Free RAM: 11836
+2026-09-24T22:03:51Z Temperature: 21.75
+2026-09-24T22:03:51Z Status: ACTIVE
+2026-09-24T22:03:51Z Free RAM: 11836
+2026-09-24T22:04:02Z Temperature: 21.75
+2026-09-24T22:04:02Z Status: ACTIVE
+2026-09-24T22:04:02Z Free RAM: 11836
+2026-09-24T22:04:12Z Temperature: 21.75
+2026-09-24T22:04:12Z Status: ACTIVE
+2026-09-24T22:04:12Z Free RAM: 11836
+2026-09-24T22:04:32Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:04:36Z Firmware version: q242157a
+2026-09-24T22:04:36Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-24T22:04:36Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:04:36Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:04:36Z OTA: no saved state, starting fresh
+2026-09-24T22:04:36Z OTA: running q242157a, phase IDLE, good (none) copy missing, record 1 gen 0
+2026-09-24T22:04:36Z OTA: q242157a is the new base; a copy of it goes on the SD card first
+2026-09-24T22:04:36Z Config doc:
+2026-09-24T22:04:37Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:04:37Z Power cycling RTC...
+2026-09-24T22:04:39Z Couldn't find RTC, retrying...
+2026-09-24T22:04:40Z Power cycling RTC...
+2026-09-24T22:04:42Z Couldn't find RTC, retrying...
+2026-09-24T22:04:43Z Power cycling RTC...
+2026-09-24T22:04:45Z Couldn't find RTC, retrying...
+2026-09-24T22:04:46Z Failed to initialize RTC after multiple attempts
+2026-09-24T22:04:56Z Connecting to WiFiRock Lodge
+2026-09-24T22:05:01Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:05:02Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:05:02Z GET Request
+2026-09-24T22:05:04Z Response code: 200
+2026-09-24T22:05:04Z It took 1 attempts to get a response
+2026-09-24T22:05:04Z {"datetime":"2026-09-24T18:05:03.000Z"}
+2026-09-24T22:05:04Z Syncing Clock to: 2026-09-24T18:05:03.000Z
+2026-09-24T22:05:04Z Uploading chunk 0, 35 bytes
+2026-09-24T22:05:04Z POST Request
+2026-09-24T22:05:05Z Response code: 200
+2026-09-24T22:05:06Z Uploaded 1 chunk(s)
+2026-09-24T22:05:07Z Set status to: NIGHT
+2026-09-24T22:05:07Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:05:07Z Setup complete.
+2026-09-24T22:05:07Z I2C bus unhealthy (code 2), attempting bus clear #1
+2026-09-24T22:05:07Z Bus clear: sda_freed=1 recovered=1 total_wedges=1 total_recovered=1
+2026-09-24T22:05:07Z Temperature: 21.75
+2026-09-24T22:05:08Z Status: NIGHT
+2026-09-24T22:05:08Z Free RAM: 13288
+2026-09-24T22:05:08Z Attempting to recalibrate
+2026-09-24T22:05:13Z homing
+2026-09-24T22:05:14Z boundary hit
+2026-09-24T22:05:14Z maxing
+2026-09-24T22:05:15Z boundary hit
+2026-09-24T22:05:16Z Extending to 76
+2026-09-24T22:05:16Z Extending towards 0
+2026-09-24T22:05:16Z Starting Position 0
+2026-09-24T22:05:17Z Set status to: ACTIVE
+2026-09-24T22:05:19Z OTA: rollback copy of q242157a ready on the SD card, 154304 bytes, crc c15caaea, read back identical to the running image (1 s)
+2026-09-24T22:05:19Z Temperature: 21.75
+2026-09-24T22:05:19Z Status: ACTIVE
+2026-09-24T22:05:19Z Free RAM: 13288
+2026-09-24T22:05:19Z GET Request
+2026-09-24T22:05:21Z Response code: 200
+2026-09-24T22:05:21Z It took 1 attempts to get a response
+2026-09-24T22:05:21Z q242157a 154304 c15caaea
+2026-09-24T22:05:21Z OTA: up to date at q242157a
+2026-09-24T22:05:29Z Temperature: 21.75
+2026-09-24T22:05:29Z Status: ACTIVE
+2026-09-24T22:05:29Z Free RAM: 12316
+2026-09-24T22:05:39Z Temperature: 21.75
+2026-09-24T22:05:39Z Status: ACTIVE
+2026-09-24T22:05:39Z Free RAM: 12316
+2026-09-24T22:05:49Z Temperature: 21.75
+2026-09-24T22:05:50Z Status: ACTIVE
+2026-09-24T22:05:50Z Free RAM: 12316
+2026-09-24T22:06:00Z Temperature: 21.75
+2026-09-24T22:06:00Z Status: ACTIVE
+2026-09-24T22:06:00Z Free RAM: 12316
+2026-09-24T22:06:10Z Temperature: 21.75
+2026-09-24T22:06:10Z Status: ACTIVE
+2026-09-24T22:06:10Z Free RAM: 12316
+2026-09-24T22:06:19Z GET Request
+2026-09-24T22:06:21Z Response code: 200
+2026-09-24T22:06:21Z It took 1 attempts to get a response
+2026-09-24T22:06:21Z q242157b 154304 34a73984
+2026-09-24T22:06:22Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:06:22Z OTA: manifest wants q242157b (154304 bytes), running q242157a
+2026-09-24T22:06:24Z Probe response code: 206
+2026-09-24T22:06:24Z OTA: downloading q242157b into /a.bin
+2026-09-24T22:06:26Z OTA: downloading q242157b, 124285 bytes, in the background (starting took 1489 ms)
+2026-09-24T22:06:26Z Temperature: 21.75
+2026-09-24T22:06:26Z Status: ACTIVE
+2026-09-24T22:06:26Z Free RAM: 12316
+2026-09-24T22:06:28Z OTA: 19979/124285 bytes (16%) after 2 s; loop ran 1410 times meanwhile
+2026-09-24T22:06:30Z OTA: 37429/124285 bytes (30%) after 4 s; loop ran 2857 times meanwhile
+2026-09-24T22:06:32Z OTA: 51195/124285 bytes (41%) after 6 s; loop ran 4317 times meanwhile
+2026-09-24T22:06:34Z OTA: 63706/124285 bytes (51%) after 8 s; loop ran 5801 times meanwhile
+2026-09-24T22:06:36Z OTA: 76920/124285 bytes (61%) after 10 s; loop ran 7182 times meanwhile
+2026-09-24T22:06:36Z Temperature: 21.75
+2026-09-24T22:06:37Z Status: ACTIVE
+2026-09-24T22:06:37Z Free RAM: 12316
+2026-09-24T22:06:38Z OTA: 94643/124285 bytes (76%) after 12 s; loop ran 8640 times meanwhile
+2026-09-24T22:06:40Z OTA: 111199/124285 bytes (89%) after 14 s; loop ran 10185 times meanwhile
+2026-09-24T22:06:42Z OTA: 119049/124285 bytes (95%) after 16 s; loop ran 11645 times meanwhile
+2026-09-24T22:06:44Z OTA: 123031/124285 bytes (98%) after 18 s; loop ran 13026 times meanwhile
+2026-09-24T22:06:45Z OTA: download complete, 124285 bytes in 19 s, loop ran 13530 times while it was in flight
+2026-09-24T22:07:02Z OTA: read-back of /a.bin: 154304 bytes, crc 34a73984, as the manifest says
+2026-09-24T22:07:03Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:07:03Z OTA: image verified, installing q242157b from /a.bin on trial; the copy of q242157a is on the SD card; the board will restart
+2026-09-24T22:07:04Z E (577731) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:07:13Z E (586519) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:07:14Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:07:19Z Firmware version: q242157b
+2026-09-24T22:07:19Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:07:19Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:07:19Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:07:19Z OTA: running q242157b, phase TRIAL, good q242157a copy on the SD card, 154304 bytes, trial q242157b boots 0, record 1 gen 4
+2026-09-24T22:07:20Z OTA: trial boot 1 of 3 for q242157b, last reset: reset pin
+2026-09-24T22:07:20Z Config doc:
+2026-09-24T22:07:20Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:07:20Z Alarm detected and cleared.
+2026-09-24T22:07:20Z Alarm was set.
+2026-09-24T22:07:20Z Setup Clock Module.
+2026-09-24T22:07:30Z Connecting to WiFiRock Lodge
+2026-09-24T22:07:35Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:07:36Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:07:36Z GET Request
+2026-09-24T22:07:38Z Response code: 200
+2026-09-24T22:07:38Z It took 1 attempts to get a response
+2026-09-24T22:07:38Z {"datetime":"2026-09-24T18:07:37.000Z"}
+2026-09-24T22:07:38Z Syncing Clock to: 2026-09-24T18:07:37.000Z
+2026-09-24T22:07:39Z Attempting to recalibrate
+2026-09-24T22:07:44Z homing
+2026-09-24T22:07:44Z Temperature: 21.75
+2026-09-24T22:07:45Z Status: ACTIVE
+2026-09-24T22:07:45Z Free RAM: 13128
+2026-09-24T22:07:46Z boundary hit
+2026-09-24T22:07:46Z maxing
+2026-09-24T22:07:47Z boundary hit
+2026-09-24T22:07:48Z Extending to 95
+2026-09-24T22:07:48Z Extending towards 0
+2026-09-24T22:07:48Z Starting Position 0
+2026-09-24T22:07:49Z Set status to: ACTIVE
+2026-09-24T22:07:49Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:07:49Z Setup complete.
+2026-09-24T22:07:49Z GET Request
+2026-09-24T22:07:50Z Response code: 200
+2026-09-24T22:07:50Z It took 1 attempts to get a response
+2026-09-24T22:07:50Z q242157b 154304 34a73984
+2026-09-24T22:07:50Z OTA: q242157b on trial, 36 s up, manifest reachable; confirms after 60 s up, rolls back after 300 s of trying
+2026-09-24T22:07:55Z Temperature: 21.75
+2026-09-24T22:07:55Z Status: ACTIVE
+2026-09-24T22:07:55Z Free RAM: 12252
+2026-09-24T22:08:05Z Temperature: 21.75
+2026-09-24T22:08:05Z Status: ACTIVE
+2026-09-24T22:08:05Z Free RAM: 12252
+2026-09-24T22:08:15Z Temperature: 21.75
+2026-09-24T22:08:15Z Status: ACTIVE
+2026-09-24T22:08:15Z Free RAM: 12252
+2026-09-24T22:08:25Z Temperature: 21.75
+2026-09-24T22:08:25Z Status: ACTIVE
+2026-09-24T22:08:25Z Free RAM: 12252
+2026-09-24T22:08:35Z Temperature: 21.75
+2026-09-24T22:08:36Z Status: ACTIVE
+2026-09-24T22:08:36Z Free RAM: 12252
+2026-09-24T22:08:46Z Temperature: 21.75
+2026-09-24T22:08:46Z Status: ACTIVE
+2026-09-24T22:08:46Z Free RAM: 12252
+2026-09-24T22:08:49Z GET Request
+2026-09-24T22:08:51Z Response code: 200
+2026-09-24T22:08:51Z It took 1 attempts to get a response
+2026-09-24T22:08:51Z q242157b 154304 34a73984
+2026-09-24T22:08:51Z OTA: q242157b CONFIRMED after 96 s and 1 boot(s); it is now the good version
+2026-09-24T22:08:53Z OTA: rollback copy of q242157b ready on the SD card, 154304 bytes, crc 34a73984, read back identical to the running image (1 s)
+2026-09-24T22:08:56Z Temperature: 21.75
+2026-09-24T22:08:56Z Status: ACTIVE
+2026-09-24T22:08:56Z Free RAM: 12252
+2026-09-24T22:08:59Z GET Request
+2026-09-24T22:09:00Z Response code: 200
+2026-09-24T22:09:00Z It took 1 attempts to get a response
+2026-09-24T22:09:00Z q242157c 154304 67f1b75e
+2026-09-24T22:09:01Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:09:01Z OTA: manifest wants q242157c (154304 bytes), running q242157b
+2026-09-24T22:09:03Z Probe response code: 206
+2026-09-24T22:09:03Z OTA: downloading q242157c into /a.bin
+2026-09-24T22:09:06Z OTA: downloading q242157c, 124285 bytes, in the background (starting took 2078 ms)
+2026-09-24T22:09:06Z Temperature: 21.75
+2026-09-24T22:09:06Z Status: ACTIVE
+2026-09-24T22:09:06Z Free RAM: 12252
+2026-09-24T22:09:08Z OTA: 13128/124285 bytes (10%) after 2 s; loop ran 1366 times meanwhile
+2026-09-24T22:09:10Z OTA: 25575/124285 bytes (20%) after 4 s; loop ran 2747 times meanwhile
+2026-09-24T22:09:12Z OTA: 40195/124285 bytes (32%) after 6 s; loop ran 4151 times meanwhile
+2026-09-24T22:09:14Z OTA: 60620/124285 bytes (48%) after 8 s; loop ran 5705 times meanwhile
+2026-09-24T22:09:16Z OTA: 76600/124285 bytes (61%) after 10 s; loop ran 7164 times meanwhile
+2026-09-24T22:09:16Z Temperature: 21.75
+2026-09-24T22:09:17Z Status: ACTIVE
+2026-09-24T22:09:17Z Free RAM: 12252
+2026-09-24T22:09:18Z OTA: 96026/124285 bytes (77%) after 12 s; loop ran 8621 times meanwhile
+2026-09-24T22:09:21Z OTA: 111199/124285 bytes (89%) after 14 s; loop ran 10179 times meanwhile
+2026-09-24T22:09:23Z OTA: 115988/124285 bytes (93%) after 16 s; loop ran 11590 times meanwhile
+2026-09-24T22:09:25Z OTA: 119177/124285 bytes (95%) after 18 s; loop ran 12996 times meanwhile
+2026-09-24T22:09:27Z OTA: 122839/124285 bytes (98%) after 20 s; loop ran 14232 times meanwhile
+2026-09-24T22:09:27Z Temperature: 21.75
+2026-09-24T22:09:27Z Status: ACTIVE
+2026-09-24T22:09:27Z Free RAM: 12252
+2026-09-24T22:09:27Z OTA: download complete, 124285 bytes in 21 s, loop ran 14713 times while it was in flight
+2026-09-24T22:09:44Z OTA: read-back of /a.bin: 154304 bytes, crc 67f1b75e, as the manifest says
+2026-09-24T22:09:45Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:09:45Z OTA: image verified, installing q242157c from /a.bin on trial; the copy of q242157b is on the SD card; the board will restart
+2026-09-24T22:09:46Z E (739827) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:09:55Z E (748597) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:09:56Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:10:01Z Firmware version: q242157c
+2026-09-24T22:10:01Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:10:01Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:10:01Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:10:02Z OTA: running q242157c, phase TRIAL, good q242157b copy on the SD card, 154304 bytes, trial q242157c boots 0, record 0 gen 9
+2026-09-24T22:10:02Z OTA: trial boot 1 of 3 for q242157c, last reset: reset pin
+2026-09-24T22:10:02Z Config doc:
+2026-09-24T22:10:02Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:10:02Z Alarm detected and cleared.
+2026-09-24T22:10:02Z Alarm was set.
+2026-09-24T22:10:02Z Setup Clock Module.
+2026-09-24T22:10:12Z Connecting to WiFiRock Lodge
+2026-09-24T22:10:17Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:10:18Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:10:18Z GET Request
+2026-09-24T22:10:20Z Response code: 200
+2026-09-24T22:10:20Z It took 1 attempts to get a response
+2026-09-24T22:10:20Z {"datetime":"2026-09-24T18:10:19.000Z"}
+2026-09-24T22:10:20Z Syncing Clock to: 2026-09-24T18:10:19.000Z
+2026-09-24T22:10:22Z Attempting to recalibrate
+2026-09-24T22:10:27Z homing
+2026-09-24T22:10:27Z Temperature: 21.75
+2026-09-24T22:10:27Z Status: ACTIVE
+2026-09-24T22:10:27Z Free RAM: 13128
+2026-09-24T22:10:28Z boundary hit
+2026-09-24T22:10:28Z maxing
+2026-09-24T22:10:29Z boundary hit
+2026-09-24T22:10:30Z Extending to 95
+2026-09-24T22:10:30Z Extending towards 0
+2026-09-24T22:10:30Z Starting Position 0
+2026-09-24T22:10:31Z Set status to: ACTIVE
+2026-09-24T22:10:31Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:10:31Z Setup complete.
+2026-09-24T22:10:31Z GET Request
+2026-09-24T22:10:33Z Response code: 200
+2026-09-24T22:10:33Z It took 1 attempts to get a response
+2026-09-24T22:10:33Z q242157c 154304 67f1b75e
+2026-09-24T22:10:33Z OTA: q242157c on trial, 36 s up, manifest reachable; confirms after 60 s up, rolls back after 300 s of trying
+2026-09-24T22:10:37Z Temperature: 21.75
+2026-09-24T22:10:37Z Status: ACTIVE
+2026-09-24T22:10:37Z Free RAM: 12252
+2026-09-24T22:10:47Z Temperature: 21.75
+2026-09-24T22:10:47Z Status: ACTIVE
+2026-09-24T22:10:47Z Free RAM: 12252
+2026-09-24T22:10:57Z Temperature: 21.75
+2026-09-24T22:10:57Z Status: ACTIVE
+2026-09-24T22:10:57Z Free RAM: 12252
+2026-09-24T22:11:07Z Temperature: 21.75
+2026-09-24T22:11:08Z Status: ACTIVE
+2026-09-24T22:11:08Z Free RAM: 12252
+2026-09-24T22:11:18Z Temperature: 21.75
+2026-09-24T22:11:18Z Status: ACTIVE
+2026-09-24T22:11:18Z Free RAM: 12252
+2026-09-24T22:11:28Z Temperature: 21.75
+2026-09-24T22:11:28Z Status: ACTIVE
+2026-09-24T22:11:28Z Free RAM: 12252
+2026-09-24T22:11:31Z GET Request
+2026-09-24T22:11:33Z Response code: 200
+2026-09-24T22:11:33Z It took 1 attempts to get a response
+2026-09-24T22:11:33Z q242157c 154304 67f1b75e
+2026-09-24T22:11:33Z OTA: q242157c CONFIRMED after 96 s and 1 boot(s); it is now the good version
+2026-09-24T22:11:35Z OTA: rollback copy of q242157c ready on the SD card, 154304 bytes, crc 67f1b75e, read back identical to the running image (1 s)
+2026-09-24T22:11:38Z Temperature: 21.75
+2026-09-24T22:11:38Z Status: ACTIVE
+2026-09-24T22:11:38Z Free RAM: 12252
+2026-09-24T22:11:41Z GET Request
+2026-09-24T22:11:48Z Response code: 200
+2026-09-24T22:11:48Z It took 1 attempts to get a response
+2026-09-24T22:11:48Z q242157h0 154304 7e5c0ce3
+2026-09-24T22:11:49Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:11:49Z OTA: manifest wants q242157h0 (154304 bytes), running q242157c
+2026-09-24T22:11:51Z Probe response code: 206
+2026-09-24T22:11:51Z OTA: downloading q242157h0 into /a.bin
+2026-09-24T22:11:53Z OTA: downloading q242157h0, 124285 bytes, in the background (starting took 1106 ms)
+2026-09-24T22:11:53Z Temperature: 21.75
+2026-09-24T22:11:53Z Status: ACTIVE
+2026-09-24T22:11:53Z Free RAM: 12252
+2026-09-24T22:11:55Z OTA: 20638/124285 bytes (16%) after 2 s; loop ran 1336 times meanwhile
+2026-09-24T22:11:57Z OTA: 38917/124285 bytes (31%) after 4 s; loop ran 2924 times meanwhile
+2026-09-24T22:11:59Z OTA: 54981/124285 bytes (44%) after 6 s; loop ran 4249 times meanwhile
+2026-09-24T22:12:01Z OTA: 67588/124285 bytes (54%) after 8 s; loop ran 5666 times meanwhile
+2026-09-24T22:12:03Z OTA: 79971/124285 bytes (64%) after 10 s; loop ran 7145 times meanwhile
+2026-09-24T22:12:03Z Temperature: 21.75
+2026-09-24T22:12:03Z Status: ACTIVE
+2026-09-24T22:12:03Z Free RAM: 12252
+2026-09-24T22:12:05Z OTA: 93141/124285 bytes (74%) after 12 s; loop ran 8702 times meanwhile
+2026-09-24T22:12:07Z OTA: 110421/124285 bytes (88%) after 14 s; loop ran 10276 times meanwhile
+2026-09-24T22:12:09Z OTA: 117995/124285 bytes (94%) after 16 s; loop ran 11746 times meanwhile
+2026-09-24T22:12:11Z OTA: 122784/124285 bytes (98%) after 18 s; loop ran 13181 times meanwhile
+2026-09-24T22:12:12Z OTA: download complete, 124285 bytes in 19 s, loop ran 13803 times while it was in flight
+2026-09-24T22:12:29Z OTA: read-back of /a.bin: 154304 bytes, crc 7e5c0ce3, as the manifest says
+2026-09-24T22:12:30Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:12:30Z OTA: image verified, installing q242157h0 from /a.bin on trial; the copy of q242157c is on the SD card; the board will restart
+2026-09-24T22:12:31Z E (904590) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:12:40Z E (913359) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:12:41Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:12:46Z Firmware version: q242157h0
+2026-09-24T22:12:46Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:12:46Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:12:46Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:12:46Z OTA: running q242157h0, phase TRIAL, good q242157c copy on the SD card, 154304 bytes, trial q242157h0 boots 0, record 1 gen 14
+2026-09-24T22:12:46Z OTA: trial boot 1 of 3 for q242157h0, last reset: reset pin
+2026-09-24T22:12:47Z Config doc:
+2026-09-24T22:12:47Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:12:47Z Alarm detected and cleared.
+2026-09-24T22:12:47Z Alarm was set.
+2026-09-24T22:12:47Z Setup Clock Module.
+2026-09-24T22:12:57Z Connecting to WiFiRock Lodge
+2026-09-24T22:13:02Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:13:03Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:13:03Z GET Request
+2026-09-24T22:13:05Z Response code: 200
+2026-09-24T22:13:05Z It took 1 attempts to get a response
+2026-09-24T22:13:05Z {"datetime":"2026-09-24T18:13:04.000Z"}
+2026-09-24T22:13:05Z Syncing Clock to: 2026-09-24T18:13:04.000Z
+2026-09-24T22:13:07Z Attempting to recalibrate
+2026-09-24T22:13:12Z homing
+2026-09-24T22:13:12Z Temperature: 21.75
+2026-09-24T22:13:12Z Status: ACTIVE
+2026-09-24T22:13:12Z Free RAM: 13128
+2026-09-24T22:13:13Z boundary hit
+2026-09-24T22:13:13Z maxing
+2026-09-24T22:13:14Z boundary hit
+2026-09-24T22:13:15Z Extending to 95
+2026-09-24T22:13:15Z Extending towards 0
+2026-09-24T22:13:15Z Starting Position 0
+2026-09-24T22:13:16Z Set status to: ACTIVE
+2026-09-24T22:13:16Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:13:16Z Setup complete.
+2026-09-24T22:13:16Z GET Request
+2026-09-24T22:13:17Z Response code: 200
+2026-09-24T22:13:17Z It took 1 attempts to get a response
+2026-09-24T22:13:17Z q242157h0 154304 7e5c0ce3
+2026-09-24T22:13:18Z OTA: q242157h0 on trial, 36 s up, manifest reachable; confirms after 60 s up, rolls back after 300 s of trying
+2026-09-24T22:13:22Z Temperature: 21.75
+2026-09-24T22:13:22Z Status: ACTIVE
+2026-09-24T22:13:22Z Free RAM: 12252
+2026-09-24T22:13:32Z Temperature: 21.75
+2026-09-24T22:13:32Z Status: ACTIVE
+2026-09-24T22:13:32Z Free RAM: 12252
+2026-09-24T22:13:42Z Temperature: 21.75
+2026-09-24T22:13:42Z Status: ACTIVE
+2026-09-24T22:13:42Z Free RAM: 12252
+2026-09-24T22:13:52Z Temperature: 21.75
+2026-09-24T22:13:53Z Status: ACTIVE
+2026-09-24T22:13:53Z Free RAM: 12252
+2026-09-24T22:14:03Z Temperature: 21.75
+2026-09-24T22:14:03Z Status: ACTIVE
+2026-09-24T22:14:03Z Free RAM: 12252
+2026-09-24T22:14:13Z Temperature: 21.75
+2026-09-24T22:14:13Z Status: ACTIVE
+2026-09-24T22:14:13Z Free RAM: 12252
+2026-09-24T22:14:16Z GET Request
+2026-09-24T22:14:18Z Response code: 200
+2026-09-24T22:14:18Z It took 1 attempts to get a response
+2026-09-24T22:14:18Z q242157h0 154304 7e5c0ce3
+2026-09-24T22:14:18Z OTA: q242157h0 CONFIRMED after 96 s and 1 boot(s); it is now the good version
+2026-09-24T22:14:20Z OTA: rollback copy of q242157h0 ready on the SD card, 154304 bytes, crc 7e5c0ce3, read back identical to the running image (1 s)
+2026-09-24T22:14:23Z Temperature: 21.75
+2026-09-24T22:14:23Z Status: ACTIVE
+2026-09-24T22:14:23Z Free RAM: 12252
+2026-09-24T22:14:26Z GET Request
+2026-09-24T22:14:28Z Response code: 200
+2026-09-24T22:14:28Z It took 1 attempts to get a response
+2026-09-24T22:14:28Z q242157h1 154304 9b41e611
+2026-09-24T22:14:29Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:14:29Z OTA: manifest wants q242157h1 (154304 bytes), running q242157h0
+2026-09-24T22:14:31Z Probe response code: 206
+2026-09-24T22:14:31Z OTA: downloading q242157h1 into /a.bin
+2026-09-24T22:14:34Z OTA: downloading q242157h1, 124285 bytes, in the background (starting took 1495 ms)
+2026-09-24T22:14:34Z Temperature: 21.75
+2026-09-24T22:14:34Z Status: ACTIVE
+2026-09-24T22:14:34Z Free RAM: 12252
+2026-09-24T22:14:36Z OTA: 14457/124285 bytes (11%) after 2 s; loop ran 1418 times meanwhile
+2026-09-24T22:14:38Z OTA: 16991/124285 bytes (13%) after 4 s; loop ran 3095 times meanwhile
+2026-09-24T22:14:40Z OTA: 29118/124285 bytes (23%) after 6 s; loop ran 4525 times meanwhile
+2026-09-24T22:14:42Z OTA: 41865/124285 bytes (33%) after 8 s; loop ran 5981 times meanwhile
+2026-09-24T22:14:44Z OTA: 59760/124285 bytes (48%) after 10 s; loop ran 7507 times meanwhile
+2026-09-24T22:14:44Z Temperature: 21.75
+2026-09-24T22:14:44Z Status: ACTIVE
+2026-09-24T22:14:44Z Free RAM: 12252
+2026-09-24T22:14:46Z OTA: 79513/124285 bytes (63%) after 12 s; loop ran 9064 times meanwhile
+2026-09-24T22:14:48Z OTA: 98579/124285 bytes (79%) after 14 s; loop ran 10643 times meanwhile
+2026-09-24T22:14:50Z OTA: 112985/124285 bytes (90%) after 16 s; loop ran 12055 times meanwhile
+2026-09-24T22:14:52Z OTA: 117601/124285 bytes (94%) after 18 s; loop ran 13350 times meanwhile
+2026-09-24T22:14:54Z OTA: 120072/124285 bytes (96%) after 20 s; loop ran 14550 times meanwhile
+2026-09-24T22:14:54Z Temperature: 21.75
+2026-09-24T22:14:54Z Status: ACTIVE
+2026-09-24T22:14:54Z Free RAM: 12252
+2026-09-24T22:14:56Z OTA: 123709/124285 bytes (99%) after 22 s; loop ran 15907 times meanwhile
+2026-09-24T22:14:57Z OTA: download complete, 124285 bytes in 22 s, loop ran 16201 times while it was in flight
+2026-09-24T22:15:14Z OTA: read-back of /a.bin: 154304 bytes, crc 9b41e611, as the manifest says
+2026-09-24T22:15:15Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:15:15Z OTA: image verified, installing q242157h1 from /a.bin on trial; the copy of q242157h0 is on the SD card; the board will restart
+2026-09-24T22:15:16Z E (1069062) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:15:24Z E (1077830) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:15:25Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:15:31Z Firmware version: q242157h1
+2026-09-24T22:15:31Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:15:31Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:15:31Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:15:31Z OTA: running q242157h1, phase TRIAL, good q242157h0 copy on the SD card, 154304 bytes, trial q242157h1 boots 0, record 0 gen 19
+2026-09-24T22:15:31Z OTA: trial boot 1 of 3 for q242157h1, last reset: reset pin
+2026-09-24T22:15:31Z Config doc:
+2026-09-24T22:15:31Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:15:31Z Alarm detected and cleared.
+2026-09-24T22:15:31Z Alarm was set.
+2026-09-24T22:15:31Z Setup Clock Module.
+2026-09-24T22:15:41Z Connecting to WiFiRock Lodge
+2026-09-24T22:15:47Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:15:48Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:15:48Z GET Request
+2026-09-24T22:15:49Z Response code: 200
+2026-09-24T22:15:49Z It took 1 attempts to get a response
+2026-09-24T22:15:49Z {"datetime":"2026-09-24T18:15:49.000Z"}
+2026-09-24T22:15:49Z Syncing Clock to: 2026-09-24T18:15:49.000Z
+2026-09-24T22:15:51Z Attempting to recalibrate
+2026-09-24T22:15:56Z homing
+2026-09-24T22:15:56Z Temperature: 21.75
+2026-09-24T22:15:56Z Status: ACTIVE
+2026-09-24T22:15:56Z Free RAM: 13128
+2026-09-24T22:15:57Z boundary hit
+2026-09-24T22:15:58Z maxing
+2026-09-24T22:15:59Z boundary hit
+2026-09-24T22:16:00Z Extending to 95
+2026-09-24T22:16:00Z Extending towards 0
+2026-09-24T22:16:00Z Starting Position 0
+2026-09-24T22:16:00Z Set status to: ACTIVE
+2026-09-24T22:16:00Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:16:00Z Setup complete.
+2026-09-24T22:16:00Z GET Request
+2026-09-24T22:16:02Z Response code: 200
+2026-09-24T22:16:02Z It took 1 attempts to get a response
+2026-09-24T22:16:02Z q242157h1 154304 9b41e611
+2026-09-24T22:16:03Z OTA: q242157h1 on trial, 37 s up, manifest reachable; confirms after 60 s up, rolls back after 300 s of trying
+2026-09-24T22:16:06Z Temperature: 21.75
+2026-09-24T22:16:06Z Status: ACTIVE
+2026-09-24T22:16:06Z Free RAM: 12252
+2026-09-24T22:16:16Z Temperature: 21.75
+2026-09-24T22:16:16Z Status: ACTIVE
+2026-09-24T22:16:16Z Free RAM: 12252
+2026-09-24T22:16:27Z Temperature: 21.75
+2026-09-24T22:16:27Z Status: ACTIVE
+2026-09-24T22:16:27Z Free RAM: 12252
+2026-09-24T22:16:37Z Temperature: 21.75
+2026-09-24T22:16:37Z Status: ACTIVE
+2026-09-24T22:16:37Z Free RAM: 12252
+2026-09-24T22:16:47Z Temperature: 21.75
+2026-09-24T22:16:47Z Status: ACTIVE
+2026-09-24T22:16:47Z Free RAM: 12252
+2026-09-24T22:16:57Z Temperature: 21.75
+2026-09-24T22:16:57Z Status: ACTIVE
+2026-09-24T22:16:57Z Free RAM: 12252
+2026-09-24T22:17:00Z GET Request
+2026-09-24T22:17:02Z Response code: 200
+2026-09-24T22:17:02Z It took 1 attempts to get a response
+2026-09-24T22:17:02Z q242157h1 154304 9b41e611
+2026-09-24T22:17:02Z OTA: q242157h1 CONFIRMED after 96 s and 1 boot(s); it is now the good version
+2026-09-24T22:17:05Z OTA: rollback copy of q242157h1 ready on the SD card, 154304 bytes, crc 9b41e611, read back identical to the running image (1 s)
+2026-09-24T22:17:07Z Temperature: 21.75
+2026-09-24T22:17:07Z Status: ACTIVE
+2026-09-24T22:17:07Z Free RAM: 12252
+2026-09-24T22:17:10Z GET Request
+2026-09-24T22:17:12Z Response code: 200
+2026-09-24T22:17:12Z It took 1 attempts to get a response
+2026-09-24T22:17:12Z q242157h1 154304 9b41e611
+2026-09-24T22:17:12Z OTA: up to date at q242157h1
+2026-09-24T22:17:18Z Temperature: 21.75
+2026-09-24T22:17:18Z Status: ACTIVE
+2026-09-24T22:17:18Z Free RAM: 12252
+2026-09-24T22:17:28Z Temperature: 21.75
+2026-09-24T22:17:28Z Status: ACTIVE
+2026-09-24T22:17:28Z Free RAM: 12252
+2026-09-24T22:17:38Z Temperature: 21.75
+2026-09-24T22:17:38Z Status: ACTIVE
+2026-09-24T22:17:38Z Free RAM: 12252
+2026-09-24T22:17:48Z Temperature: 21.75
+2026-09-24T22:17:48Z Status: ACTIVE
+2026-09-24T22:17:48Z Free RAM: 12252
+2026-09-24T22:17:58Z Temperature: 21.75
+2026-09-24T22:17:59Z Status: ACTIVE
+2026-09-24T22:17:59Z Free RAM: 12252
+2026-09-24T22:18:09Z Temperature: 21.75
+2026-09-24T22:18:09Z Status: ACTIVE
+2026-09-24T22:18:09Z Free RAM: 12252
+2026-09-24T22:18:11Z GET Request
+2026-09-24T22:18:12Z Response code: 200
+2026-09-24T22:18:12Z It took 1 attempts to get a response
+2026-09-24T22:18:12Z q242157h2 154304 6f16df46
+2026-09-24T22:18:13Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:18:13Z OTA: manifest wants q242157h2 (154304 bytes), running q242157h1
+2026-09-24T22:18:15Z Probe response code: 206
+2026-09-24T22:18:15Z OTA: downloading q242157h2 into /a.bin
+2026-09-24T22:18:17Z OTA: downloading q242157h2, 124286 bytes, in the background (starting took 1344 ms)
+2026-09-24T22:18:19Z Temperature: 21.75
+2026-09-24T22:18:19Z Status: ACTIVE
+2026-09-24T22:18:19Z Free RAM: 12252
+2026-09-24T22:18:19Z OTA: 20013/124286 bytes (16%) after 2 s; loop ran 1382 times meanwhile
+2026-09-24T22:18:22Z OTA: 38651/124286 bytes (31%) after 4 s; loop ran 2929 times meanwhile
+2026-09-24T22:18:24Z OTA: 57122/124286 bytes (45%) after 6 s; loop ran 4478 times meanwhile
+2026-09-24T22:18:26Z OTA: 71535/124286 bytes (57%) after 8 s; loop ran 5888 times meanwhile
+2026-09-24T22:18:28Z OTA: 81580/124286 bytes (65%) after 10 s; loop ran 7252 times meanwhile
+2026-09-24T22:18:29Z Temperature: 21.75
+2026-09-24T22:18:29Z Status: ACTIVE
+2026-09-24T22:18:29Z Free RAM: 12252
+2026-09-24T22:18:30Z OTA: 97132/124286 bytes (78%) after 12 s; loop ran 8767 times meanwhile
+2026-09-24T22:18:32Z OTA: 109284/124286 bytes (87%) after 14 s; loop ran 10303 times meanwhile
+2026-09-24T22:18:34Z OTA: 116666/124286 bytes (93%) after 16 s; loop ran 11726 times meanwhile
+2026-09-24T22:18:36Z OTA: 121135/124286 bytes (97%) after 18 s; loop ran 13185 times meanwhile
+2026-09-24T22:18:37Z OTA: download complete, 124286 bytes in 19 s, loop ran 13917 times while it was in flight
+2026-09-24T22:18:54Z OTA: read-back of /a.bin: 154304 bytes, crc 6f16df46, as the manifest says
+2026-09-24T22:18:55Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:18:55Z OTA: image verified, installing q242157h2 from /a.bin on trial; the copy of q242157h1 is on the SD card; the board will restart
+2026-09-24T22:18:56Z E (1289168) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:19:05Z E (1297969) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:19:06Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:19:11Z Firmware version: q242157h2
+2026-09-24T22:19:11Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:19:11Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:19:11Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:19:11Z OTA: running q242157h2, phase TRIAL, good q242157h1 copy on the SD card, 154304 bytes, trial q242157h2 boots 0, record 1 gen 24
+2026-09-24T22:19:11Z OTA: trial boot 1 of 3 for q242157h2, last reset: reset pin
+2026-09-24T22:19:11Z Config doc:
+2026-09-24T22:19:11Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:19:11Z Alarm detected and cleared.
+2026-09-24T22:19:11Z Alarm was set.
+2026-09-24T22:19:11Z Setup Clock Module.
+2026-09-24T22:19:22Z Connecting to WiFiRock Lodge
+2026-09-24T22:19:27Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:19:28Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:19:28Z GET Request
+2026-09-24T22:19:40Z Response code: 200
+2026-09-24T22:19:40Z It took 1 attempts to get a response
+2026-09-24T22:19:40Z {"datetime":"2026-09-24T18:19:40.000Z"}
+2026-09-24T22:19:40Z Syncing Clock to: 2026-09-24T18:19:40.000Z
+2026-09-24T22:19:42Z Attempting to recalibrate
+2026-09-24T22:19:47Z homing
+2026-09-24T22:19:47Z Temperature: 21.75
+2026-09-24T22:19:47Z Status: ACTIVE
+2026-09-24T22:19:47Z Free RAM: 13128
+2026-09-24T22:19:48Z boundary hit
+2026-09-24T22:19:48Z maxing
+2026-09-24T22:19:50Z boundary hit
+2026-09-24T22:19:51Z Extending to 95
+2026-09-24T22:19:51Z Extending towards 0
+2026-09-24T22:19:51Z Starting Position 0
+2026-09-24T22:19:51Z Set status to: ACTIVE
+2026-09-24T22:19:51Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:19:51Z Setup complete.
+2026-09-24T22:19:51Z GET Request
+2026-09-24T22:19:57Z Response code: 200
+2026-09-24T22:19:57Z It took 1 attempts to get a response
+2026-09-24T22:19:57Z q242157h2 154304 6f16df46
+2026-09-24T22:19:57Z OTA: q242157h2 on trial, 51 s up, manifest reachable; confirms after 60 s up, rolls back after 300 s of trying
+2026-09-24T22:19:57Z Temperature: 21.75
+2026-09-24T22:19:57Z Status: ACTIVE
+2026-09-24T22:19:57Z Free RAM: 12252
+2026-09-24T22:20:07Z Temperature: 21.75
+2026-09-24T22:20:07Z Status: ACTIVE
+2026-09-24T22:20:07Z Free RAM: 12252
+2026-09-24T22:20:17Z Temperature: 21.75
+2026-09-24T22:20:18Z Status: ACTIVE
+2026-09-24T22:20:18Z Free RAM: 12252
+2026-09-24T22:20:28Z Temperature: 21.75
+2026-09-24T22:20:28Z Status: ACTIVE
+2026-09-24T22:20:28Z Free RAM: 12252
+2026-09-24T22:20:38Z Temperature: 21.75
+2026-09-24T22:20:38Z Status: ACTIVE
+2026-09-24T22:20:38Z Free RAM: 12252
+2026-09-24T22:20:48Z Temperature: 21.75
+2026-09-24T22:20:48Z Status: ACTIVE
+2026-09-24T22:20:48Z Free RAM: 12252
+2026-09-24T22:20:51Z GET Request
+2026-09-24T22:20:53Z Response code: 200
+2026-09-24T22:20:53Z It took 1 attempts to get a response
+2026-09-24T22:20:53Z q242157h2 154304 6f16df46
+2026-09-24T22:20:53Z OTA: q242157h2 CONFIRMED after 107 s and 1 boot(s); it is now the good version
+2026-09-24T22:20:55Z OTA: rollback copy of q242157h2 ready on the SD card, 154304 bytes, crc 6f16df46, read back identical to the running image (1 s)
+2026-09-24T22:20:58Z Temperature: 21.75
+2026-09-24T22:20:58Z Status: ACTIVE
+2026-09-24T22:20:58Z Free RAM: 12252
+2026-09-24T22:21:01Z GET Request
+2026-09-24T22:21:04Z Response code: 200
+2026-09-24T22:21:04Z It took 1 attempts to get a response
+2026-09-24T22:21:04Z q242157nc 153776 5fabc29f
+2026-09-24T22:21:05Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:21:05Z OTA: manifest wants q242157nc (153776 bytes), running q242157h2
+2026-09-24T22:21:07Z Probe response code: 206
+2026-09-24T22:21:07Z OTA: downloading q242157nc into /a.bin
+2026-09-24T22:21:09Z OTA: downloading q242157nc, 123939 bytes, in the background (starting took 1506 ms)
+2026-09-24T22:21:09Z Temperature: 21.75
+2026-09-24T22:21:10Z Status: ACTIVE
+2026-09-24T22:21:10Z Free RAM: 12252
+2026-09-24T22:21:11Z OTA: 16677/123939 bytes (13%) after 2 s; loop ran 1337 times meanwhile
+2026-09-24T22:21:13Z OTA: 30443/123939 bytes (24%) after 4 s; loop ran 2804 times meanwhile
+2026-09-24T22:21:15Z OTA: 42447/123939 bytes (34%) after 6 s; loop ran 4295 times meanwhile
+2026-09-24T22:21:17Z OTA: 56424/123939 bytes (45%) after 8 s; loop ran 5714 times meanwhile
+2026-09-24T22:21:19Z OTA: 74115/123939 bytes (59%) after 10 s; loop ran 7290 times meanwhile
+2026-09-24T22:21:20Z Temperature: 21.75
+2026-09-24T22:21:20Z Status: ACTIVE
+2026-09-24T22:21:20Z Free RAM: 12252
+2026-09-24T22:21:22Z OTA: 95352/123939 bytes (76%) after 12 s; loop ran 8859 times meanwhile
+2026-09-24T22:21:24Z OTA: 104757/123939 bytes (84%) after 14 s; loop ran 10470 times meanwhile
+2026-09-24T22:21:26Z OTA: 115865/123939 bytes (93%) after 16 s; loop ran 11983 times meanwhile
+2026-09-24T22:21:28Z OTA: 119566/123939 bytes (96%) after 18 s; loop ran 13389 times meanwhile
+2026-09-24T22:21:30Z OTA: 121884/123939 bytes (98%) after 20 s; loop ran 14595 times meanwhile
+2026-09-24T22:21:30Z Temperature: 21.75
+2026-09-24T22:21:30Z Status: ACTIVE
+2026-09-24T22:21:30Z Free RAM: 12252
+2026-09-24T22:21:31Z OTA: download complete, 123939 bytes in 21 s, loop ran 15602 times while it was in flight
+2026-09-24T22:21:48Z OTA: read-back of /a.bin: 153776 bytes, crc 5fabc29f, as the manifest says
+2026-09-24T22:21:49Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:21:49Z OTA: image verified, installing q242157nc from /a.bin on trial; the copy of q242157h2 is on the SD card; the board will restart
+2026-09-24T22:21:50Z E (1463757) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:21:59Z E (1472539) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:22:00Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:22:05Z Firmware version: q242157nc
+2026-09-24T22:22:05Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:22:05Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:22:05Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:22:05Z OTA: running q242157nc, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157nc boots 0, record 0 gen 29
+2026-09-24T22:22:06Z OTA: trial boot 1 of 3 for q242157nc, last reset: reset pin
+2026-09-24T22:22:06Z Config doc:
+2026-09-24T22:22:06Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:22:06Z Alarm detected and cleared.
+2026-09-24T22:22:06Z Alarm was set.
+2026-09-24T22:22:06Z Setup Clock Module.
+2026-09-24T22:22:16Z Connecting to WiFiRock Lodge
+2026-09-24T22:22:21Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:22:22Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:22:22Z GET Request
+2026-09-24T22:22:24Z Response code: 200
+2026-09-24T22:22:24Z It took 1 attempts to get a response
+2026-09-24T22:22:24Z {"datetime":"2026-09-24T18:22:24.000Z"}
+2026-09-24T22:22:24Z Syncing Clock to: 2026-09-24T18:22:24.000Z
+2026-09-24T22:22:26Z Attempting to recalibrate
+2026-09-24T22:22:31Z homing
+2026-09-24T22:22:31Z Temperature: 21.75
+2026-09-24T22:22:31Z Status: ACTIVE
+2026-09-24T22:22:31Z Free RAM: 13128
+2026-09-24T22:22:32Z boundary hit
+2026-09-24T22:22:32Z maxing
+2026-09-24T22:22:33Z boundary hit
+2026-09-24T22:22:34Z Extending to 95
+2026-09-24T22:22:34Z Extending towards 0
+2026-09-24T22:22:34Z Starting Position 0
+2026-09-24T22:22:35Z Set status to: ACTIVE
+2026-09-24T22:22:35Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:22:35Z Setup complete.
+2026-09-24T22:22:35Z GET Request
+2026-09-24T22:22:38Z Response code: 200
+2026-09-24T22:22:38Z It took 1 attempts to get a response
+2026-09-24T22:22:38Z q242157nc 153776 5fabc29f
+2026-09-24T22:22:38Z OTA: fault injection, never confirming
+2026-09-24T22:22:41Z Temperature: 21.75
+2026-09-24T22:22:41Z Status: ACTIVE
+2026-09-24T22:22:41Z Free RAM: 12252
+2026-09-24T22:22:51Z Temperature: 21.75
+2026-09-24T22:22:51Z Status: ACTIVE
+2026-09-24T22:22:51Z Free RAM: 12252
+2026-09-24T22:23:01Z Temperature: 21.75
+2026-09-24T22:23:01Z Status: ACTIVE
+2026-09-24T22:23:01Z Free RAM: 12252
+2026-09-24T22:23:12Z Temperature: 21.75
+2026-09-24T22:23:12Z Status: ACTIVE
+2026-09-24T22:23:12Z Free RAM: 12252
+2026-09-24T22:23:22Z Temperature: 21.75
+2026-09-24T22:23:22Z Status: ACTIVE
+2026-09-24T22:23:22Z Free RAM: 12252
+2026-09-24T22:23:32Z Temperature: 21.75
+2026-09-24T22:23:32Z Status: ACTIVE
+2026-09-24T22:23:32Z Free RAM: 12252
+2026-09-24T22:23:35Z GET Request
+2026-09-24T22:23:37Z Response code: 200
+2026-09-24T22:23:37Z It took 1 attempts to get a response
+2026-09-24T22:23:37Z q242157nc 153776 5fabc29f
+2026-09-24T22:23:37Z OTA: fault injection, never confirming
+2026-09-24T22:23:42Z Temperature: 21.75
+2026-09-24T22:23:42Z Status: ACTIVE
+2026-09-24T22:23:42Z Free RAM: 12252
+2026-09-24T22:23:52Z Temperature: 21.75
+2026-09-24T22:23:52Z Status: ACTIVE
+2026-09-24T22:23:52Z Free RAM: 12252
+2026-09-24T22:24:02Z Temperature: 21.75
+2026-09-24T22:24:03Z Status: ACTIVE
+2026-09-24T22:24:03Z Free RAM: 12252
+2026-09-24T22:24:13Z Temperature: 21.75
+2026-09-24T22:24:13Z Status: ACTIVE
+2026-09-24T22:24:13Z Free RAM: 12252
+2026-09-24T22:24:23Z Temperature: 21.75
+2026-09-24T22:24:23Z Status: ACTIVE
+2026-09-24T22:24:23Z Free RAM: 12252
+2026-09-24T22:24:33Z Temperature: 21.75
+2026-09-24T22:24:33Z Status: ACTIVE
+2026-09-24T22:24:33Z Free RAM: 12252
+2026-09-24T22:24:35Z GET Request
+2026-09-24T22:24:37Z Response code: 200
+2026-09-24T22:24:37Z It took 1 attempts to get a response
+2026-09-24T22:24:37Z q242157nc 153776 5fabc29f
+2026-09-24T22:24:37Z OTA: fault injection, never confirming
+2026-09-24T22:24:43Z Temperature: 21.75
+2026-09-24T22:24:43Z Status: ACTIVE
+2026-09-24T22:24:43Z Free RAM: 12252
+2026-09-24T22:24:53Z Temperature: 21.75
+2026-09-24T22:24:54Z Status: ACTIVE
+2026-09-24T22:24:54Z Free RAM: 12252
+2026-09-24T22:25:04Z Temperature: 21.75
+2026-09-24T22:25:04Z Status: ACTIVE
+2026-09-24T22:25:04Z Free RAM: 12252
+2026-09-24T22:25:14Z Temperature: 21.75
+2026-09-24T22:25:14Z Status: ACTIVE
+2026-09-24T22:25:14Z Free RAM: 12252
+2026-09-24T22:25:24Z Temperature: 21.75
+2026-09-24T22:25:24Z Status: ACTIVE
+2026-09-24T22:25:24Z Free RAM: 12252
+2026-09-24T22:25:34Z Temperature: 21.75
+2026-09-24T22:25:34Z Status: ACTIVE
+2026-09-24T22:25:34Z Free RAM: 12252
+2026-09-24T22:25:35Z GET Request
+2026-09-24T22:25:38Z Response code: 200
+2026-09-24T22:25:38Z It took 1 attempts to get a response
+2026-09-24T22:25:38Z q242157nc 153776 5fabc29f
+2026-09-24T22:25:38Z OTA: fault injection, never confirming
+2026-09-24T22:25:44Z Temperature: 21.75
+2026-09-24T22:25:45Z Status: ACTIVE
+2026-09-24T22:25:45Z Free RAM: 12252
+2026-09-24T22:25:55Z Temperature: 21.75
+2026-09-24T22:25:55Z Status: ACTIVE
+2026-09-24T22:25:55Z Free RAM: 12252
+2026-09-24T22:26:05Z Temperature: 21.75
+2026-09-24T22:26:05Z Status: ACTIVE
+2026-09-24T22:26:05Z Free RAM: 12252
+2026-09-24T22:26:15Z Temperature: 21.75
+2026-09-24T22:26:15Z Status: ACTIVE
+2026-09-24T22:26:15Z Free RAM: 12252
+2026-09-24T22:26:25Z Temperature: 21.75
+2026-09-24T22:26:25Z Status: ACTIVE
+2026-09-24T22:26:25Z Free RAM: 12252
+2026-09-24T22:26:35Z Temperature: 21.75
+2026-09-24T22:26:36Z Status: ACTIVE
+2026-09-24T22:26:36Z Free RAM: 12252
+2026-09-24T22:26:36Z GET Request
+2026-09-24T22:26:38Z Response code: 200
+2026-09-24T22:26:38Z It took 1 attempts to get a response
+2026-09-24T22:26:38Z q242157nc 153776 5fabc29f
+2026-09-24T22:26:38Z OTA: fault injection, never confirming
+2026-09-24T22:26:46Z Temperature: 21.75
+2026-09-24T22:26:46Z Status: ACTIVE
+2026-09-24T22:26:46Z Free RAM: 12252
+2026-09-24T22:26:56Z Temperature: 21.75
+2026-09-24T22:26:56Z Status: ACTIVE
+2026-09-24T22:26:56Z Free RAM: 12252
+2026-09-24T22:27:06Z Temperature: 21.75
+2026-09-24T22:27:06Z Status: ACTIVE
+2026-09-24T22:27:06Z Free RAM: 12252
+2026-09-24T22:27:16Z Temperature: 21.75
+2026-09-24T22:27:16Z Status: ACTIVE
+2026-09-24T22:27:16Z Free RAM: 12252
+2026-09-24T22:27:26Z Temperature: 21.75
+2026-09-24T22:27:27Z Status: ACTIVE
+2026-09-24T22:27:27Z Free RAM: 12252
+2026-09-24T22:27:35Z OTA: ROLLING BACK to q242157h2 from the SD card: did not confirm within 5 minutes
+2026-09-24T22:28:47Z OTA: copy of q242157h2 written to the ESP32 and read back identical (71 s)
+2026-09-24T22:28:48Z E (1881268) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:28:57Z E (1890044) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:28:58Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:29:03Z Firmware version: q242157h2
+2026-09-24T22:29:03Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:29:03Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:29:03Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:29:03Z OTA: running q242157h2, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157nc boots 1, record 0 gen 31
+2026-09-24T22:29:03Z OTA: ROLLED BACK from q242157nc to q242157h2; q242157nc is rejected and will not be installed again
+2026-09-24T22:29:03Z Config doc:
+2026-09-24T22:29:04Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:29:04Z Alarm detected and cleared.
+2026-09-24T22:29:04Z Alarm was set.
+2026-09-24T22:29:04Z Setup Clock Module.
+2026-09-24T22:29:14Z Connecting to WiFiRock Lodge
+2026-09-24T22:29:19Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:29:20Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:29:20Z GET Request
+2026-09-24T22:29:32Z Response code: 200
+2026-09-24T22:29:32Z It took 1 attempts to get a response
+2026-09-24T22:29:32Z {"datetime":"2026-09-24T18:29:31.000Z"}
+2026-09-24T22:29:32Z Syncing Clock to: 2026-09-24T18:29:31.000Z
+2026-09-24T22:29:32Z Uploading chunk 0, 35 bytes
+2026-09-24T22:29:32Z POST Request
+2026-09-24T22:29:33Z Response code: 200
+2026-09-24T22:29:34Z Uploaded 1 chunk(s)
+2026-09-24T22:29:35Z Attempting to recalibrate
+2026-09-24T22:29:40Z homing
+2026-09-24T22:29:40Z Temperature: 21.75
+2026-09-24T22:29:40Z Status: ACTIVE
+2026-09-24T22:29:40Z Free RAM: 13128
+2026-09-24T22:29:41Z boundary hit
+2026-09-24T22:29:42Z maxing
+2026-09-24T22:29:43Z boundary hit
+2026-09-24T22:29:44Z Extending to 95
+2026-09-24T22:29:44Z Extending towards 0
+2026-09-24T22:29:44Z Starting Position 0
+2026-09-24T22:29:45Z Set status to: ACTIVE
+2026-09-24T22:29:45Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:29:45Z Setup complete.
+2026-09-24T22:29:45Z GET Request
+2026-09-24T22:29:46Z Response code: 200
+2026-09-24T22:29:46Z It took 1 attempts to get a response
+2026-09-24T22:29:46Z q242157nc 153776 5fabc29f
+2026-09-24T22:29:46Z OTA: manifest wants q242157nc, which failed its trial; staying on q242157h2
+2026-09-24T22:29:50Z Temperature: 21.75
+2026-09-24T22:29:51Z Status: ACTIVE
+2026-09-24T22:29:51Z Free RAM: 12252
+2026-09-24T22:30:01Z Temperature: 21.75
+2026-09-24T22:30:01Z Status: ACTIVE
+2026-09-24T22:30:01Z Free RAM: 12252
+2026-09-24T22:30:11Z Temperature: 21.75
+2026-09-24T22:30:11Z Status: ACTIVE
+2026-09-24T22:30:11Z Free RAM: 12252
+2026-09-24T22:30:21Z Temperature: 21.75
+2026-09-24T22:30:21Z Status: ACTIVE
+2026-09-24T22:30:21Z Free RAM: 12252
+2026-09-24T22:30:31Z Temperature: 21.75
+2026-09-24T22:30:31Z Status: ACTIVE
+2026-09-24T22:30:31Z Free RAM: 12252
+2026-09-24T22:30:41Z Temperature: 21.75
+2026-09-24T22:30:42Z Status: ACTIVE
+2026-09-24T22:30:42Z Free RAM: 12252
+2026-09-24T22:30:45Z GET Request
+2026-09-24T22:30:47Z Response code: 200
+2026-09-24T22:30:47Z It took 1 attempts to get a response
+2026-09-24T22:30:47Z q242157cr 151640 0dd9f5b7
+2026-09-24T22:30:48Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:30:48Z OTA: manifest wants q242157cr (151640 bytes), running q242157h2
+2026-09-24T22:30:50Z Probe response code: 206
+2026-09-24T22:30:50Z OTA: downloading q242157cr into /a.bin
+2026-09-24T22:30:52Z OTA: downloading q242157cr, 122094 bytes, in the background (starting took 1241 ms)
+2026-09-24T22:30:52Z Temperature: 21.75
+2026-09-24T22:30:52Z Status: ACTIVE
+2026-09-24T22:30:52Z Free RAM: 12252
+2026-09-24T22:30:54Z OTA: 14290/122094 bytes (11%) after 2 s; loop ran 1378 times meanwhile
+2026-09-24T22:30:56Z OTA: 26865/122094 bytes (22%) after 4 s; loop ran 2953 times meanwhile
+2026-09-24T22:30:58Z OTA: 41354/122094 bytes (33%) after 6 s; loop ran 4480 times meanwhile
+2026-09-24T22:31:00Z OTA: 59633/122094 bytes (48%) after 8 s; loop ran 5945 times meanwhile
+2026-09-24T22:31:02Z OTA: 78131/122094 bytes (63%) after 10 s; loop ran 7494 times meanwhile
+2026-09-24T22:31:02Z Temperature: 21.75
+2026-09-24T22:31:02Z Status: ACTIVE
+2026-09-24T22:31:02Z Free RAM: 12252
+2026-09-24T22:31:04Z OTA: 99412/122094 bytes (81%) after 12 s; loop ran 9072 times meanwhile
+2026-09-24T22:31:06Z OTA: 112474/122094 bytes (92%) after 14 s; loop ran 10492 times meanwhile
+2026-09-24T22:31:08Z OTA: 116475/122094 bytes (95%) after 16 s; loop ran 11856 times meanwhile
+2026-09-24T22:31:10Z OTA: 118690/122094 bytes (97%) after 18 s; loop ran 13111 times meanwhile
+2026-09-24T22:31:12Z OTA: download complete, 122094 bytes in 20 s, loop ran 14469 times while it was in flight
+2026-09-24T22:31:29Z OTA: read-back of /a.bin: 151640 bytes, crc dd9f5b7, as the manifest says
+2026-09-24T22:31:30Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:31:30Z OTA: image verified, installing q242157cr from /a.bin on trial; the copy of q242157h2 is on the SD card; the board will restart
+2026-09-24T22:31:31Z E (2044326) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:31:40Z E (2053096) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:31:41Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:31:46Z Firmware version: q242157cr
+2026-09-24T22:31:46Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:31:46Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:31:46Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:31:46Z OTA: running q242157cr, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157cr boots 0, rejected q242157nc, record 1 gen 34
+2026-09-24T22:31:46Z OTA: trial boot 1 of 3 for q242157cr, last reset: reset pin
+2026-09-24T22:31:46Z FAULT INJECTION: hard fault in setup()
+2026-09-24T22:31:52Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:31:57Z Firmware version: q242157cr
+2026-09-24T22:31:57Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:31:57Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:31:57Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:31:57Z OTA: running q242157cr, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157cr boots 1, rejected q242157nc, record 0 gen 35
+2026-09-24T22:31:57Z OTA: trial boot 2 of 3 for q242157cr, last reset: watchdog
+2026-09-24T22:31:57Z FAULT INJECTION: hard fault in setup()
+2026-09-24T22:32:03Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:32:08Z Firmware version: q242157cr
+2026-09-24T22:32:08Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:32:08Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:32:08Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:32:08Z OTA: running q242157cr, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157cr boots 2, rejected q242157nc, record 1 gen 36
+2026-09-24T22:32:08Z OTA: trial boot 3 of 3 for q242157cr, last reset: watchdog
+2026-09-24T22:32:08Z FAULT INJECTION: hard fault in setup()
+2026-09-24T22:32:14Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:32:19Z Firmware version: q242157cr
+2026-09-24T22:32:19Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:32:19Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:32:19Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:32:19Z OTA: running q242157cr, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157cr boots 3, rejected q242157nc, record 0 gen 37
+2026-09-24T22:32:20Z OTA: trial boot 4 of 3 for q242157cr, last reset: watchdog
+2026-09-24T22:32:20Z OTA: ROLLING BACK to q242157h2 from the SD card: booted 4 times without confirming
+2026-09-24T22:33:32Z OTA: copy of q242157h2 written to the ESP32 and read back identical (72 s)
+2026-09-24T22:33:33Z E (2166304) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:33:42Z E (2175078) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:33:43Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:33:48Z Firmware version: q242157h2
+2026-09-24T22:33:48Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:33:48Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:33:48Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:33:48Z OTA: running q242157h2, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157cr boots 4, rejected q242157nc, record 0 gen 39
+2026-09-24T22:33:48Z OTA: ROLLED BACK from q242157cr to q242157h2; q242157cr is rejected and will not be installed again
+2026-09-24T22:33:48Z Config doc:
+2026-09-24T22:33:49Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:33:49Z Alarm detected and cleared.
+2026-09-24T22:33:49Z Alarm was set.
+2026-09-24T22:33:49Z Setup Clock Module.
+2026-09-24T22:33:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:34:04Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:34:05Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:34:05Z GET Request
+2026-09-24T22:34:16Z Response code: 200
+2026-09-24T22:34:16Z It took 1 attempts to get a response
+2026-09-24T22:34:16Z {"datetime":"2026-09-24T18:34:16.000Z"}
+2026-09-24T22:34:16Z Syncing Clock to: 2026-09-24T18:34:16.000Z
+2026-09-24T22:34:18Z Attempting to recalibrate
+2026-09-24T22:34:23Z homing
+2026-09-24T22:34:23Z Temperature: 21.75
+2026-09-24T22:34:23Z Status: ACTIVE
+2026-09-24T22:34:23Z Free RAM: 13128
+2026-09-24T22:34:24Z boundary hit
+2026-09-24T22:34:25Z maxing
+2026-09-24T22:34:26Z boundary hit
+2026-09-24T22:34:27Z Extending to 95
+2026-09-24T22:34:27Z Extending towards 0
+2026-09-24T22:34:27Z Starting Position 0
+2026-09-24T22:34:28Z Set status to: ACTIVE
+2026-09-24T22:34:28Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:34:28Z Setup complete.
+2026-09-24T22:34:28Z GET Request
+2026-09-24T22:34:30Z Response code: 200
+2026-09-24T22:34:30Z It took 1 attempts to get a response
+2026-09-24T22:34:30Z q242157cr 151640 0dd9f5b7
+2026-09-24T22:34:30Z OTA: manifest wants q242157cr, which failed its trial; staying on q242157h2
+2026-09-24T22:34:33Z Temperature: 21.75
+2026-09-24T22:34:33Z Status: ACTIVE
+2026-09-24T22:34:33Z Free RAM: 12252
+2026-09-24T22:34:44Z Temperature: 21.75
+2026-09-24T22:34:44Z Status: ACTIVE
+2026-09-24T22:34:44Z Free RAM: 12252
+2026-09-24T22:34:54Z Temperature: 21.75
+2026-09-24T22:34:54Z Status: ACTIVE
+2026-09-24T22:34:54Z Free RAM: 12252
+2026-09-24T22:35:04Z Temperature: 21.75
+2026-09-24T22:35:04Z Status: ACTIVE
+2026-09-24T22:35:04Z Free RAM: 12252
+2026-09-24T22:35:14Z Temperature: 21.75
+2026-09-24T22:35:14Z Status: ACTIVE
+2026-09-24T22:35:14Z Free RAM: 12252
+2026-09-24T22:35:24Z Temperature: 21.75
+2026-09-24T22:35:24Z Status: ACTIVE
+2026-09-24T22:35:24Z Free RAM: 12252
+2026-09-24T22:35:28Z GET Request
+2026-09-24T22:35:30Z Response code: 200
+2026-09-24T22:35:30Z It took 1 attempts to get a response
+2026-09-24T22:35:30Z q242157hg 151624 cd2ad558
+2026-09-24T22:35:31Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:35:31Z OTA: manifest wants q242157hg (151624 bytes), running q242157h2
+2026-09-24T22:35:32Z Probe response code: 206
+2026-09-24T22:35:32Z OTA: downloading q242157hg into /a.bin
+2026-09-24T22:35:35Z OTA: downloading q242157hg, 122088 bytes, in the background (starting took 1636 ms)
+2026-09-24T22:35:35Z Temperature: 21.75
+2026-09-24T22:35:35Z Status: ACTIVE
+2026-09-24T22:35:35Z Free RAM: 12252
+2026-09-24T22:35:37Z OTA: 12402/122088 bytes (10%) after 2 s; loop ran 1365 times meanwhile
+2026-09-24T22:35:39Z OTA: 26129/122088 bytes (21%) after 4 s; loop ran 2750 times meanwhile
+2026-09-24T22:35:41Z OTA: 43192/122088 bytes (35%) after 6 s; loop ran 4202 times meanwhile
+2026-09-24T22:35:43Z OTA: 62598/122088 bytes (51%) after 8 s; loop ran 5844 times meanwhile
+2026-09-24T22:35:45Z OTA: 79162/122088 bytes (64%) after 10 s; loop ran 7346 times meanwhile
+2026-09-24T22:35:45Z Temperature: 21.75
+2026-09-24T22:35:45Z Status: ACTIVE
+2026-09-24T22:35:45Z Free RAM: 12252
+2026-09-24T22:35:47Z OTA: 98587/122088 bytes (80%) after 12 s; loop ran 8817 times meanwhile
+2026-09-24T22:35:49Z OTA: 112186/122088 bytes (91%) after 14 s; loop ran 10360 times meanwhile
+2026-09-24T22:35:51Z OTA: 115611/122088 bytes (94%) after 16 s; loop ran 11620 times meanwhile
+2026-09-24T22:35:53Z OTA: 118633/122088 bytes (97%) after 18 s; loop ran 13017 times meanwhile
+2026-09-24T22:35:55Z OTA: download complete, 122088 bytes in 19 s, loop ran 14258 times while it was in flight
+2026-09-24T22:36:12Z OTA: read-back of /a.bin: 151624 bytes, crc cd2ad558, as the manifest says
+2026-09-24T22:36:12Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:36:13Z OTA: image verified, installing q242157hg from /a.bin on trial; the copy of q242157h2 is on the SD card; the board will restart
+2026-09-24T22:36:14Z E (2327026) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:36:22Z E (2335807) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:36:23Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:36:29Z Firmware version: q242157hg
+2026-09-24T22:36:29Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:36:29Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:36:29Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:36:29Z OTA: running q242157hg, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157hg boots 0, rejected q242157cr, record 1 gen 42
+2026-09-24T22:36:29Z OTA: trial boot 1 of 3 for q242157hg, last reset: reset pin
+2026-09-24T22:36:29Z FAULT INJECTION: hanging in setup()
+2026-09-24T22:39:30Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:39:35Z Firmware version: q242157hg
+2026-09-24T22:39:35Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:39:35Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:39:35Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:39:35Z OTA: running q242157hg, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157hg boots 1, rejected q242157cr, record 0 gen 43
+2026-09-24T22:39:35Z OTA: trial boot 2 of 3 for q242157hg, last reset: watchdog
+2026-09-24T22:39:35Z FAULT INJECTION: hanging in setup()
+2026-09-24T22:42:36Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:42:41Z Firmware version: q242157hg
+2026-09-24T22:42:41Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:42:41Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:42:41Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:42:42Z OTA: running q242157hg, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157hg boots 2, rejected q242157cr, record 1 gen 44
+2026-09-24T22:42:42Z OTA: trial boot 3 of 3 for q242157hg, last reset: watchdog
+2026-09-24T22:42:42Z FAULT INJECTION: hanging in setup()
+2026-09-24T22:45:43Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: watchdog
+2026-09-24T22:45:48Z Firmware version: q242157hg
+2026-09-24T22:45:48Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: watchdog
+2026-09-24T22:45:48Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:45:48Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:45:48Z OTA: running q242157hg, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157hg boots 3, rejected q242157cr, record 0 gen 45
+2026-09-24T22:45:48Z OTA: trial boot 4 of 3 for q242157hg, last reset: watchdog
+2026-09-24T22:45:48Z OTA: ROLLING BACK to q242157h2 from the SD card: booted 4 times without confirming
+2026-09-24T22:47:01Z OTA: copy of q242157h2 written to the ESP32 and read back identical (72 s)
+2026-09-24T22:47:02Z E (2975391) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:47:11Z E (2984168) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:47:12Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:47:17Z Firmware version: q242157h2
+2026-09-24T22:47:17Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:47:17Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:47:17Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:47:17Z OTA: running q242157h2, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157hg boots 4, rejected q242157cr, record 0 gen 47
+2026-09-24T22:47:17Z OTA: ROLLED BACK from q242157hg to q242157h2; q242157hg is rejected and will not be installed again
+2026-09-24T22:47:17Z Config doc:
+2026-09-24T22:47:18Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:47:18Z Alarm detected and cleared.
+2026-09-24T22:47:18Z Alarm was set.
+2026-09-24T22:47:18Z Setup Clock Module.
+2026-09-24T22:47:28Z Connecting to WiFiRock Lodge
+2026-09-24T22:47:33Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:47:34Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:47:34Z GET Request
+2026-09-24T22:47:45Z Response code: 200
+2026-09-24T22:47:45Z It took 1 attempts to get a response
+2026-09-24T22:47:45Z {"datetime":"2026-09-24T18:47:45.000Z"}
+2026-09-24T22:47:46Z Syncing Clock to: 2026-09-24T18:47:45.000Z
+2026-09-24T22:47:47Z Attempting to recalibrate
+2026-09-24T22:47:52Z homing
+2026-09-24T22:47:52Z Temperature: 21.50
+2026-09-24T22:47:52Z Status: ACTIVE
+2026-09-24T22:47:52Z Free RAM: 13128
+2026-09-24T22:47:53Z boundary hit
+2026-09-24T22:47:54Z maxing
+2026-09-24T22:47:55Z boundary hit
+2026-09-24T22:47:56Z Extending to 95
+2026-09-24T22:47:56Z Extending towards 0
+2026-09-24T22:47:56Z Starting Position 0
+2026-09-24T22:47:57Z Set status to: ACTIVE
+2026-09-24T22:47:57Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:47:57Z Setup complete.
+2026-09-24T22:47:57Z GET Request
+2026-09-24T22:47:59Z Response code: 200
+2026-09-24T22:47:59Z It took 1 attempts to get a response
+2026-09-24T22:47:59Z q242157hg 151624 cd2ad558
+2026-09-24T22:47:59Z OTA: manifest wants q242157hg, which failed its trial; staying on q242157h2
+2026-09-24T22:48:02Z Temperature: 21.50
+2026-09-24T22:48:03Z Status: ACTIVE
+2026-09-24T22:48:03Z Free RAM: 12252
+2026-09-24T22:48:13Z Temperature: 21.50
+2026-09-24T22:48:13Z Status: ACTIVE
+2026-09-24T22:48:13Z Free RAM: 12252
+2026-09-24T22:48:23Z Temperature: 21.50
+2026-09-24T22:48:23Z Status: ACTIVE
+2026-09-24T22:48:23Z Free RAM: 12252
+2026-09-24T22:48:33Z Temperature: 21.50
+2026-09-24T22:48:33Z Status: ACTIVE
+2026-09-24T22:48:33Z Free RAM: 12252
+2026-09-24T22:48:43Z Temperature: 21.50
+2026-09-24T22:48:44Z Status: ACTIVE
+2026-09-24T22:48:44Z Free RAM: 12252
+2026-09-24T22:48:53Z Temperature: 21.50
+2026-09-24T22:48:54Z Status: ACTIVE
+2026-09-24T22:48:54Z Free RAM: 12252
+2026-09-24T22:48:57Z GET Request
+2026-09-24T22:49:00Z Response code: 200
+2026-09-24T22:49:00Z It took 1 attempts to get a response
+2026-09-24T22:49:00Z q242157d 154304 04211919
+2026-09-24T22:49:01Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:49:01Z OTA: manifest wants q242157d (154304 bytes), running q242157h2
+2026-09-24T22:49:02Z Probe response code: 206
+2026-09-24T22:49:03Z OTA: downloading q242157d into /a.bin
+2026-09-24T22:49:04Z OTA: downloading q242157d, 124285 bytes, in the background (starting took 1217 ms)
+2026-09-24T22:49:04Z Temperature: 21.50
+2026-09-24T22:49:04Z Status: ACTIVE
+2026-09-24T22:49:04Z Free RAM: 12252
+2026-09-24T22:49:06Z OTA: 14528/124285 bytes (11%) after 2 s; loop ran 1345 times meanwhile
+2026-09-24T22:49:08Z OTA: 30573/124285 bytes (24%) after 4 s; loop ran 2798 times meanwhile
+2026-09-24T22:49:10Z OTA: 49383/124285 bytes (39%) after 6 s; loop ran 4329 times meanwhile
+2026-09-24T22:49:12Z OTA: 67778/124285 bytes (54%) after 8 s; loop ran 5924 times meanwhile
+2026-09-24T22:49:14Z OTA: 85481/124285 bytes (68%) after 10 s; loop ran 7414 times meanwhile
+2026-09-24T22:49:15Z Temperature: 21.50
+2026-09-24T22:49:15Z Status: ACTIVE
+2026-09-24T22:49:15Z Free RAM: 12252
+2026-09-24T22:49:16Z OTA: 102057/124285 bytes (82%) after 12 s; loop ran 8901 times meanwhile
+2026-09-24T22:49:19Z OTA: 112673/124285 bytes (90%) after 14 s; loop ran 10404 times meanwhile
+2026-09-24T22:49:21Z OTA: 117609/124285 bytes (94%) after 16 s; loop ran 11765 times meanwhile
+2026-09-24T22:49:23Z OTA: 121207/124285 bytes (97%) after 18 s; loop ran 13174 times meanwhile
+2026-09-24T22:49:24Z OTA: download complete, 124285 bytes in 19 s, loop ran 14025 times while it was in flight
+2026-09-24T22:49:41Z OTA: read-back of /a.bin: 154304 bytes, crc 4211919, as the manifest says
+2026-09-24T22:49:42Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:49:42Z OTA: image verified, installing q242157d from /a.bin on trial; the copy of q242157h2 is on the SD card; the board will restart
+2026-09-24T22:49:43Z E (3136159) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:49:52Z E (3144940) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:49:53Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:49:58Z Firmware version: q242157d
+2026-09-24T22:49:58Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:49:58Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:49:58Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:49:58Z OTA: running q242157d, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157d boots 0, rejected q242157hg, record 1 gen 50
+2026-09-24T22:49:58Z OTA: trial boot 1 of 3 for q242157d, last reset: reset pin
+2026-09-24T22:49:58Z Config doc:
+2026-09-24T22:49:58Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:49:58Z Alarm detected and cleared.
+2026-09-24T22:49:58Z Alarm was set.
+2026-09-24T22:49:58Z Setup Clock Module.
+2026-09-24T22:50:09Z Connecting to WiFiRock Lodge
+2026-09-24T22:50:14Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:50:15Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:50:15Z GET Request
+2026-09-24T22:50:26Z Response code: 200
+2026-09-24T22:50:26Z It took 1 attempts to get a response
+2026-09-24T22:50:26Z {"datetime":"2026-09-24T18:50:26.000Z"}
+2026-09-24T22:50:26Z Syncing Clock to: 2026-09-24T18:50:26.000Z
+2026-09-24T22:50:28Z Attempting to recalibrate
+2026-09-24T22:50:33Z homing
+2026-09-24T22:50:33Z Temperature: 21.50
+2026-09-24T22:50:33Z Status: ACTIVE
+2026-09-24T22:50:33Z Free RAM: 13128
+2026-09-24T22:50:34Z boundary hit
+2026-09-24T22:50:35Z maxing
+2026-09-24T22:50:36Z boundary hit
+2026-09-24T22:50:37Z Extending to 95
+2026-09-24T22:50:37Z Extending towards 0
+2026-09-24T22:50:37Z Starting Position 0
+2026-09-24T22:50:37Z Set status to: ACTIVE
+2026-09-24T22:50:37Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:50:37Z Setup complete.
+2026-09-24T22:50:37Z GET Request
+2026-09-24T22:50:39Z Response code: 200
+2026-09-24T22:50:39Z It took 1 attempts to get a response
+2026-09-24T22:50:39Z q242157h2 154304 6f16df46
+2026-09-24T22:50:39Z OTA: ROLLING BACK to q242157h2 from the SD card: the manifest points back to q242157h2
+2026-09-24T22:51:53Z OTA: copy of q242157h2 written to the ESP32 and read back identical (73 s)
+2026-09-24T22:51:54Z E (3267449) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:52:03Z E (3276230) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-24T22:52:04Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-24T22:52:09Z Firmware version: q242157h2
+2026-09-24T22:52:09Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-24T22:52:09Z ESP32 bridge firmware: 0.6.0
+2026-09-24T22:52:09Z ESP32 bridge firmware U32: 0x600
+2026-09-24T22:52:09Z OTA: running q242157h2, phase TRIAL, good q242157h2 copy on the SD card, 154304 bytes, trial q242157d boots 1, rejected q242157hg, record 1 gen 52
+2026-09-24T22:52:09Z OTA: ROLLED BACK from q242157d to q242157h2; q242157d is rejected and will not be installed again
+2026-09-24T22:52:10Z Config doc:
+2026-09-24T22:52:10Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-24T22:52:10Z Alarm detected and cleared.
+2026-09-24T22:52:10Z Alarm was set.
+2026-09-24T22:52:10Z Setup Clock Module.
+2026-09-24T22:52:20Z Connecting to WiFiRock Lodge
+2026-09-24T22:52:25Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:52:26Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:52:26Z GET Request
+2026-09-24T22:52:38Z Response code: 200
+2026-09-24T22:52:38Z It took 1 attempts to get a response
+2026-09-24T22:52:38Z {"datetime":"2026-09-24T18:52:37.000Z"}
+2026-09-24T22:52:38Z Syncing Clock to: 2026-09-24T18:52:37.000Z
+2026-09-24T22:52:39Z Attempting to recalibrate
+2026-09-24T22:52:44Z homing
+2026-09-24T22:52:44Z Temperature: 21.50
+2026-09-24T22:52:45Z Status: ACTIVE
+2026-09-24T22:52:45Z Free RAM: 13128
+2026-09-24T22:52:46Z boundary hit
+2026-09-24T22:52:46Z maxing
+2026-09-24T22:52:47Z boundary hit
+2026-09-24T22:52:48Z Extending to 95
+2026-09-24T22:52:48Z Extending towards 0
+2026-09-24T22:52:48Z Starting Position 0
+2026-09-24T22:52:49Z Set status to: ACTIVE
+2026-09-24T22:52:49Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-24T22:52:49Z Setup complete.
+2026-09-24T22:52:49Z GET Request
+2026-09-24T22:52:51Z Response code: 200
+2026-09-24T22:52:51Z It took 1 attempts to get a response
+2026-09-24T22:52:51Z q242157bad 154304 a7d38b90
+2026-09-24T22:52:52Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:52:52Z OTA: manifest wants q242157bad (154304 bytes), running q242157h2
+2026-09-24T22:52:54Z Probe response code: 206
+2026-09-24T22:52:54Z OTA: downloading q242157bad into /a.bin
+2026-09-24T22:52:56Z OTA: downloading q242157bad, 124283 bytes, in the background (starting took 1483 ms)
+2026-09-24T22:52:56Z Temperature: 21.50
+2026-09-24T22:52:56Z Status: ACTIVE
+2026-09-24T22:52:56Z Free RAM: 12252
+2026-09-24T22:52:58Z OTA: 17831/124283 bytes (14%) after 2 s; loop ran 1347 times meanwhile
+2026-09-24T22:53:00Z OTA: 37020/124283 bytes (29%) after 4 s; loop ran 2723 times meanwhile
+2026-09-24T22:53:02Z OTA: 56067/124283 bytes (45%) after 6 s; loop ran 4185 times meanwhile
+2026-09-24T22:53:04Z OTA: 72990/124283 bytes (58%) after 8 s; loop ran 5786 times meanwhile
+2026-09-24T22:53:06Z OTA: 86121/124283 bytes (69%) after 10 s; loop ran 7305 times meanwhile
+2026-09-24T22:53:06Z Temperature: 21.50
+2026-09-24T22:53:07Z Status: ACTIVE
+2026-09-24T22:53:07Z Free RAM: 12252
+2026-09-24T22:53:08Z OTA: 99227/124283 bytes (79%) after 12 s; loop ran 8722 times meanwhile
+2026-09-24T22:53:10Z OTA: 112609/124283 bytes (90%) after 14 s; loop ran 10157 times meanwhile
+2026-09-24T22:53:12Z OTA: 118377/124283 bytes (95%) after 16 s; loop ran 11428 times meanwhile
+2026-09-24T22:53:14Z OTA: 123653/124283 bytes (99%) after 18 s; loop ran 12819 times meanwhile
+2026-09-24T22:53:15Z verify: CRC32 mismatch
+2026-09-24T22:53:15Z OTA: download complete, 124283 bytes in 18 s, loop ran 13092 times while it was in flight
+2026-09-24T22:53:15Z OTA: verify failed (-10) on q242157bad, attempt 1 of 3; staying on q242157h2
+2026-09-24T22:53:16Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:53:25Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:53:25Z Temperature: 21.50
+2026-09-24T22:53:25Z Status: ACTIVE
+2026-09-24T22:53:25Z Free RAM: 12252
+2026-09-24T22:53:35Z Temperature: 21.50
+2026-09-24T22:53:35Z Status: ACTIVE
+2026-09-24T22:53:35Z Free RAM: 12252
+2026-09-24T22:53:46Z Temperature: 21.50
+2026-09-24T22:53:46Z Status: ACTIVE
+2026-09-24T22:53:46Z Free RAM: 12252
+2026-09-24T22:53:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:54:04Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:54:05Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:54:05Z GET Request
+2026-09-24T22:54:07Z Response code: 200
+2026-09-24T22:54:07Z It took 1 attempts to get a response
+2026-09-24T22:54:07Z q242157bad 154304 a7d38b90
+2026-09-24T22:54:08Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:54:08Z OTA: manifest wants q242157bad (154304 bytes), running q242157h2
+2026-09-24T22:54:09Z Probe response code: 206
+2026-09-24T22:54:09Z OTA: downloading q242157bad into /a.bin
+2026-09-24T22:54:14Z entExtended: -1
+2026-09-24T22:54:14Z 1242157bad, 124283 bytes, in the background (starting took 3438 ms)
+2026-09-24T22:54:14Z Temperature: 21.50
+2026-09-24T22:54:14Z Perc8:54:13
+2026-09-24T22:54:14Z Status: ACTIVE
+2026-09-24T22:54:14Z Free RAM: 12252
+2026-09-24T22:54:16Z OTA: 15902/124283 bytes (12%) after 2 s; loop ran 1483 times meanwhile
+2026-09-24T22:54:18Z OTA: 31883/124283 bytes (25%) after 4 s; loop ran 2898 times meanwhile
+2026-09-24T22:54:20Z OTA: 44600/124283 bytes (35%) after 6 s; loop ran 4365 times meanwhile
+2026-09-24T22:54:22Z OTA: 55600/124283 bytes (44%) after 8 s; loop ran 5819 times meanwhile
+2026-09-24T22:54:24Z OTA: 69749/124283 bytes (56%) after 10 s; loop ran 7321 times meanwhile
+2026-09-24T22:54:24Z Temperature: 21.50
+2026-09-24T22:54:24Z Status: ACTIVE
+2026-09-24T22:54:24Z Free RAM: 12252
+2026-09-24T22:54:26Z OTA: 87049/124283 bytes (70%) after 12 s; loop ran 8801 times meanwhile
+2026-09-24T22:54:28Z OTA: 107114/124283 bytes (86%) after 14 s; loop ran 10403 times meanwhile
+2026-09-24T22:54:30Z OTA: 117307/124283 bytes (94%) after 16 s; loop ran 11942 times meanwhile
+2026-09-24T22:54:32Z OTA: 120752/124283 bytes (97%) after 18 s; loop ran 13354 times meanwhile
+2026-09-24T22:54:34Z OTA: 123838/124283 bytes (99%) after 20 s; loop ran 14696 times meanwhile
+2026-09-24T22:54:34Z Temperature: 21.50
+2026-09-24T22:54:35Z Status: ACTIVE
+2026-09-24T22:54:35Z Free RAM: 12252
+2026-09-24T22:54:35Z verify: CRC32 mismatch
+2026-09-24T22:54:35Z OTA: download complete, 124283 bytes in 20 s, loop ran 14975 times while it was in flight
+2026-09-24T22:54:35Z OTA: verify failed (-10) on q242157bad, attempt 2 of 3; staying on q242157h2
+2026-09-24T22:54:40Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:54:45Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:54:45Z Temperature: 21.75
+2026-09-24T22:54:45Z Status: ACTIVE
+2026-09-24T22:54:45Z Free RAM: 12252
+2026-09-24T22:54:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:55:04Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:55:05Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:55:05Z GET Request
+2026-09-24T22:55:07Z Response code: 200
+2026-09-24T22:55:07Z It took 1 attempts to get a response
+2026-09-24T22:55:07Z q242157bad 154304 a7d38b90
+2026-09-24T22:55:08Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:55:08Z OTA: manifest wants q242157bad (154304 bytes), running q242157h2
+2026-09-24T22:55:10Z Probe response code: 206
+2026-09-24T22:55:10Z OTA: downloading q242157bad into /a.bin
+2026-09-24T22:55:12Z OTA: downloading q242157bad, 124283 bytes, in the background (starting took 1138 ms)
+2026-09-24T22:55:12Z Temperature: 21.75
+2026-09-24T22:55:12Z Status: ACTIVE
+2026-09-24T22:55:12Z Free RAM: 12252
+2026-09-24T22:55:14Z OTA: 15470/124283 bytes (12%) after 2 s; loop ran 1338 times meanwhile
+2026-09-24T22:55:16Z OTA: 32258/124283 bytes (25%) after 4 s; loop ran 2773 times meanwhile
+2026-09-24T22:55:18Z OTA: 51899/124283 bytes (41%) after 6 s; loop ran 4323 times meanwhile
+2026-09-24T22:55:20Z OTA: 69877/124283 bytes (56%) after 8 s; loop ran 5826 times meanwhile
+2026-09-24T22:55:22Z OTA: 86281/124283 bytes (69%) after 10 s; loop ran 7394 times meanwhile
+2026-09-24T22:55:22Z Temperature: 21.75
+2026-09-24T22:55:22Z Status: ACTIVE
+2026-09-24T22:55:22Z Free RAM: 12252
+2026-09-24T22:55:24Z OTA: 101518/124283 bytes (81%) after 12 s; loop ran 8915 times meanwhile
+2026-09-24T22:55:26Z OTA: 111455/124283 bytes (89%) after 14 s; loop ran 10391 times meanwhile
+2026-09-24T22:55:28Z OTA: 116859/124283 bytes (94%) after 16 s; loop ran 11729 times meanwhile
+2026-09-24T22:55:30Z OTA: 121072/124283 bytes (97%) after 18 s; loop ran 13132 times meanwhile
+2026-09-24T22:55:31Z verify: CRC32 mismatch
+2026-09-24T22:55:31Z OTA: download complete, 124283 bytes in 19 s, loop ran 13957 times while it was in flight
+2026-09-24T22:55:31Z OTA: verify failed (-10) on q242157bad, attempt 3 of 3; staying on q242157h2
+2026-09-24T22:55:42Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:55:42Z Temperature: 21.75
+2026-09-24T22:55:42Z Status: ACTIVE
+2026-09-24T22:55:42Z Free RAM: 12252
+2026-09-24T22:55:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:56:04Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:56:05Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:56:05Z GET Request
+2026-09-24T22:56:07Z Response code: 200
+2026-09-24T22:56:07Z It took 1 attempts to get a response
+2026-09-24T22:56:07Z q242157mg 154304 a37cc246
+2026-09-24T22:56:08Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:56:08Z OTA: manifest wants q242157mg (154304 bytes), running q242157h2
+2026-09-24T22:56:10Z Probe response code: 206
+2026-09-24T22:56:10Z OTA: downloading q242157mg into /a.bin
+2026-09-24T22:56:13Z OTA: downloading q242157mg, 124286 bytes, in the background (starting took 1126 ms)
+2026-09-24T22:56:13Z Temperature: 21.75
+2026-09-24T22:56:13Z Status: ACTIVE
+2026-09-24T22:56:13Z Free RAM: 12252
+2026-09-24T22:56:19Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:56:29Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:56:33Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:56:33Z Temperature: 21.75
+2026-09-24T22:56:33Z Status: ACTIVE
+2026-09-24T22:56:33Z Free RAM: 12252
+2026-09-24T22:56:43Z Temperature: 21.75
+2026-09-24T22:56:43Z Status: ACTIVE
+2026-09-24T22:56:43Z Free RAM: 12252
+2026-09-24T22:56:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:57:04Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:57:05Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:57:05Z GET Request
+2026-09-24T22:57:07Z Response code: 200
+2026-09-24T22:57:07Z It took 1 attempts to get a response
+2026-09-24T22:57:07Z q242157mg 154304 a37cc246
+2026-09-24T22:57:08Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:57:08Z OTA: manifest wants q242157mg (154304 bytes), running q242157h2
+2026-09-24T22:57:10Z Probe response code: 206
+2026-09-24T22:57:10Z OTA: downloading q242157mg into /a.bin
+2026-09-24T22:57:12Z OTA: downloading q242157mg, 124286 bytes, in the background (starting took 1830 ms)
+2026-09-24T22:57:12Z Temperature: 21.75
+2026-09-24T22:57:13Z Status: ACTIVE
+2026-09-24T22:57:13Z Free RAM: 12252
+2026-09-24T22:57:16Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:57:26Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:57:34Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:57:34Z Temperature: 21.75
+2026-09-24T22:57:34Z Status: ACTIVE
+2026-09-24T22:57:34Z Free RAM: 12252
+2026-09-24T22:57:44Z Temperature: 21.75
+2026-09-24T22:57:44Z Status: ACTIVE
+2026-09-24T22:57:44Z Free RAM: 12252
+2026-09-24T22:57:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:58:05Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:58:06Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:58:06Z GET Request
+2026-09-24T22:58:07Z Response code: 200
+2026-09-24T22:58:07Z It took 1 attempts to get a response
+2026-09-24T22:58:07Z q242157mg 154304 a37cc246
+2026-09-24T22:58:08Z OTA: the copy on the SD card read back identical to the running image
+2026-09-24T22:58:08Z OTA: manifest wants q242157mg (154304 bytes), running q242157h2
+2026-09-24T22:58:10Z Probe response code: 206
+2026-09-24T22:58:10Z OTA: downloading q242157mg into /a.bin
+2026-09-24T22:58:12Z OTA: downloading q242157mg, 124286 bytes, in the background (starting took 1273 ms)
+2026-09-24T22:58:12Z Temperature: 21.75
+2026-09-24T22:58:12Z Status: ACTIVE
+2026-09-24T22:58:12Z Free RAM: 12252
+2026-09-24T22:58:18Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:58:23Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-24T22:58:32Z OTA: restarted the ESP32 so the next attempt starts clean, bridge 0.6.0
+2026-09-24T22:58:32Z Temperature: 21.75
+2026-09-24T22:58:33Z Status: ACTIVE
+2026-09-24T22:58:33Z Free RAM: 12252
+2026-09-24T22:58:43Z Temperature: 21.75
+2026-09-24T22:58:43Z Status: ACTIVE
+2026-09-24T22:58:43Z Free RAM: 12252
+2026-09-24T22:58:59Z Connecting to WiFiRock Lodge
+2026-09-24T22:59:05Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-24T22:59:06Z .Successfully connected toSmartRG-d0b0
+2026-09-24T22:59:06Z GET Request
+2026-09-24T22:59:08Z Response code: 200
+2026-09-24T22:59:08Z It took 1 attempts to get a response
+2026-09-24T22:59:08Z q242157mg 154304 a37cc246
+2026-09-24T22:59:08Z OTA: q242157mg failed 3 times; not trying again until the manifest names another version
+2026-09-24T22:59:08Z Temperature: 21.75
+2026-09-24T22:59:08Z Status: ACTIVE
+2026-09-24T22:59:08Z Free RAM: 12252
+2026-09-24T22:59:18Z Temperature: 21.75
+2026-09-24T22:59:18Z Status: ACTIVE
+2026-09-24T22:59:18Z Free RAM: 12252
+2026-09-24T22:59:28Z Temperature: 21.75
+2026-09-24T22:59:28Z Status: ACTIVE
+2026-09-24T22:59:28Z Free RAM: 12252
+2026-09-24T22:59:38Z Temperature: 21.75
+2026-09-24T22:59:38Z Status: ACTIVE
+2026-09-24T22:59:38Z Free RAM: 12252
+2026-09-24T22:59:48Z Temperature: 21.75
+2026-09-24T22:59:49Z Status: ACTIVE
+2026-09-24T22:59:49Z Free RAM: 12252
+2026-09-24T22:59:49Z GET Request
+2026-09-24T22:59:51Z Response code: 200
+2026-09-24T22:59:51Z It took 1 attempts to get a response
+2026-09-24T22:59:51Z q242157mg 154304 a37cc246
+2026-09-24T22:59:51Z OTA: q242157mg failed 3 times; not trying again until the manifest names another version
+2026-09-24T22:59:59Z Temperature: 21.75
+2026-09-24T22:59:59Z Status: ACTIVE
+2026-09-24T22:59:59Z Free RAM: 12252
+2026-09-24T23:00:01Z Alarm detected and cleared.
+2026-09-24T23:00:01Z Alarm was set.
+2026-09-24T23:00:01Z maxing
+2026-09-24T23:00:02Z boundary hit
+2026-09-24T23:00:09Z Temperature: 21.75
+2026-09-24T23:00:09Z Status: ACTIVE
+2026-09-24T23:00:09Z Free RAM: 12252
+2026-09-24T23:00:09Z Set status to: NIGHT
+2026-09-24T23:00:19Z Temperature: 21.75
+2026-09-24T23:00:19Z Status: NIGHT
+2026-09-24T23:00:19Z Free RAM: 12252
+2026-09-24T23:00:29Z Temperature: 21.75
+2026-09-24T23:00:29Z Status: NIGHT
+2026-09-24T23:00:29Z Free RAM: 12252
+2026-09-24T23:00:39Z Temperature: 21.75
+2026-09-24T23:00:40Z Status: NIGHT
+2026-09-24T23:00:40Z Free RAM: 12252

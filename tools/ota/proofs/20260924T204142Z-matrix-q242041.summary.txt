@@ -1,0 +1,16 @@
+OTA fault matrix, run q242041, Thu 24 Sep 2026 21:56:54 UTC
+
+PASS  base      q242041a flashed over USB, watchdog armed, copy of itself saved on the SD card
+PASS  hop       installed q242041b over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242041c over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242041h0 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242041h1 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242041h2 over the air, trial confirmed, rollback copy saved
+PASS  noconfirm q242041nc never confirmed and was rolled back to q242041h2 at the deadline; rejected
+PASS  crash     q242041cr hard-faulted every boot; watchdog reset it; rolled back to q242041h2 on boot 4
+PASS  hang      q242041hg hung in setup every boot; watchdog reset it; rolled back to q242041h2 on boot 4
+PASS  abort     manifest pointed back mid-trial; rolled back from q242041d to q242041h2 from the SD card, no download
+PASS  corrupt   q242041bad with a flipped byte failed its CRC, three tries, never flashed
+PASS  magic     q242041mg with another board's magic was refused, never flashed
+PASS  readback  q242041rb with a wrong CRC in the manifest was read back, refused, never flashed
+FAIL  q242041zz kept being retried

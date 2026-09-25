@@ -75,11 +75,13 @@ arduino-cli compile -b arduino:renesas_uno:unor4wifi \
   "$ROOT" | grep -E "bytes"
 
 BIN="$OUT/solar-tracker.ino.bin"
-# Two images live on the ESP32 at once, the rollback copy and the one being tried, in a
-# 512 KB SPIFFS partition that holds roughly 393 KB. 180 KB each leaves room; beyond that a
-# download could run out of space, and the bridge truncates silently when it does.
-if (( $(wc -c < "$BIN") > 184320 )); then
-  echo "FAIL: $(wc -c < "$BIN") byte image; above 180 KB two no longer fit on the ESP32 safely" >&2
+# The image passes through the ESP32's SPIFFS on its way to the RA4M1, one at a time. SPIFFS
+# loses space for good on every write that fails for lack of it, and the bench unit's 512 KB
+# partition was left holding about 190 KB by the tests that found that out
+# (bench/18_slot_stress, bench/19_spiffs_reclaim). 168 KB fits there with room to spare; a
+# download that ran out would be truncated silently by the bridge and cost more space.
+if (( $(wc -c < "$BIN") > 172032 )); then
+  echo "FAIL: $(wc -c < "$BIN") byte image; above 168 KB it may not fit on the bench unit's ESP32" >&2
   exit 1
 fi
 # OtaUpdater works out the running image's length from these linker symbols and demands the

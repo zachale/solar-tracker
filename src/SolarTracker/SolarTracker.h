@@ -40,7 +40,7 @@ public:
   // True while an OTA download is in flight. Anything that would reset the radio waits.
   bool otaBusy() const { return otaUpdater.busy(); }
   // Over-the-air trial bookkeeping; first thing in setup() after the watchdog.
-  void otaBoot() { otaUpdater.boot(); }
+  void otaBoot(uint8_t sdChipSelect) { otaUpdater.boot(sdChipSelect); }
 
 private:
   Status status = ACTIVE;

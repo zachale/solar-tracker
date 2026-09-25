@@ -1,0 +1,17 @@
+OTA fault matrix, run q242318, Fri 25 Sep 2026 00:35:34 UTC
+
+PASS  base      q242318a flashed over USB, watchdog armed, copy of itself saved on the SD card
+PASS  hop       installed q242318b over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242318c over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242318h0 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242318h1 over the air, trial confirmed, rollback copy saved
+PASS  hop       installed q242318h2 over the air, trial confirmed, rollback copy saved
+PASS  noconfirm q242318nc never confirmed and was rolled back to q242318h2 at the deadline; rejected
+PASS  crash     q242318cr hard-faulted every boot; watchdog reset it; rolled back to q242318h2 on boot 4
+PASS  hang      q242318hg hung in setup every boot; watchdog reset it; rolled back to q242318h2 on boot 4
+PASS  abort     manifest pointed back mid-trial; rolled back from q242318d to q242318h2 from the SD card, no download
+PASS  corrupt   q242318bad with a flipped byte failed its CRC, three tries, never flashed
+PASS  magic     q242318mg with another board's magic was refused, never flashed
+PASS  readback  q242318rb with a wrong CRC in the manifest was read back, refused, never flashed
+PASS  missing   manifest named an image that does not exist; found missing before the bridge was asked, never flashed, no restart
+PASS  recover   after every failure above, q242318e still installs and confirms normally

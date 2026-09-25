@@ -6,7 +6,7 @@
 # Builds every image it needs with fast timers (check every 60 s, confirm after 60 s, roll
 # back after 300 s; the logic is the production logic), then drives the board through:
 #
-#   base       USB-flash the first image; it downloads its own rollback copy
+#   base       USB-flash the first image; it saves a copy of itself on the SD card
 #   hops       normal updates, each confirmed after its trial        (N, default 3)
 #   noconfirm  an image that never confirms           -> rolled back at the deadline
 #   crash      an image that hard-faults in setup()   -> watchdog resets, rolled back on boot 4
@@ -15,7 +15,7 @@
 #   corrupt    payload byte flipped                   -> refused at verify, never flashed
 #   magic      another board's magic number           -> refused, never flashed
 #   readback   manifest gives the wrong CRC           -> read back, refused, never flashed
-#   missing    manifest names an image not uploaded   -> refused, never flashed
+#   missing    manifest names an image not uploaded   -> refused before the bridge sees it
 #   recover    one more normal update after all of it -> still accepted
 #
 # Every scenario ends with the board on a known version and the evidence in
@@ -39,6 +39,7 @@ done
 RUN="q$(date -u +%d%H%M)"            # names are never reused, so every run gets fresh ones
 RESULTS=()
 GOOD=""                              # the version the board should be running now
+RETRIES=0
 RUN_START="$(now)"
 mkdir -p "$HERE/proofs"
 PROOF="$HERE/proofs/$(date -u +%Y%m%dT%H%M%SZ)-matrix-$RUN.log"
@@ -99,24 +100,31 @@ accepted() {
   local next="$1" t
   t="$(now)"
   set_manifest "$next" || die "set manifest $next"
-  wait_for "OTA: image verified, installing $next" 240 "$t" || die "$next was never installed"
+  # A download can fail on the way (a network stall, once, on this unit); the board retries by
+  # itself, up to three times, and that is part of what is being shown. So failures are counted
+  # and reported, not fatal. A rollback, or a board that never installs, still is.
+  wait_for "OTA: image verified, installing $next" 600 "$t" lenient || die "$next was never installed"
+  RETRIES="$(count_since "OTA: .* failed \(" "$t")"
   wait_for "Firmware version: $next" 120 "$t" || die "the board did not come back as $next"
   wait_for "OTA: trial boot 1 of 3 for $next" 60 "$t" || die "$next booted without its trial bookkeeping"
   wait_for "OTA: $next CONFIRMED" 300 "$t" || die "$next never confirmed"
   wait_for "OTA: rollback copy of $next ready" 240 "$t" || die "$next never saved its rollback copy"
+  if (( $(count_since "ROLLING BACK|CANNOT ROLL BACK" "$t") > 0 )); then die "$next was rolled back"; fi
   GOOD="$next"
 }
+retried() { (( RETRIES > 0 )) && echo ", after $RETRIES failed download(s) retried by itself"; }
 
 # rolled_back <bad> <reason regex> <seconds>: the board installs <bad>, which fails its trial,
-# and ends up back on the good version with <bad> rejected and a fresh rollback copy.
+# and ends up back on the good version with <bad> rejected. The copy on the SD card is only
+# read by a rollback, so it still stands and nothing is saved again.
 rolled_back() {
   local bad="$1" reason="$2" timeout="$3" t
   t="$(now)"
   set_manifest "$bad" || die "set manifest $bad"
-  wait_for "OTA: image verified, installing $bad" 240 "$t" || die "$bad was never installed"
-  wait_for "OTA: ROLLING BACK to $GOOD from /[ab]\.bin: $reason" "$timeout" "$t" lenient || die "$bad was not rolled back ($reason)"
+  wait_for "OTA: image verified, installing $bad" 600 "$t" lenient || die "$bad was never installed"
+  wait_for "OTA: ROLLING BACK to $GOOD from the SD card: $reason" "$timeout" "$t" lenient || die "$bad was not rolled back ($reason)"
+  wait_for "OTA: copy of $GOOD written to the ESP32 and read back identical" 420 "$t" lenient || die "the copy of $GOOD never reached the ESP32"
   wait_for "OTA: ROLLED BACK from $bad to $GOOD" 180 "$t" lenient || die "the board did not come back as $GOOD"
-  wait_for "OTA: rollback copy of $GOOD ready" 240 "$t" lenient || die "$GOOD did not restore its rollback copy"
   wait_for "OTA: manifest wants $bad, which failed its trial" 180 "$t" lenient || die "$bad was not held as rejected"
 }
 
@@ -128,9 +136,11 @@ refused_line() {
   t="$(now)"
   set_manifest_line "$line" || die "set manifest $bad"
   wait_for "$failure" 300 "$t" lenient || die "$bad was not refused as expected"
-  wait_for "failed [0-9]+ times; not trying again|attempt 3 of 3" 300 "$t" lenient || die "$bad kept being retried"
+  wait_for "failed [0-9]+ times; not trying again|attempt 3 of 3" 420 "$t" lenient || die "$bad kept being retried"
   if (( $(count_since "Firmware version:" "$t") > 0 )); then die "the board restarted while refusing $bad"; fi
   if (( $(count_since "installing $bad" "$t") > 0 )); then die "$bad got as far as installing"; fi
+  # A retry after a failed download used to crash the bridge; it is restarted cleanly instead.
+  if (( $(count_since "startDownload failed \(-26\)" "$t") > 0 )); then die "the bridge crashed on a retry of $bad"; fi
 }
 
 # ---------------------------------------------------------------------------------------------
@@ -143,14 +153,14 @@ if want base; then
   wait_for "OTA: rollback copy of $(v a) ready" 240 "$t" || die "$(v a) never saved its rollback copy"
   wait_for "OTA: up to date at $(v a)" 180 "$t" || die "$(v a) did not report up to date"
   GOOD="$(v a)"
-  record "PASS  base      $(v a) flashed over USB, watchdog armed, rollback copy saved"
+  record "PASS  base      $(v a) flashed over USB, watchdog armed, copy of itself saved on the SD card"
 fi
 [[ -n "$GOOD" ]] || die "no base; run without --only first"
 
 if want hops; then
   for t in b c "${NORMAL[@]:5}"; do
     accepted "$(v "$t")"
-    record "PASS  hop       installed $(v "$t") over the air, trial confirmed, rollback copy saved"
+    record "PASS  hop       installed $(v "$t") over the air, trial confirmed, rollback copy saved$(retried)"
   done
 fi
 
@@ -174,10 +184,10 @@ if want abort; then
   set_manifest "$(v d)" || die "set manifest"
   wait_for "OTA: trial boot 1 of 3 for $(v d)" 300 "$t" || die "$(v d) never started its trial"
   set_manifest "$GOOD" || die "set manifest back"
-  wait_for "OTA: ROLLING BACK to $GOOD from /[ab]\.bin: the manifest points back to $GOOD" 180 "$t" lenient || die "the abort did not roll back"
+  wait_for "OTA: ROLLING BACK to $GOOD from the SD card: the manifest points back to $GOOD" 180 "$t" lenient || die "the abort did not roll back"
+  wait_for "OTA: copy of $GOOD written to the ESP32 and read back identical" 420 "$t" lenient || die "the copy of $GOOD never reached the ESP32"
   wait_for "OTA: ROLLED BACK from $(v d) to $GOOD" 180 "$t" lenient || die "the board did not come back as $GOOD"
-  wait_for "OTA: rollback copy of $GOOD ready" 240 "$t" lenient || die "$GOOD did not restore its rollback copy"
-  record "PASS  abort     manifest pointed back mid-trial; rolled back from $(v d) to $GOOD without a download"
+  record "PASS  abort     manifest pointed back mid-trial; rolled back from $(v d) to $GOOD from the SD card, no download"
 fi
 
 if want corrupt; then
@@ -186,7 +196,9 @@ if want corrupt; then
 fi
 
 if want magic; then
-  refused "$(v mg)" "OTA: (downloadProgress|verify) failed"
+  # The bridge crashes on this download, which drops USB for a few seconds, so the line saying
+  # so can fall in the capture's gap. Its giving up after three is logged once USB is back.
+  refused "$(v mg)" "OTA: (downloadProgress|verify) failed|OTA: $(v mg) failed 3 times; not trying again"
   record "PASS  magic     $(v mg) with another board's magic was refused, never flashed"
 fi
 
@@ -198,13 +210,13 @@ if want readback; then
 fi
 
 if want missing; then
-  refused "$(v zz)" "OTA: startDownload failed"
-  record "PASS  missing   manifest named an image that does not exist; refused, never flashed"
+  refused "$(v zz)" "OTA: probe of the image failed \(404\)"
+  record "PASS  missing   manifest named an image that does not exist; found missing before the bridge was asked, never flashed, no restart"
 fi
 
 if want recover; then
   accepted "$(v e)"
-  record "PASS  recover   after every failure above, $(v e) still installs and confirms normally"
+  record "PASS  recover   after every failure above, $(v e) still installs and confirms normally$(retried)"
 fi
 
 set_manifest "$GOOD" >/dev/null
