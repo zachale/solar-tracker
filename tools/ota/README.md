@@ -99,7 +99,13 @@ run (their logs are in `proofs/` too):
   its retry worked, but the test took any failure as fatal. Update hops now report a
   self-retried failure instead of failing on it; anything that never installs still fails.
 
-<!-- PROVE -->
+With production timing (`prove.sh v10 v11`, 2026-09-25), the build that went on to the
+60-hour run arrived over the air with nothing else touching the board: the manifest was
+pointed at v11 at 00:53 UTC, the tracker found it at its next five-minute check, downloaded
+it in 20 s while its loop kept running (14,082 passes), read it back against the manifest,
+installed it on trial, confirmed it after 332 s, and saved it to the SD card as the new
+rollback copy at 01:04. Evidence:
+[`proofs/20260925T005112Z-v10-to-v11.log`](proofs/20260925T005112Z-v10-to-v11.log).
 
 ## What this does not cover
 
