@@ -1,0 +1,333 @@
+2026-09-25T02:03:19Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-25T02:03:23Z Firmware version: v12
+2026-09-25T02:03:23Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-25T02:03:23Z ESP32 bridge firmware: 0.6.0
+2026-09-25T02:03:23Z ESP32 bridge firmware U32: 0x600
+2026-09-25T02:03:23Z OTA: running v12, phase IDLE, good w2 copy on the SD card, 155312 bytes, rejected q242318d, record 1 gen 150
+2026-09-25T02:03:23Z OTA: v12 is the new base; a copy of it goes on the SD card first
+2026-09-25T02:03:23Z Config doc:
+2026-09-25T02:03:23Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-25T02:03:23Z Schedule: 6h at 10%, 12h at 60%, 18h at 95%, safe 80%
+2026-09-25T02:03:23Z Power cycling RTC...
+2026-09-25T02:03:25Z Couldn't find RTC, retrying...
+2026-09-25T02:03:27Z Power cycling RTC...
+2026-09-25T02:03:29Z Couldn't find RTC, retrying...
+2026-09-25T02:03:30Z Power cycling RTC...
+2026-09-25T02:03:32Z Couldn't find RTC, retrying...
+2026-09-25T02:03:33Z Failed to initialize RTC after multiple attempts; its setup finishes once the bus answers
+2026-09-25T02:03:33Z I2C bus unhealthy (code 2), attempting bus clear #1
+2026-09-25T02:03:33Z Bus clear: sda_freed=1 recovered=1 total_wedges=1 total_recovered=1
+2026-09-25T02:03:33Z Alarm detected and cleared.
+2026-09-25T02:03:33Z Alarm was set.
+2026-09-25T02:03:33Z Setup Clock Module.
+2026-09-25T02:03:43Z Connecting to WiFiRock Lodge
+2026-09-25T02:03:48Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-25T02:03:49Z .Successfully connected toSmartRG-d0b0
+2026-09-25T02:03:49Z GET Request
+2026-09-25T02:03:51Z Response code: 200
+2026-09-25T02:03:51Z It took 1 attempts to get a response
+2026-09-25T02:03:51Z {"datetime":"2026-09-24T22:03:51.000Z"}
+2026-09-25T02:03:51Z Syncing Clock to: 2026-09-24T22:03:51.000Z
+2026-09-25T02:03:51Z Uploading chunk 0, 35 bytes
+2026-09-25T02:03:51Z POST Request
+2026-09-25T02:03:53Z Response code: 200
+2026-09-25T02:03:54Z Uploaded 1 chunk(s)
+2026-09-25T02:03:55Z Set status to: NIGHT
+2026-09-25T02:03:55Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-25T02:03:55Z Setup complete.
+2026-09-25T02:03:55Z Temperature: 21.75
+2026-09-25T02:03:55Z Status: NIGHT
+2026-09-25T02:03:55Z Free RAM: 12980
+2026-09-25T02:03:57Z OTA: rollback copy of v12 ready on the SD card, 154744 bytes, crc 63df720, read back identical to the running image (1 s)
+2026-09-25T02:03:57Z GET Request
+2026-09-25T02:04:00Z Response code: 404
+2026-09-25T02:04:00Z OTA: no usable manifest, staying on v12
+2026-09-25T02:04:05Z Temperature: 21.75
+2026-09-25T02:04:05Z Status: NIGHT
+2026-09-25T02:04:05Z Free RAM: 12980
+2026-09-25T02:04:28Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-25T02:04:32Z Firmware version: v11
+2026-09-25T02:04:32Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-25T02:04:33Z ESP32 bridge firmware: 0.6.0
+2026-09-25T02:04:33Z ESP32 bridge firmware U32: 0x600
+2026-09-25T02:04:33Z OTA: running v11, phase IDLE, good v12 copy on the SD card, 154744 bytes, rejected q242318d, record 1 gen 152
+2026-09-25T02:04:33Z OTA: v11 is the new base; a copy of it goes on the SD card first
+2026-09-25T02:04:33Z Config doc:
+2026-09-25T02:04:33Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-25T02:04:33Z Alarm detected and cleared.
+2026-09-25T02:04:33Z Alarm was set.
+2026-09-25T02:04:33Z Setup Clock Module.
+2026-09-25T02:04:43Z Connecting to WiFiRock Lodge
+2026-09-25T02:04:48Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-25T02:04:49Z .Successfully connected toSmartRG-d0b0
+2026-09-25T02:04:49Z GET Request
+2026-09-25T02:04:51Z Response code: 200
+2026-09-25T02:04:51Z It took 1 attempts to get a response
+2026-09-25T02:04:51Z {"datetime":"2026-09-24T22:04:50.000Z"}
+2026-09-25T02:04:51Z Syncing Clock to: 2026-09-24T22:04:50.000Z
+2026-09-25T02:04:53Z Set status to: NIGHT
+2026-09-25T02:04:53Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-25T02:04:53Z Setup complete.
+2026-09-25T02:04:53Z Temperature: 21.75
+2026-09-25T02:04:53Z Status: NIGHT
+2026-09-25T02:04:53Z Free RAM: 13180
+2026-09-25T02:04:55Z OTA: rollback copy of v11 ready on the SD card, 154288 bytes, crc b49792c, read back identical to the running image (1 s)
+2026-09-25T02:04:57Z GET Request
+2026-09-25T02:04:59Z Response code: 200
+2026-09-25T02:04:59Z It took 1 attempts to get a response
+2026-09-25T02:04:59Z v11 154288 0b49792c
+2026-09-25T02:04:59Z OTA: up to date at v11
+2026-09-25T02:05:03Z Temperature: 21.75
+2026-09-25T02:05:03Z Status: NIGHT
+2026-09-25T02:05:03Z Free RAM: 13180
+2026-09-25T02:05:13Z Temperature: 21.75
+2026-09-25T02:05:13Z Status: NIGHT
+2026-09-25T02:05:13Z Free RAM: 13180
+2026-09-25T02:05:23Z Temperature: 21.75
+2026-09-25T02:05:23Z Status: NIGHT
+2026-09-25T02:05:23Z Free RAM: 13180
+2026-09-25T02:05:34Z Temperature: 21.75
+2026-09-25T02:05:34Z Status: NIGHT
+2026-09-25T02:05:34Z Free RAM: 13180
+2026-09-25T02:05:44Z Temperature: 21.75
+2026-09-25T02:05:44Z Status: NIGHT
+2026-09-25T02:05:44Z Free RAM: 13180
+2026-09-25T02:05:54Z Temperature: 21.75
+2026-09-25T02:05:54Z Status: NIGHT
+2026-09-25T02:05:54Z Free RAM: 13180
+2026-09-25T02:06:04Z Temperature: 21.75
+2026-09-25T02:06:04Z Status: NIGHT
+2026-09-25T02:06:04Z Free RAM: 13180
+2026-09-25T02:06:14Z Temperature: 21.75
+2026-09-25T02:06:14Z Status: NIGHT
+2026-09-25T02:06:14Z Free RAM: 13180
+2026-09-25T02:06:24Z Temperature: 21.75
+2026-09-25T02:06:25Z Status: NIGHT
+2026-09-25T02:06:25Z Free RAM: 13180
+2026-09-25T02:06:35Z Temperature: 21.75
+2026-09-25T02:06:35Z Status: NIGHT
+2026-09-25T02:06:35Z Free RAM: 13180
+2026-09-25T02:06:45Z Temperature: 21.75
+2026-09-25T02:06:45Z Status: NIGHT
+2026-09-25T02:06:45Z Free RAM: 13180
+2026-09-25T02:06:55Z Temperature: 21.75
+2026-09-25T02:06:55Z Status: NIGHT
+2026-09-25T02:06:55Z Free RAM: 13180
+2026-09-25T02:07:05Z Temperature: 21.75
+2026-09-25T02:07:05Z Status: NIGHT
+2026-09-25T02:07:05Z Free RAM: 13180
+2026-09-25T02:07:15Z Temperature: 21.75
+2026-09-25T02:07:16Z Status: NIGHT
+2026-09-25T02:07:16Z Free RAM: 13180
+2026-09-25T02:07:26Z Temperature: 21.75
+2026-09-25T02:07:26Z Status: NIGHT
+2026-09-25T02:07:26Z Free RAM: 13180
+2026-09-25T02:07:36Z Temperature: 21.75
+2026-09-25T02:07:36Z Status: NIGHT
+2026-09-25T02:07:36Z Free RAM: 13180
+2026-09-25T02:07:46Z Temperature: 21.75
+2026-09-25T02:07:46Z Status: NIGHT
+2026-09-25T02:07:46Z Free RAM: 13180
+2026-09-25T02:07:56Z Temperature: 21.75
+2026-09-25T02:07:56Z Status: NIGHT
+2026-09-25T02:07:56Z Free RAM: 13180
+2026-09-25T02:08:06Z Temperature: 21.75
+2026-09-25T02:08:07Z Status: NIGHT
+2026-09-25T02:08:07Z Free RAM: 13180
+2026-09-25T02:08:17Z Temperature: 21.75
+2026-09-25T02:08:17Z Status: NIGHT
+2026-09-25T02:08:17Z Free RAM: 13180
+2026-09-25T02:08:27Z Temperature: 21.75
+2026-09-25T02:08:27Z Status: NIGHT
+2026-09-25T02:08:27Z Free RAM: 13180
+2026-09-25T02:08:37Z Temperature: 21.75
+2026-09-25T02:08:37Z Status: NIGHT
+2026-09-25T02:08:37Z Free RAM: 13180
+2026-09-25T02:08:47Z Temperature: 21.75
+2026-09-25T02:08:47Z Status: NIGHT
+2026-09-25T02:08:47Z Free RAM: 13180
+2026-09-25T02:08:57Z Temperature: 21.75
+2026-09-25T02:08:58Z Status: NIGHT
+2026-09-25T02:08:58Z Free RAM: 13180
+2026-09-25T02:09:08Z Temperature: 21.75
+2026-09-25T02:09:08Z Status: NIGHT
+2026-09-25T02:09:08Z Free RAM: 13180
+2026-09-25T02:09:18Z Temperature: 21.75
+2026-09-25T02:09:18Z Status: NIGHT
+2026-09-25T02:09:18Z Free RAM: 13180
+2026-09-25T02:09:29Z Temperature: 21.75
+2026-09-25T02:09:29Z Status: NIGHT
+2026-09-25T02:09:29Z Free RAM: 13180
+2026-09-25T02:09:39Z Temperature: 21.75
+2026-09-25T02:09:39Z Status: NIGHT
+2026-09-25T02:09:39Z Free RAM: 13180
+2026-09-25T02:09:49Z Temperature: 21.75
+2026-09-25T02:09:49Z Status: NIGHT
+2026-09-25T02:09:49Z Free RAM: 13180
+2026-09-25T02:09:58Z GET Request
+2026-09-25T02:09:59Z Response code: 200
+2026-09-25T02:09:59Z It took 1 attempts to get a response
+2026-09-25T02:09:59Z v12 154744 063df720
+2026-09-25T02:10:00Z OTA: the copy on the SD card read back identical to the running image
+2026-09-25T02:10:00Z OTA: manifest wants v12 (154744 bytes), running v11
+2026-09-25T02:10:02Z Probe response code: 206
+2026-09-25T02:10:02Z OTA: downloading v12 into /a.bin
+2026-09-25T02:10:05Z OTA: downloading v12, 124601 bytes, in the background (starting took 2121 ms)
+2026-09-25T02:10:05Z Temperature: 21.75
+2026-09-25T02:10:05Z Status: NIGHT
+2026-09-25T02:10:05Z Free RAM: 12208
+2026-09-25T02:10:07Z OTA: 13849/124601 bytes (11%) after 2 s; loop ran 1353 times meanwhile
+2026-09-25T02:10:09Z OTA: 30957/124601 bytes (24%) after 4 s; loop ran 2847 times meanwhile
+2026-09-25T02:10:11Z OTA: 42744/124601 bytes (34%) after 6 s; loop ran 4491 times meanwhile
+2026-09-25T02:10:13Z OTA: 61023/124601 bytes (48%) after 8 s; loop ran 6053 times meanwhile
+2026-09-25T02:10:15Z OTA: 74053/124601 bytes (59%) after 10 s; loop ran 7630 times meanwhile
+2026-09-25T02:10:15Z Temperature: 21.75
+2026-09-25T02:10:15Z Status: NIGHT
+2026-09-25T02:10:15Z Free RAM: 12208
+2026-09-25T02:10:17Z OTA: 92716/124601 bytes (74%) after 12 s; loop ran 9119 times meanwhile
+2026-09-25T02:10:19Z OTA: 107589/124601 bytes (86%) after 14 s; loop ran 10418 times meanwhile
+2026-09-25T02:10:21Z OTA: 114420/124601 bytes (91%) after 16 s; loop ran 11854 times meanwhile
+2026-09-25T02:10:23Z OTA: 118377/124601 bytes (95%) after 18 s; loop ran 13228 times meanwhile
+2026-09-25T02:10:25Z OTA: 124037/124601 bytes (99%) after 20 s; loop ran 14591 times meanwhile
+2026-09-25T02:10:25Z Temperature: 21.75
+2026-09-25T02:10:26Z Status: NIGHT
+2026-09-25T02:10:26Z Free RAM: 12208
+2026-09-25T02:10:26Z OTA: download complete, 124601 bytes in 20 s, loop ran 14704 times while it was in flight
+2026-09-25T02:10:43Z OTA: read-back of /a.bin: 154744 bytes, crc 63df720, as the manifest says
+2026-09-25T02:10:44Z OTA: the copy on the SD card read back identical to the running image
+2026-09-25T02:10:44Z OTA: image verified, installing v12 from /a.bin on trial; the copy of v11 is on the SD card; the board will restart
+2026-09-25T02:10:45Z E (6062818) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-25T02:10:54Z E (6071588) uart: uart_get_buffered_data_len(1342): uart driver error
+2026-09-25T02:10:55Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, GPT4, last reset: reset pin
+2026-09-25T02:11:00Z Firmware version: v12
+2026-09-25T02:11:00Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: reset pin
+2026-09-25T02:11:00Z ESP32 bridge firmware: 0.6.0
+2026-09-25T02:11:00Z ESP32 bridge firmware U32: 0x600
+2026-09-25T02:11:00Z OTA: running v12, phase TRIAL, good v11 copy on the SD card, 154288 bytes, trial v12 boots 0, rejected q242318d, record 1 gen 156
+2026-09-25T02:11:00Z OTA: trial boot 1 of 3 for v12, last reset: reset pin
+2026-09-25T02:11:00Z Config doc:
+2026-09-25T02:11:00Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-25T02:11:01Z Schedule: 6h at 10%, 12h at 60%, 18h at 95%, safe 80%
+2026-09-25T02:11:01Z Alarm detected and cleared.
+2026-09-25T02:11:01Z Alarm was set.
+2026-09-25T02:11:01Z Setup Clock Module.
+2026-09-25T02:11:11Z Connecting to WiFiRock Lodge
+2026-09-25T02:11:16Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-25T02:11:17Z .Successfully connected toSmartRG-d0b0
+2026-09-25T02:11:17Z GET Request
+2026-09-25T02:11:19Z Response code: 200
+2026-09-25T02:11:19Z It took 1 attempts to get a response
+2026-09-25T02:11:19Z {"datetime":"2026-09-24T22:11:18.000Z"}
+2026-09-25T02:11:19Z Syncing Clock to: 2026-09-24T22:11:18.000Z
+2026-09-25T02:11:19Z Uploading chunk 0, 34 bytes
+2026-09-25T02:11:19Z POST Request
+2026-09-25T02:11:21Z Response code: 200
+2026-09-25T02:11:21Z Uploaded 1 chunk(s)
+2026-09-25T02:11:22Z Set status to: NIGHT
+2026-09-25T02:11:22Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-25T02:11:22Z Setup complete.
+2026-09-25T02:11:22Z Temperature: 21.75
+2026-09-25T02:11:23Z Status: NIGHT
+2026-09-25T02:11:23Z Free RAM: 13024
+2026-09-25T02:11:25Z GET Request
+2026-09-25T02:11:26Z Response code: 200
+2026-09-25T02:11:26Z It took 1 attempts to get a response
+2026-09-25T02:11:26Z v12 154744 063df720
+2026-09-25T02:11:26Z OTA: v12 on trial, 31 s up, manifest reachable; confirms after 180 s up, rolls back after 900 s of trying
+2026-09-25T02:11:33Z Temperature: 21.75
+2026-09-25T02:11:33Z Status: NIGHT
+2026-09-25T02:11:33Z Free RAM: 13024
+2026-09-25T02:11:43Z Temperature: 21.75
+2026-09-25T02:11:43Z Status: NIGHT
+2026-09-25T02:11:43Z Free RAM: 13024
+2026-09-25T02:11:53Z Temperature: 21.75
+2026-09-25T02:11:53Z Status: NIGHT
+2026-09-25T02:11:53Z Free RAM: 13024
+2026-09-25T02:12:03Z Temperature: 21.75
+2026-09-25T02:12:03Z Status: NIGHT
+2026-09-25T02:12:03Z Free RAM: 13024
+2026-09-25T02:12:13Z Temperature: 21.75
+2026-09-25T02:12:14Z Status: NIGHT
+2026-09-25T02:12:14Z Free RAM: 13024
+2026-09-25T02:12:24Z Temperature: 21.75
+2026-09-25T02:12:24Z Status: NIGHT
+2026-09-25T02:12:24Z Free RAM: 13024
+2026-09-25T02:12:34Z Temperature: 21.75
+2026-09-25T02:12:34Z Status: NIGHT
+2026-09-25T02:12:34Z Free RAM: 13024
+2026-09-25T02:12:44Z Temperature: 21.75
+2026-09-25T02:12:44Z Status: NIGHT
+2026-09-25T02:12:44Z Free RAM: 13024
+2026-09-25T02:12:54Z Temperature: 21.75
+2026-09-25T02:12:54Z Status: NIGHT
+2026-09-25T02:12:54Z Free RAM: 13024
+2026-09-25T02:13:04Z Temperature: 21.75
+2026-09-25T02:13:05Z Status: NIGHT
+2026-09-25T02:13:05Z Free RAM: 13024
+2026-09-25T02:13:15Z Temperature: 21.75
+2026-09-25T02:13:15Z Status: NIGHT
+2026-09-25T02:13:15Z Free RAM: 13024
+2026-09-25T02:13:25Z Temperature: 21.75
+2026-09-25T02:13:25Z Status: NIGHT
+2026-09-25T02:13:25Z Free RAM: 13024
+2026-09-25T02:13:35Z Temperature: 21.75
+2026-09-25T02:13:35Z Status: NIGHT
+2026-09-25T02:13:35Z Free RAM: 13024
+2026-09-25T02:13:45Z Temperature: 21.75
+2026-09-25T02:13:45Z Status: NIGHT
+2026-09-25T02:13:45Z Free RAM: 13024
+2026-09-25T02:13:55Z Temperature: 21.75
+2026-09-25T02:13:56Z Status: NIGHT
+2026-09-25T02:13:56Z Free RAM: 13024
+2026-09-25T02:14:06Z Temperature: 21.75
+2026-09-25T02:14:06Z Status: NIGHT
+2026-09-25T02:14:06Z Free RAM: 13024
+2026-09-25T02:14:16Z Temperature: 22.00
+2026-09-25T02:14:16Z Status: NIGHT
+2026-09-25T02:14:16Z Free RAM: 13024
+2026-09-25T02:14:26Z Temperature: 22.00
+2026-09-25T02:14:26Z Status: NIGHT
+2026-09-25T02:14:26Z Free RAM: 13024
+2026-09-25T02:14:36Z Temperature: 22.00
+2026-09-25T02:14:36Z Status: NIGHT
+2026-09-25T02:14:36Z Free RAM: 13024
+2026-09-25T02:14:46Z Temperature: 22.00
+2026-09-25T02:14:46Z Status: NIGHT
+2026-09-25T02:14:46Z Free RAM: 13024
+2026-09-25T02:14:57Z Temperature: 22.00
+2026-09-25T02:14:57Z Status: NIGHT
+2026-09-25T02:14:57Z Free RAM: 13024
+2026-09-25T02:15:07Z Temperature: 22.00
+2026-09-25T02:15:07Z Status: NIGHT
+2026-09-25T02:15:07Z Free RAM: 13024
+2026-09-25T02:15:17Z Temperature: 22.00
+2026-09-25T02:15:17Z Status: NIGHT
+2026-09-25T02:15:17Z Free RAM: 13024
+2026-09-25T02:15:27Z Temperature: 22.00
+2026-09-25T02:15:27Z Status: NIGHT
+2026-09-25T02:15:27Z Free RAM: 13024
+2026-09-25T02:15:37Z Temperature: 22.00
+2026-09-25T02:15:37Z Status: NIGHT
+2026-09-25T02:15:37Z Free RAM: 13024
+2026-09-25T02:15:48Z Temperature: 22.00
+2026-09-25T02:15:48Z Status: NIGHT
+2026-09-25T02:15:48Z Free RAM: 13024
+2026-09-25T02:15:58Z Temperature: 22.00
+2026-09-25T02:15:58Z Status: NIGHT
+2026-09-25T02:15:58Z Free RAM: 13024
+2026-09-25T02:16:08Z Temperature: 22.00
+2026-09-25T02:16:08Z Status: NIGHT
+2026-09-25T02:16:08Z Free RAM: 13024
+2026-09-25T02:16:18Z Temperature: 22.00
+2026-09-25T02:16:18Z Status: NIGHT
+2026-09-25T02:16:18Z Free RAM: 13024
+2026-09-25T02:16:25Z GET Request
+2026-09-25T02:16:27Z Response code: 200
+2026-09-25T02:16:27Z It took 1 attempts to get a response
+2026-09-25T02:16:27Z v12 154744 063df720
+2026-09-25T02:16:27Z OTA: v12 CONFIRMED after 331 s and 1 boot(s); it is now the good version
+2026-09-25T02:16:29Z OTA: rollback copy of v12 ready on the SD card, 154744 bytes, crc 63df720, read back identical to the running image (1 s)
+2026-09-25T02:16:29Z Temperature: 22.00
+2026-09-25T02:16:29Z Status: NIGHT
+2026-09-25T02:16:29Z Free RAM: 13024
+2026-09-25T02:16:35Z GET Request

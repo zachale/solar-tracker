@@ -99,13 +99,18 @@ run (their logs are in `proofs/` too):
   its retry worked, but the test took any failure as fatal. Update hops now report a
   self-retried failure instead of failing on it; anything that never installs still fails.
 
-With production timing (`prove.sh v10 v11`, 2026-09-25), the build that went on to the
-60-hour run arrived over the air with nothing else touching the board: the manifest was
-pointed at v11 at 00:53 UTC, the tracker found it at its next five-minute check, downloaded
-it in 20 s while its loop kept running (14,082 passes), read it back against the manifest,
-installed it on trial, confirmed it after 332 s, and saved it to the SD card as the new
-rollback copy at 01:04. Evidence:
+With production timing (`prove.sh v10 v11`, 2026-09-25), v11 arrived over the air with
+nothing else touching the board: the manifest was pointed at v11 at 00:53 UTC, the tracker
+found it at its next five-minute check, downloaded it in 20 s while its loop kept running
+(14,082 passes), read it back against the manifest, installed it on trial, confirmed it after
+332 s, and saved it to the SD card as the new rollback copy at 01:04. Evidence:
 [`proofs/20260925T005112Z-v10-to-v11.log`](proofs/20260925T005112Z-v10-to-v11.log).
+
+v12, the build for the 60-hour run (it finishes the clock's setup when a boot finds the I2C
+bus wedged), went the same way with `prove.sh v11 v12`: named in the manifest at 02:05 UTC,
+downloaded in 20 s (14,704 loop passes), read back at crc 63df720, installed on trial at
+02:10:44, confirmed after 331 s, and saved as the rollback copy at 02:16. Evidence:
+[`proofs/20260925T020258Z-v11-to-v12.log`](proofs/20260925T020258Z-v11-to-v12.log).
 
 ## What this does not cover
 
