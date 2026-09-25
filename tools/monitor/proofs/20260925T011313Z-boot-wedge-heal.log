@@ -1,0 +1,141 @@
+# w2 (tools/ota/build.sh --fault=wedge-clock): wedges the I2C bus before the RTC is set up, then every two minutes.
+# Shows: the card's schedule loaded before the chip, three failed RTC retries, the boot bus clear, the
+# deferred clock setup, NIGHT from the card's schedule, 25 of 25 wedges healed, and the hourly alarm firing at 22:00 local.
+2026-09-25T01:13:33Z [capture-supervisor] board on COM3, capture (re)started
+2026-09-25T01:13:37Z Firmware version: w2
+2026-09-25T01:13:37Z Watchdog armed: 5592 ms hardware, 180 s loop deadline, last reset: software
+2026-09-25T01:13:37Z ESP32 bridge firmware: 0.6.0
+2026-09-25T01:13:37Z ESP32 bridge firmware U32: 0x600
+2026-09-25T01:13:37Z OTA: running w2, phase IDLE, good v11 copy on the SD card, 154288 bytes, rejected q242318d, record 1 gen 148
+2026-09-25T01:13:37Z OTA: w2 is the new base; a copy of it goes on the SD card first
+2026-09-25T01:13:37Z Config doc:
+2026-09-25T01:13:38Z {"windUpperMaxSpeed":5.555554,"windLowerWait":300000,"windUpperWait":60000,"schedule":"{\"setStartHour\":\"6\",\"setStartPercent\":\"10\",\"setMiddleHour\":\"12\",\"setMiddlePercent\":\"60\",\"setEndHour\":\"18\",\"setEndPercent\":\"95\",\"setSafePercent\":\"80\"}","windLowerSpeedMax":2.222222}
+2026-09-25T01:13:38Z Schedule: 6h at 10%, 12h at 60%, 18h at 95%, safe 80%
+2026-09-25T01:13:38Z FAULT INJECTION: wedging the I2C bus before the RTC is set up: the DS3231 is holding SDA low
+2026-09-25T01:13:38Z Power cycling RTC...
+2026-09-25T01:13:40Z Couldn't find RTC, retrying...
+2026-09-25T01:13:41Z Power cycling RTC...
+2026-09-25T01:13:43Z Couldn't find RTC, retrying...
+2026-09-25T01:13:44Z Power cycling RTC...
+2026-09-25T01:13:46Z Couldn't find RTC, retrying...
+2026-09-25T01:13:47Z Failed to initialize RTC after multiple attempts; its setup finishes once the bus answers
+2026-09-25T01:13:47Z I2C bus unhealthy (code 2), attempting bus clear #1
+2026-09-25T01:13:47Z Bus clear: sda_freed=1 recovered=1 total_wedges=1 total_recovered=1
+2026-09-25T01:13:47Z Alarm detected and cleared.
+2026-09-25T01:13:47Z Alarm was set.
+2026-09-25T01:13:47Z Setup Clock Module.
+2026-09-25T01:13:57Z Connecting to WiFiRock Lodge
+2026-09-25T01:14:02Z .....Connecting to WiFiSmartRG-d0b0
+2026-09-25T01:14:04Z .Successfully connected toSmartRG-d0b0
+2026-09-25T01:14:05Z It took 1 attempts to get a response
+2026-09-25T01:14:05Z {"datetime":"2026-09-24T21:14:05.000Z"}
+2026-09-25T01:14:05Z Syncing Clock to: 2026-09-24T21:14:05.000Z
+2026-09-25T01:14:05Z Uploading chunk 0, 68 bytes
+2026-09-25T01:14:05Z POST Request
+2026-09-25T01:14:08Z Uploaded 1 chunk(s)
+2026-09-25T01:14:09Z Set status to: NIGHT
+2026-09-25T01:14:09Z Field mode: no access point, telemetry will be shipped on schedule
+2026-09-25T01:14:09Z Setup complete.
+2026-09-25T01:14:12Z OTA: rollback copy of w2 ready on the SD card, 155312 bytes, crc 663dbec, read back identical to the running image (1 s)
+2026-09-25T01:14:13Z OTA: no usable manifest, staying on w2
+2026-09-25T01:15:32Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:15:32Z I2C bus unhealthy (code 2), attempting bus clear #2
+2026-09-25T01:15:32Z Bus clear: sda_freed=1 recovered=1 total_wedges=2 total_recovered=2
+2026-09-25T01:17:32Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:17:32Z I2C bus unhealthy (code 2), attempting bus clear #3
+2026-09-25T01:17:32Z Bus clear: sda_freed=1 recovered=1 total_wedges=3 total_recovered=3
+2026-09-25T01:19:14Z OTA: no usable manifest, staying on w2
+2026-09-25T01:19:32Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:19:32Z I2C bus unhealthy (code 2), attempting bus clear #4
+2026-09-25T01:19:32Z Bus clear: sda_freed=1 recovered=1 total_wedges=4 total_recovered=4
+2026-09-25T01:21:33Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:21:33Z I2C bus unhealthy (code 2), attempting bus clear #5
+2026-09-25T01:21:33Z Bus clear: sda_freed=1 recovered=1 total_wedges=5 total_recovered=5
+2026-09-25T01:23:33Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:23:33Z I2C bus unhealthy (code 2), attempting bus clear #6
+2026-09-25T01:23:33Z Bus clear: sda_freed=1 recovered=1 total_wedges=6 total_recovered=6
+2026-09-25T01:24:15Z OTA: no usable manifest, staying on w2
+2026-09-25T01:25:33Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:25:33Z I2C bus unhealthy (code 2), attempting bus clear #7
+2026-09-25T01:25:33Z Bus clear: sda_freed=1 recovered=1 total_wedges=7 total_recovered=7
+2026-09-25T01:27:33Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:27:33Z I2C bus unhealthy (code 2), attempting bus clear #8
+2026-09-25T01:27:33Z Bus clear: sda_freed=1 recovered=1 total_wedges=8 total_recovered=8
+2026-09-25T01:28:35Z It took 1 attempts to get a response
+2026-09-25T01:28:35Z {"datetime":"2026-09-24T21:28:35.000Z"}
+2026-09-25T01:28:35Z Syncing Clock to: 2026-09-24T21:28:35.000Z
+2026-09-25T01:28:35Z Uploading chunk 0, 68 bytes
+2026-09-25T01:28:35Z POST Request
+2026-09-25T01:28:38Z Uploaded 1 chunk(s)
+2026-09-25T01:29:15Z OTA: no usable manifest, staying on w2
+2026-09-25T01:29:33Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:29:33Z I2C bus unhealthy (code 2), attempting bus clear #9
+2026-09-25T01:29:34Z Bus clear: sda_freed=1 recovered=1 total_wedges=9 total_recovered=9
+2026-09-25T01:31:34Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:31:34Z I2C bus unhealthy (code 2), attempting bus clear #10
+2026-09-25T01:31:34Z Bus clear: sda_freed=1 recovered=1 total_wedges=10 total_recovered=10
+2026-09-25T01:33:34Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:33:34Z I2C bus unhealthy (code 2), attempting bus clear #11
+2026-09-25T01:33:34Z Bus clear: sda_freed=1 recovered=1 total_wedges=11 total_recovered=11
+2026-09-25T01:34:15Z OTA: no usable manifest, staying on w2
+2026-09-25T01:35:34Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:35:34Z I2C bus unhealthy (code 2), attempting bus clear #12
+2026-09-25T01:35:34Z Bus clear: sda_freed=1 recovered=1 total_wedges=12 total_recovered=12
+2026-09-25T01:37:34Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:37:34Z I2C bus unhealthy (code 2), attempting bus clear #13
+2026-09-25T01:37:34Z Bus clear: sda_freed=1 recovered=1 total_wedges=13 total_recovered=13
+2026-09-25T01:39:16Z OTA: no usable manifest, staying on w2
+2026-09-25T01:39:34Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:39:34Z I2C bus unhealthy (code 2), attempting bus clear #14
+2026-09-25T01:39:35Z Bus clear: sda_freed=1 recovered=1 total_wedges=14 total_recovered=14
+2026-09-25T01:41:35Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:41:35Z I2C bus unhealthy (code 2), attempting bus clear #15
+2026-09-25T01:41:35Z Bus clear: sda_freed=1 recovered=1 total_wedges=15 total_recovered=15
+2026-09-25T01:43:36Z It took 1 attempts to get a response
+2026-09-25T01:43:36Z {"datetime":"2026-09-24T21:43:36.000Z"}
+2026-09-25T01:43:36Z Syncing Clock to: 2026-09-24T21:43:36.000Z
+2026-09-25T01:43:36Z Uploading chunk 0, 104 bytes
+2026-09-25T01:43:36Z POST Request
+2026-09-25T01:43:39Z Uploaded 1 chunk(s)
+2026-09-25T01:43:40Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:43:40Z I2C bus unhealthy (code 2), attempting bus clear #16
+2026-09-25T01:43:40Z Bus clear: sda_freed=1 recovered=1 total_wedges=16 total_recovered=16
+2026-09-25T01:44:17Z OTA: no usable manifest, staying on w2
+2026-09-25T01:45:40Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:45:40Z I2C bus unhealthy (code 2), attempting bus clear #17
+2026-09-25T01:45:40Z Bus clear: sda_freed=1 recovered=1 total_wedges=17 total_recovered=17
+2026-09-25T01:47:40Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:47:40Z I2C bus unhealthy (code 2), attempting bus clear #18
+2026-09-25T01:47:40Z Bus clear: sda_freed=1 recovered=1 total_wedges=18 total_recovered=18
+2026-09-25T01:49:17Z OTA: no usable manifest, staying on w2
+2026-09-25T01:49:40Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:49:40Z I2C bus unhealthy (code 2), attempting bus clear #19
+2026-09-25T01:49:41Z Bus clear: sda_freed=1 recovered=1 total_wedges=19 total_recovered=19
+2026-09-25T01:51:41Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:51:41Z I2C bus unhealthy (code 2), attempting bus clear #20
+2026-09-25T01:51:41Z Bus clear: sda_freed=1 recovered=1 total_wedges=20 total_recovered=20
+2026-09-25T01:53:41Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:53:41Z I2C bus unhealthy (code 2), attempting bus clear #21
+2026-09-25T01:53:41Z Bus clear: sda_freed=1 recovered=1 total_wedges=21 total_recovered=21
+2026-09-25T01:54:17Z OTA: no usable manifest, staying on w2
+2026-09-25T01:55:41Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:55:41Z I2C bus unhealthy (code 2), attempting bus clear #22
+2026-09-25T01:55:41Z Bus clear: sda_freed=1 recovered=1 total_wedges=22 total_recovered=22
+2026-09-25T01:57:41Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:57:41Z I2C bus unhealthy (code 2), attempting bus clear #23
+2026-09-25T01:57:41Z Bus clear: sda_freed=1 recovered=1 total_wedges=23 total_recovered=23
+2026-09-25T01:58:38Z It took 1 attempts to get a response
+2026-09-25T01:58:38Z {"datetime":"2026-09-24T21:58:37.000Z"}
+2026-09-25T01:58:38Z Syncing Clock to: 2026-09-24T21:58:37.000Z
+2026-09-25T01:58:38Z Uploading chunk 0, 105 bytes
+2026-09-25T01:58:38Z POST Request
+2026-09-25T01:58:40Z Uploaded 1 chunk(s)
+2026-09-25T01:59:18Z OTA: no usable manifest, staying on w2
+2026-09-25T01:59:41Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T01:59:41Z I2C bus unhealthy (code 2), attempting bus clear #24
+2026-09-25T01:59:42Z Bus clear: sda_freed=1 recovered=1 total_wedges=24 total_recovered=24
+2026-09-25T02:00:01Z Alarm detected and cleared.
+2026-09-25T02:00:01Z Alarm was set.
+2026-09-25T02:01:42Z FAULT INJECTION: wedging the I2C bus: the DS3231 is holding SDA low
+2026-09-25T02:01:42Z I2C bus unhealthy (code 2), attempting bus clear #25
+2026-09-25T02:01:42Z Bus clear: sda_freed=1 recovered=1 total_wedges=25 total_recovered=25
