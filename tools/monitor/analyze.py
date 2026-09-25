@@ -245,15 +245,26 @@ def main():
     # Alarm: the DS3231 raises its alarm at every hour mark, and the tracker logs re-arming
     # it. A wedge that left the chip half set up shows here as an hour that never rang.
     # The clock's setup logs the same two lines followed by "Setup Clock Module.", so those
-    # are a boot or a healed boot wedge, not the alarm. The print can wait on a sync or a
-    # download blocking the loop, for as long as the watchdog allows (180 s) and no longer.
+    # are a boot or a healed boot wedge, not the alarm. A sync or a manifest check can hold
+    # the loop for minutes (every retry feeds the watchdog), but the alarm is handled at the
+    # top of the loop, so it is always logged before the first status block after the mark.
+    # The mark is shifted by the clock's measured error onto the capture's timeline.
     setups = [t for t, x in lines if x == "Setup Clock Module."]
-    rings = [t for t, x in lines if x == "Alarm detected and cleared."
+    rings = [i for i, (t, x) in enumerate(lines) if x == "Alarm detected and cleared."
              and not any(0 <= (s - t).total_seconds() <= 2 for s in setups)]
+    status_at = [i for i, (t, x) in enumerate(lines) if x.startswith("Status: ")]
+
+    def after_mark(mark, blocks):
+        """Index of the given status block (1st, 2nd) logged after the mark, or None."""
+        due = mark - offset + timedelta(seconds=5)
+        later = [i for i in status_at if lines[i][0] >= due]
+        return later[blocks - 1] if len(later) >= blocks else None
+
     rang, silent = [], []
     mark = (lines[0][0] + timedelta(hours=1)).replace(minute=0, second=0)
-    while mark + timedelta(seconds=180) <= lines[-1][0]:
-        hit = any(-10 <= (t - mark).total_seconds() <= 180 for t in rings)
+    while (end := after_mark(mark, 1)) is not None:
+        start = mark - offset - timedelta(seconds=10)
+        hit = any(start <= lines[i][0] and i < end for i in rings)
         (rang if hit else silent).append(f"{mark.astimezone(LOCAL):%H:%M}")
         mark += timedelta(hours=1)
     if not rang and not silent:
@@ -263,29 +274,47 @@ def main():
                f"rang at {', '.join(rang) or 'none'}" + (f"; SILENT at {', '.join(silent)}" if silent else ""))
 
     # Position: every hour mark in active hours commands exactly the scheduled extension.
-    commands = [(t, int(x.split()[-1])) for t, x in lines if re.fullmatch(r"Extending to -?\d+", x)]
-    wrong = []
-    for t, pct in commands:
+    # extendToPercent() logs "Extending to N" between 0 and 100 but only "homing" for 0 and
+    # "maxing" for 100, the same words a recalibration logs; those follow "Attempting to
+    # recalibrate" and are not moves.
+    recals = [t for t, x in lines if x == "Attempting to recalibrate"]
+    commands = []
+    for i, (t, x) in enumerate(lines):
+        if re.fullmatch(r"Extending to -?\d+", x):
+            commands.append((i, t, int(x.split()[-1])))
+        elif x in ("maxing", "homing") and not any(0 <= (t - r).total_seconds() <= 30 for r in recals):
+            commands.append((i, t, 100 if x == "maxing" else 0))
+    wrong, quirk = [], []
+    for _, t, pct in commands:
         hour = t.astimezone(LOCAL).hour
         if pct == schedule["setSafePercent"]:
             continue
-        if not active(hour, schedule):
+        if hour == int(schedule["setEndHour"]) + 1 and pct == expected_percent(hour, schedule):
+            # v12 and the field unit both do this: the alarm at the first hour past the end
+            # fires while the status is still ACTIVE, so the tracker moves on the formula
+            # before the status block turns it to NIGHT. Known, reported, not a failure.
+            quirk.append(f"{t.astimezone(LOCAL):%H:%M} moved to {pct}% as the day ended")
+        elif not active(hour, schedule):
             # At night the tracker holds still; the only move it makes is to the safe position.
             wrong.append(f"{t.astimezone(LOCAL):%H:%M} commanded {pct}% outside the active hours")
         elif pct != expected_percent(hour, schedule):
             wrong.append(f"{t.astimezone(LOCAL):%H:%M} commanded {pct}%, "
                          f"schedule says {expected_percent(hour, schedule)}%")
+    # Every active hour mark commands a move before the second status block after it: the
+    # alarm's move comes before the first, and the first hour of the day moves from the status
+    # block that turns the tracker ACTIVE, just before the second.
     missed = []
     mark = (lines[0][0] + timedelta(hours=1)).replace(minute=0, second=0)
-    while mark + timedelta(minutes=3) <= lines[-1][0]:
+    while (end := after_mark(mark, 2)) is not None:
         hour = mark.astimezone(LOCAL).hour
-        if active(hour, schedule) and not any(0 <= (t - mark).total_seconds() <= 180 for t, _ in commands):
+        start = mark - offset - timedelta(seconds=10)
+        if active(hour, schedule) and not any(start <= t and i < end for i, t, _ in commands):
             missed.append(f"{mark.astimezone(LOCAL):%H:%M}")
         mark += timedelta(hours=1)
     states = sorted({s for _, s in status})
     local_now = lines[-1][0].astimezone(LOCAL)
     want_state = "ACTIVE" if active(local_now.hour, schedule) else "NIGHT"
-    detail = (", ".join(f"{t.astimezone(LOCAL):%H:%M} {p}%" for t, p in commands) or "no move commanded") + \
+    detail = (", ".join(f"{t.astimezone(LOCAL):%H:%M} {p}%" for _, t, p in commands) or "no move commanded") + \
              f"; status {'/'.join(states)} (schedule says {want_state} at {local_now:%H:%M})"
     extended = [x for t, x in lines if x.startswith("PercentExtended: ")]
     if extended:
@@ -311,8 +340,9 @@ def main():
     loaded_wrong = [x for t, x in lines if x.startswith("Schedule: ") and x != want_loaded]
     if loaded_wrong:
         detail += f"; booted with '{loaded_wrong[-1]}', the card says '{want_loaded}'"
-    report("FAIL" if wrong or missed or off or loaded_wrong else "PASS", "position",
-           detail + ("; " + "; ".join(wrong) if wrong else "") + ("; no command at " + ", ".join(missed) if missed else ""))
+    report("FAIL" if wrong or missed or off or loaded_wrong else ("WARN" if quirk else "PASS"), "position",
+           detail + ("; " + "; ".join(wrong) if wrong else "") + ("; no command at " + ", ".join(missed) if missed else "") +
+           ("; " + "; ".join(quirk) + " (the firmware moves on the alarm before turning NIGHT)" if quirk else ""))
 
     # Uploads: a batch every fifteen minutes, each one landing in Cloud Storage.
     uploaded = [int(re.search(r"Uploaded (\d+)", x).group(1)) for t, x in lines if re.match(r"Uploaded \d+ chunk", x)]
