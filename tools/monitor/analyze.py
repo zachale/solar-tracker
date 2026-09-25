@@ -111,14 +111,30 @@ def main():
             except ValueError:
                 pass
 
+    # The time the board prints as H:M:S in each status block comes from reads of the chip
+    # separate from the epoch's, so a flaky bus can garble one and not the other. Its error
+    # against New York time, wrapped at midnight.
+    hms = []
+    for t, x in lines:
+        m = re.fullmatch(r"(\d{1,2}):(\d{1,2}):(\d{1,2})", x)
+        if m:
+            local = t.astimezone(LOCAL)
+            board = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+            truth = local.hour * 3600 + local.minute * 60 + local.second
+            hms.append((t, (board - truth + 43200) % 86400 - 43200))
+
     # Wedges, and proof that each one was solved rather than only attempted:
     #   - every wedge detected has a bus clear that brought the chip back,
-    #   - the clock read true (within 10 s of New York time) in the first status block after
-    #     the heal, before any further wedge,
+    #   - the clock read true (epoch and H:M:S within 10 s of New York time) in the first
+    #     status block after the heal, before any further wedge,
     #   - no reading was wrong that the detector missed (off by more than a minute, or
     #     "RTC Error", with no detection within a few seconds of it),
     #   - the board's own counters agree (every wedge this power session recovered), and so
     #     does the count the cloud rows carry while the wind sensor is off.
+    def count(x, key):
+        m = re.search(key + r"=(\d+)", x)
+        return int(m.group(1)) if m else None
+
     detected = [t for t, x in lines if x.startswith("I2C bus unhealthy")]
     clears = [(t, x) for t, x in lines if x.startswith("Bus clear:")]
     healed = [t for t, x in clears if "recovered=1" in x]
@@ -127,19 +143,22 @@ def main():
     for h in healed:
         # The first reading after the heal and before the next wedge. Usually the next status
         # block, 10 s on; after a boot it waits on the startup sync, about 25 s.
-        until = next((d for d in detected if d > h), h + timedelta(seconds=120))
-        until = min(until, h + timedelta(seconds=120))
-        after = next((e for t, e in readings if h <= t <= until), None)
-        if after is None:
+        until = min(next((d for d in detected if d > h), h + timedelta(seconds=120)), h + timedelta(seconds=120))
+        after = [next((e for t, e in series if h <= t <= until), None) for series in (readings, hms)]
+        if after[0] is None:
             unverified += 1
-        elif abs(after) <= 10:
+        elif all(e is None or abs(e) <= 10 for e in after):
             verified += 1
         else:
-            still_wrong.append(f"{h.astimezone(LOCAL):%H:%M:%S} read {after:+.0f} s after its heal")
-    bad = [t for t, e in readings if abs(e) > 60] + [t for t, x in lines if x == "RTC Error"]
-    missed = [t for t in bad if not any(-2 <= (d - t).total_seconds() <= 15 for d in detected)]
-    totals = {k: int(v) for k, v in re.findall(r"(total_\w+)=(\d+)", clears[-1][1])} if clears else {}
-    counters_off = totals and totals["total_wedges"] != totals["total_recovered"]
+            still_wrong.append(f"{h.astimezone(LOCAL):%H:%M:%S} read {max((e for e in after if e is not None), key=abs):+.0f} s "
+                               f"after its heal")
+    bad = [t for series in (readings, hms) for t, e in series if abs(e) > 60] + \
+          [t for t, x in lines if x == "RTC Error"]
+    missed = sorted(t for t in bad if not any(-2 <= (d - t).total_seconds() <= 15 for d in detected))
+    counted = [(t, count(x, "total_wedges"), count(x, "total_recovered")) for t, x in clears]
+    counted = [c for c in counted if c[1] is not None and c[2] is not None]
+    totals = {"total_wedges": counted[-1][1], "total_recovered": counted[-1][2]} if counted else {}
+    counters_off = bool(totals) and totals["total_wedges"] != totals["total_recovered"]
     detail = (f"{len(detected)} detected, {len(healed)} healed, {len(unhealed)} not healed; "
               f"clock read true after {verified} of {len(healed)} heal(s)")
     if unverified:
@@ -150,7 +169,8 @@ def main():
     # Every row in the newest batch, while the wind sensor is off, carries the wedges the board
     # had counted this boot when the row was written. Row times are the RTC's New York time
     # labelled Z; shifting them by the clock's measured error puts them on the capture's
-    # timeline. A row within 2 s of a clear could be either side of it, so it is left out.
+    # timeline. A row within 2 s of a clear could be either side of it, so it may carry the
+    # count from just before that clear or just after, and nothing else.
     offset = timedelta(seconds=sorted(errors)[len(errors) // 2]) if errors else timedelta(0)
     cloud_checked, cloud_wrong = 0, []
     placed = []
@@ -158,13 +178,28 @@ def main():
         if r.get("button_panel", {}).get("wind_sensor", True):
             continue
         at = datetime.strptime(r["time"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=LOCAL) - offset
-        if at < lines[0][0] or any(abs((t - at).total_seconds()) <= 2 for t, _ in clears):
+        if at < lines[0][0]:
+            continue
+        # A clear whose line was cut short says nothing about the count, so a row it could
+        # have changed is left out rather than judged against a stale number.
+        cut = [t for t, x in clears if count(x, "total_wedges") is None]
+        if any(abs((t - at).total_seconds()) <= 2 for t in cut):
+            continue
+        near = [n for t, n, _ in counted if abs((t - at).total_seconds()) <= 2]
+        if near:
+            cloud_checked += 1
+            if r["wind_peak"] not in (min(99, near[0] - 1), min(99, near[0])):
+                cloud_wrong.append(f"row at {r['time'][11:19]} says {r['wind_peak']}, "
+                                   f"the board had {near[0] - 1} or {near[0]}")
             continue
         placed.append((at, r))
         boot = max((b for b in boots if b <= at), default=None)
-        before = [x for t, x in clears if t <= at and (boot is None or t >= boot)]
+        last = max((t for t, _ in clears if t <= at and (boot is None or t >= boot)), default=None)
+        if last is not None and last in cut:
+            continue
+        before = [n for t, n, _ in counted if t <= at and (boot is None or t >= boot)]
         if before:
-            want = min(99, int(re.search(r"total_wedges=(\d+)", before[-1]).group(1)))
+            want = min(99, before[-1])
         elif boot is not None:
             want = 0
         else:
@@ -186,7 +221,7 @@ def main():
     if cloud_checked:
         detail += f"; cloud rows agree with the board in {cloud_checked - len(cloud_wrong)} of {cloud_checked}"
     elif rows:
-        detail += f"; newest cloud row says {rows[-1]['wind_peak']} (no clear or boot in the window to check it against)"
+        detail += f"; newest cloud row says {rows[-1]['wind_peak']} (nothing in the window to check it against)"
     cloud_off = bool(cloud_wrong)
     if cloud_wrong:
         detail += " (DISAGREE: " + "; ".join(cloud_wrong) + ")"
@@ -194,18 +229,31 @@ def main():
         detail += "; " + "; ".join(still_wrong)
     if missed:
         detail += f"; first missed at {missed[0].astimezone(LOCAL):%H:%M:%S}"
-    unaccounted = len(detected) != len(clears)
-    if unaccounted:
+    # A capture that restarts can drop a line. A detection without its clear line is still
+    # accounted for when a later clear's counters show every wedge this boot recovered; a
+    # clear without its detection line is its own proof.
+    unaccounted = False
+    if len(detected) != len(clears):
         detail += f"; {len(detected)} detections but {len(clears)} bus clear line(s)"
+        vouched = counted and not counters_off and counted[-1][0] >= detected[-1]
+        unaccounted = len(detected) > len(clears) and not vouched
+        if not unaccounted:
+            detail += ", a dropped log line; the board's counters account for every wedge"
     failed = unhealed or still_wrong or missed or counters_off or cloud_off
     report("FAIL" if failed else ("WARN" if unverified or unaccounted else "PASS"), "wedges", detail)
 
     # Alarm: the DS3231 raises its alarm at every hour mark, and the tracker logs re-arming
     # it. A wedge that left the chip half set up shows here as an hour that never rang.
+    # The clock's setup logs the same two lines followed by "Setup Clock Module.", so those
+    # are a boot or a healed boot wedge, not the alarm. The print can wait on a sync or a
+    # download blocking the loop, for as long as the watchdog allows (180 s) and no longer.
+    setups = [t for t, x in lines if x == "Setup Clock Module."]
+    rings = [t for t, x in lines if x == "Alarm detected and cleared."
+             and not any(0 <= (s - t).total_seconds() <= 2 for s in setups)]
     rang, silent = [], []
     mark = (lines[0][0] + timedelta(hours=1)).replace(minute=0, second=0)
-    while mark + timedelta(seconds=90) <= lines[-1][0]:
-        hit = any(-10 <= (t - mark).total_seconds() <= 90 for t, x in lines if x == "Alarm detected and cleared.")
+    while mark + timedelta(seconds=180) <= lines[-1][0]:
+        hit = any(-10 <= (t - mark).total_seconds() <= 180 for t in rings)
         (rang if hit else silent).append(f"{mark.astimezone(LOCAL):%H:%M}")
         mark += timedelta(hours=1)
     if not rang and not silent:
@@ -319,4 +367,9 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    # One malformed line must not silence the hourly check: a crash is reported as a FAIL.
+    try:
+        sys.exit(main())
+    except Exception as e:
+        print(f"FAIL  analyze   crashed on this window: {type(e).__name__}: {e}")
+        sys.exit(1)
