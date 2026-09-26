@@ -1,0 +1,11 @@
+tracker health since 2026-09-25T23:22:58Z (checked 2026-09-26T00:28:03Z)
+PASS  alive     status every 10 s, last 10 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 20:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 20:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 20:10 local (18 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
