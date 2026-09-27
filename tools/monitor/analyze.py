@@ -114,14 +114,35 @@ def main():
     # The time the board prints as H:M:S in each status block comes from reads of the chip
     # separate from the epoch's, so a flaky bus can garble one and not the other. Its error
     # against New York time, wrapped at midnight.
+    #
+    # getFullTimeString() reads the hour, the minute and the second in three separate calls,
+    # so a block printed across a rollover can tear: at 08:29:00 it printed "8:28:0", the
+    # minute read just before the second. A line that some hour, minute and second read
+    # within 2 s of one another would give is counted as true, at that read's error.
+    def torn(h, mi, se, truth):
+        for d1 in range(-12, 11):
+            t1 = truth + timedelta(seconds=d1)
+            for d2 in range(3):
+                t2 = t1 + timedelta(seconds=d2)
+                for d3 in range(3 - d2):
+                    t3 = t2 + timedelta(seconds=d3)
+                    if (t1.hour, t2.minute, t3.second) == (h, mi, se):
+                        return d1
+        return None
+
     hms = []
     for t, x in lines:
         m = re.fullmatch(r"(\d{1,2}):(\d{1,2}):(\d{1,2})", x)
         if m:
             local = t.astimezone(LOCAL)
-            board = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3))
+            h, mi, se = int(m.group(1)), int(m.group(2)), int(m.group(3))
+            board = h * 3600 + mi * 60 + se
             truth = local.hour * 3600 + local.minute * 60 + local.second
-            hms.append((t, (board - truth + 43200) % 86400 - 43200))
+            err = (board - truth + 43200) % 86400 - 43200
+            if abs(err) > 10:
+                tear = torn(h, mi, se, local.replace(tzinfo=None))
+                err = err if tear is None else tear
+            hms.append((t, err))
 
     # Wedges, and proof that each one was solved rather than only attempted:
     #   - every wedge detected has a bus clear that brought the chip back,
