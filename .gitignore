@@ -12,3 +12,7 @@ server/node_modules/
 
 # server lives on feature/telemetry-api
 server/
+
+# Serial capture logs: they record the home WiFi SSID and a Cloud Run URL.
+# Keep captures local; this repo is public.
+docs/diagnostics/*.log
