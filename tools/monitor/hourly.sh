@@ -16,14 +16,20 @@ UNTIL="${2:-}"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
-# Enough lines for a little over an hour even when the log is at its chattiest.
+# Enough lines for the window even when the log is at its chattiest: 12000 covers a little
+# over an hour, and a longer window, such as a whole run, gets 200 for every minute of it.
+TAIL="$(python3 -c "
+from datetime import datetime, timezone
+s = datetime.strptime('$SINCE', '%Y-%m-%dT%H:%M:%SZ').replace(tzinfo=timezone.utc)
+print(max(12000, int((datetime.now(timezone.utc) - s).total_seconds() / 60) * 200))")"
 cat > "$WORK/tail.ps1" <<'PS'
+param([int]$Tail)
 Get-ChildItem 'C:\Users\zachl\Documents\Arduino\solar-tracker\docs\diagnostics\serial-*.log' |
   Sort-Object LastWriteTime -Descending | Select-Object -First 2 | Sort-Object LastWriteTime |
-  ForEach-Object { Get-Content $_.FullName -Tail 12000 }
+  ForEach-Object { Get-Content $_.FullName -Tail $Tail }
 PS
 scp -q "$WORK/tail.ps1" 'home:C:/Users/zachl/ota-flash/monitor-tail.ps1'
-ssh -o BatchMode=yes home 'powershell -NoProfile -ExecutionPolicy Bypass -File C:\Users\zachl\ota-flash\monitor-tail.ps1' \
+ssh -o BatchMode=yes home "powershell -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\zachl\\ota-flash\\monitor-tail.ps1 -Tail $TAIL" \
   2>/dev/null | tr -d '\r' > "$WORK/log"
 
 CONFIG="$(grep -A1 "Config doc:" "$WORK/log" | tail -1 | cut -d' ' -f2-)"
