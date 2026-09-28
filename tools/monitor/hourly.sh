@@ -50,8 +50,10 @@ while d <= e.date():
     print(d); d += timedelta(days=1)"); do
   gcloud storage ls "gs://$BUCKET/raw/$day/" 2>/dev/null
 done > "$WORK/objects"
-# The newest batch itself, to check the rows as well as their arrival.
-LATEST="$(grep "\.ndjson$" "$WORK/objects" | sort | tail -1)"
+# The newest batch itself, to check the rows as well as their arrival. With an end to the
+# window, the newest one inside it: batches are named by the UTC time they landed.
+CUT="$(tr ':' '-' <<< "$UNTIL")"
+LATEST="$(grep "\.ndjson$" "$WORK/objects" | awk -F/ -v cut="$CUT" 'cut == "" || $NF < cut' | sort | tail -1)"
 [[ -n "$LATEST" ]] && gcloud storage cat "$LATEST" > "$WORK/latest.ndjson" 2>/dev/null
 touch "$WORK/latest.ndjson"
 
