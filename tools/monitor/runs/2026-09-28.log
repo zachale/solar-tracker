@@ -9,3 +9,69 @@ PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Stor
 PASS  rows      newest batch has 3 row(s), last at 20:12 local (15 min old): status NIGHT, extended -1%, wind/wedge column 0
 PASS  memory    12052 bytes free, lowest 12052, +0 over the window
 PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T00:22:53Z (checked 2026-09-28T01:27:57Z)
+PASS  alive     status every 10 s, last 12 s ago, 380 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 5 s of real New York time over 380 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 21:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 21:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 21:12 local (15 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T01:22:53Z (checked 2026-09-28T02:27:57Z)
+PASS  alive     status every 10 s, last 8 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 22:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 22:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 22:13 local (15 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T02:22:55Z (checked 2026-09-28T03:28:02Z)
+PASS  alive     status every 10 s, last 6 s ago, 382 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 382 readings (latest -2 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 23:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 23:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 23:13 local (15 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T03:23:16Z (checked 2026-09-28T04:28:23Z)
+PASS  alive     status every 10 s, last 10 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 00:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 00:28); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 00:13 local (15 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T04:22:55Z (checked 2026-09-28T05:27:59Z)
+PASS  alive     status every 10 s, last 12 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 01:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 01:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 01:13 local (14 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
+tracker health since 2026-09-28T05:22:59Z (checked 2026-09-28T06:28:04Z)
+PASS  alive     status every 10 s, last 10 s ago, 381 blocks over 65 min
+PASS  restarts  none
+PASS  clock     RTC within 2 s of real New York time over 381 readings (latest -1 s)
+PASS  wedges    0 detected, 0 healed, 0 not healed; clock read true after 0 of 0 heal(s); 0 wrong reading(s) the detector missed; cloud rows agree with the board in 2 of 2
+PASS  alarm     rang at 02:00
+PASS  position  no move commanded; status NIGHT (schedule says NIGHT at 02:27); actuator reports -1%
+PASS  uploads   4 sync(s) posted 4 chunk(s), 0 failed; 4 batch(es) in Cloud Storage over 65 min (expect ~4); 4 clock sync(s)
+PASS  rows      newest batch has 3 row(s), last at 02:13 local (14 min old): status NIGHT, extended -1%, wind/wedge column 0
+PASS  memory    12052 bytes free, lowest 12052, +0 over the window
+PASS  ota       running unchanged; last: OTA: up to date at v12
