@@ -5,6 +5,7 @@
 
 #include <Arduino.h>
 #include <ctime>
+#include <Wire.h>  // the real RTClib pulls Wire in for its users
 
 enum Ds3231SqwPinMode { DS3231_OFF, DS3231_SquareWave1Hz, DS3231_SquareWave1kHz };
 enum Ds3231Alarm1Mode {
