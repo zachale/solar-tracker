@@ -59,7 +59,10 @@ void SolarTracker::pollSensorData()
 
   if (clockModule.isAlarmTriggered())
   {
-    if (status == ACTIVE)
+    // The alarm at the first hour past the schedule's end fires before the status block
+    // turns the tracker to NIGHT, so the status alone would drive it past the last
+    // scheduled position to full extension every evening.
+    if (status == ACTIVE && clockModule.isActiveHours())
     {
       extendActuatorOnHour();
     }
