@@ -111,6 +111,28 @@ TEST_SUITE("clock: safe position") {
   }
 }
 
+TEST_SUITE("clock: temperature") {
+
+  TEST_CASE("temperatures below freezing come back negative") {
+    // The DS3231's temperature register is signed, and RTClib reads it as unsigned:
+    // -0.25 C arrives as 255.75.
+    ClockModule c = at(10);
+    c.rtc.mockTemp = 255.75f;
+    CHECK(c.getClockTemp() == doctest::Approx(-0.25f));
+    c.rtc.mockTemp = 216.0f;                       // -40 C, the bottom of the chip's range
+    CHECK(c.getClockTemp() == doctest::Approx(-40.0f));
+  }
+
+  TEST_CASE("temperatures at or above freezing are unchanged") {
+    ClockModule c = at(10);
+    for (float t : {0.0f, 0.25f, 22.75f, 85.0f}) {
+      CAPTURE(t);
+      c.rtc.mockTemp = t;
+      CHECK(c.getClockTemp() == doctest::Approx(t));
+    }
+  }
+}
+
 TEST_SUITE("clock: active hours") {
 
   TEST_CASE("active hours are inclusive of both schedule ends") {

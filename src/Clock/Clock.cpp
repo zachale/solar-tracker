@@ -356,7 +356,10 @@ bool ClockModule::isActiveHours()
 
 float ClockModule::getClockTemp()
 {
-  return rtc.getTemperature();
+  // RTClib reads the DS3231's signed temperature byte as unsigned, so anything below
+  // 0 C comes back 256 too high (-0.25 C as 255.75). The chip's range is -40 to 85 C.
+  float t = rtc.getTemperature();
+  return t >= 128 ? t - 256 : t;
 }
 
 String ClockModule::getSimpleTimeString()
