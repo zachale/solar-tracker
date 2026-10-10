@@ -380,3 +380,22 @@ TEST_SUITE("actuator: moves that cannot finish") {
     CHECK(simPos == 1000);
   }
 }
+
+TEST_SUITE("actuator: homing") {
+
+  TEST_CASE("every home() drives back to the stop, not only the first") {
+    // isHomed stays 1 after the first homing. home() has to clear it, or every later
+    // recalibration skips the drive home and keeps a position that has drifted.
+    LinearActuator a;
+    onBench(a, 500, true);
+    a.isHomed = 1;                                   // left over from an earlier homing
+
+    a.home();
+
+    CHECK(simPos == 0);
+    CHECK(a.pos == 0);
+    CHECK(a.isHomed);
+    const int stopped = LinearActuator::STOP;  // a copy: the constant has no out-of-class definition
+    CHECK(a.status == stopped);
+  }
+}

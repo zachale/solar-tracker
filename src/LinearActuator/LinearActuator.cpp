@@ -95,7 +95,7 @@ void LinearActuator::home()
 {
   Serial.println("homing");
   extend(BACKWARD);
-  isHomed == 0;
+  isHomed = 0;
   while (isHomed == 0)
   {
     setStatus(HOMING);
