@@ -192,29 +192,18 @@ void SolarTracker::spoolTelemetryRow()
                                          ButtonPanel::isWindSensorEnabled(),
                                          ButtonPanel::isAwayModeOverride()));
   windPeak = 0;
-#if BENCH_TEST
-  Serial.println("Spooled row into chunk " + String(Telemetry::currentIndex()) + ", now " + String(Telemetry::chunkSize(Telemetry::currentIndex())) + " bytes");
-#endif
 }
 
 void SolarTracker::extendActuatorOnHour()
 {
   int dayCompletePercentage = clockModule.getHourlyExtensionPercent();
-#if BENCH_TEST
-  Serial.println("BENCH_TEST: would extend to " + String(dayCompletePercentage) + "%");
-#else
   actuator.extendToPercent(dayCompletePercentage);
-#endif
 }
 
 void SolarTracker::extendActuatorToSafe()
 {
   int safePercentage = clockModule.getSafeExtensionPercent();
-#if BENCH_TEST
-  Serial.println("BENCH_TEST: would extend to safe " + String(safePercentage) + "%");
-#else
   actuator.extendToPercent(safePercentage);
-#endif
 }
 
 SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
@@ -291,11 +280,7 @@ void SolarTracker::setAppMode(bool isAppMode)
 
 void SolarTracker::dailySync()
 {
-#if BENCH_TEST
-  Serial.println("BENCH_TEST: skipping actuator recalibration");
-#else
   actuator.checkWeeklyRecalibration();
-#endif
   syncClock();
   uploadLogs();
 }
@@ -352,7 +337,9 @@ void SolarTracker::uploadLogs()
 
 void SolarTracker::syncClock()
 {
-  String body = wifiClient.get(API + String("/time/est"));
+  // The firmware version rides along so the server's request log shows what each
+  // tracker is running; the route ignores the query.
+  String body = wifiClient.get(API + String("/time/est?fw=" FIRMWARE_VERSION));
   if (body != "")
   {
     StaticJsonDocument<200> doc;

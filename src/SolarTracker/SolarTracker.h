@@ -9,7 +9,6 @@
 #include "../SettingsManager/SettingsManager.h"
 #include "../Telemetry/Telemetry.h"
 #include "../OtaUpdater/OtaUpdater.h"
-#include "../BenchTest.h"
 #include <Arduino.h>
 class SolarTracker
 {
@@ -63,13 +62,8 @@ private:
   // station association: a batch every fifteen minutes keeps each body small and
   // shows a fault in the cloud within the quarter hour.
   unsigned long syncTimer = 0;
-#if BENCH_TEST
-  static const unsigned long TELEMETRY_INTERVAL = 15000;    // fifteen seconds
-  static const unsigned long SYNC_INTERVAL_MS = 120000;     // two minutes
-#else
   static const unsigned long TELEMETRY_INTERVAL = 300000;   // five minutes, three rows a batch
   static const unsigned long SYNC_INTERVAL_MS = 900000;     // fifteen minutes
-#endif
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
   void extendActuatorOnHour();

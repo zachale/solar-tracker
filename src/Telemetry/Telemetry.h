@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <SD.h>
 #include <SPI.h>
-#include "../BenchTest.h"
 
 // Spools telemetry rows onto the SD card as a series of numbered chunk files,
 // tlm0.csv through tlm63.csv, each one small enough to be POSTed in a single
@@ -27,15 +26,9 @@
 class Telemetry
 {
 public:
-#if BENCH_TEST
-  // Small enough that a bench run fills several chunks in a few minutes and the
-  // multiple chunk upload path actually gets exercised.
-  static constexpr size_t chunkBytes = 256;
-#else
   // Roughly 117 rows. Comfortably inside the ~21 KB of free RAM, with room for
   // the request the body is copied into.
   static constexpr size_t chunkBytes = 4096;
-#endif
 
   // 64 chunks is about 26 days of five minute rows. Past that the oldest unsent
   // chunk is overwritten rather than letting the card fill indefinitely.
