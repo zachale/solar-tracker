@@ -34,7 +34,7 @@ bool WindSpeedSensor::isEnabled()
   return false;
 }
 
-int WindSpeedSensor::getSpeed()
+float WindSpeedSensor::getSpeed()
 {
   if (!isEnabled())
   {

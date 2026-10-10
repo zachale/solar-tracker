@@ -36,7 +36,7 @@ TEST_SUITE("wind: voltage to speed") {
   TEST_CASE("at or below the floor voltage the sensor reads zero") {
     WindSpeedSensor w = enabledSensor();
     mock::analog[WIND_PIN] = adcFor(0.4f);
-    CHECK(w.getSpeed() == 0);
+    CHECK(w.getSpeed() < 0.1f);                    // the nearest ADC count sits just above the floor
     mock::analog[WIND_PIN] = adcFor(0.2f);
     CHECK(w.getSpeed() == 0);
     mock::analog[WIND_PIN] = 0;
@@ -56,6 +56,12 @@ TEST_SUITE("wind: voltage to speed") {
       mock::analog[WIND_PIN] = adcForSpeed(mps);
       CHECK(w.getSpeed() == doctest::Approx(mps).epsilon(0.08));
     }
+  }
+
+  TEST_CASE("the speed keeps its fraction of a metre per second") {
+    WindSpeedSensor w = enabledSensor();
+    mock::analog[WIND_PIN] = adcForSpeed(5.5f);
+    CHECK(w.getSpeed() == doctest::Approx(5.5f).epsilon(0.02));
   }
 
   TEST_CASE("a disabled sensor reports zero and cannot trigger safe mode") {
@@ -113,6 +119,19 @@ TEST_SUITE("wind: hysteresis") {
     mock::advance(2000);
     CHECK(w.exitingHighWind());
     CHECK(w.status == WindSpeedSensor::ACTIVE);
+  }
+
+  TEST_CASE("a wind just over a fractional threshold parks the array") {
+    // Field thresholds are set in km/h and stored in m/s, so they are rarely whole:
+    // 20 km/h is 5.56 m/s. A sustained 5.8 m/s is over it and has to count.
+    WindSpeedSensor w = enabledSensor();
+    w.setUpperSpeedMax(20 / 3.6f);
+    w.setUpperSpeedDelay(60000);
+
+    mock::analog[WIND_PIN] = adcForSpeed(5.8f);
+    CHECK_FALSE(w.enteringHighWind());             // timer starts
+    mock::advance(60001);
+    CHECK(w.enteringHighWind());
   }
 
   TEST_CASE("the park threshold sits above the release threshold") {

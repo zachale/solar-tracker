@@ -38,7 +38,7 @@ public:
                           float temperature,
                           int extendedPercent,
                           const String &status,
-                          int windPeak,
+                          float windPeak,
                           bool settingsServer,
                           bool windSensor,
                           bool away);

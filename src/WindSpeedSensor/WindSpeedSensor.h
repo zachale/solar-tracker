@@ -17,7 +17,7 @@ public:
   };
   Status status;
   void setup();
-  int getSpeed();
+  float getSpeed();
   void setUpperSpeedMax(float);
   float getUpperSpeedMax();
   void setLowerSpeedMax(float);

@@ -77,7 +77,7 @@ void SolarTracker::pollSensorData()
     Serial.println();
     if (windSpeed > windPeak)
     {
-      windPeak = (int)windSpeed;
+      windPeak = windSpeed;
     }
     int percentExtended = actuator.getPercentExtended();
     Serial.print("PercentExtended: ");

@@ -20,20 +20,21 @@ TEST_SUITE("telemetry")
 {
   TEST_CASE("formatRow emits the eight fields in order")
   {
-    String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3, true, true, false);
-    CHECK(row.s == "1788947478,22.25,29,ACTIVE,3,1,1,0");
+    String row = Telemetry::formatRow(1788947478u, 22.25f, 29, "ACTIVE", 3.4f, true, true, false);
+    CHECK(row.s == "1788947478,22.25,29,ACTIVE,3.4,1,1,0");
   }
 
   TEST_CASE("formatRow renders booleans as 1 and 0, never true/false")
   {
     String row = Telemetry::formatRow(1u, 0.0f, 0, "AWAY", 0, false, false, true);
-    CHECK(row.s == "1,0.00,0,AWAY,0,0,0,1");
+    CHECK(row.s == "1,0.00,0,AWAY,0.0,0,0,1");
   }
 
-  TEST_CASE("formatRow keeps two decimals of temperature and rounds nothing else")
+  TEST_CASE("formatRow keeps two decimals of temperature and one of wind")
   {
-    String row = Telemetry::formatRow(42u, -7.5f, 100, "SAFE", 31, true, false, false);
-    CHECK(row.s == "42,-7.50,100,SAFE,31,1,0,0");
+    // One decimal is what the sensor resolves: one ADC count is about 0.1 m/s.
+    String row = Telemetry::formatRow(42u, -7.5f, 100, "SAFE", 5.46f, true, false, false);
+    CHECK(row.s == "42,-7.50,100,SAFE,5.5,1,0,0");
   }
 
   TEST_CASE("a row is stored with a single newline and no carriage return")

@@ -6,7 +6,7 @@ String Telemetry::formatRow(uint32_t timestamp,
                             float temperature,
                             int extendedPercent,
                             const String &status,
-                            int windPeak,
+                            float windPeak,
                             bool settingsServer,
                             bool windSensor,
                             bool away)
@@ -21,7 +21,8 @@ String Telemetry::formatRow(uint32_t timestamp,
   row += ',';
   row += status;
   row += ',';
-  row += String(windPeak);
+  // One decimal: a count of the wind sensor's ADC is about 0.1 m/s.
+  row += String(windPeak, 1);
   row += ',';
   row += settingsServer ? '1' : '0';
   row += ',';

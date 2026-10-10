@@ -51,7 +51,7 @@ private:
   // Highest wind speed seen since the last row was spooled. Ten second samples
   // are too coarse to average usefully, and a gust that triggers the safety
   // logic matters far more than the mean, so the peak is what gets recorded.
-  int windPeak = 0;
+  float windPeak = 0;
   bool appMode = false;
   // A sync is queued rather than run the moment its hour arrives, because the hour
   // can arrive while the actuator is driving. See serviceSync().
