@@ -3,42 +3,54 @@ import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 
 import { clearCookie, readCookie, setCookie } from "../src/cookies.js";
-import { REMEMBER_MS, SESSION_MS, sessionCookie, shouldRenew, signSession, verifySession } from "../src/session.js";
+import { RENEW_AFTER_MS, SESSION_MS, sessionCookie, shouldRenew, signSession, verifySession } from "../src/session.js";
 
 const SECRET = "test-secret";
 const NOW = Date.parse("2026-10-11T16:00:00.000Z");
 const HOUR = 60 * 60 * 1000;
-const PHONE = "+15195550100";
+const DAY = 24 * HOUR;
+const ID = "uncle";
+const KEY_HASH = "0123456789abcdef".repeat(4);
+const sign = (now = NOW) => signSession({ id: ID, keyHash: KEY_HASH, now }, SECRET);
 
-test("a token signed here verifies, carrying its phone and expiry", () => {
-  const remembered = verifySession(signSession({ phone: PHONE, remember: true, now: NOW }, SECRET), SECRET, NOW);
-  assert.deepEqual(remembered, { phone: PHONE, remember: true, iat: NOW, exp: NOW + REMEMBER_MS });
+// Signed by hand with the real secret, so only the claim checks can stop it.
+const signClaims = (claims) => {
+  const payload = Buffer.from(JSON.stringify(claims)).toString("base64url");
+  return `${payload}.${createHmac("sha256", SECRET).update(payload).digest("base64url")}`;
+};
 
-  const brief = verifySession(signSession({ phone: PHONE, remember: false, now: NOW }, SECRET), SECRET, NOW);
-  assert.deepEqual(brief, { phone: PHONE, remember: false, iat: NOW, exp: NOW + SESSION_MS });
-  assert.equal(REMEMBER_MS, 90 * 24 * HOUR);
-  assert.equal(SESSION_MS, 12 * HOUR);
+test("a token signed here verifies, carrying the id, the start of the key hash and a 400-day expiry", () => {
+  assert.deepEqual(verifySession(sign(), SECRET, NOW), {
+    id: ID,
+    keyTag: "0123456789abcdef",
+    iat: NOW,
+    exp: NOW + 400 * DAY,
+  });
+  assert.equal(SESSION_MS, 400 * DAY);
+  assert.equal(RENEW_AFTER_MS, DAY);
+
+  // Only 16 hex of the hash go into the cookie.
+  const claims = JSON.parse(Buffer.from(sign().split(".")[0], "base64url").toString());
+  assert.deepEqual(claims, { u: ID, k: "0123456789abcdef", iat: NOW, exp: NOW + 400 * DAY });
 });
 
 test("a token signed with another secret is refused", () => {
-  const token = signSession({ phone: PHONE, remember: true, now: NOW }, "other-secret");
+  const token = signSession({ id: ID, keyHash: KEY_HASH, now: NOW }, "other-secret");
   assert.equal(verifySession(token, SECRET, NOW), null);
 });
 
 test("changing the payload breaks the signature", () => {
-  const token = signSession({ phone: PHONE, remember: false, now: NOW }, SECRET);
-  const [payload, signature] = token.split(".");
+  const [payload, signature] = sign().split(".");
   const claims = JSON.parse(Buffer.from(payload, "base64url").toString());
 
-  for (const change of [{ p: "+15195550101" }, { r: true }, { exp: claims.exp + 365 * 24 * HOUR }]) {
+  for (const change of [{ u: "zach" }, { k: "fedcba9876543210" }, { exp: claims.exp + 365 * DAY }]) {
     const forged = Buffer.from(JSON.stringify({ ...claims, ...change })).toString("base64url");
     assert.equal(verifySession(`${forged}.${signature}`, SECRET, NOW), null, JSON.stringify(change));
   }
 });
 
 test("changing the signature is refused, including variants that decode the same", () => {
-  const token = signSession({ phone: PHONE, remember: true, now: NOW }, SECRET);
-  const [payload, signature] = token.split(".");
+  const [payload, signature] = sign().split(".");
   const last = signature.at(-1);
   const flipped = last === "A" ? "B" : "A";
   assert.equal(verifySession(`${payload}.${signature.slice(0, -1)}${flipped}`, SECRET, NOW), null);
@@ -48,51 +60,53 @@ test("changing the signature is refused, including variants that decode the same
 });
 
 test("malformed tokens are refused", () => {
-  const token = signSession({ phone: PHONE, remember: true, now: NOW }, SECRET);
+  const token = sign();
   for (const bad of ["", "abc", ".", `${token}.extra`, token.replace(".", ""), undefined, null, 42]) {
     assert.equal(verifySession(bad, SECRET, NOW), null, String(bad));
   }
 });
 
 test("a well-signed payload that is not a session is refused", () => {
-  // Signed by hand with the real secret, so only the claim checks can stop it.
-  const sign = (claims) => {
-    const payload = Buffer.from(JSON.stringify(claims)).toString("base64url");
-    return `${payload}.${createHmac("sha256", SECRET).update(payload).digest("base64url")}`;
-  };
-  assert.equal(verifySession(sign({ p: PHONE, r: "yes", iat: NOW, exp: NOW + HOUR }), SECRET, NOW), null);
-  assert.equal(verifySession(sign({ p: 15195550100, r: true, iat: NOW, exp: NOW + HOUR }), SECRET, NOW), null);
-  assert.equal(verifySession(sign({ p: PHONE, r: true, iat: NOW }), SECRET, NOW), null);
-  assert.equal(verifySession(sign(null), SECRET, NOW), null);
-  assert.ok(verifySession(sign({ p: PHONE, r: true, iat: NOW, exp: NOW + HOUR }), SECRET, NOW));
+  const good = { u: ID, k: "0123456789abcdef", iat: NOW, exp: NOW + HOUR };
+  assert.ok(verifySession(signClaims(good), SECRET, NOW));
+
+  for (const bad of [
+    { ...good, u: 42 },
+    { ...good, u: undefined },
+    // A short or empty tag would match the start of any key hash.
+    { ...good, k: "" },
+    { ...good, k: "0123" },
+    { ...good, k: "0123456789ABCDEF" },
+    { ...good, k: "0123456789abcdef0" },
+    { ...good, k: undefined },
+    { ...good, iat: undefined },
+    { ...good, exp: "never" },
+    // The previous format's claims.
+    { p: "+15195550100", r: true, iat: NOW, exp: NOW + HOUR },
+    null,
+  ]) {
+    assert.equal(verifySession(signClaims(bad), SECRET, NOW), null, JSON.stringify(bad));
+  }
 });
 
 test("a token is good until the moment it expires", () => {
-  const token = signSession({ phone: PHONE, remember: false, now: NOW }, SECRET);
+  const token = sign();
   assert.ok(verifySession(token, SECRET, NOW + SESSION_MS - 1));
   assert.equal(verifySession(token, SECRET, NOW + SESSION_MS), null);
-
-  const remembered = signSession({ phone: PHONE, remember: true, now: NOW }, SECRET);
-  assert.ok(verifySession(remembered, SECRET, NOW + REMEMBER_MS - 1));
-  assert.equal(verifySession(remembered, SECRET, NOW + REMEMBER_MS), null);
 });
 
-test("only a remembered session more than a day old is renewed", () => {
-  const remembered = { phone: PHONE, remember: true, iat: NOW, exp: NOW + REMEMBER_MS };
-  assert.equal(shouldRenew(remembered, NOW + 23 * HOUR), false);
-  assert.equal(shouldRenew(remembered, NOW + 24 * HOUR), false);
-  assert.equal(shouldRenew(remembered, NOW + 24 * HOUR + 1), true);
-
-  const brief = { phone: PHONE, remember: false, iat: NOW, exp: NOW + SESSION_MS };
-  assert.equal(shouldRenew(brief, NOW + 11 * HOUR), false);
+test("a session is renewed once it is more than a day old", () => {
+  const session = verifySession(sign(), SECRET, NOW);
+  assert.equal(shouldRenew(session, NOW + 23 * HOUR), false);
+  assert.equal(shouldRenew(session, NOW + 24 * HOUR), false);
+  assert.equal(shouldRenew(session, NOW + 24 * HOUR + 1), true);
 });
 
-test("cookie attributes: Max-Age only when remembered", () => {
+test("cookie attributes: always persistent, for 400 days", () => {
   assert.equal(
-    sessionCookie("tok.en", true),
-    "tracker_session=tok.en; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=7776000",
+    sessionCookie("tok.en"),
+    "tracker_session=tok.en; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=34560000",
   );
-  assert.equal(sessionCookie("tok.en", false), "tracker_session=tok.en; Path=/; HttpOnly; Secure; SameSite=Lax");
   assert.equal(setCookie("a", "b", 60), "a=b; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=60");
   assert.equal(clearCookie("tracker_session"), "tracker_session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
 });

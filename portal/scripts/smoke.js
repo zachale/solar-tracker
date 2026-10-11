@@ -1,7 +1,7 @@
 // Runs the portal API on this machine against the real telemetry bucket, read-only,
-// with users.json and the sign-in requests held in memory. It asks to sign in over
-// HTTP the way the page does, approves the request the way tools/portal/requests.sh
-// would, and summarizes what /telemetry returns. Nothing is written to any bucket.
+// with users.json held in memory. It lists one person with a fresh key, the way
+// tools/portal/users.sh does, opens their link over HTTP the way the page does,
+// summarizes what /telemetry returns, and signs out. Nothing is written to any bucket.
 //
 //   node scripts/smoke.js [days]        default 2
 //
@@ -16,14 +16,15 @@ import { Storage } from "@google-cloud/storage";
 import { OAuth2Client } from "google-auth-library";
 
 import { createApp } from "../src/app.js";
-import { requestId } from "../src/requests.js";
 import { createGcsStore, createMemoryStore } from "../src/stores.js";
 import { uploadTime } from "../src/telemetry.js";
+import { hashKey } from "../src/users.js";
 
 const DAYS = process.argv[2] ?? "2";
 const TZ = "America/Toronto";
 const BUCKET = "solar-tracker-442903-telemetry";
-const PHONE = "+15195550100"; // a reserved 555 number
+// Made here and never stored, as users.sh does.
+const KEY = randomBytes(32).toString("base64url");
 
 const accessToken = execFileSync("gcloud", ["auth", "print-access-token"], {
   stdio: ["ignore", "pipe", "inherit"],
@@ -37,7 +38,9 @@ const storage = new Storage({ authClient, projectId: "solar-tracker-442903" });
 // Only list and read are passed on, so a write to the real bucket would throw here.
 const { list, read } = createGcsStore(storage.bucket(BUCKET));
 const portalStore = createMemoryStore({
-  "users.json": JSON.stringify({ users: [{ phone: PHONE, name: "Smoke test", admin: true }] }),
+  "users.json": JSON.stringify({
+    users: [{ id: "smoke", name: "Smoke test", keyHash: hashKey(KEY), issuedAt: new Date().toISOString() }],
+  }),
 });
 const app = createApp({
   telemetryStore: { list, read },
@@ -49,7 +52,6 @@ const server = app.listen(0, "127.0.0.1");
 await once(server, "listening");
 const base = `http://127.0.0.1:${server.address().port}`;
 
-
 const local = new Intl.DateTimeFormat("sv-SE", {
   timeZone: TZ,
   dateStyle: "short",
@@ -58,23 +60,22 @@ const local = new Intl.DateTimeFormat("sv-SE", {
 const show = (ms) => `${new Date(ms).toISOString()} (${local.format(ms)} Toronto)`;
 
 try {
-  const asked = await fetch(`${base}/auth/request`, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify({ phone: PHONE, remember: true }),
-  });
-  const requestCookie = asked.headers.get("set-cookie").split(";")[0];
-  const poll = () => fetch(`${base}/auth/request`, { headers: { cookie: requestCookie } });
-  const waiting = await (await poll()).json();
+  const post = (path, body, cookie) =>
+    fetch(`${base}${path}`, {
+      method: "POST",
+      headers: { "content-type": "application/json", ...(cookie ? { cookie } : {}) },
+      body: JSON.stringify(body),
+    });
 
-  const name = `requests/${requestId(requestCookie.split("=")[1])}.json`;
-  const request = JSON.parse(await portalStore.read(name));
-  await portalStore.write(name, `${JSON.stringify({ ...request, status: "approved" })}\n`);
-  const approved = await poll();
-  console.log(
-    `POST /auth/request ${asked.status}; GET ${JSON.stringify(waiting)}; after approval ${JSON.stringify(await approved.json())}`,
-  );
-  const cookie = approved.headers.getSetCookie().find((line) => line.startsWith("tracker_session=")).split(";")[0];
+  const opened = await post("/auth/link", { key: KEY });
+  const setCookie = opened.headers.getSetCookie()[0];
+  console.log(`POST /auth/link ${opened.status} ${JSON.stringify(await opened.json())}`);
+  console.log(`  Set-Cookie: ${setCookie.replace(/=[^;]+;/, "=<token>;")}`);
+  const cookie = setCookie.split(";")[0];
+  const session = await fetch(`${base}/session`, { headers: { cookie } });
+  console.log(`GET /session ${session.status} ${JSON.stringify(await session.json())}`);
+  const unknown = await post("/auth/link", { key: randomBytes(32).toString("base64url") });
+  console.log(`POST /auth/link with a key nobody has: ${unknown.status} ${JSON.stringify(await unknown.json())}`);
 
   let started = Date.now();
   const res = await fetch(`${base}/telemetry?days=${DAYS}`, { headers: { cookie } });
@@ -146,6 +147,14 @@ try {
       `    today's ${lags.length} uploads arrive ${lags[0].toFixed(1)} to ${lags.at(-1).toFixed(1)} min (median ${lags[Math.floor(lags.length / 2)].toFixed(1)}) after their newest row`,
     );
   }
+
+  const out = await post("/auth/logout", {}, cookie);
+  console.log(`POST /auth/logout ${out.status}; Set-Cookie ${out.headers.get("set-cookie")}`);
+  // Signing out only makes the browser drop its cookie; nothing is recorded on the
+  // server, so a copy of the token kept elsewhere still works until the link is
+  // re-issued. That is the revocation, not this.
+  const after = await fetch(`${base}/telemetry?days=${DAYS}`, { headers: { cookie } });
+  console.log(`  the dropped cookie, sent again anyway: ${after.status} (200 expected; see the comment)`);
 } finally {
   server.closeAllConnections();
   server.close();

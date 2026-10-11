@@ -3,36 +3,44 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { setCookie } from "./cookies.js";
 
 // A signed cookie rather than a session table: the portal has a handful of users
-// and no database, and a token that carries its own phone number and expiry needs
+// and no database, and a token that carries its own user id and expiry needs
 // nothing stored to check it. Revocation still works because every request also
-// looks the phone number up in users.json (see app.js), so removing someone there
-// shuts them out without a server-side session list.
+// looks the person up in users.json (see app.js):
+//   - removed from the list: their id is gone, so every cookie naming it fails;
+//   - link re-issued: the token carries the start of the key hash it was signed in
+//     with ("k"), which no longer matches the new hash, so every device that used
+//     the old link is signed out without the server keeping a list of devices.
 //
-// token = base64url(JSON {p: phone, r: remember, iat, exp}) + "." + base64url(HMAC-SHA256)
-// with times in epoch milliseconds.
+// token = base64url(JSON {u: user id, k: first 16 hex of the key hash, iat, exp})
+//         + "." + base64url(HMAC-SHA256), with times in epoch milliseconds.
 
 export const SESSION_COOKIE = "tracker_session";
 
-const HOUR = 60 * 60 * 1000;
-const DAY = 24 * HOUR;
-export const REMEMBER_MS = 90 * DAY;
-export const SESSION_MS = 12 * HOUR;
-// A remembered cookie is re-issued once it is a day old, so someone who opens the
-// page every few weeks never meets the 90-day limit, without a Set-Cookie on
+const DAY = 24 * 60 * 60 * 1000;
+// Opening a link should sign a device in for good. Browsers cap a cookie's lifetime
+// at 400 days whatever Max-Age asks for, so that is the longest it can be, and the
+// token's own expiry matches it.
+export const SESSION_MS = 400 * DAY;
+// The cookie is re-issued once it is a day old, so a device that opens the page at
+// least once every 400 days stays signed in indefinitely, without a Set-Cookie on
 // every request.
 export const RENEW_AFTER_MS = DAY;
+// 64 bits of the key hash are plenty to tell one issue of a person's link from the
+// next; the cookie has no need to carry the whole hash.
+const KEY_TAG_LENGTH = 16;
+const KEY_TAG = /^[0-9a-f]{16}$/;
 
 function mac(payload, secret) {
   return createHmac("sha256", secret).update(payload).digest("base64url");
 }
 
-export function signSession({ phone, remember, now }, secret) {
-  const claims = { p: phone, r: remember, iat: now, exp: now + (remember ? REMEMBER_MS : SESSION_MS) };
+export function signSession({ id, keyHash, now }, secret) {
+  const claims = { u: id, k: keyHash.slice(0, KEY_TAG_LENGTH), iat: now, exp: now + SESSION_MS };
   const payload = Buffer.from(JSON.stringify(claims)).toString("base64url");
   return `${payload}.${mac(payload, secret)}`;
 }
 
-// Returns {phone, remember, iat, exp} for a genuine, unexpired token, else null.
+// Returns {id, keyTag, iat, exp} for a genuine, unexpired token, else null.
 export function verifySession(token, secret, now) {
   if (typeof token !== "string") return null;
   const parts = token.split(".");
@@ -51,19 +59,19 @@ export function verifySession(token, secret, now) {
   } catch {
     return null;
   }
-  const { p, r, iat, exp } = claims ?? {};
-  if (typeof p !== "string" || typeof r !== "boolean") return null;
+  const { u, k, iat, exp } = claims ?? {};
+  // A short or empty k would match the start of any hash, so its shape is checked
+  // even though only this service can sign one.
+  if (typeof u !== "string" || typeof k !== "string" || !KEY_TAG.test(k)) return null;
   if (!Number.isFinite(iat) || !Number.isFinite(exp)) return null;
   if (now >= exp) return null;
-  return { phone: p, remember: r, iat, exp };
+  return { id: u, keyTag: k, iat, exp };
 }
 
 export function shouldRenew(session, now) {
-  return session.remember && now - session.iat > RENEW_AFTER_MS;
+  return now - session.iat > RENEW_AFTER_MS;
 }
 
-// Without "remember me" there is no Max-Age, which makes it a browser-session
-// cookie that goes when the browser closes, on top of the 12 h expiry in the token.
-export function sessionCookie(token, remember) {
-  return setCookie(SESSION_COOKIE, token, remember ? REMEMBER_MS / 1000 : undefined);
+export function sessionCookie(token) {
+  return setCookie(SESSION_COOKIE, token, SESSION_MS / 1000);
 }

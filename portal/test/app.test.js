@@ -1,26 +1,37 @@
 // The whole sign-in flow over real HTTP, against in-memory buckets and a clock the
-// tests move by hand. Each test starts its own server, so they run concurrently:
-// POST /auth/request takes at least half a second on purpose.
+// tests move by hand. Each test starts its own server, so they run concurrently.
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { createHmac, randomBytes } from "node:crypto";
 import { once } from "node:events";
 
 import { createApp } from "../src/app.js";
-import { requestId } from "../src/requests.js";
 import { createMemoryStore } from "../src/stores.js";
+import { hashKey } from "../src/users.js";
 
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 const START = Date.parse("2026-10-11T16:00:00.000Z");
+const SECRET = "test-secret";
 
-const ZACH = { phone: "+15195550100", name: "Zach", admin: true };
-const SAM = { phone: "+15195550101", name: "Sam", admin: false };
-const ANN = { phone: "+15195550102", name: "Ann", admin: false };
-const STRANGER = "+15195550199";
+// Someone with a personal link, as tools/portal/users.sh makes one: the key goes in
+// the link, only its hash goes in users.json.
+function person(id, name) {
+  const key = randomBytes(32).toString("base64url");
+  return { id, name, key, keyHash: hashKey(key) };
+}
+const ZACH = person("zach", "Zach");
+const UNCLE = person("uncle", "Uncle Dave");
+const usersJson = (people) =>
+  JSON.stringify({
+    users: people.map(({ id, name, keyHash }) => ({ id, name, keyHash, issuedAt: "2026-10-01T12:00:00.000Z" })),
+  });
 
 const ATTRIBUTES = "Path=/; HttpOnly; Secure; SameSite=Lax";
+const CLEARED = `tracker_session=; ${ATTRIBUTES}; Max-Age=0`;
+const claimsOf = (token) => JSON.parse(Buffer.from(token.split(".")[0], "base64url").toString());
 
 // Toronto wall clock, as the tracker stamps it.
 const reading = (wall, status = "ACTIVE") =>
@@ -39,23 +50,13 @@ const TELEMETRY = {
   "raw/2026-10-11/2026-10-11T15-00-00-000Z.ndjson": `${reading("2026-10-11T10:55:00")}\n`,
 };
 
-// The bucket as seen over a network: every call takes a little while, so requests
-// handled at the same time really do interleave.
-function withLatency(store, ms) {
-  const later = (fn) => async (...args) => {
-    await new Promise((resolve) => setTimeout(resolve, ms));
-    return fn(...args);
-  };
-  return { list: later(store.list), read: later(store.read), write: later(store.write), delete: later(store.delete) };
-}
-
-async function startPortal(t, { users = [ZACH, SAM, ANN], latencyMs = 0 } = {}) {
+async function startPortal(t, { people = [ZACH, UNCLE] } = {}) {
   const clock = { now: START };
-  const portalStore = createMemoryStore({ "users.json": JSON.stringify({ users }) });
+  const portalStore = createMemoryStore({ "users.json": usersJson(people) });
   const app = createApp({
     telemetryStore: createMemoryStore(TELEMETRY),
-    portalStore: latencyMs ? withLatency(portalStore, latencyMs) : portalStore,
-    sessionSecret: "test-secret",
+    portalStore,
+    sessionSecret: SECRET,
     siteTz: "America/Toronto",
     now: () => clock.now,
   });
@@ -99,101 +100,53 @@ async function startPortal(t, { users = [ZACH, SAM, ANN], latencyMs = 0 } = {}) 
       } catch {}
       return { status: res.status, data, setCookies, headers: res.headers };
     }
-    // The id the admin sees for this browser's request.
-    const id = () => requestId(jar.get("tracker_request"));
-    return { call, jar, id };
+    return { call, jar };
   }
 
-  const requestObjects = async () => portalStore.list("requests/");
-  const readRequest = async (id) => {
-    const text = await portalStore.read(`requests/${id}.json`);
-    return text === null ? null : JSON.parse(text);
-  };
-  // What tools/portal/requests.sh does: rewrite the object with an answer.
-  const answerInBucket = async (id, status) => {
-    const request = await readRequest(id);
-    await portalStore.write(`requests/${id}.json`, `${JSON.stringify({ ...request, status })}\n`);
-  };
-
-  async function signIn(user, { remember = true, as = browser() } = {}) {
-    assert.equal((await as.call("POST", "/auth/request", { json: { phone: user.phone, remember } })).status, 202);
-    await answerInBucket(as.id(), "approved");
-    const res = await as.call("GET", "/auth/request");
-    assert.equal(res.data.status, "approved");
-    return { ...as, res };
+  // What the page does with #key=... from the address bar.
+  async function open(who, as = browser()) {
+    const res = await as.call("POST", "/auth/link", { json: { key: who.key } });
+    assert.equal(res.status, 200);
+    assert.deepEqual(res.data, { name: who.name });
+    return as;
   }
 
-  return { clock, portalStore, browser, requestObjects, readRequest, answerInBucket, signIn };
+  // What tools/portal/users.sh does: rewrite users.json.
+  const setPeople = (people) => portalStore.write("users.json", usersJson(people));
+
+  return { clock, portalStore, browser, open, setPeople };
 }
 
 describe("portal API", { concurrency: true }, () => {
-  test("request, wait, approve, sign in, read telemetry, sign out", async (t) => {
+  test("open a link, read telemetry, sign out", async (t) => {
     const portal = await startPortal(t);
+    const phone = portal.browser();
+    assert.deepEqual((await phone.call("GET", "/session")).data, { error: "unauthenticated" });
 
-    // Zach's own first sign-in, approved in the bucket with tools/portal/requests.sh.
-    const zach = portal.browser();
-    assert.deepEqual((await zach.call("GET", "/session")).data, { error: "unauthenticated" });
-    const asked = await zach.call("POST", "/auth/request", { json: { phone: "(519) 555-0100", remember: true } });
-    assert.equal(asked.status, 202);
-    assert.deepEqual(asked.data, { ok: true });
-    assert.equal(asked.setCookies.length, 1);
-    assert.match(asked.setCookies[0], new RegExp(`^tracker_request=[\\w-]{43}; ${ATTRIBUTES}; Max-Age=86400$`));
-    assert.deepEqual(await portal.readRequest(zach.id()), {
-      id: zach.id(),
-      phone: ZACH.phone,
-      name: "Zach",
-      remember: true,
-      requestedAt: "2026-10-11T16:00:00.000Z",
-      expiresAt: "2026-10-12T16:00:00.000Z",
-      status: "pending",
+    const opened = await phone.call("POST", "/auth/link", { json: { key: UNCLE.key } });
+    assert.equal(opened.status, 200);
+    assert.deepEqual(opened.data, { name: "Uncle Dave" });
+    assert.equal(opened.setCookies.length, 1);
+    // Always persistent: no "remember me", and no login screen next time.
+    assert.match(opened.setCookies[0], new RegExp(`^tracker_session=[\\w-]+\\.[\\w-]+; ${ATTRIBUTES}; Max-Age=34560000$`));
+    assert.deepEqual(claimsOf(phone.jar.get("tracker_session")), {
+      u: "uncle",
+      k: UNCLE.keyHash.slice(0, 16),
+      iat: START,
+      exp: START + 400 * DAY,
     });
-    assert.deepEqual((await zach.call("GET", "/auth/request")).data, { status: "pending" });
+    assert.ok(!opened.setCookies[0].includes(UNCLE.key), "the key itself is not in the cookie");
 
-    await portal.answerInBucket(zach.id(), "approved");
-    const zachIn = await zach.call("GET", "/auth/request");
-    assert.deepEqual(zachIn.data, { status: "approved", name: "Zach", admin: true });
-    assert.deepEqual(zachIn.setCookies.length, 2);
-    assert.equal(zachIn.setCookies[0], `tracker_request=; ${ATTRIBUTES}; Max-Age=0`);
-    assert.match(zachIn.setCookies[1], new RegExp(`^tracker_session=[\\w-]+\\.[\\w-]+; ${ATTRIBUTES}; Max-Age=7776000$`));
-    assert.deepEqual(await portal.requestObjects(), [], "a collected request is gone");
-    assert.deepEqual((await zach.call("GET", "/session")).data, { name: "Zach", admin: true });
+    const session = await phone.call("GET", "/session");
+    assert.equal(session.status, 200);
+    assert.deepEqual(session.data, { name: "Uncle Dave" });
+    assert.equal(session.headers.get("cache-control"), "no-store");
 
-    // Sam asks; Zach sees it in the admin view and approves it there.
-    const sam = portal.browser();
-    portal.clock.now += MINUTE;
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    const listed = await zach.call("GET", "/admin/requests");
-    assert.equal(listed.status, 200);
-    assert.deepEqual(listed.data, {
-      requests: [
-        {
-          id: sam.id(),
-          name: "Sam",
-          phone: SAM.phone,
-          requestedAt: "2026-10-11T16:01:00.000Z",
-          expiresAt: "2026-10-12T16:01:00.000Z",
-        },
-      ],
-    });
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { status: "pending" });
-
-    const approved = await zach.call("POST", `/admin/requests/${sam.id()}/approve`, { json: {} });
-    assert.equal(approved.status, 200);
-    assert.deepEqual(approved.data, { ok: true });
-    assert.equal((await portal.readRequest(sam.id())).decidedAt, "2026-10-11T16:01:00.000Z");
-    assert.deepEqual((await zach.call("GET", "/admin/requests")).data, { requests: [] });
-
-    const samIn = await sam.call("GET", "/auth/request");
-    assert.deepEqual(samIn.data, { status: "approved", name: "Sam", admin: false });
-    // Sam did not ask to be remembered: a browser-session cookie.
-    assert.match(samIn.setCookies[1], new RegExp(`^tracker_session=[\\w-]+\\.[\\w-]+; ${ATTRIBUTES}$`));
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { error: "no_request" });
-
-    const telemetry = await sam.call("GET", "/telemetry");
+    const telemetry = await phone.call("GET", "/telemetry");
     assert.equal(telemetry.status, 200);
     assert.equal(telemetry.headers.get("cache-control"), "private, max-age=30");
     assert.deepEqual(telemetry.data, {
-      generatedAt: "2026-10-11T16:01:00.000Z",
+      generatedAt: "2026-10-11T16:00:00.000Z",
       lastUploadAt: "2026-10-11T15:00:00.000Z",
       statuses: ["ACTIVE", "NIGHT", "SAFE", "AWAY"],
       rows: [
@@ -201,337 +154,277 @@ describe("portal API", { concurrency: true }, () => {
         [Date.parse("2026-10-11T14:55:00Z"), 40, 12.5, 2, 0, 1],
       ],
     });
-    assert.equal((await sam.call("GET", "/session")).headers.get("cache-control"), "no-store");
 
-    const out = await sam.call("POST", "/auth/logout", { json: {} });
+    const out = await phone.call("POST", "/auth/logout", { json: {} });
     assert.equal(out.status, 204);
-    assert.deepEqual(out.setCookies, [`tracker_session=; ${ATTRIBUTES}; Max-Age=0`]);
-    assert.equal((await sam.call("GET", "/session")).status, 401);
-    assert.equal((await sam.call("GET", "/telemetry")).status, 401);
+    assert.deepEqual(out.setCookies, [CLEARED]);
+    assert.equal((await phone.call("GET", "/session")).status, 401);
+    assert.equal((await phone.call("GET", "/telemetry")).status, 401);
+
+    // Signing out a device does not spend the link.
+    await portal.open(UNCLE, phone);
+    assert.equal((await phone.call("GET", "/session")).status, 200);
   });
 
-  test("a denied request ends in denied, with no session", async (t) => {
+  test("one link signs in any number of devices, each as its person", async (t) => {
     const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone, remember: true } });
+    const phone = await portal.open(UNCLE);
+    const laptop = await portal.open(UNCLE);
+    const zach = await portal.open(ZACH);
+    assert.deepEqual((await phone.call("GET", "/session")).data, { name: "Uncle Dave" });
+    assert.deepEqual((await laptop.call("GET", "/session")).data, { name: "Uncle Dave" });
+    assert.deepEqual((await zach.call("GET", "/session")).data, { name: "Zach" });
 
-    assert.deepEqual((await zach.call("POST", `/admin/requests/${sam.id()}/deny`, { json: {} })).data, { ok: true });
-    const answer = await sam.call("GET", "/auth/request");
-    assert.deepEqual(answer.data, { status: "denied" });
-    assert.deepEqual(answer.setCookies, [`tracker_request=; ${ATTRIBUTES}; Max-Age=0`]);
-    assert.deepEqual(await portal.requestObjects(), []);
-    assert.equal((await sam.call("GET", "/session")).status, 401);
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { error: "no_request" });
+    // Opening another person's link on a signed-in device switches it to them.
+    await portal.open(ZACH, laptop);
+    assert.deepEqual((await laptop.call("GET", "/session")).data, { name: "Zach" });
   });
 
-  test("an answer can be changed until it is collected", async (t) => {
+  test("a key that is not base64url of 20 to 100 characters is a 400 with no cookie", async (t) => {
     const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    await zach.call("POST", `/admin/requests/${sam.id()}/approve`, { json: {} });
-    await zach.call("POST", `/admin/requests/${sam.id()}/deny`, { json: {} });
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { status: "denied" });
-  });
-
-  test("a request lasts 24 hours", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    portal.clock.now += DAY - SECOND;
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { status: "pending" });
-    portal.clock.now += SECOND;
-    const expired = await sam.call("GET", "/auth/request");
-    assert.deepEqual(expired.data, { status: "expired" });
-    assert.deepEqual(expired.setCookies, [`tracker_request=; ${ATTRIBUTES}; Max-Age=0`]);
-    assert.deepEqual(await portal.requestObjects(), []);
-
-    // Too late to answer, and an approval not collected in time lapses too.
-    const ann = portal.browser();
-    await ann.call("POST", "/auth/request", { json: { phone: ANN.phone } });
-    const late = portal.browser();
-    await late.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    await zach.call("POST", `/admin/requests/${ann.id()}/approve`, { json: {} });
-    portal.clock.now += DAY;
-    assert.deepEqual((await ann.call("GET", "/auth/request")).data, { status: "expired" });
-    assert.equal(ann.jar.has("tracker_session"), false);
-    const tooLate = await zach.call("POST", `/admin/requests/${late.id()}/approve`, { json: {} });
-    assert.equal(tooLate.status, 404);
-    assert.deepEqual(tooLate.data, { error: "not_found" });
-  });
-
-  test("a number not on the list gets the same answers and waits forever", async (t) => {
-    const portal = await startPortal(t);
-    const sam = portal.browser();
-    const stranger = portal.browser();
-    const real = await sam.call("POST", "/auth/request", { json: { phone: SAM.phone, remember: true } });
-    const decoy = await stranger.call("POST", "/auth/request", { json: { phone: STRANGER, remember: true } });
-
-    assert.equal(decoy.status, real.status);
-    assert.deepEqual(decoy.data, real.data);
-    const shape = (setCookies) => setCookies.map((line) => line.replace(/=[\w-]{43};/, "=<secret>;"));
-    assert.deepEqual(shape(decoy.setCookies), shape(real.setCookies));
-    assert.notEqual(stranger.jar.get("tracker_request"), sam.jar.get("tracker_request"));
-
-    assert.deepEqual(await portal.requestObjects(), [`requests/${sam.id()}.json`], "nothing filed for the stranger");
-    assert.deepEqual((await stranger.call("GET", "/auth/request")).data, { status: "pending" });
-    portal.clock.now += 30 * DAY;
-    assert.deepEqual((await stranger.call("GET", "/auth/request")).data, { status: "pending" });
-    assert.equal((await stranger.call("POST", "/auth/request/cancel", { json: {} })).status, 204);
-  });
-
-  test("at most three requests wait per number", async (t) => {
-    const portal = await startPortal(t, { latencyMs: 20 });
-    const zach = await portal.signIn(ZACH);
-    const browsers = [portal.browser(), portal.browser(), portal.browser(), portal.browser()];
-
-    // Sent together: the cap still holds.
-    const answers = await Promise.all(
-      browsers.map((b) => b.call("POST", "/auth/request", { json: { phone: SAM.phone } })),
-    );
-    assert.ok(answers.every((res) => res.status === 202 && res.setCookies.length === 1));
-    assert.equal((await portal.requestObjects()).length, 3);
-    for (const b of browsers) assert.deepEqual((await b.call("GET", "/auth/request")).data, { status: "pending" });
-
-    // An answered request no longer counts.
-    const filed = [];
-    for (const b of browsers) if (await portal.readRequest(b.id())) filed.push(b);
-    await zach.call("POST", `/admin/requests/${filed[0].id()}/deny`, { json: {} });
-    const fifth = portal.browser();
-    await fifth.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    assert.ok(await portal.readRequest(fifth.id()));
-    assert.equal((await zach.call("GET", "/admin/requests")).data.requests.length, 3);
-  });
-
-  test("asking again from the same browser replaces the earlier request", async (t) => {
-    const portal = await startPortal(t);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    const first = sam.id();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone, remember: true } });
-    assert.notEqual(sam.id(), first);
-    assert.deepEqual(await portal.requestObjects(), [`requests/${sam.id()}.json`]);
-    assert.equal((await portal.readRequest(sam.id())).remember, true);
-  });
-
-  test("cancelling forgets the request", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    const id = sam.id();
-
-    const cancelled = await sam.call("POST", "/auth/request/cancel", { json: {} });
-    assert.equal(cancelled.status, 204);
-    assert.deepEqual(cancelled.setCookies, [`tracker_request=; ${ATTRIBUTES}; Max-Age=0`]);
-    assert.deepEqual(await portal.requestObjects(), []);
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { error: "no_request" });
-    assert.equal((await zach.call("POST", `/admin/requests/${id}/approve`, { json: {} })).status, 404);
-    // Nothing to cancel is not an error.
-    assert.equal((await portal.browser().call("POST", "/auth/request/cancel", { json: {} })).status, 204);
-  });
-
-  test("an approval is collected only by the browser that asked", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    await zach.call("POST", `/admin/requests/${sam.id()}/approve`, { json: {} });
-
-    // Someone who has the public id (from the admin page or the bucket) presents it.
-    const thief = portal.browser();
-    thief.jar.set("tracker_request", sam.id());
-    const stolen = await thief.call("GET", "/auth/request");
-    assert.deepEqual(stolen.data, { status: "pending" });
-    assert.equal(thief.jar.has("tracker_session"), false);
-
-    assert.deepEqual((await sam.call("GET", "/auth/request")).data, { status: "approved", name: "Sam", admin: false });
-  });
-
-  test("someone removed from the list after approval is not signed in", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    await zach.call("POST", `/admin/requests/${sam.id()}/approve`, { json: {} });
-
-    await portal.portalStore.write("users.json", JSON.stringify({ users: [ZACH, ANN] }));
-    portal.clock.now += 31 * SECOND;
-    const answer = await sam.call("GET", "/auth/request");
-    assert.deepEqual(answer.data, { status: "denied" });
-    assert.equal(sam.jar.has("tracker_session"), false);
-  });
-
-  test("admin routes need a signed-in admin", async (t) => {
-    const portal = await startPortal(t);
-    const id = "a".repeat(64);
-    const nobody = portal.browser();
-    assert.equal((await nobody.call("GET", "/admin/requests")).status, 401);
-    assert.equal((await nobody.call("POST", `/admin/requests/${id}/approve`, { json: {} })).status, 401);
-
-    const sam = await portal.signIn(SAM);
-    for (const [method, path] of [
-      ["GET", "/admin/requests"],
-      ["POST", `/admin/requests/${id}/approve`],
-      ["POST", `/admin/requests/${id}/deny`],
+    const anyone = portal.browser();
+    for (const key of [
+      "short",
+      "a".repeat(19),
+      "a".repeat(101),
+      `${UNCLE.key}=`,
+      UNCLE.key.replace(/^./, "+"),
+      UNCLE.key.replace(/^./, "/"),
+      ` ${UNCLE.key}`,
+      "",
+      42,
+      null,
+      true,
+      [UNCLE.key],
+      { key: UNCLE.key },
     ]) {
-      const res = await sam.call(method, path, method === "POST" ? { json: {} } : {});
-      assert.equal(res.status, 403, path);
-      assert.deepEqual(res.data, { error: "forbidden" });
+      const res = await anyone.call("POST", "/auth/link", { json: { key } });
+      assert.equal(res.status, 400, JSON.stringify(key));
+      assert.deepEqual(res.data, { error: "invalid_key" });
+      assert.deepEqual(res.setCookies, []);
     }
-  });
-
-  test("request ids are checked", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    for (const id of ["abc", "A".repeat(64), "g".repeat(64), "a".repeat(63), "a".repeat(65)]) {
-      const res = await zach.call("POST", `/admin/requests/${id}/approve`, { json: {} });
-      assert.equal(res.status, 400, id);
-      assert.deepEqual(res.data, { error: "invalid_id" });
+    for (const json of [{}, { link: UNCLE.key }, [UNCLE.key]]) {
+      const res = await anyone.call("POST", "/auth/link", { json });
+      assert.equal(res.status, 400, JSON.stringify(json));
+      assert.deepEqual(res.data, { error: "invalid_key" });
     }
-    for (const decision of ["approve", "deny"]) {
-      const res = await zach.call("POST", `/admin/requests/${"0".repeat(64)}/${decision}`, { json: {} });
-      assert.equal(res.status, 404);
-      assert.deepEqual(res.data, { error: "not_found" });
+    // A JSON POST with no body at all.
+    const empty = await anyone.call("POST", "/auth/link", { type: "application/json" });
+    assert.equal(empty.status, 400);
+    assert.deepEqual(empty.data, { error: "invalid_key" });
+    assert.equal((await anyone.call("GET", "/session")).status, 401);
+  });
+
+  test("a well-formed key that is nobody's is a 401 with no cookie", async (t) => {
+    const portal = await startPortal(t);
+    const anyone = portal.browser();
+    for (const key of [person("x", "x").key, "a".repeat(20), "Z".repeat(100), UNCLE.keyHash]) {
+      const res = await anyone.call("POST", "/auth/link", { json: { key } });
+      assert.equal(res.status, 401, key);
+      assert.deepEqual(res.data, { error: "invalid_link" });
+      assert.deepEqual(res.setCookies, []);
     }
+
+    // A device already signed in stays signed in as before.
+    const zach = await portal.open(ZACH);
+    const dead = await zach.call("POST", "/auth/link", { json: { key: person("x", "x").key } });
+    assert.equal(dead.status, 401);
+    assert.deepEqual(dead.setCookies, []);
+    assert.deepEqual((await zach.call("GET", "/session")).data, { name: "Zach" });
   });
 
-  test("the admin list shows waiting requests newest first and clears expired ones", async (t) => {
+  test("re-issuing a link signs out every device that used the old one, and the old link stops working", async (t) => {
     const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const sam = portal.browser();
-    const ann = portal.browser();
-    await sam.call("POST", "/auth/request", { json: { phone: SAM.phone } });
-    portal.clock.now += HOUR;
-    await ann.call("POST", "/auth/request", { json: { phone: ANN.phone } });
+    const phone = await portal.open(UNCLE);
+    const laptop = await portal.open(UNCLE);
+    const zach = await portal.open(ZACH);
 
-    const names = async () => (await zach.call("GET", "/admin/requests")).data.requests.map((r) => r.name);
-    assert.deepEqual(await names(), ["Ann", "Sam"]);
-    portal.clock.now += 23 * HOUR;
-    assert.deepEqual(await names(), ["Ann"]);
-    assert.equal(await portal.readRequest(sam.id()), null, "the expired request was deleted");
-  });
+    // tools/portal/users.sh link uncle: same id and name, new key.
+    const reissued = person("uncle", "Uncle Dave");
+    await portal.setPeople([ZACH, reissued]);
 
-  test("without remember me the session is a browser-session cookie that lasts 12 hours", async (t) => {
-    const portal = await startPortal(t);
-    const sam = await portal.signIn(SAM, { remember: false });
-    assert.match(sam.res.setCookies[1], new RegExp(`^tracker_session=[^;]+; ${ATTRIBUTES}$`));
-
-    portal.clock.now += 12 * HOUR - SECOND;
-    const still = await sam.call("GET", "/session");
-    assert.equal(still.status, 200);
-    assert.deepEqual(still.setCookies, [], "a short session is never renewed");
-
-    portal.clock.now += SECOND;
-    const over = await sam.call("GET", "/session");
-    assert.equal(over.status, 401);
-    assert.deepEqual(over.setCookies, [`tracker_session=; ${ATTRIBUTES}; Max-Age=0`]);
-  });
-
-  test("a remembered session is renewed once it is a day old", async (t) => {
-    const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH, { remember: true });
-    const original = zach.jar.get("tracker_session");
-
-    portal.clock.now += 23 * HOUR;
-    assert.deepEqual((await zach.call("GET", "/session")).setCookies, []);
-
-    portal.clock.now += 2 * HOUR;
-    const renewed = await zach.call("GET", "/telemetry?days=1");
-    assert.equal(renewed.status, 200);
-    assert.match(renewed.setCookies[0], /^tracker_session=.+; Max-Age=7776000$/);
-    assert.notEqual(zach.jar.get("tracker_session"), original);
-
-    // Ninety days after signing in the original cookie is dead, but the renewed
-    // one, issued a day later, still has a day to run.
-    portal.clock.now = START + 90 * DAY;
-    assert.equal((await zach.call("GET", "/session")).status, 200);
-    const stale = portal.browser();
-    stale.jar.set("tracker_session", original);
-    assert.equal((await stale.call("GET", "/session")).status, 401);
-  });
-
-  test("removing someone from users.json signs them out within 30 seconds", async (t) => {
-    const portal = await startPortal(t);
-    const sam = await portal.signIn(SAM);
-    assert.equal((await sam.call("GET", "/session")).status, 200);
-
-    await portal.portalStore.write("users.json", JSON.stringify({ users: [ZACH, ANN] }));
     portal.clock.now += 29 * SECOND;
-    assert.equal((await sam.call("GET", "/session")).status, 200, "still cached");
+    assert.equal((await phone.call("GET", "/session")).status, 200, "users.json is still cached");
     portal.clock.now += 2 * SECOND;
-    const res = await sam.call("GET", "/telemetry");
+    const out = await phone.call("GET", "/telemetry");
+    assert.equal(out.status, 401);
+    assert.deepEqual(out.data, { error: "unauthenticated" });
+    assert.deepEqual(out.setCookies, [CLEARED]);
+    assert.equal((await laptop.call("GET", "/session")).status, 401);
+
+    const old = await portal.browser().call("POST", "/auth/link", { json: { key: UNCLE.key } });
+    assert.equal(old.status, 401);
+    assert.deepEqual(old.data, { error: "invalid_link" });
+
+    await portal.open(reissued, phone);
+    assert.deepEqual((await phone.call("GET", "/session")).data, { name: "Uncle Dave" });
+    assert.deepEqual((await zach.call("GET", "/session")).data, { name: "Zach" }, "nobody else is affected");
+  });
+
+  test("removing someone signs out their devices within 30 seconds, and their link stops working", async (t) => {
+    const portal = await startPortal(t);
+    const phone = await portal.open(UNCLE);
+    const zach = await portal.open(ZACH);
+
+    await portal.setPeople([ZACH]);
+    portal.clock.now += 29 * SECOND;
+    assert.equal((await phone.call("GET", "/session")).status, 200, "still cached");
+    portal.clock.now += 2 * SECOND;
+    const res = await phone.call("GET", "/session");
     assert.equal(res.status, 401);
     assert.deepEqual(res.data, { error: "unauthenticated" });
-    assert.deepEqual(res.setCookies, [`tracker_session=; ${ATTRIBUTES}; Max-Age=0`]);
+    assert.deepEqual(res.setCookies, [CLEARED]);
+
+    const link = await portal.browser().call("POST", "/auth/link", { json: { key: UNCLE.key } });
+    assert.equal(link.status, 401);
+    assert.deepEqual(link.data, { error: "invalid_link" });
+    assert.equal((await zach.call("GET", "/session")).status, 200);
   });
 
-  test("a session cookie that is forged or garbled is refused and cleared", async (t) => {
+  test("a device in use stays signed in: renewed once a day, always for 400 days", async (t) => {
     const portal = await startPortal(t);
-    const sam = await portal.signIn(SAM);
-    const [payload, signature] = sam.jar.get("tracker_session").split(".");
-    const claims = JSON.parse(Buffer.from(payload, "base64url").toString());
-    const promoted = Buffer.from(JSON.stringify({ ...claims, p: ZACH.phone })).toString("base64url");
+    const phone = await portal.open(UNCLE);
+    const original = phone.jar.get("tracker_session");
 
-    for (const value of [`${promoted}.${signature}`, "garbage", ""]) {
+    portal.clock.now += 23 * HOUR;
+    assert.deepEqual((await phone.call("GET", "/session")).setCookies, [], "not yet a day old");
+
+    portal.clock.now += 2 * HOUR;
+    const renewed = await phone.call("GET", "/telemetry?days=1");
+    assert.equal(renewed.status, 200);
+    assert.equal(renewed.setCookies.length, 1);
+    assert.match(renewed.setCookies[0], new RegExp(`^tracker_session=[\\w-]+\\.[\\w-]+; ${ATTRIBUTES}; Max-Age=34560000$`));
+    const token = phone.jar.get("tracker_session");
+    assert.notEqual(token, original);
+    assert.deepEqual(claimsOf(token), {
+      u: "uncle",
+      k: UNCLE.keyHash.slice(0, 16),
+      iat: START + 25 * HOUR,
+      exp: START + 25 * HOUR + 400 * DAY,
+    });
+    assert.deepEqual((await phone.call("GET", "/session")).setCookies, [], "renewed only once a day");
+
+    // 400 days after the link was opened the first cookie is dead, but the renewed
+    // one still has a day to run, and using it renews it again.
+    portal.clock.now = START + 400 * DAY;
+    const later = await phone.call("GET", "/session");
+    assert.equal(later.status, 200);
+    assert.equal(claimsOf(phone.jar.get("tracker_session")).exp, START + 800 * DAY);
+
+    const idle = portal.browser();
+    idle.jar.set("tracker_session", original);
+    const expired = await idle.call("GET", "/session");
+    assert.equal(expired.status, 401);
+    assert.deepEqual(expired.setCookies, [CLEARED]);
+  });
+
+  test("a users.json left in the old phone-number format lets nobody in, without failing", async (t) => {
+    const portal = await startPortal(t);
+    const phone = await portal.open(UNCLE);
+
+    await portal.portalStore.write(
+      "users.json",
+      JSON.stringify({
+        users: [
+          { phone: "+15195550100", name: "Zach", admin: true },
+          { phone: "+15195550101", name: "Uncle Dave", admin: false },
+        ],
+      }),
+    );
+    portal.clock.now += 31 * SECOND;
+    const session = await phone.call("GET", "/session");
+    assert.equal(session.status, 401);
+    assert.deepEqual(session.setCookies, [CLEARED]);
+    const link = await portal.browser().call("POST", "/auth/link", { json: { key: ZACH.key } });
+    assert.equal(link.status, 401);
+    assert.deepEqual(link.data, { error: "invalid_link" });
+
+    // users.sh add writes the new format over it, and that works at once.
+    await portal.setPeople([ZACH]);
+    portal.clock.now += 31 * SECOND;
+    await portal.open(ZACH);
+  });
+
+  test("a missing users.json lets nobody in", async (t) => {
+    const portal = await startPortal(t);
+    await portal.portalStore.delete("users.json");
+    const res = await portal.browser().call("POST", "/auth/link", { json: { key: ZACH.key } });
+    assert.equal(res.status, 401);
+    assert.deepEqual(res.data, { error: "invalid_link" });
+  });
+
+  test("a session cookie that is forged, garbled or from the old format is refused and cleared", async (t) => {
+    const portal = await startPortal(t);
+    const phone = await portal.open(UNCLE);
+    const [payload, signature] = phone.jar.get("tracker_session").split(".");
+    const claims = claimsOf(payload);
+    const swap = (change) => `${Buffer.from(JSON.stringify({ ...claims, ...change })).toString("base64url")}.${signature}`;
+    // A cookie from before links, signed with the same secret: deploying this
+    // version signs out everyone who had one.
+    const oldPayload = Buffer.from(
+      JSON.stringify({ p: "+15195550100", r: true, iat: START, exp: START + 90 * DAY }),
+    ).toString("base64url");
+    const oldFormat = `${oldPayload}.${createHmac("sha256", SECRET).update(oldPayload).digest("base64url")}`;
+
+    for (const value of [swap({ u: "zach" }), swap({ k: ZACH.keyHash.slice(0, 16) }), oldFormat, "garbage", ""]) {
       const forger = portal.browser();
       forger.jar.set("tracker_session", value);
-      const res = await forger.call("GET", "/admin/requests");
+      const res = await forger.call("GET", "/telemetry");
       assert.equal(res.status, 401, value);
-      assert.deepEqual(res.setCookies, [`tracker_session=; ${ATTRIBUTES}; Max-Age=0`]);
+      assert.deepEqual(res.setCookies, [CLEARED]);
     }
   });
 
   test("every POST must be JSON", async (t) => {
     const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
-    const id = "a".repeat(64);
-    for (const path of [
-      "/auth/request",
-      "/auth/request/cancel",
-      "/auth/logout",
-      `/admin/requests/${id}/approve`,
-      `/admin/requests/${id}/deny`,
-    ]) {
+    const zach = await portal.open(ZACH);
+    for (const path of ["/auth/link", "/auth/logout"]) {
       for (const [type, body] of [
-        ["application/x-www-form-urlencoded", `phone=${SAM.phone}`],
-        ["text/plain", JSON.stringify({ phone: SAM.phone })],
+        ["application/x-www-form-urlencoded", `key=${UNCLE.key}`],
+        ["text/plain", JSON.stringify({ key: UNCLE.key })],
         ["multipart/form-data; boundary=x", "--x--"],
         [undefined, undefined],
       ]) {
         const res = await zach.call("POST", path, { body, type });
         assert.equal(res.status, 415, `${path} ${type}`);
         assert.deepEqual(res.data, { error: "unsupported_media_type" });
+        assert.deepEqual(res.setCookies, []);
       }
     }
-    assert.deepEqual(await portal.requestObjects(), []);
-    assert.equal((await zach.call("GET", "/session")).status, 200, "still signed in");
+    assert.deepEqual((await zach.call("GET", "/session")).data, { name: "Zach" }, "still signed in, as Zach");
 
-    // A JSON POST needs no body.
-    assert.equal((await zach.call("POST", "/auth/request/cancel", { type: "application/json" })).status, 204);
     // Broken JSON is a 400.
-    const broken = await zach.call("POST", "/auth/request", { body: "{phone:", type: "application/json" });
+    const broken = await zach.call("POST", "/auth/link", { body: "{key:", type: "application/json" });
     assert.equal(broken.status, 400);
     assert.deepEqual(broken.data, { error: "bad_request" });
+    // A JSON POST needs no body.
+    assert.equal((await zach.call("POST", "/auth/logout", { type: "application/json" })).status, 204);
   });
 
-  test("a malformed number is a 400 and gets no cookie", async (t) => {
+  test("the phone-number sign-in and admin routes are gone", async (t) => {
     const portal = await startPortal(t);
-    const anyone = portal.browser();
-    for (const phone of ["12345", "", "call me", 5195550100, null, undefined]) {
-      const res = await anyone.call("POST", "/auth/request", { json: { phone } });
-      assert.equal(res.status, 400, String(phone));
-      assert.deepEqual(res.data, { error: "invalid_phone" });
-      assert.deepEqual(res.setCookies, []);
+    const zach = await portal.open(ZACH);
+    const id = "a".repeat(64);
+    for (const [method, path] of [
+      ["POST", "/auth/request"],
+      ["GET", "/auth/request"],
+      ["POST", "/auth/request/cancel"],
+      ["GET", "/admin/requests"],
+      ["POST", `/admin/requests/${id}/approve`],
+      ["POST", `/admin/requests/${id}/deny`],
+    ]) {
+      for (const who of [zach, portal.browser()]) {
+        const res = await who.call(method, path, method === "POST" ? { json: { phone: "+15195550100" } } : {});
+        assert.equal(res.status, 404, `${method} ${path}`);
+        assert.deepEqual(res.data, { error: "not_found" });
+        assert.deepEqual(res.setCookies, []);
+      }
     }
   });
 
   test("days must be a whole number from 1 to 60, 7 by default", async (t) => {
     const portal = await startPortal(t);
-    const zach = await portal.signIn(ZACH);
+    const zach = await portal.open(ZACH);
     for (const days of ["0", "61", "abc", "1.5", "-1", "", "007", "7&days=8"]) {
       const res = await zach.call("GET", `/telemetry?days=${days}`);
       assert.equal(res.status, 400, days);
@@ -548,16 +441,8 @@ describe("portal API", { concurrency: true }, () => {
     const health = await anyone.call("GET", "/health");
     assert.equal(health.status, 200);
     assert.equal(health.data, "ok");
-    assert.equal((await anyone.call("GET", "/nope")).status, 404);
-    assert.deepEqual((await anyone.call("GET", "/auth/request")).data, { error: "no_request" });
-  });
-
-  test("a missing users.json lets nobody in", async (t) => {
-    const portal = await startPortal(t);
-    await portal.portalStore.delete("users.json");
-    const zach = portal.browser();
-    const res = await zach.call("POST", "/auth/request", { json: { phone: ZACH.phone } });
-    assert.equal(res.status, 202);
-    assert.deepEqual(await portal.requestObjects(), []);
+    const nope = await anyone.call("GET", "/nope");
+    assert.equal(nope.status, 404);
+    assert.deepEqual(nope.data, { error: "not_found" });
   });
 });
