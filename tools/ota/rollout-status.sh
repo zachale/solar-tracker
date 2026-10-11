@@ -20,7 +20,7 @@ echo "rollout status, last $HOURS h (since $SINCE; now $(date -u +%Y-%m-%dT%H:%M
 echo "manifest: $(gcloud storage cat "gs://solar-tracker-442903-ota/$TOKEN/manifest.txt" 2>/dev/null)"
 
 gcloud logging read "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"test-image\" AND httpRequest.requestUrl:\"/time/est\" AND timestamp>=\"$SINCE\"" \
-  --limit=1000 --format="value(timestamp,httpRequest.requestUrl,httpRequest.status)" 2>/dev/null | sort > "$WORK/syncs"
+  --limit=1000 --format="value(timestamp,httpRequest.requestUrl,httpRequest.status)" 2>/dev/null < /dev/null | sort > "$WORK/syncs"
 python3 - "$WORK/syncs" <<'PY'
 import sys, re
 seen = {}
@@ -44,9 +44,13 @@ from datetime import datetime, timedelta, timezone
 s = datetime.strptime('$SINCE', '%Y-%m-%dT%H:%M:%SZ'); e = datetime.now(timezone.utc).replace(tzinfo=None)
 d = s.date()
 while d <= e.date(): print(d); d += timedelta(days=1)"); do
-  gcloud storage ls "gs://$BUCKET/raw/$day/*.ndjson" 2>/dev/null
+  gcloud storage ls "gs://$BUCKET/raw/$day/*.ndjson" 2>/dev/null < /dev/null
 done | awk -F/ -v since="$(tr ':' '-' <<< "$SINCE")" '$NF >= since' > "$WORK/objects"
-while read -r o; do gcloud storage cat "$o" 2>/dev/null; done < "$WORK/objects" > "$WORK/rows"
+# Eight at a time, each into its own file, and never on gcloud's stdin: one cat per batch in
+# a plain read loop took minutes.
+mkdir -p "$WORK/batches"
+xargs -P 8 -I{} sh -c 'gcloud storage cat "$1" > "$2/$(basename "$1")" 2>/dev/null < /dev/null' _ {} "$WORK/batches" < "$WORK/objects"
+cat "$WORK/batches"/* > "$WORK/rows" 2>/dev/null || : > "$WORK/rows"
 python3 - "$WORK/rows" "$(wc -l < "$WORK/objects" | tr -d ' ')" <<'PY'
 import sys, json
 from collections import Counter
