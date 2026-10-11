@@ -542,10 +542,10 @@ describe("portal API", { concurrency: true }, () => {
     assert.equal((await zach.call("GET", "/telemetry")).data.rows.length, 2);
   });
 
-  test("healthz needs no sign-in, and unknown paths are 404", async (t) => {
+  test("health needs no sign-in, and unknown paths are 404", async (t) => {
     const portal = await startPortal(t);
     const anyone = portal.browser();
-    const health = await anyone.call("GET", "/healthz");
+    const health = await anyone.call("GET", "/health");
     assert.equal(health.status, 200);
     assert.equal(health.data, "ok");
     assert.equal((await anyone.call("GET", "/nope")).status, 404);

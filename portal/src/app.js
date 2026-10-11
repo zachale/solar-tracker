@@ -95,7 +95,7 @@ export function createApp({ telemetryStore, portalStore, sessionSecret, siteTz, 
     next();
   };
 
-  app.get("/healthz", (req, res) => {
+  app.get("/health", (req, res) => {
     res.type("text/plain").send("ok");
   });
 

@@ -44,7 +44,7 @@ All responses are JSON unless noted. Every POST must be sent as `Content-Type: a
 
 | Method | Path | Who | What |
 | --- | --- | --- | --- |
-| GET | `/healthz` | anyone | `ok` (text) |
+| GET | `/health` | anyone | `ok` (text). Not `/healthz`: Cloud Run's front end reserves paths ending in `z` |
 | POST | `/auth/request` | anyone | `{phone, remember}` → 202 `{ok: true}` and a `tracker_request` cookie, always. 400 `invalid_phone` if it is not a phone number. |
 | GET | `/auth/request` | the asking browser | `{status: "pending"}`, `{status: "approved", name, admin}` (and the session cookie is set), `{status: "denied"}` or `{status: "expired"}`. 404 `no_request` without a request cookie. |
 | POST | `/auth/request/cancel` | the asking browser | Forgets the request. 204. |
@@ -171,14 +171,10 @@ gcloud run deploy tracker-api --source portal --region us-central1 \
 Buildpacks build it from `package.json` (Node 22, `npm start`); there is no Dockerfile.
 `--allow-unauthenticated` because the browser reaches it through Netlify's proxy, which cannot
 attach a Google identity token; the API does its own authentication. The Netlify rewrite lives in
-the portfolio repo:
+the portfolio repo's `src/_redirects`:
 
-```toml
-[[redirects]]
-  from = "/api/tracker/*"
-  to = "https://<tracker-api URL>/:splat"
-  status = 200
-  force = true
+```
+/api/tracker/*  https://tracker-api-188091506191.us-central1.run.app/:splat  200
 ```
 
 To sign everyone out, add a new secret version and start a new revision, which reads it:
