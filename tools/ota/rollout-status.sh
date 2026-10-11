@@ -17,7 +17,7 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
 echo "rollout status, last $HOURS h (since $SINCE; now $(date -u +%Y-%m-%dT%H:%M:%SZ))"
-echo "manifest: $(gcloud storage cat "gs://solar-tracker-442903-ota/$TOKEN/manifest.txt" 2>/dev/null)"
+echo "manifest: $(gcloud storage cat "gs://solar-tracker-442903-ota/$TOKEN/manifest.txt" 2>/dev/null < /dev/null)"
 
 gcloud logging read "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"test-image\" AND httpRequest.requestUrl:\"/time/est\" AND timestamp>=\"$SINCE\"" \
   --limit=1000 --format="value(timestamp,httpRequest.requestUrl,httpRequest.status)" 2>/dev/null < /dev/null | sort > "$WORK/syncs"
