@@ -1,0 +1,8 @@
+# Cloud Run builds from source with buildpacks, which run npm ci themselves.
+# Only package*.json and src/ are needed.
+.gcloudignore
+.gitignore
+node_modules/
+test/
+scripts/
+README.md
