@@ -59,10 +59,13 @@ BATCH_GAP = timedelta(minutes=45)    # longest daytime wait for a telemetry batc
 SAFE_GAP = timedelta(hours=3)        # the same, while SAFE holds uploads back by design
 STAGE_DEADLINE = timedelta(hours=40)  # from install to passing its own check
 MAX_FAILURES = 3                     # runs in a row that could not complete
-PUBLISH_HOURS = range(6, 14)         # site hours a version may go out: its 2 h install grace
-                                     # and 3 h soak both fit in the same afternoon
-DAY_START, DAY_END = 6, 17           # site hours the tracker uploads at all
-MORNING_CATCHUP = (6, 20)            # by this site time the night's rows have arrived
+# The tracker syncs through the night since v12.3 ended the 17:00 move that used to hang
+# until morning (seen 2026-10-12: syncs every 15 min after 17:00), so it is reachable, and
+# checked, around the clock.
+PUBLISH_HOURS = range(0, 14)         # site hours a version may go out: from midnight, so its
+                                     # 3 h soak ends while someone could still look
+DAY_START, DAY_END = 0, 24           # site hours the tracker is expected to upload
+MORNING_CATCHUP = (0, 0)             # no overnight catch-up to wait for any more
 STATUSES = {"ACTIVE", "NIGHT", "SAFE", "AWAY"}
 
 DRY_RUN = False

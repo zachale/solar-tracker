@@ -2,8 +2,8 @@
 Description=Hourly staged OTA rollout check, during the tracker's site daytime
 
 [Timer]
-# 06:13 to 17:13 at the site. The tracker only reaches the cloud from about 06:00 to 17:00.
-OnCalendar=*-*-* 06..17:13:00 America/New_York
+# Hourly, at :13. The tracker reaches the cloud around the clock (since v12.3).
+OnCalendar=*-*-* *:13:00 America/New_York
 Persistent=false
 
 [Install]
