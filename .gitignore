@@ -24,3 +24,4 @@ tools/ota/.venv/
 tools/ota/lzss.dylib
 tools/ota/lzss.so
 tools/ota/.ota_token
+__pycache__/

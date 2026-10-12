@@ -160,8 +160,10 @@ def public_manifest(cfg: dict) -> str:
     return r.text.strip()
 
 
-def clock_syncs(s: requests.Session, cfg: dict, since: datetime) -> list[tuple[datetime, str]]:
-    """Every /time/est request since `since`, oldest first, with the firmware it named."""
+def clock_syncs(s: requests.Session, cfg: dict, since: datetime) -> list[tuple[datetime, str, dict]]:
+    """Every /time/est request since `since`, oldest first, with the firmware it named and
+    the rest of its query (from v12.6: cal = calibrations since boot, pos = 1 when the boot
+    took its position over from the last firmware)."""
     flt = (f'resource.type="cloud_run_revision" AND resource.labels.service_name="{cfg["service"]}" '
            f'AND httpRequest.requestUrl:"/time/est" AND timestamp>="{iso(since)}"')
     body = {"resourceNames": [f"projects/{cfg['project']}"], "filter": flt,
@@ -173,8 +175,8 @@ def clock_syncs(s: requests.Session, cfg: dict, since: datetime) -> list[tuple[d
         data = r.json()
         for e in data.get("entries", []):
             url = e.get("httpRequest", {}).get("requestUrl", "")
-            m = re.search(r"[?&]fw=([^&\s]+)", url)
-            out.append((parse_utc(e["timestamp"]), m.group(1) if m else "v12"))
+            query = dict(re.findall(r"[?&]([a-z]+)=([^&\s]+)", url))
+            out.append((parse_utc(e["timestamp"]), query.pop("fw", "v12"), query))
         if not data.get("nextPageToken"):
             return out
         body["pageToken"] = data["nextPageToken"]
@@ -291,8 +293,9 @@ def finish(s: requests.Session, cfg: dict, state: dict, sa_email: str) -> None:
                  f"{h.get('installed_at', '?')}. {h.get('evidence', '')}" for h in state["history"]]
         body = ("The staged rollout is done. Every version installed, ran for 3 h and passed its "
                 "check.\n\n" + "\n".join(lines) +
-                f"\n\nOvernight silence after v12.3: {state.get('silence_note', 'not recorded')}\n\n"
-                "The homing fix in v12.5 only shows at the weekly recalibration, about 7 days after "
+                f"\n\nv12.3 night test: {state.get('night_test', 'not recorded')}. "
+            f"Overnight silence: {state.get('silence_note', 'not recorded')}\n\n"
+                "The homing fix in v12.13 only shows at the weekly recalibration, about 7 days after "
                 "the last boot.\n\nThe VM's service account deletes itself after this email and the "
                 "timer turns off. Leftover IAM bindings that name the deleted account grant nothing; "
                 "tools/ota/vm/cleanup.sh on the Mac removes them, and the custom self-delete role.")
@@ -342,7 +345,7 @@ def check(cfg: dict, state: dict) -> None:
                    "someone else changed it")
 
     syncs = clock_syncs(s, cfg, published_at - timedelta(hours=1))
-    tagged = [t for t, fw in syncs if fw == version and t >= published_at]
+    tagged = [t for t, fw, _ in syncs if fw == version and t >= published_at]
     if not tagged:
         waited = daytime_between(published_at, now)
         if waited > INSTALL_GRACE:
@@ -355,7 +358,7 @@ def check(cfg: dict, state: dict) -> None:
         cur["installed_at"] = iso(installed_at)
         save_state(state)
 
-    older = [(t, fw) for t, fw in syncs if t > installed_at and version_key(fw) < version_key(version)]
+    older = [(t, fw) for t, fw, _ in syncs if t > installed_at and version_key(fw) < version_key(version)]
     if older:
         t, fw = older[0]
         raise Stop(f"rollback: the tracker synced as {fw} at {iso(t)}, after installing "
@@ -382,16 +385,21 @@ def check(cfg: dict, state: dict) -> None:
     bad = [r for r in rows if r.get("status") not in STATUSES]
     if bad:
         raise Stop(f"unknown status in a row since {version} installed: {bad[0]}")
-    if len(rows) >= 3 and all(r["extended_percent"] == -1 for r in rows[-3:]):
+    # From v12.6 an away boot without a handed-over position holds still and reports -1
+    # until away ends: expected, not stuck.
+    away_unknown_ok = version == "v12.6" and all(
+        r["status"] == "AWAY" for r in rows[-3:])
+    if len(rows) >= 3 and all(r["extended_percent"] == -1 for r in rows[-3:]) and not away_unknown_ok:
         raise Stop(f"panel position stuck at -1 (uncalibrated) in the last 3 rows: {rows[-1]['time']}")
-    if version_key(version) >= version_key("v12.4"):
+    if version_key(version) >= version_key(cfg.get("temperature_fix", "v12.8")):
         hot = [r for r in rows if r["temperature"] >= 128]
         if hot:
             raise Stop(f"temperature {hot[0]['temperature']} at {hot[0]['time']} with {version} running")
 
     # Soak counts only what has been seen: the newest row from the new firmware.
     seen = (row_site_time(rows[-1]) - installed_site) if rows else timedelta()
-    passed, evidence = stage_check(version, rows, got, state)
+    since_install = [(t, q) for t, fw, q in syncs if fw == version and t >= installed_at]
+    passed, evidence = stage_check(version, rows, got, state, since_install, installed_site)
     log(f"{version}: installed {iso(installed_at)}, seen running {seen}, {len(rows)} rows since, "
         f"check {'passed' if passed else 'not yet'}: {evidence}")
     if not passed:
@@ -424,8 +432,34 @@ def check(cfg: dict, state: dict) -> None:
         log(f"progress email not sent: {e!r}")
 
 
-def stage_check(version: str, rows: list[dict], got, state: dict):
+def stage_check(version: str, rows: list[dict], got, state: dict, syncs, installed_site):
     """(passed, evidence) for the version's own change."""
+    if version == "v12.3":
+        # The night test needs the tracker in ACTIVE at 17:00; it is in away for the
+        # foreseeable future, so it is deferred (Zach, 2026-10-12) and every later version
+        # carries the change. Here: 3 h of normal rows.
+        state["night_test"] = "deferred while the tracker is in away"
+        if len(rows) >= 36:
+            return True, f"{len(rows)} normal rows since install; night test deferred while away"
+        return False, f"{len(rows)} rows since install, want 36"
+
+    if version == "v12.6":
+        return away_calibration_check(rows, got, syncs, installed_site)
+
+    if version == "v12.10":
+        return boot_calibration_check(rows, syncs)
+
+    if version in ("v12.11", "v12.12", "v12.13"):
+        note = handoff_check(version, rows, got, syncs, installed_site)
+        if version == "v12.12":
+            temps = [r["temperature"] for r in rows]
+            if temps and not all(-41 <= t <= 70 for t in temps):
+                raise Stop(f"v12.12: a temperature outside -41..70 °C: {[t for t in temps if not -41 <= t <= 70][:3]}")
+            note += f"; {len(temps)} readings from {min(temps, default='-')} to {max(temps, default='-')} °C"
+        if len(rows) >= 36:
+            return True, f"{len(rows)} normal rows since install; {note}"
+        return False, f"{len(rows)} rows since install, want 36; {note}"
+
     if version == "v12.2":
         frac = sorted({r["wind_peak"] for r in rows
                        if r["button_panel"]["wind_sensor"] and r["wind_peak"] != int(r["wind_peak"])})
@@ -436,18 +470,93 @@ def stage_check(version: str, rows: list[dict], got, state: dict):
     if version == "v12.3":
         return night_check(rows, got, state)
 
-    if version == "v12.4":
+    if version in ("v12.4", "v12.8"):
         temps = [r["temperature"] for r in rows]
         if temps and all(-41 <= t <= 70 for t in temps):
             return True, f"{len(temps)} readings from {min(temps)} to {max(temps)} °C, none at 128 or above"
         return False, "no readings yet" if not temps else "a reading outside -41..70 °C"
 
-    if version == "v12.5":
+    if version in ("v12.5", "v12.9"):
         if len(rows) >= 30:
             return True, f"{len(rows)} normal rows since install"
         return False, f"{len(rows)} rows since install, want 30"
 
     raise Stop(f"no check defined for {version}")
+
+
+def boot_calibration_check(rows: list[dict], syncs):
+    """v12.10: the update from v12.6 has no position to hand over, so the boot calibrates
+    once, even in away, and the panel then reports the away position instead of -1."""
+    if not syncs:
+        return False, "no tagged sync yet"
+    cals = [int(q.get("cal", 0)) for _, q in syncs]
+    if max(cals) > 1:
+        raise Stop(f"v12.10 calibrated {max(cals)} times since boot; the boot calibration should be the only one")
+    known = [r for r in rows if r["extended_percent"] != -1]
+    if cals[-1] == 1 and rows and rows[-1]["extended_percent"] == -1 and len(rows) >= 3:
+        raise Stop("v12.10 calibrated but the panel still reports -1")
+    if not known:
+        return False, f"cal={cals[-1]}, no row with a known position yet"
+    where = known[-1]["extended_percent"]
+    if len(rows) < 36:
+        return False, f"{len(rows)} rows since install, want 36; calibrated once, now at {where}%"
+    return True, f"calibrated once at boot (cal=1), then held at {where}% ({known[-1]['status']})"
+
+
+def handoff_check(version: str, rows: list[dict], got, syncs, installed_site) -> str:
+    """From v12.11: the update from a calibrated version hands the position over, so the
+    boot neither calibrates nor moves."""
+    if not syncs:
+        return "no tagged sync yet"
+    first = syncs[0][1]
+    if first.get("pos") != "1":
+        raise Stop(f"{version} booted without the position handed over (first sync {first})")
+    cals = [int(q.get("cal", 0)) for _, q in syncs]
+    if any(r["status"] == "AWAY" for r in rows) and any(cals):
+        raise Stop(f"{version} calibrated while away (cal={max(cals)})")
+    before = [r for _, rs in got for r in rs if row_site_time(r) < installed_site]
+    after = [r for r in rows if r["status"] == before[-1]["status"]] if before else []
+    if before and before[-1]["status"] in ("AWAY", "NIGHT") and after:
+        held = before[-1]["extended_percent"]
+        moved = [r for r in after if abs(r["extended_percent"] - held) > 1]
+        if moved:
+            raise Stop(f"{version}: position {moved[0]['extended_percent']}% at {moved[0]['time']}, "
+                       f"was {held}% before the update")
+    return f"position handed over (pos=1), no calibration (cal={max(cals)})"
+
+
+def away_calibration_check(rows: list[dict], got, syncs, installed_site):
+    """v12.6: an OTA restart in away takes the position over and nothing calibrates."""
+    if not syncs:
+        return False, "no tagged sync yet"
+    first = syncs[0][1]
+    away = [r for r in rows if r["status"] == "AWAY"]
+    cals = [int(q.get("cal", 0)) for _, q in syncs]
+    if away and any(cals):
+        raise Stop(f"v12.6 calibrated while away: cal={max(cals)} in its syncs")
+    if first.get("pos") != "1":
+        # The update from v12.3 cannot hand the position over (v12.3 never writes it), so
+        # in away v12.6 holds still with the position unknown until away ends.
+        if away and all(r["extended_percent"] == -1 for r in away):
+            if len(rows) < 36:
+                return False, f"{len(rows)} rows since install, want 36; holding still, cal=0 so far"
+            return True, ("held still in away with the position unknown (v12.3 could not hand it "
+                          "over) and never calibrated (cal=0); it calibrates once away ends")
+        raise Stop(f"v12.6 booted without a handed-over position (first sync {first}) and did not "
+                   "hold still with it unknown")
+    before = [r for _, rs in got for r in rs
+              if row_site_time(r) < installed_site and r["status"] == "AWAY"]
+    if away and before:
+        held = before[-1]["extended_percent"]
+        moved = [r for r in away if abs(r["extended_percent"] - held) > 1]
+        if moved:
+            raise Stop(f"v12.6: away position {moved[0]['extended_percent']}% at {moved[0]['time']}, "
+                       f"was {held}% before the update")
+    if len(rows) < 36:
+        return False, f"{len(rows)} rows since install, want 36; position handed over, cal=0 so far"
+    where = (f"held at {away[-1]['extended_percent']}% in away" if away
+             else "away ended; calibrations since boot " + str(max(cals)))
+    return True, f"position handed over at boot (pos=1), no calibration (cal=0), {where}"
 
 
 def night_check(rows: list[dict], got, state: dict):
