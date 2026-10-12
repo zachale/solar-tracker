@@ -176,14 +176,15 @@ bool LinearActuator::isExtending()
 
 void LinearActuator::extendToPercent(float percent)
 {
-  if (!calibrationAllowed && maxPos == 0)
+  bool mayCalibrate = calibrationAllowed || (maxPos == 0 && positionCalibrationAllowed);
+  if (!mayCalibrate && maxPos == 0)
   {
     // Before the target is recorded, so the same request goes through once it may calibrate.
     Serial.println("Position unknown and no calibration allowed now: holding still");
     return;
   }
 
-  if (calibrationAllowed && calibrationDue() && status == STOP)
+  if (mayCalibrate && calibrationDue() && status == STOP)
   {
     Serial.println(maxPos == 0 ? "Position unknown: calibrating before the move"
                                : "Calibration due: calibrating before the move");

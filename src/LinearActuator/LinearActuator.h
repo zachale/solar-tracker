@@ -32,6 +32,10 @@ public:
   // Without it a move never sweeps: with the position unknown it holds still, and if it
   // runs into something it stops where it is and owes a calibration.
   bool calibrationAllowed = true;
+  // The narrower permission, only to find an unknown position (after a boot that was not
+  // handed one). Allowed in away, so the panel does not sit at an unknown position reading
+  // -1 for as long as away lasts; never in SAFE.
+  bool positionCalibrationAllowed = true;
   // Returns a target asked for during the sweep (the sweep calls back into the main loop,
   // which can change the status), or -1 if none was.
   int recalibrate();

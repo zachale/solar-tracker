@@ -42,6 +42,7 @@ void SolarTracker::setup()
   checkClockBus();
   windSensor.setup();
   actuator.calibrationAllowed = mayCalibrate();
+  actuator.positionCalibrationAllowed = status != SAFE;
   LinearActuator::Snapshot handed;
   positionRestored = PositionHandoff::take(FIRMWARE_VERSION, clockModule.getTimestamp(), handed) &&
                      actuator.restore(handed);
@@ -55,6 +56,7 @@ void SolarTracker::setup()
 void SolarTracker::pollSensorData()
 {
   actuator.calibrationAllowed = mayCalibrate();
+  actuator.positionCalibrationAllowed = status != SAFE;
 
   if (status != AWAY && ButtonPanel::isAwayModeOverride())
   {
@@ -242,6 +244,7 @@ SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
 {
   status = inputStatus;
   actuator.calibrationAllowed = mayCalibrate();
+  actuator.positionCalibrationAllowed = status != SAFE;
   actOnStatus(status);
   Serial.print("Set status to: ");
   Serial.println(getStatusString());
@@ -276,6 +279,8 @@ SolarTracker::Status SolarTracker::statusForNow()
   return clockModule.isActiveHours() ? ACTIVE : NIGHT;
 }
 
+// The weekly calibration. Finding an unknown position is allowed more widely: see
+// LinearActuator::positionCalibrationAllowed.
 bool SolarTracker::mayCalibrate()
 {
   // The switch as well as the status: at boot the status has not been chosen yet.

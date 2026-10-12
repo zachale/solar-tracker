@@ -167,16 +167,40 @@ constexpr unsigned long WEEK_MS = 604800000UL;
 
 TEST_SUITE("actuator: when it may calibrate") {
 
-  TEST_CASE("with the position unknown, a move that may not calibrate holds still") {
-    // Away mode after a power cut: the panel stays where it is rather than sweeping.
+  TEST_CASE("with the position unknown, SAFE holds still rather than sweep in the wind") {
     LinearActuator a;
     onBench(a, 800, false);
     a.calibrationAllowed = false;
+    a.positionCalibrationAllowed = false;
     a.extendToPercent(80);
     CHECK(simPos == 800);
     CHECK(LinearActuator::recalibrations == 0);
     CHECK(a.calibrationDue());
     CHECK(a.currentPercentTarget == -1);   // so the same request goes through once it may
+  }
+
+  TEST_CASE("with the position unknown, away calibrates once and goes to the away position") {
+    // A boot in away: without a position the panel reads -1, which nobody can make sense
+    // of, so the one calibration that finds it is allowed even in away.
+    LinearActuator a;
+    onBench(a, 300, false);
+    a.calibrationAllowed = false;            // away: no weekly calibration
+    a.positionCalibrationAllowed = true;     // but finding the position is allowed
+    a.extendToPercent(80);
+    CHECK(LinearActuator::recalibrations == 1);
+    CHECK(a.getPercentExtended() == doctest::Approx(80).epsilon(0.02));
+    CHECK(simPos == doctest::Approx(800).epsilon(0.02));
+  }
+
+  TEST_CASE("in away with the position known, a due weekly calibration still waits") {
+    LinearActuator a;
+    onBench(a, 790, true);
+    mock::advance(WEEK_MS + 1);
+    a.calibrationAllowed = false;
+    a.positionCalibrationAllowed = true;
+    a.extendToPercent(80);
+    CHECK(LinearActuator::recalibrations == 0);
+    CHECK(a.calibrationDue());
   }
 
   TEST_CASE("with the position unknown, a move that may calibrate calibrates first") {
