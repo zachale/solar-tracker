@@ -48,10 +48,15 @@ d = s.date()
 while d <= e.date(): print(d); d += timedelta(days=1)"); do
   gcloud storage ls "gs://$BUCKET/raw/$day/*.ndjson" 2>/dev/null < /dev/null
 done | awk -F/ -v since="$(tr ':' '-' <<< "$SINCE")" '$NF >= since' > "$WORK/objects"
-# Eight at a time, each into its own file, and never on gcloud's stdin: one cat per batch in
-# a plain read loop took minutes.
+# Eight at a time, with curl and one access token: gcloud storage cat sometimes never returns,
+# and a hung one held the whole check for over ten minutes.
 mkdir -p "$WORK/batches"
-xargs -P 8 -I{} sh -c 'gcloud storage cat "$1" > "$2/$(basename "$1")" 2>/dev/null < /dev/null' _ {} "$WORK/batches" < "$WORK/objects"
+ACCESS="$(gcloud auth print-access-token < /dev/null 2>/dev/null)"
+export ACCESS
+sed 's|^gs://\([^/]*\)/|\1 |' "$WORK/objects" | xargs -P 8 -n 2 sh -c '
+  obj="$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=\"\"))" "$1")"
+  curl -fsS -m 30 --retry 2 -H "Authorization: Bearer $ACCESS" \
+    "https://storage.googleapis.com/storage/v1/b/$0/o/$obj?alt=media" -o "'"$WORK"'/batches/$(basename "$1")" 2>/dev/null' 
 cat "$WORK/batches"/* > "$WORK/rows" 2>/dev/null || : > "$WORK/rows"
 python3 - "$WORK/rows" "$(wc -l < "$WORK/objects" | tr -d ' ')" <<'PY'
 import sys, json
