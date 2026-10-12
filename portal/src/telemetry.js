@@ -130,8 +130,9 @@ export function createTelemetry({ store, tz, now }) {
   }
 
   return {
-    async read(days) {
-      const at = now();
+    // The window is the days up to `at`; a caller passes it when something else must
+    // cover the same window.
+    async read(days, at = now()) {
       const since = at - days * DAY;
 
       // A row is uploaded at or after the moment it describes, so its object is

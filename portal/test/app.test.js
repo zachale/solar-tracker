@@ -7,6 +7,7 @@ import { once } from "node:events";
 
 import { createApp } from "../src/app.js";
 import { createMemoryStore } from "../src/stores.js";
+import { createMemorySyncLog } from "../src/syncs.js";
 import { hashKey } from "../src/users.js";
 
 const SECOND = 1000;
@@ -50,12 +51,27 @@ const TELEMETRY = {
   "raw/2026-10-11/2026-10-11T15-00-00-000Z.ndjson": `${reading("2026-10-11T10:55:00")}\n`,
 };
 
-async function startPortal(t, { people = [ZACH, UNCLE] } = {}) {
+// Clock syncs in the request log (real UTC). A recalibration on 3 October, more
+// than seven days before START; a reboot; then two between one pair of syncs on
+// 11 October, inside them.
+const sync = (iso, cal) => ({
+  t: Date.parse(iso),
+  url: `https://test-image-188091506191.us-central1.run.app/time/est?fw=v12.10&cal=${cal}&pos=0`,
+});
+const SYNCS = [
+  sync("2026-10-03T14:00:00Z", 0),
+  sync("2026-10-03T14:15:00Z", 1),
+  sync("2026-10-11T13:45:00Z", 0),
+  sync("2026-10-11T14:00:00Z", 2),
+];
+
+async function startPortal(t, { people = [ZACH, UNCLE], syncLog = createMemorySyncLog(SYNCS) } = {}) {
   const clock = { now: START };
   const portalStore = createMemoryStore({ "users.json": usersJson(people) });
   const app = createApp({
     telemetryStore: createMemoryStore(TELEMETRY),
     portalStore,
+    syncLog,
     sessionSecret: SECRET,
     siteTz: "America/Toronto",
     now: () => clock.now,
@@ -153,6 +169,7 @@ describe("portal API", { concurrency: true }, () => {
         [Date.parse("2026-10-05T04:00:00Z"), 40, 12.5, 2, 1, 1],
         [Date.parse("2026-10-11T14:55:00Z"), 40, 12.5, 2, 0, 1],
       ],
+      calibrations: [[Date.parse("2026-10-11T13:52:30Z"), 2]],
     });
 
     const out = await phone.call("POST", "/auth/logout", { json: {} });
@@ -433,6 +450,47 @@ describe("portal API", { concurrency: true }, () => {
     assert.equal((await zach.call("GET", "/telemetry?days=60")).data.rows.length, 3);
     assert.equal((await zach.call("GET", "/telemetry?days=1")).data.rows.length, 1);
     assert.equal((await zach.call("GET", "/telemetry")).data.rows.length, 2);
+  });
+
+  test("the calibrations cover the same window as the rows", async (t) => {
+    const portal = await startPortal(t);
+    const zach = await portal.open(ZACH);
+    const sixty = (await zach.call("GET", "/telemetry?days=60")).data;
+    assert.equal(sixty.rows.length, 3);
+    assert.deepEqual(sixty.calibrations, [
+      [Date.parse("2026-10-03T14:07:30Z"), 1],
+      [Date.parse("2026-10-11T13:52:30Z"), 2],
+    ]);
+    assert.deepEqual((await zach.call("GET", "/telemetry?days=1")).data.calibrations, [
+      [Date.parse("2026-10-11T13:52:30Z"), 2],
+    ]);
+
+    // Two days on, the 11 October one is still inside a 7-day window but not a 1-day one.
+    portal.clock.now += 2 * DAY;
+    assert.deepEqual((await zach.call("GET", "/telemetry")).data.calibrations, [
+      [Date.parse("2026-10-11T13:52:30Z"), 2],
+    ]);
+    assert.deepEqual((await zach.call("GET", "/telemetry?days=1")).data.calibrations, []);
+  });
+
+  test("a request log that cannot be read costs the calibrations, not the readings", async (t) => {
+    const error = t.mock.method(console, "error", () => {});
+    const portal = await startPortal(t, {
+      syncLog: {
+        async list() {
+          throw new Error("7 PERMISSION_DENIED: Permission 'logging.logEntries.list' denied");
+        },
+      },
+    });
+    const zach = await portal.open(ZACH);
+    const res = await zach.call("GET", "/telemetry");
+    assert.equal(res.status, 200);
+    assert.equal(res.headers.get("cache-control"), "private, max-age=30");
+    assert.equal(res.data.rows.length, 2);
+    assert.deepEqual(res.data.calibrations, []);
+    const logged = error.mock.calls.filter((call) => String(call.arguments[0]).startsWith("Reading the calibrations"));
+    assert.equal(logged.length, 1);
+    assert.match(logged[0].arguments[1].message, /PERMISSION_DENIED/);
   });
 
   test("health needs no sign-in, and unknown paths are 404", async (t) => {

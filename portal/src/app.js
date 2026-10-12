@@ -1,5 +1,6 @@
 import express from "express";
 
+import { createCalibrations } from "./calibrations.js";
 import { clearCookie, readCookie } from "./cookies.js";
 import { SESSION_COOKIE, sessionCookie, shouldRenew, signSession, verifySession } from "./session.js";
 import { createTelemetry } from "./telemetry.js";
@@ -9,6 +10,7 @@ import { createUsers, isKey } from "./users.js";
 // apart from the prefix, so to the browser this API is on the page's own origin.
 // That is why there are no CORS headers: nothing cross-origin is meant to call it.
 
+const DAY = 24 * 60 * 60 * 1000;
 const DEFAULT_DAYS = 7;
 const MAX_DAYS = 60;
 
@@ -23,9 +25,10 @@ function parseDays(raw) {
   return days >= 1 && days <= MAX_DAYS ? days : null;
 }
 
-export function createApp({ telemetryStore, portalStore, sessionSecret, siteTz, now = Date.now }) {
+export function createApp({ telemetryStore, portalStore, syncLog, sessionSecret, siteTz, now = Date.now }) {
   const users = createUsers(portalStore, now);
   const telemetry = createTelemetry({ store: telemetryStore, tz: siteTz, now });
+  const calibrations = createCalibrations({ log: syncLog, now });
 
   const app = express();
   app.disable("x-powered-by");
@@ -119,10 +122,20 @@ export function createApp({ telemetryStore, portalStore, sessionSecret, siteTz, 
     route(async (req, res) => {
       const days = parseDays(req.query.days);
       if (days === null) return res.status(400).json({ error: "invalid_days" });
-      const body = await telemetry.read(days);
+      // One instant for both, so the calibrations cover exactly the rows' window.
+      const at = now();
+      const [body, events] = await Promise.all([
+        telemetry.read(days, at),
+        // The calibrations only mark up the chart. If the log cannot be read the
+        // page still gets its readings, just without the marks.
+        calibrations.read(at - days * DAY, at).catch((error) => {
+          console.error("Reading the calibrations from the request log failed:", error);
+          return [];
+        }),
+      ]);
       // Private: the response is for a signed-in user only. 30 s, because a new
       // upload arrives every 15 minutes or so and the page may poll.
-      res.set("Cache-Control", "private, max-age=30").json(body);
+      res.set("Cache-Control", "private, max-age=30").json({ ...body, calibrations: events });
     }),
   );
 

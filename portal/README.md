@@ -12,16 +12,17 @@ The page itself is an Angular component in the
 
 ```
 tracker (field unit)
-   | CSV over HTTPS, a batch every ~15 min
+   | over HTTPS, every ~15 min: a CSV batch, and a clock sync
    v
 test-image (Cloud Run, the upload service; not part of this)
-   | one immutable object per upload
-   v
-gs://solar-tracker-442903-telemetry/raw/<UTC date>/<UTC upload time>.ndjson
-   | read-only
-   v
-tracker-api (Cloud Run, this service)  <-->  gs://solar-tracker-442903-portal
-   ^                                          users.json
+   | one immutable object per upload        | every request, in Cloud Run's request log
+   v                                        v
+gs://solar-tracker-442903-telemetry/      Cloud Logging, _Default bucket (30 days)
+  raw/<UTC date>/<UTC upload time>.ndjson   |
+   | read-only                              | read-only: the clock syncs, for the calibrations
+   v                                        |
+tracker-api (Cloud Run, this service)  <----+
+   ^    <-->  gs://solar-tracker-442903-portal (users.json)
    | Netlify proxy: /api/tracker/*  ->  <tracker-api URL>/:splat  (200 rewrite)
    |
 the page on zachlegesse.ca (and Netlify deploy previews)
@@ -57,10 +58,11 @@ one was sent.
 
 ```json
 {
-  "generatedAt": "2026-10-11T19:37:56.111Z",
-  "lastUploadAt": "2026-10-11T19:34:05.866Z",
+  "generatedAt": "2026-10-12T22:56:44.957Z",
+  "lastUploadAt": "2026-10-12T22:46:02.429Z",
   "statuses": ["ACTIVE", "NIGHT", "SAFE", "AWAY"],
-  "rows": [[1791747549000, 100, 21.25, 3, 0, 1]]
+  "rows": [[1791747549000, 100, 21.25, 3, 0, 1]],
+  "calibrations": [[1791827592240, 1]]
 }
 ```
 
@@ -68,6 +70,54 @@ Each row is `[tMs, extendedPercent, temperatureC, windPeak, statusIndex, windSen
 instant in epoch milliseconds, ascending and unique; the index into `statuses` (ACTIVE tracking,
 NIGHT parked for the night, SAFE parked for wind, AWAY parked by hand); and `windSensor` 0 or 1.
 `lastUploadAt` is when the newest upload in the window arrived, or null.
+
+Each calibration is `[tMs, count]`, ascending, for the same window as the rows: `count`
+recalibrations of the actuator happened around real instant `tMs` (see below). It is `[]` when
+there were none, and also when the request log could not be read: that error is logged and the
+rows are served as usual, since they matter more.
+
+### Calibrations
+
+A recalibration is the actuator driving all the way home and out to its far end to find where it
+is, instead of trusting its count. The tracker does one at boot, unless it took its position over
+from the previous firmware, and another whenever it loses track. Nothing records when one happened,
+but from v12.6 the tracker's clock sync, about every 15 minutes, reports how many there have been
+since that boot:
+
+```
+GET /time/est?fw=<version>&cal=<recalibrations since boot>&pos=<1 if this boot took its position over>
+```
+
+test-image ignores the query and stores nothing, so the only record is Cloud Run's request log for
+test-image (Cloud Logging, `_Default` bucket, kept 30 days). The API reads it (`src/syncs.js`) and
+works out the events from each pair of consecutive syncs a → b (`src/calibrations.js`):
+
+- b.cal > a.cal: b.cal − a.cal recalibrations;
+- b.cal < a.cal and b.cal > 0: a reboot reset the count, and the new boot has done b.cal.
+
+Each event is placed halfway between a and b, since all that is known is that it happened in
+between. What follows from that:
+
+- **15-minute resolution.** An event is within about 7.5 minutes of when it really was, more
+  across a gap in the syncs (the tracker offline). Several between two syncs are one event with a
+  `count` above 1.
+- **Blind spot.** A reboot shows only as the count going down. A new boot that is back to the old
+  count by its next sync is missed entirely (say cal=1, then a power cut reboots it and it
+  calibrates once at boot: cal=1 again), and one that is past it counts only the difference.
+- **Edges.** The first sync in the window is compared with the last one up to a day before it;
+  one with nothing in that day counts nothing. A sync whose `cal` is not a whole number is
+  skipped, as if it had not been made.
+- **History.** `cal` exists from 2026-10-12 about 16:49Z (v12.6); older syncs lack it and are
+  ignored. The log keeps 30 days, so a longer window has calibrations for its last 30 days only.
+- **Freshness.** Log entries settle within 15 minutes, so anything older is read once and kept;
+  the last 15 minutes are read again at most every 2 minutes. An event shows within about 2 minutes
+  of the sync after it.
+
+Reading the log needs `roles/logging.viewer` on the project (see One-time setup). The reads come
+out of Cloud Logging's quota of 60 a minute for the whole project, shared with the Logs Explorer and
+`gcloud logging read`. A request makes at most two reads, usually none: the recent part every 2
+minutes, and the days before anything read so far when a longer window is first asked for. A read
+is one call per 1000 syncs (10 days), so even a cold 60-day request costs a handful.
 
 ## Signing in
 
@@ -136,6 +186,8 @@ Security properties, stated plainly:
 | `TELEMETRY_BUCKET` | `solar-tracker-442903-telemetry` | Read-only. |
 | `PORTAL_BUCKET` | `solar-tracker-442903-portal` | `users.json`. |
 | `SITE_TZ` | `America/Toronto` | The zone of the tracker's clock. |
+| `TRACKER_SERVICE` | `test-image` | The Cloud Run service whose request log has the clock syncs. |
+| `GOOGLE_CLOUD_PROJECT` | detected | The project whose log is read. On Cloud Run, the service's own. |
 | `PORT` | `8080` | Set by Cloud Run. |
 
 ## One-time setup
@@ -158,6 +210,10 @@ gcloud storage buckets add-iam-policy-binding gs://solar-tracker-442903-telemetr
   --member=serviceAccount:$SA --role=roles/storage.objectViewer
 gcloud storage buckets add-iam-policy-binding gs://solar-tracker-442903-portal \
   --member=serviceAccount:$SA --role=roles/storage.objectAdmin
+# Reading test-image's request log, for the calibrations. logging.viewer is project-wide: it can
+# read every log in the project except private ones such as Data Access audit logs. The API only
+# asks for the tracker's clock syncs.
+gcloud projects add-iam-policy-binding $PROJECT --member=serviceAccount:$SA --role=roles/logging.viewer
 
 # The cookie signing key, readable by that account only.
 openssl rand -base64 48 | tr -d '\n' | gcloud secrets create portal-session-secret \
@@ -195,6 +251,16 @@ openssl rand -base64 48 | tr -d '\n' | gcloud secrets versions add portal-sessio
 gcloud run services update tracker-api --region us-central1
 ```
 
+### Adding calibrations to a running deployment
+
+A deployment set up before calibrations needs the log permission granted once. Without it
+`/telemetry` still works, but `calibrations` is always `[]` and each request logs a
+`PERMISSION_DENIED`:
+
+```sh
+gcloud projects add-iam-policy-binding solar-tracker-442903 --member=serviceAccount:tracker-portal@solar-tracker-442903.iam.gserviceaccount.com --role=roles/logging.viewer
+```
+
 ### Moving over from phone-number sign-in
 
 - Deploying this signs out every existing session: the cookie format changed, and a cookie from
@@ -226,14 +292,15 @@ a deploy preview.
 cd portal
 npm install
 npm test                   # node:test, no network
-node scripts/smoke.js 2    # the real telemetry bucket, read-only; users.json in memory
+node scripts/smoke.js 2    # the real telemetry bucket and request log, read-only; users.json in memory
 ```
 
 `scripts/smoke.js` lists a person with a fresh key in an in-memory `users.json`, opens their link
 over HTTP against a local server, and summarizes `/telemetry?days=N`: row count, first and last
-rows, when each day's ACTIVE stretch ran in Toronto time, and how long after its newest row each of
-today's uploads arrived (a few minutes if the wall-clock conversion is right). It uses the gcloud
-CLI's login, so no application default credentials are needed.
+rows, the calibrations and how many log reads they took, when each day's ACTIVE stretch ran in
+Toronto time, and how long after its newest row each of today's uploads arrived (a few minutes if
+the wall-clock conversion is right). It uses the gcloud CLI's login, so no application default
+credentials are needed; that login needs `roles/logging.viewer` too.
 
 ## Cost
 
@@ -245,5 +312,6 @@ About $0 a month, inside the free tiers:
   for a minute), so a cold start costs a few hundred reads and a page left open costs two listings
   a minute; the portal bucket holds one small object, read at most every 30 s per instance.
 - **Secret Manager**: one secret, read when an instance starts.
+- **Cloud Logging**: reading the request log is free. test-image's request log is written anyway.
 - **Cloud Build / Artifact Registry**: a deploy is a minute or two of build time; old images can be
   deleted if storage passes the free 0.5 GB.

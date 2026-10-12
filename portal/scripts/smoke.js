@@ -1,7 +1,8 @@
-// Runs the portal API on this machine against the real telemetry bucket, read-only,
-// with users.json held in memory. It lists one person with a fresh key, the way
-// tools/portal/users.sh does, opens their link over HTTP the way the page does,
-// summarizes what /telemetry returns, and signs out. Nothing is written to any bucket.
+// Runs the portal API on this machine against the real telemetry bucket and the
+// upload service's real request log, both read-only, with users.json held in memory.
+// It lists one person with a fresh key, the way tools/portal/users.sh does, opens
+// their link over HTTP the way the page does, summarizes what /telemetry returns,
+// and signs out. Nothing is written to any bucket or log.
 //
 //   node scripts/smoke.js [days]        default 2
 //
@@ -11,17 +12,24 @@ import { execFileSync } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { once } from "node:events";
 
+import { Logging } from "@google-cloud/logging";
 import { Storage } from "@google-cloud/storage";
 // Installed with @google-cloud/storage; used only here, to hand it the CLI's token.
 import { OAuth2Client } from "google-auth-library";
+// Installed with @google-cloud/logging, whose client authenticates through it. It is
+// a newer major version of google-auth-library than the one above, and each client
+// only takes a token holder from its own.
+import { googleAuthLibrary } from "google-gax";
 
 import { createApp } from "../src/app.js";
 import { createGcsStore, createMemoryStore } from "../src/stores.js";
+import { createLoggingSyncLog } from "../src/syncs.js";
 import { uploadTime } from "../src/telemetry.js";
 import { hashKey } from "../src/users.js";
 
 const DAYS = process.argv[2] ?? "2";
 const TZ = "America/Toronto";
+const PROJECT = "solar-tracker-442903";
 const BUCKET = "solar-tracker-442903-telemetry";
 // Made here and never stored, as users.sh does.
 const KEY = randomBytes(32).toString("base64url");
@@ -33,10 +41,17 @@ const accessToken = execFileSync("gcloud", ["auth", "print-access-token"], {
   .trim();
 const authClient = new OAuth2Client();
 authClient.setCredentials({ access_token: accessToken });
-const storage = new Storage({ authClient, projectId: "solar-tracker-442903" });
+const storage = new Storage({ authClient, projectId: PROJECT });
+const logAuthClient = new googleAuthLibrary.OAuth2Client();
+logAuthClient.setCredentials({ access_token: accessToken });
+const syncLog = createLoggingSyncLog(new Logging({ authClient: logAuthClient, projectId: PROJECT }), {
+  service: "test-image",
+});
 
 // Only list and read are passed on, so a write to the real bucket would throw here.
 const { list, read } = createGcsStore(storage.bucket(BUCKET));
+// Counted, to show what a request costs against the log's read quota.
+const logReads = [];
 const portalStore = createMemoryStore({
   "users.json": JSON.stringify({
     users: [{ id: "smoke", name: "Smoke test", keyHash: hashKey(KEY), issuedAt: new Date().toISOString() }],
@@ -45,6 +60,12 @@ const portalStore = createMemoryStore({
 const app = createApp({
   telemetryStore: { list, read },
   portalStore,
+  syncLog: {
+    list(fromMs, toMs) {
+      logReads.push(`${new Date(fromMs).toISOString()} to ${new Date(toMs).toISOString()}`);
+      return syncLog.list(fromMs, toMs);
+    },
+  },
   sessionSecret: randomBytes(32).toString("base64"),
   siteTz: TZ,
 });
@@ -101,6 +122,13 @@ try {
   const counts = {};
   for (const row of rows) counts[statuses[row[4]]] = (counts[statuses[row[4]]] ?? 0) + 1;
   console.log(`  by status: ${JSON.stringify(counts)}`);
+
+  // From the request log, not the bucket: each one halfway between the two syncs
+  // either side of it, so within about 7.5 minutes of when it happened.
+  const { calibrations } = body;
+  console.log(`  calibrations ${calibrations.length}`);
+  for (const [t, count] of calibrations) console.log(`    ${show(t)} x${count}`);
+  console.log(`  request log reads for both requests: ${logReads.length} (${logReads.join("; ")})`);
 
   // When each local day's ACTIVE stretch began and ended: should be around sunrise
   // and sunset in Toronto, not shifted four hours either way.
