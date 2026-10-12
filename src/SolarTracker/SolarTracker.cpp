@@ -19,6 +19,18 @@ SolarTracker::SolarTracker(void (*callback)())
 {
   // Initialize the linear actuator
   actuator.setExtensionCallBack(callback);
+  otaUpdater.onBeforeRestart(handOffPosition, this);
+}
+
+// Right before an OTA restart: write down where the panel is, so the new firmware starts
+// there instead of calibrating. OTA only installs with the actuator stopped.
+void SolarTracker::handOffPosition(void *ctx, const char *version)
+{
+  SolarTracker *tracker = static_cast<SolarTracker *>(ctx);
+  bool saved = PositionHandoff::save(version, tracker->actuator.snapshot(),
+                                     tracker->clockModule.getTimestamp());
+  Serial.println(saved ? "Position handed over to " + String(version)
+                       : String("No position to hand over; the next boot calibrates"));
 }
 
 void SolarTracker::setup()
@@ -29,12 +41,20 @@ void SolarTracker::setup()
   clockModule.setup();
   checkClockBus();
   windSensor.setup();
+  actuator.calibrationAllowed = mayCalibrate();
+  LinearActuator::Snapshot handed;
+  positionRestored = PositionHandoff::take(FIRMWARE_VERSION, clockModule.getTimestamp(), handed) &&
+                     actuator.restore(handed);
+  Serial.println(positionRestored ? "Position restored from the last firmware: " +
+                                        String(actuator.getPercentExtended()) + "%, no calibration needed"
+                                  : String("No position handed over; the first move calibrates"));
   dailySync();
   initializeStatus();
 }
 
 void SolarTracker::pollSensorData()
 {
+  actuator.calibrationAllowed = mayCalibrate();
 
   if (status != AWAY && ButtonPanel::isAwayModeOverride())
   {
@@ -42,7 +62,16 @@ void SolarTracker::pollSensorData()
   }
   else if (status == AWAY && !ButtonPanel::isAwayModeOverride())
   {
-    setStatus(ACTIVE);
+    // Out of away: a calibration that came due while away runs now. In ACTIVE the move
+    // does it first; at night nothing moves, so it runs here and goes back to where it was.
+    // The status changes first: the sweep calls back into this loop.
+    Status next = statusForNow();
+    setStatus(next);
+    if (next == NIGHT && actuator.calibrationDue() && actuator.status == LinearActuator::STOP)
+    {
+      Serial.println("Away ended with a calibration due");
+      actuator.recalibrateInPlace(clockModule.getEndPercent());
+    }
   }
 
 #ifdef CLOCK_FAULT_WEDGE
@@ -157,7 +186,7 @@ void SolarTracker::checkClockBus()
 //   - moveTo() calls back into loop() on every iteration of its drive loop, with
 //     the motor still energised. A sync started from inside that call would hold
 //     the motor on for the whole request and drive the panel past its target.
-//   - dailySync() runs checkWeeklyRecalibration(), and a full home-and-max sweep
+//   - dailySync() can run the weekly calibration, and a full home-and-max sweep
 //     is the last thing wanted in the wind it was trying to get away from.
 //
 // So the sync waits for the actuator to stop and for the tracker to be out of SAFE.
@@ -212,6 +241,7 @@ void SolarTracker::extendActuatorToSafe()
 SolarTracker::Status SolarTracker::setStatus(Status inputStatus)
 {
   status = inputStatus;
+  actuator.calibrationAllowed = mayCalibrate();
   actOnStatus(status);
   Serial.print("Set status to: ");
   Serial.println(getStatusString());
@@ -230,25 +260,55 @@ String SolarTracker::getStatusString()
 
 void SolarTracker::initializeStatus()
 {
-  if (clockModule.isActiveHours())
+  setStatus(statusForNow());
+}
+
+SolarTracker::Status SolarTracker::statusForNow()
+{
+  if (ButtonPanel::isAwayModeOverride())
   {
-    setStatus(ACTIVE);
+    return AWAY;
   }
-  else
+  if (windSensor.status == WindSpeedSensor::HIGH_WIND)
   {
-    setStatus(NIGHT);
+    return SAFE; // leaving away in a wind that is still up
   }
+  return clockModule.isActiveHours() ? ACTIVE : NIGHT;
+}
+
+bool SolarTracker::mayCalibrate()
+{
+  // The switch as well as the status: at boot the status has not been chosen yet.
+  return status != AWAY && status != SAFE && !ButtonPanel::isAwayModeOverride();
+}
+
+int SolarTracker::restingPercent()
+{
+  return status == ACTIVE ? clockModule.getHourlyExtensionPercent() : clockModule.getEndPercent();
 }
 
 void SolarTracker::updateStatus()
 {
+  if (status == AWAY)
+  {
+    // Away already holds the safe position. The wind sensor's own state still has to
+    // follow the wind, or a gust while away leaves it stuck in HIGH_WIND: SAFE could never
+    // trip again, and leaving away would not know the wind is up.
+    if (!windSensor.enteringHighWind() && windSensor.status == WindSpeedSensor::HIGH_WIND)
+    {
+      windSensor.exitingHighWind();
+    }
+    return;
+  }
   if (windSensor.enteringHighWind())
   {
     setStatus(SAFE);
   }
   else if (status == SAFE && windSensor.exitingHighWind())
   {
-    setStatus(ACTIVE);
+    // Not straight to ACTIVE: at night that would drive to the hour's position past the
+    // schedule's end.
+    setStatus(statusForNow());
   }
   else if (status == NIGHT && clockModule.isActiveHours())
   {
@@ -283,7 +343,13 @@ void SolarTracker::setAppMode(bool isAppMode)
 
 void SolarTracker::dailySync()
 {
-  actuator.checkWeeklyRecalibration();
+  // The weekly calibration, on a known position. An unknown one is calibrated by the next
+  // move that may. Away or in SAFE it keeps waiting, and runs on the first sync after.
+  if (mayCalibrate() && actuator.getPercentExtended() >= 0 && actuator.calibrationDue())
+  {
+    Serial.println("Weekly calibration");
+    actuator.recalibrateInPlace(restingPercent());
+  }
   syncClock();
   uploadLogs();
 }
@@ -342,7 +408,11 @@ void SolarTracker::syncClock()
 {
   // The firmware version rides along so the server's request log shows what each
   // tracker is running; the route ignores the query.
-  String body = wifiClient.get(API + String("/time/est?fw=" FIRMWARE_VERSION));
+  // cal: calibrations since boot; pos: 1 when this boot took its position over from the
+  // last firmware rather than calibrating. Both are for the request log; the route
+  // ignores them.
+  String body = wifiClient.get(API + String("/time/est?fw=" FIRMWARE_VERSION "&cal=") +
+                               String(LinearActuator::recalibrations) + "&pos=" + String(positionRestored ? 1 : 0));
   if (body != "")
   {
     StaticJsonDocument<200> doc;

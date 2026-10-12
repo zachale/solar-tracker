@@ -1,6 +1,7 @@
 #include "./LinearActuator.h"
 
 long LinearActuator::steps = 0;
+unsigned int LinearActuator::recalibrations = 0;
 unsigned long LinearActuator::lastStepTime = 0;
 unsigned long LinearActuator::lastRecalibrationTime = 0;
 
@@ -36,12 +37,58 @@ int LinearActuator::getPercentExtended()
   return percentExtended = ((float)pos / (float)maxPos) * 100;
 }
 
-void LinearActuator::recalibrate()
+bool LinearActuator::calibrationDue()
+{
+  // Latched once a week is up: millis() wraps after 49.7 days, and a calibration that came
+  // due during a long away must not stop being due when it does.
+  if (millis() - lastRecalibrationTime >= RECALIBRATION_INTERVAL)
+  {
+    calibrationRequested = true;
+  }
+  return maxPos == 0 || calibrationRequested;
+}
+
+int LinearActuator::recalibrate()
 {
   Serial.println("Attempting to recalibrate");
+  int before = currentPercentTarget;
   delay(5000);
   home();
   max();
+  recalibrations++;
+  lastRecalibrationTime = millis();
+  calibrationRequested = false;
+  int asked = currentPercentTarget != before ? currentPercentTarget : -1;
+  // The sweep ends at full extension: whatever was last asked for has to be asked again.
+  currentPercentTarget = -1;
+  return asked;
+}
+
+void LinearActuator::recalibrateInPlace(int fallbackPercent)
+{
+  int target = currentPercentTarget;
+  int asked = recalibrate();
+  extendToPercent(asked >= 0 ? asked : target >= 0 ? target : fallbackPercent);
+}
+
+LinearActuator::Snapshot LinearActuator::snapshot()
+{
+  updatePos(); // pulses counted since the last pass, the coast after a stop
+  return Snapshot{pos, maxPos, millis() - lastRecalibrationTime, currentPercentTarget, calibrationDue()};
+}
+
+bool LinearActuator::restore(const Snapshot &s)
+{
+  if (s.maxPos <= 0 || s.pos < 0 || s.pos > s.maxPos)
+  {
+    return false;
+  }
+  pos = s.pos;
+  maxPos = s.maxPos;
+  currentPercentTarget = s.target;
+  lastRecalibrationTime = millis() - s.sinceCalibrationMs; // unsigned: wraps correctly near boot
+  calibrationRequested = s.owed;
+  return true;
 }
 
 void LinearActuator::home()
@@ -129,6 +176,24 @@ bool LinearActuator::isExtending()
 
 void LinearActuator::extendToPercent(float percent)
 {
+  if (!calibrationAllowed && maxPos == 0)
+  {
+    // Before the target is recorded, so the same request goes through once it may calibrate.
+    Serial.println("Position unknown and no calibration allowed now: holding still");
+    return;
+  }
+
+  if (calibrationAllowed && calibrationDue() && status == STOP)
+  {
+    Serial.println(maxPos == 0 ? "Position unknown: calibrating before the move"
+                               : "Calibration due: calibrating before the move");
+    int asked = recalibrate();
+    if (asked >= 0)
+    {
+      percent = asked; // a newer request arrived during the sweep (into away or SAFE)
+    }
+  }
+
   if (percent == currentPercentTarget)
   {
     Serial.println("Same extension target detected, ignoring");
@@ -157,19 +222,25 @@ void LinearActuator::extendToPercent(float percent)
     return;
   }
 
-  if (maxPos == 0)
-  {
-    recalibrate();
-  }
-
   for (int i = 0; i < 2; i++)
   {
     if (moveTo(percent))
     {
       return;
     }
+    if (!calibrationAllowed) // read now: the status may have changed during the move
+    {
+      Serial.println("Failed to move to target; holding here, calibration owed");
+      calibrationRequested = true;
+      currentPercentTarget = -1; // not reached: the same request must not count as done
+      extend(STOP);
+      return;
+    }
     Serial.println("Failed to move to target, recalibrating and retrying");
-    recalibrate();
+    int latest = currentPercentTarget; // a redirect during the failed move wins
+    int asked = recalibrate();
+    percent = asked >= 0 ? asked : latest;
+    currentPercentTarget = percent;
   };
   Serial.println("Failed to move to target.");
   return;
@@ -284,15 +355,4 @@ void LinearActuator::setDirection(int direction)
 void LinearActuator::setExtensionCallBack(void (*inputCallBack)())
 {
   extensionCallBack = inputCallBack;
-}
-
-void LinearActuator::checkWeeklyRecalibration()
-{
-  unsigned long currentTime = millis();
-  if (currentTime - lastRecalibrationTime >= RECALIBRATION_INTERVAL)
-  {
-    Serial.println("Weekly recalibration triggered");
-    recalibrate();
-    lastRecalibrationTime = currentTime;
-  }
 }

@@ -63,7 +63,13 @@ public:
   // WiFi.end() in particular, must wait until this is false or it kills the download.
   bool busy() const;
 
+  // Called right before the board restarts into another image (an install or a rollback),
+  // with that image's version, so the tracker can hand its state to the next firmware.
+  void onBeforeRestart(void (*fn)(void *ctx, const char *version), void *ctx);
+
 private:
+  void (*beforeRestart)(void *ctx, const char *version) = nullptr;
+  void *beforeRestartCtx = nullptr;
   static const uint8_t VERSION_LEN = 16; // 15 characters and the terminator
 
   enum Phase : uint8_t

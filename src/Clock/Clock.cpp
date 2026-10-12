@@ -311,6 +311,11 @@ int ClockModule::getSafeExtensionPercent()
   return safeExtensionPercent;
 }
 
+int ClockModule::getEndPercent()
+{
+  return percentFinish;
+}
+
 int ClockModule::getHourlyExtensionPercent()
 {
   float dayCompletePercent = getDayCompletionPercent();

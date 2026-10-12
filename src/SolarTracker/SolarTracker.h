@@ -9,6 +9,7 @@
 #include "../SettingsManager/SettingsManager.h"
 #include "../Telemetry/Telemetry.h"
 #include "../OtaUpdater/OtaUpdater.h"
+#include "../PositionHandoff/PositionHandoff.h"
 #include <Arduino.h>
 class SolarTracker
 {
@@ -66,11 +67,21 @@ private:
   static const unsigned long SYNC_INTERVAL_MS = 900000;     // fifteen minutes
   static const int ACTUATOR_INTERRUPT_PIN = 2;
   static const int CLOCK_INTERRUPT_PIN = 3;
+  // Set at boot when the last firmware handed its position over, so no calibration was needed.
+  bool positionRestored = false;
   void extendActuatorOnHour();
   void extendActuatorToSafe();
   void updateStatus();
   void actOnStatus(Status);
   void initializeStatus();
+  // What the status should be now, ignoring wind: AWAY while the away switch is on, else
+  // ACTIVE or NIGHT by the schedule. Used at boot and when AWAY or SAFE ends.
+  Status statusForNow();
+  // A calibration sweeps the panel from end to end. Never in AWAY (the panel is meant to
+  // stay put) or in SAFE (the wind it is hiding from); it waits until both are over.
+  bool mayCalibrate();
+  int restingPercent();
+  static void handOffPosition(void *ctx, const char *version);
   void spoolTelemetryRow();
   void serviceSync();
   void checkClockBus();

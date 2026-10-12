@@ -183,6 +183,12 @@ void OtaUpdater::boot(uint8_t sdChipSelect)
 // ---------------------------------------------------------------------------------------------
 // Loop
 
+void OtaUpdater::onBeforeRestart(void (*fn)(void *ctx, const char *version), void *ctx)
+{
+  beforeRestart = fn;
+  beforeRestartCtx = ctx;
+}
+
 bool OtaUpdater::busy() const
 {
   return downloading;
@@ -391,6 +397,10 @@ void OtaUpdater::rollback(const String &reason)
   Serial.flush();
   delay(100);
 
+  if (beforeRestart)
+  {
+    beforeRestart(beforeRestartCtx, state.good);
+  }
   // On success the ESP32 flashes the copy and restarts the RA4M1: no return.
   int code = ota.update(IMAGE_PATH);
 
@@ -569,6 +579,10 @@ void OtaUpdater::install()
   Serial.flush();
   delay(100);
 
+  if (beforeRestart)
+  {
+    beforeRestart(beforeRestartCtx, target.c_str());
+  }
   // On success the ESP32 reprograms the RA4M1 and restarts it, so this never returns.
   int code = ota.update(IMAGE_PATH);
   state.phase = IDLE;

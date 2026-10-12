@@ -14,6 +14,7 @@ public:
   bool isAlarmTriggered();
   int getDayCompletionPercent();
   int getSafeExtensionPercent();
+  int getEndPercent(); // the schedule's last position, held through the night
   int getHourlyExtensionPercent();
   bool isActiveHours();
   float getClockTemp();

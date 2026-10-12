@@ -21,6 +21,7 @@ SOURCES=(
   test/test_settings.cpp
   test/test_urldecode.cpp
   test/test_telemetry.cpp
+  test/test_handoff.cpp
   test/stubs/mock.cpp
   src/Clock/Clock.cpp
   src/WindSpeedSensor/WindSpeedSensor.cpp
@@ -28,6 +29,7 @@ SOURCES=(
   src/ButtonPanel/ButtonPanel.cpp
   src/SettingsManager/SettingsManager.cpp
   src/Telemetry/Telemetry.cpp
+  src/PositionHandoff/PositionHandoff.cpp
 )
 
 c++ -std=c++17 -g -O0 \
