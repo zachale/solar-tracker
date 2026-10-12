@@ -71,7 +71,6 @@ private:
   long maxPos = 0;
   int speed = 255;
   unsigned long prevTimer = 0;
-  long prevSteps = -1;
   int dir = 0;
   void setStatus(int statusCode);
   void setDirection(int direction);

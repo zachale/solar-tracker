@@ -244,6 +244,7 @@ void LinearActuator::extendToPercent(float percent)
     currentPercentTarget = percent;
   };
   Serial.println("Failed to move to target.");
+  extend(STOP); // a failed move returns with the motor still driven
   return;
 }
 
@@ -286,7 +287,9 @@ bool LinearActuator::moveTo(int targetPercent)
       extensionCallBack();
       if (targetPercent != currentPercentTarget)
       {
-        targetPos = getPosFromPercent(currentPercentTarget);
+        // Once per new target: redirecting on every pass restarted the stall timer each time.
+        targetPercent = currentPercentTarget;
+        targetPos = getPosFromPercent(targetPercent);
         extendTowardsPos(targetPos);
       }
     }
@@ -311,10 +314,19 @@ void LinearActuator::extendTowardsPos(int targetPos)
   }
 }
 
+// Only the duty cycle: going through extend() here restarted the stall timer on every pass
+// of a move, so a move that could not reach its target never noticed and drove forever.
 void LinearActuator::setSpeed(int input)
 {
   speed = input;
-  extend(dir);
+  if (dir == FORWARD)
+  {
+    setSpeeds(speed, 0);
+  }
+  else if (dir == BACKWARD)
+  {
+    setSpeeds(0, speed);
+  }
 }
 
 int LinearActuator::getPosFromPercent(float percent)
@@ -322,22 +334,18 @@ int LinearActuator::getPosFromPercent(float percent)
   return maxPos * (percent / 100);
 }
 
+// Stalled: no hall pulse for a second, at least a second after the drive started (prevTimer,
+// set by extend()). Timed from the last pulse itself rather than from a pulse count that
+// stops changing: the count is zeroed by updatePos() on every pass of a move, so a steady
+// one pulse a pass read as stalled.
 bool LinearActuator::hitBoundary()
 {
-  if (prevSteps == steps)
+  if (millis() - prevTimer > 1000 && micros() - lastStepTime > 1000000UL)
   {
-    if (millis() - prevTimer > 1000)
-    {
-      Serial.println("boundary hit");
-      steps = 0;
-      prevTimer = millis();
-      return true;
-    }
-  }
-  else
-  {
-    prevSteps = steps;
+    Serial.println("boundary hit");
+    steps = 0;
     prevTimer = millis();
+    return true;
   }
   return false;
 }

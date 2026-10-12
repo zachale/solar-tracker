@@ -64,9 +64,10 @@ TEST_SUITE("actuator: stall detection") {
 
   TEST_CASE("boundary is reported after a second of no pulses") {
     mock::reset();
+    mock::advance(5000);
     LinearActuator a = calibrated(20000, 0);
-    LinearActuator::steps = 100;
-    a.prevSteps = 100;
+    LinearActuator::lastStepTime = 0;
+    LinearActuator::countSteps();     // the last pulse, now
     a.prevTimer = millis();
 
     CHECK_FALSE(a.hitBoundary());     // same instant
@@ -79,17 +80,17 @@ TEST_SUITE("actuator: stall detection") {
   }
 
   TEST_CASE("a single stray pulse restarts the stall timer") {
-    // The detector treats any change in the step count as evidence of movement.
-    // A stalled motor that vibrates its own hall sensor therefore reads as alive,
-    // which is what allows the max() loop to spin without an exit.
+    // The detector treats any pulse as evidence of movement. A stalled motor that
+    // vibrates its own hall sensor therefore reads as alive.
     mock::reset();
+    mock::advance(5000);
     LinearActuator a = calibrated(20000, 0);
-    LinearActuator::steps = 100;
-    a.prevSteps = 100;
+    LinearActuator::lastStepTime = 0;
+    LinearActuator::countSteps();
     a.prevTimer = millis();
 
     mock::advance(900);
-    LinearActuator::steps = 101;      // one spurious count
+    LinearActuator::countSteps();     // one spurious pulse
     CHECK_FALSE(a.hitBoundary());     // timer resets here
 
     mock::advance(900);               // 1800ms total, still no boundary
@@ -127,8 +128,7 @@ long simPass = 0;
 
 void simMotor() {
   mock::advance(20);
-  // One or two pulses a pass, never the same count for long: the firmware reads a pulse
-  // count that stops changing as a stall (see "a single stray pulse" above).
+  // One or two pulses a pass, each through the interrupt handler as on the board.
   int pulses = (++simPass % 3 == 0) ? 2 : 1;
   LinearActuator &a = *simActuator;
   // Driven whenever it is not stopped, in the direction it was last set to.
@@ -136,8 +136,9 @@ void simMotor() {
   bool forward = driven && a.dir > 0;
   bool backward = driven && a.dir < 0;
   for (int i = 0; i < pulses; i++) {
-    if (forward && simPos < simLimit && simPos != simBlockAt) { simPos++; LinearActuator::steps++; }
-    if (backward && simPos > 0 && simPos != simBlockAt) { simPos--; LinearActuator::steps++; }
+    bool moves = (forward && simPos < simLimit && simPos != simBlockAt) ||
+                 (backward && simPos > 0 && simPos != simBlockAt);
+    if (moves) { simPos += forward ? 1 : -1; mock::now_us += 600; LinearActuator::countSteps(); }
   }
 }
 
@@ -153,7 +154,6 @@ LinearActuator &onBench(LinearActuator &a, long at, bool calibrated) {
   LinearActuator::recalibrations = 0;
   LinearActuator::lastRecalibrationTime = millis();
   a.isHomed = 0;
-  a.prevSteps = 0;
   a.calibrationRequested = false;
   a.calibrationAllowed = true;
   a.currentPercentTarget = -1;
@@ -234,6 +234,21 @@ TEST_SUITE("actuator: when it may calibrate") {
     CHECK(LinearActuator::recalibrations == 1);
     CHECK(simPos == doctest::Approx(400).epsilon(0.02));
     CHECK_FALSE(a.calibrationDue());
+  }
+
+  TEST_CASE("a move that may not calibrate and runs into something stops and owes a calibration") {
+    LinearActuator a;
+    onBench(a, 200, true);
+    simBlockAt = 400;
+    a.calibrationAllowed = false;
+    a.extendToPercent(80);
+    CHECK(LinearActuator::recalibrations == 0);
+    CHECK(simPos == 400);
+    CHECK(a.calibrationDue());
+    const int stopped = LinearActuator::STOP;
+    CHECK(a.status == stopped);
+    CHECK(mock::pwm[5] == 0);
+    CHECK(mock::pwm[6] == 0);
   }
 
   TEST_CASE("a request made during the sweep is where the panel goes, not the hourly one") {
@@ -325,5 +340,43 @@ TEST_SUITE("actuator: snapshot across a restart") {
     LinearActuator::Snapshot s{0, 0, 0, -1, false};
     CHECK_FALSE(b.restore(s));
     CHECK(b.getPercentExtended() == -1);
+  }
+}
+
+TEST_SUITE("actuator: moves that cannot finish") {
+
+  TEST_CASE("a target past the end stop stops at the end instead of driving forever") {
+    // What the evening alarm used to ask for: a position past full extension. The motor
+    // stops at its end stop, the pulses stop, and the move has to notice. It used to
+    // drive on all night with the status still FORWARD, which held off every upload.
+    LinearActuator a;
+    onBench(a, 900, true);
+    a.calibrationAllowed = true;
+    a.extendToPercent(103);
+    const int stopped = LinearActuator::STOP;
+    CHECK(a.status == stopped);
+    CHECK(mock::pwm[5] == 0);
+    CHECK(mock::pwm[6] == 0);
+    CHECK(simPos == 1000);
+  }
+
+  TEST_CASE("a move redirected partway still notices a stall") {
+    // A new target while moving (the morning position replacing the evening one) used to
+    // restart the stall timer on every pass from then on.
+    LinearActuator a;
+    onBench(a, 500, true);
+    static LinearActuator *redirect = nullptr;
+    static int passes = 0;
+    redirect = &a;
+    passes = 0;
+    a.setExtensionCallBack([] {
+      simMotor();
+      if (++passes == 50) redirect->currentPercentTarget = 105;   // past the end, mid-move
+    });
+    a.calibrationAllowed = false;
+    a.extendToPercent(90);
+    const int stopped = LinearActuator::STOP;
+    CHECK(a.status == stopped);
+    CHECK(simPos == 1000);
   }
 }
