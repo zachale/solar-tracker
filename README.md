@@ -13,3 +13,12 @@ This repository contains C++ firmware and a JavaScript API developed for a custo
 - An Express-based JavaScript API to handle data ingestion, update serving, and time serving
 
 
+## Portal
+A small read-only API that serves the tracker's telemetry to a few signed-in people, behind the
+tracker page on zachlegesse.ca. Each person gets a personal link, and opening it signs in that
+device for good: no passwords, no codes, no login screen. A link is a bearer credential (whoever
+has it is that person), which suits data that is not sensitive; re-issuing it signs out every
+device that used the old one. The service is in [`portal/`](portal/README.md), with the script
+that manages people and their links in `tools/portal/users.sh`. The page itself lives in the
+[zachale/portfolio](https://github.com/zachale/portfolio) repo under `src/app/tracker`. See
+[portal/README.md](portal/README.md) for the architecture, endpoints, setup and deployment.
