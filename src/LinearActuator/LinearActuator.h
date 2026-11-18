@@ -93,6 +93,10 @@ private:
   long maxPos = 0;
   int speed = 255;
   unsigned long prevTimer = 0;
+  long prevSteps = -1;
+  // The longest a move may drive toward one target. Far longer than any real move (a full
+  // stroke took about two minutes on the first actuator).
+  static const unsigned long MOVE_TIMEOUT_MS = 600000UL;
   int dir = 0;
   void setStatus(int statusCode);
   void setDirection(int direction);

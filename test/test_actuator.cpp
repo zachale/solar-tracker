@@ -1,4 +1,4 @@
-// Tests for LinearActuator's position arithmetic and stall detection.
+// Tests for LinearActuator's position arithmetic, stall detection and move limits.
 //
 // Access control is relaxed for this translation unit only. The position maths and
 // the boundary detector are private, and they are exactly the parts worth pinning
@@ -64,10 +64,9 @@ TEST_SUITE("actuator: stall detection") {
 
   TEST_CASE("boundary is reported after a second of no pulses") {
     mock::reset();
-    mock::advance(5000);
     LinearActuator a = calibrated(20000, 0);
-    LinearActuator::lastStepTime = 0;
-    LinearActuator::countSteps();     // the last pulse, now
+    LinearActuator::steps = 100;
+    a.prevSteps = 100;
     a.prevTimer = millis();
 
     CHECK_FALSE(a.hitBoundary());     // same instant
@@ -80,20 +79,34 @@ TEST_SUITE("actuator: stall detection") {
   }
 
   TEST_CASE("a single stray pulse restarts the stall timer") {
-    // The detector treats any pulse as evidence of movement. A stalled motor that
-    // vibrates its own hall sensor therefore reads as alive.
+    // The detector treats any change in the step count as evidence of movement.
+    // A stalled motor that vibrates its own hall sensor therefore reads as alive.
     mock::reset();
-    mock::advance(5000);
     LinearActuator a = calibrated(20000, 0);
-    LinearActuator::lastStepTime = 0;
-    LinearActuator::countSteps();
+    LinearActuator::steps = 100;
+    a.prevSteps = 100;
     a.prevTimer = millis();
 
     mock::advance(900);
-    LinearActuator::countSteps();     // one spurious pulse
+    LinearActuator::steps = 101;      // one spurious count
     CHECK_FALSE(a.hitBoundary());     // timer resets here
 
     mock::advance(900);               // 1800ms total, still no boundary
+    CHECK_FALSE(a.hitBoundary());
+  }
+
+  TEST_CASE("a pulse stamped after the clock was read cannot end a sweep") {
+    // The v12.11-v12.13 fault. Their check read micros() and then the interrupt's lastStepTime;
+    // a pulse in between left a stamp newer than the clock reading, the unsigned difference
+    // wrapped to about 71 minutes, and the sweep ended with the motor still running. The
+    // check compares pulse counts again, so a stamp in the future means nothing to it.
+    mock::reset();
+    mock::advance(5000);
+    LinearActuator a = calibrated(20000, 0);
+    a.prevTimer = millis() - 2000;              // driving for two seconds
+    LinearActuator::steps = 100;
+    a.prevSteps = 99;                           // and the count moved since the last pass
+    LinearActuator::lastStepTime = micros() + 5;
     CHECK_FALSE(a.hitBoundary());
   }
 
@@ -236,15 +249,19 @@ TEST_SUITE("actuator: when it may calibrate") {
     CHECK_FALSE(a.calibrationDue());
   }
 
-  TEST_CASE("a move that may not calibrate and runs into something stops and owes a calibration") {
+  TEST_CASE("a move that runs into something stops at its time limit and holds there") {
+    // The pulses it counted are still right, so nothing is calibrated for it.
     LinearActuator a;
     onBench(a, 200, true);
+    LinearActuator::moveTimeouts = 0;
     simBlockAt = 400;
-    a.calibrationAllowed = false;
     a.extendToPercent(80);
     CHECK(LinearActuator::recalibrations == 0);
+    CHECK(LinearActuator::moveTimeouts == 1);
     CHECK(simPos == 400);
-    CHECK(a.calibrationDue());
+    CHECK(a.pos == 400);
+    CHECK_FALSE(a.calibrationDue());
+    CHECK(a.currentPercentTarget == -1);   // so the same request is tried again
     const int stopped = LinearActuator::STOP;
     CHECK(a.status == stopped);
     CHECK(mock::pwm[5] == 0);
@@ -345,13 +362,11 @@ TEST_SUITE("actuator: snapshot across a restart") {
 
 TEST_SUITE("actuator: moves that cannot finish") {
 
-  TEST_CASE("a target past the end stop stops at the end instead of driving forever") {
-    // What the evening alarm used to ask for: a position past full extension. The motor
-    // stops at its end stop, the pulses stop, and the move has to notice. It used to
-    // drive on all night with the status still FORWARD, which held off every upload.
+  TEST_CASE("a target past the end stop goes to the end and stops") {
+    // What the evening alarm used to ask for: a position past full extension. It is taken as
+    // full extension, which max() finds by its end stop.
     LinearActuator a;
     onBench(a, 900, true);
-    a.calibrationAllowed = true;
     a.extendToPercent(103);
     const int stopped = LinearActuator::STOP;
     CHECK(a.status == stopped);
@@ -360,11 +375,22 @@ TEST_SUITE("actuator: moves that cannot finish") {
     CHECK(simPos == 1000);
   }
 
-  TEST_CASE("a move redirected partway still notices a stall") {
-    // A new target while moving (the morning position replacing the evening one) used to
-    // restart the stall timer on every pass from then on.
+  TEST_CASE("a target below zero goes home") {
+    LinearActuator a;
+    onBench(a, 300, true);
+    a.extendToPercent(-4);
+    CHECK(simPos == 0);
+    CHECK(a.pos == 0);
+    const int stopped = LinearActuator::STOP;
+    CHECK(a.status == stopped);
+  }
+
+  TEST_CASE("a move redirected past the end stops at its time limit") {
+    // A redirect sets the target directly, around the clamp: the motor reaches its end stop
+    // and the move can never finish.
     LinearActuator a;
     onBench(a, 500, true);
+    LinearActuator::moveTimeouts = 0;
     static LinearActuator *redirect = nullptr;
     static int passes = 0;
     redirect = &a;
@@ -373,11 +399,64 @@ TEST_SUITE("actuator: moves that cannot finish") {
       simMotor();
       if (++passes == 50) redirect->currentPercentTarget = 105;   // past the end, mid-move
     });
-    a.calibrationAllowed = false;
     a.extendToPercent(90);
     const int stopped = LinearActuator::STOP;
     CHECK(a.status == stopped);
     CHECK(simPos == 1000);
+    CHECK(LinearActuator::moveTimeouts == 1);
+    CHECK(mock::pwm[5] == 0);
+    CHECK(mock::pwm[6] == 0);
+  }
+
+  TEST_CASE("the time limit starts again when the target changes") {
+    // Stuck at the end stop for almost the whole limit, then SAFE asks for the middle: the new
+    // target gets a full window of its own, and the panel gets there.
+    LinearActuator a;
+    onBench(a, 900, true);
+    LinearActuator::moveTimeouts = 0;
+    static LinearActuator *redirect = nullptr;
+    static unsigned long startedAt = 0;
+    static bool redirected = false;
+    redirect = &a;
+    startedAt = millis();
+    redirected = false;
+    a.setExtensionCallBack([] {
+      simMotor();
+      const unsigned long limit = LinearActuator::MOVE_TIMEOUT_MS;
+      if (!redirected && millis() - startedAt > limit - 1000) {
+        redirected = true;
+        redirect->currentPercentTarget = 50;
+      }
+    });
+    a.currentPercentTarget = 105;            // what the old evening alarm asked for, unclamped
+    bool reached = a.moveTo(105);
+    CHECK(reached);
+    CHECK(redirected);
+    CHECK(simPos == doctest::Approx(500).epsilon(0.02));
+    CHECK(LinearActuator::moveTimeouts == 0);
+  }
+}
+
+TEST_SUITE("actuator: recalibration") {
+
+  TEST_CASE("a recalibration asked for in the middle of a slow approach sweeps at full speed") {
+    // The dashboard's button runs recalibrate() from inside a move's callback.
+    LinearActuator a;
+    onBench(a, 500, true);
+    static int slowestHome = 255;
+    slowestHome = 255;
+    a.setExtensionCallBack([] {
+      simMotor();
+      if (simActuator->status == LinearActuator::HOMING && mock::pwm[5] < slowestHome) {
+        slowestHome = mock::pwm[5];
+      }
+    });
+    a.speed = 120;                            // the approach speed of a move near its target
+    a.extend(LinearActuator::FORWARD);
+    a.recalibrate();
+    CHECK(slowestHome == 255);
+    CHECK(simPos == 1000);
+    CHECK(a.maxPos == doctest::Approx(1000).epsilon(0.01));
   }
 }
 

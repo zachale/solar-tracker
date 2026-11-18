@@ -52,6 +52,9 @@ bool LinearActuator::calibrationDue()
 int LinearActuator::recalibrate()
 {
   Serial.println("Attempting to recalibrate");
+  // Stopped, and back at full speed, whoever asked: the dashboard's button can arrive in the
+  // middle of a move, at the slow speed of its approach, and home() sweeps at `speed`.
+  extend(STOP);
   int before = currentPercentTarget;
   delay(5000);
   home();
@@ -234,6 +237,16 @@ bool LinearActuator::isExtending()
 
 void LinearActuator::extendToPercent(float percent)
 {
+  // Past either end is a position that does not exist; a move there could never finish.
+  if (percent < 0)
+  {
+    percent = 0;
+  }
+  else if (percent > 100)
+  {
+    percent = 100;
+  }
+
   bool mayCalibrate = calibrationAllowed || (maxPos == 0 && positionCalibrationAllowed);
   if (!mayCalibrate && maxPos == 0)
   {
@@ -281,29 +294,15 @@ void LinearActuator::extendToPercent(float percent)
     return;
   }
 
-  for (int i = 0; i < 2; i++)
+  if (!moveTo(percent))
   {
-    if (moveTo(percent))
-    {
-      return;
-    }
-    if (!calibrationAllowed) // read now: the status may have changed during the move
-    {
-      Serial.println("Failed to move to target; holding here, calibration owed");
-      calibrationRequested = true;
-      currentPercentTarget = -1; // not reached: the same request must not count as done
-      extend(STOP);
-      return;
-    }
-    Serial.println("Failed to move to target, recalibrating and retrying");
-    int latest = currentPercentTarget; // a redirect during the failed move wins
-    int asked = recalibrate();
-    percent = asked >= 0 ? asked : latest;
-    currentPercentTarget = percent;
-  };
-  Serial.println("Failed to move to target.");
-  extend(STOP); // a failed move returns with the motor still driven
-  return;
+    // Out of time. The pulses counted so far are still right, so the position stands and no
+    // calibration is run for it; the weekly one corrects any drift. The target is forgotten,
+    // so the same request is tried again rather than taken as done.
+    Serial.println("Holding here");
+    currentPercentTarget = -1;
+    extend(STOP);
+  }
 }
 
 // Move the actuator to a target percentage, and return true if successful
@@ -319,6 +318,13 @@ bool LinearActuator::moveTo(int targetPercent)
 
   // Determine direction of target from current position
   extendTowardsPos(targetPos);
+
+  // A target the actuator cannot reach (its end stop, an obstruction, a stall on the slow
+  // approach) would otherwise be driven for ever: the stall check cannot fire inside a move.
+  // The limit restarts whenever the target changes, so a redirect (SAFE, away, the next hour)
+  // always gets a full window of its own.
+  int timedTarget = currentPercentTarget;
+  unsigned long timedSince = millis();
 
   for (int difference = 1; difference > 0; difference = (targetPos - pos) * dir)
   {
@@ -345,13 +351,23 @@ bool LinearActuator::moveTo(int targetPercent)
       extensionCallBack();
       if (targetPercent != currentPercentTarget)
       {
-        // Once per new target: redirecting on every pass restarted the stall timer each time.
-        targetPercent = currentPercentTarget;
-        targetPos = getPosFromPercent(targetPercent);
+        targetPos = getPosFromPercent(currentPercentTarget);
         extendTowardsPos(targetPos);
       }
     }
     updatePos();
+
+    if (currentPercentTarget != timedTarget)
+    {
+      timedTarget = currentPercentTarget;
+      timedSince = millis();
+    }
+    if (millis() - timedSince > MOVE_TIMEOUT_MS)
+    {
+      Serial.println("Move did not finish within " + String(MOVE_TIMEOUT_MS / 1000UL) + " s");
+      moveTimeouts++;
+      return false;
+    }
   }
   extend(STOP);
   return true;
@@ -372,19 +388,11 @@ void LinearActuator::extendTowardsPos(int targetPos)
   }
 }
 
-// Only the duty cycle: going through extend() here restarted the stall timer on every pass
-// of a move, so a move that could not reach its target never noticed and drove forever.
+// Through extend(), as in v12.10: this restarts the stall timer on every pass of a move.
 void LinearActuator::setSpeed(int input)
 {
   speed = input;
-  if (dir == FORWARD)
-  {
-    setSpeeds(speed, 0);
-  }
-  else if (dir == BACKWARD)
-  {
-    setSpeeds(0, speed);
-  }
+  extend(dir);
 }
 
 int LinearActuator::getPosFromPercent(float percent)
@@ -392,18 +400,28 @@ int LinearActuator::getPosFromPercent(float percent)
   return maxPos * (percent / 100);
 }
 
-// Stalled: no hall pulse for a second, at least a second after the drive started (prevTimer,
-// set by extend()). Timed from the last pulse itself rather than from a pulse count that
-// stops changing: the count is zeroed by updatePos() on every pass of a move, so a steady
-// one pulse a pass read as stalled.
+// Stalled: the pulse count has not changed for a second (prevTimer, also set by extend()).
+// This is v12.10's check, restored. It compares the count the hall interrupt writes, never a
+// timestamp against the clock: v12.11-v12.13 read micros() and then the interrupt's
+// lastStepTime, so a pulse landing between the two read as a second without one, and sweeps
+// ended wherever that happened. Inside a move setSpeed() restarts the timer on every pass, so
+// this never fires there; moveTo() is bounded by MOVE_TIMEOUT_MS instead.
 bool LinearActuator::hitBoundary()
 {
-  if (millis() - prevTimer > 1000 && micros() - lastStepTime > 1000000UL)
+  if (prevSteps == steps)
   {
-    Serial.println("boundary hit");
-    steps = 0;
+    if (millis() - prevTimer > 1000)
+    {
+      Serial.println("boundary hit");
+      steps = 0;
+      prevTimer = millis();
+      return true;
+    }
+  }
+  else
+  {
+    prevSteps = steps;
     prevTimer = millis();
-    return true;
   }
   return false;
 }
