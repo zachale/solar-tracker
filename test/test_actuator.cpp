@@ -439,24 +439,96 @@ TEST_SUITE("actuator: moves that cannot finish") {
 
 TEST_SUITE("actuator: recalibration") {
 
-  TEST_CASE("a recalibration asked for in the middle of a slow approach sweeps at full speed") {
-    // The dashboard's button runs recalibrate() from inside a move's callback.
+  TEST_CASE("a recalibration asked for in the middle of a move is owed, and the move finishes") {
+    // The dashboard's button is served by the loop the move calls back into.
     LinearActuator a;
-    onBench(a, 500, true);
-    static int slowestHome = 255;
-    slowestHome = 255;
+    onBench(a, 200, true);
+    static LinearActuator *pressed = nullptr;
+    static int passes = 0;
+    pressed = &a;
+    passes = 0;
     a.setExtensionCallBack([] {
       simMotor();
-      if (simActuator->status == LinearActuator::HOMING && mock::pwm[5] < slowestHome) {
-        slowestHome = mock::pwm[5];
+      if (++passes == 40) CHECK(pressed->recalibrate() == -1);
+    });
+    a.extendToPercent(80);
+    CHECK(LinearActuator::recalibrations == 0);
+    CHECK(simPos == doctest::Approx(800).epsilon(0.02));
+    CHECK(a.currentPercentTarget == 80);
+    CHECK(a.calibrationDue());                       // owed: the next move or sync runs it
+    const int stopped = LinearActuator::STOP;
+    CHECK(a.status == stopped);
+  }
+
+  TEST_CASE("a recalibration asked for during a sweep is answered by that sweep, whose frame stands") {
+    LinearActuator a;
+    onBench(a, 500, true);
+    static LinearActuator *pressed = nullptr;
+    static int passes = 0;
+    pressed = &a;
+    passes = 0;
+    a.setExtensionCallBack([] {
+      simMotor();
+      if (++passes == 30) pressed->recalibrate();   // pressed again, partway home
+    });
+    a.recalibrate();
+    CHECK(LinearActuator::recalibrations == 1);
+    CHECK(a.maxPos == doctest::Approx(1000).epsilon(0.01));
+    CHECK(a.pos == a.maxPos);
+    CHECK(simPos == 1000);
+    CHECK_FALSE(a.calibrationDue());                 // the sweep under way was the calibration asked for
+  }
+
+  TEST_CASE("an owed recalibration runs at the next move") {
+    LinearActuator a;
+    onBench(a, 500, true);
+    a.calibrationRequested = true;
+    a.extendToPercent(30);
+    CHECK(LinearActuator::recalibrations == 1);
+    CHECK(simPos == doctest::Approx(300).epsilon(0.02));
+    CHECK_FALSE(a.calibrationDue());
+  }
+
+  TEST_CASE("SAFE asked for during the sweep that finds the position is where the panel goes") {
+    // A boot without a position: the first move calibrates. The wind rises partway through.
+    LinearActuator a;
+    onBench(a, 300, false);
+    static LinearActuator *windy = nullptr;
+    static int passes = 0;
+    windy = &a;
+    passes = 0;
+    a.setExtensionCallBack([] {
+      simMotor();
+      if (++passes == 30) {
+        windy->calibrationAllowed = false;            // SAFE
+        windy->positionCalibrationAllowed = false;
+        windy->extendToPercent(10);                   // the safe position
       }
     });
-    a.speed = 120;                            // the approach speed of a move near its target
-    a.extend(LinearActuator::FORWARD);
-    a.recalibrate();
-    CHECK(slowestHome == 255);
-    CHECK(simPos == 1000);
-    CHECK(a.maxPos == doctest::Approx(1000).epsilon(0.01));
+    a.extendToPercent(50);
+    CHECK(LinearActuator::recalibrations == 1);
+    CHECK(simPos == doctest::Approx(100).epsilon(0.02));
+  }
+}
+
+TEST_SUITE("actuator: redirects") {
+
+  TEST_CASE("a move redirected away and back again ends at the target it was sent back to") {
+    LinearActuator a;
+    onBench(a, 200, true);
+    static LinearActuator *redirect = nullptr;
+    static int passes = 0;
+    redirect = &a;
+    passes = 0;
+    a.setExtensionCallBack([] {
+      simMotor();
+      ++passes;
+      if (passes == 20) redirect->currentPercentTarget = 10;   // away switch on
+      if (passes == 25) redirect->currentPercentTarget = 80;   // and off again
+    });
+    a.extendToPercent(80);
+    CHECK(simPos == doctest::Approx(800).epsilon(0.02));
+    CHECK(a.currentPercentTarget == 80);
   }
 }
 

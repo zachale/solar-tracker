@@ -51,10 +51,16 @@ bool LinearActuator::calibrationDue()
 
 int LinearActuator::recalibrate()
 {
+  if (isExtending())
+  {
+    // Asked for from inside a move or a sweep (the dashboard's button, served by the loop the
+    // motion calls back into). A sweep nested in a move or in another sweep wrecks both, so it
+    // is owed instead, and runs at the next move or sync that may calibrate.
+    Serial.println("Recalibration asked for while moving: owed");
+    calibrationRequested = true;
+    return -1;
+  }
   Serial.println("Attempting to recalibrate");
-  // Stopped, and back at full speed, whoever asked: the dashboard's button can arrive in the
-  // middle of a move, at the slow speed of its approach, and home() sweeps at `speed`.
-  extend(STOP);
   int before = currentPercentTarget;
   delay(5000);
   home();
@@ -250,7 +256,14 @@ void LinearActuator::extendToPercent(float percent)
   bool mayCalibrate = calibrationAllowed || (maxPos == 0 && positionCalibrationAllowed);
   if (!mayCalibrate && maxPos == 0)
   {
-    // Before the target is recorded, so the same request goes through once it may calibrate.
+    if (status != STOP)
+    {
+      // Asked for during the sweep that is finding the position (SAFE, say): recorded, so the
+      // sweep's caller goes there once the position is known.
+      currentPercentTarget = percent;
+    }
+    // Otherwise before the target is recorded, so the same request goes through once it may
+    // calibrate.
     Serial.println("Position unknown and no calibration allowed now: holding still");
     return;
   }
@@ -351,7 +364,11 @@ bool LinearActuator::moveTo(int targetPercent)
       extensionCallBack();
       if (targetPercent != currentPercentTarget)
       {
-        targetPos = getPosFromPercent(currentPercentTarget);
+        // Once per new target (kept from v12.11 as bookkeeping; the stall check plays no part
+        // here). Without it a redirect back to the move's first target was never seen: the move
+        // ended at the target in between, and later requests for the first were ignored.
+        targetPercent = currentPercentTarget;
+        targetPos = getPosFromPercent(targetPercent);
         extendTowardsPos(targetPos);
       }
     }

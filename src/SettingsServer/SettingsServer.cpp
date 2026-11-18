@@ -149,7 +149,12 @@ void SettingsServer::checkForClient()
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /recalibrate"))
         {
-          tracker->actuator.recalibrate();
+          // A request made during the sweep (SAFE, away) is where the panel goes afterwards.
+          int asked = tracker->actuator.recalibrate();
+          if (asked >= 0)
+          {
+            tracker->actuator.extendToPercent(asked);
+          }
           endConnection(client);
           return;
         }
@@ -206,7 +211,12 @@ void SettingsServer::actOnParameter(JsonDocument params)
 
   if (params["recalibrateActuator"])
   {
-    tracker->actuator.recalibrate();
+    // A request made during the sweep (SAFE, away) is where the panel goes afterwards.
+    int asked = tracker->actuator.recalibrate();
+    if (asked >= 0)
+    {
+      tracker->actuator.extendToPercent(asked);
+    }
   }
 
   if (params["extendToPercent"])
