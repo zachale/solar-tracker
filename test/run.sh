@@ -18,6 +18,7 @@ SOURCES=(
   test/test_clock.cpp
   test/test_wind.cpp
   test/test_actuator.cpp
+  test/test_timing.cpp
   test/test_settings.cpp
   test/test_urldecode.cpp
   test/test_telemetry.cpp

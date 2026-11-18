@@ -50,7 +50,31 @@ void SolarTracker::setup()
                                         String(actuator.getPercentExtended()) + "%, no calibration needed"
                                   : String("No position handed over; the first move calibrates"));
   dailySync();
+  runBootCalibrationTest();
   initializeStatus();
+}
+
+// Timing builds only (BOOT_TEST_CALIBRATIONS > 0): a few calibrations in a row at every boot,
+// so the legs they record (LinearActuator::legsQuery, sent with every sync) show how long a
+// home and a max really take on this actuator. Never in away or SAFE; a wind that rises
+// during a sweep ends the test after that sweep. initializeStatus() then moves to wherever
+// the status wants the panel; at night it would stay where the last sweep left it, at full
+// extension, so it goes to the end position instead.
+void SolarTracker::runBootCalibrationTest()
+{
+  if (BOOT_TEST_CALIBRATIONS <= 0)
+  {
+    return;
+  }
+  for (int i = 0; i < BOOT_TEST_CALIBRATIONS && mayCalibrate(); i++)
+  {
+    Serial.println("Boot calibration test " + String(i + 1) + " of " + String(BOOT_TEST_CALIBRATIONS));
+    actuator.recalibrate();
+  }
+  if (mayCalibrate() && statusForNow() == NIGHT)
+  {
+    actuator.extendToPercent(clockModule.getEndPercent());
+  }
 }
 
 void SolarTracker::pollSensorData()
@@ -416,8 +440,10 @@ void SolarTracker::syncClock()
   // cal: calibrations since boot; pos: 1 when this boot took its position over from the
   // last firmware rather than calibrating. Both are for the request log; the route
   // ignores them.
+  // The rest is LinearActuator::legsQuery(): the calibrated frame and the last sweep legs.
   String body = wifiClient.get(API + String("/time/est?fw=" FIRMWARE_VERSION "&cal=") +
-                               String(LinearActuator::recalibrations) + "&pos=" + String(positionRestored ? 1 : 0));
+                               String(LinearActuator::recalibrations) + "&pos=" + String(positionRestored ? 1 : 0) +
+                               actuator.legsQuery());
   if (body != "")
   {
     StaticJsonDocument<200> doc;

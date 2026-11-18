@@ -18,6 +18,7 @@ public:
   int currentPercentTarget = -1;
   static long steps; // pulses from hall effect sensors
   static unsigned int recalibrations; // full home-and-max sweeps since boot
+  static unsigned int moveTimeouts;   // moves stopped by their time limit since boot
   static void countSteps();
   LinearActuator();
   int getPercentExtended();
@@ -58,7 +59,28 @@ public:
   Snapshot snapshot();
   bool restore(const Snapshot &s);
 
+  // For the sync URL: maxPos, pos, move time-outs, and the last LEG_LOG sweep legs, oldest
+  // first. Each leg is <kind><ms>.<pulses>.<passes>.<gapMs>: kind H or M for a home or max leg
+  // that found its end, h or m for one stopped by the time limit; ms it took; pulses counted;
+  // loop passes (passes / seconds is the loop rate); ms since the last hall pulse when it ended.
+  String legsQuery();
+
 private:
+  struct Leg
+  {
+    char kind;
+    unsigned long ms;
+    long pulses;
+    unsigned long passes;
+    unsigned long gapMs;
+  };
+  static const int LEG_LOG = 8;
+  Leg legLog[LEG_LOG] = {};
+  unsigned int legsRecorded = 0;
+  void recordLeg(char kind, unsigned long startMs, long pulses, unsigned long passes);
+  // Longer than any real stroke (about two minutes on the first actuator), short enough that
+  // a sweep that never ends cannot hold off syncs and OTA for long.
+  static const unsigned long SWEEP_TIMEOUT_MS = 600000UL;
   static const int PWMBackwardPin = 5;
   static const int PWMForwardPin = 6;
   static unsigned long lastStepTime;

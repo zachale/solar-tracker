@@ -2,6 +2,7 @@
 
 long LinearActuator::steps = 0;
 unsigned int LinearActuator::recalibrations = 0;
+unsigned int LinearActuator::moveTimeouts = 0;
 unsigned long LinearActuator::lastStepTime = 0;
 unsigned long LinearActuator::lastRecalibrationTime = 0;
 
@@ -96,6 +97,11 @@ void LinearActuator::home()
   Serial.println("homing");
   extend(BACKWARD);
   isHomed = 0;
+  unsigned long legStart = millis();
+  long startSteps = steps;
+  long legPulses = 0;
+  unsigned long passes = 0;
+  bool boundary = false;
   while (isHomed == 0)
   {
     setStatus(HOMING);
@@ -103,13 +109,19 @@ void LinearActuator::home()
     {
       extensionCallBack();
     }
-    if (hitBoundary())
+    passes++;
+    legPulses = steps - startSteps; // home() never folds steps into pos, so they add up here
+    boundary = hitBoundary();
+    // The time limit keeps a sweep that never sees its end (a hall left floating, picking up
+    // noise) from holding the actuator off STOP for good, and with it every sync and OTA check.
+    if (boundary || millis() - legStart > SWEEP_TIMEOUT_MS)
     {
       pos = 0;
       isHomed = 1;
       break;
     }
   }
+  recordLeg(boundary ? 'H' : 'h', legStart, legPulses, passes);
   extend(STOP);
 }
 
@@ -118,6 +130,10 @@ void LinearActuator::max()
   Serial.println("maxing");
   extend(FORWARD);
   isMaxed = 0;
+  unsigned long legStart = millis();
+  long startPos = pos;
+  unsigned long passes = 0;
+  bool boundary = false;
   while (isMaxed == 0)
   {
     updatePos();
@@ -126,14 +142,56 @@ void LinearActuator::max()
     {
       extensionCallBack();
     }
-    if (hitBoundary())
+    passes++;
+    boundary = hitBoundary();
+    if (boundary || millis() - legStart > SWEEP_TIMEOUT_MS) // see home()
     {
       maxPos = pos;
       isMaxed = 1;
       break;
     }
   }
+  recordLeg(boundary ? 'M' : 'm', legStart, pos - startPos, passes);
   extend(STOP);
+}
+
+void LinearActuator::recordLeg(char kind, unsigned long startMs, long pulses, unsigned long passes)
+{
+  // First, before anything else can take time: how long since the last hall pulse as the leg
+  // ended. Loaded before micros() is read, so the subtraction cannot go negative. At a real end
+  // stop it is over a second; a leg that ended with pulses still arriving reads a few ms.
+  unsigned long last = lastStepTime;
+  unsigned long gapMs = (micros() - last) / 1000UL;
+  Leg &leg = legLog[legsRecorded % LEG_LOG];
+  leg.kind = kind;
+  leg.ms = millis() - startMs;
+  leg.pulses = pulses;
+  leg.passes = passes;
+  leg.gapMs = gapMs;
+  legsRecorded++;
+}
+
+String LinearActuator::legsQuery()
+{
+  String q = "&mp=" + String(maxPos) + "&p=" + String(pos) + "&mto=" + String(moveTimeouts) +
+             "&legn=" + String(legsRecorded);
+  if (legsRecorded == 0)
+  {
+    return q;
+  }
+  q += "&legs=";
+  unsigned int first = legsRecorded > (unsigned int)LEG_LOG ? legsRecorded - LEG_LOG : 0;
+  for (unsigned int i = first; i < legsRecorded; i++)
+  {
+    const Leg &leg = legLog[i % LEG_LOG];
+    if (i != first)
+    {
+      q += "_";
+    }
+    q += String(leg.kind) + String(leg.ms) + "." + String(leg.pulses) + "." + String(leg.passes) + "." +
+         String(leg.gapMs);
+  }
+  return q;
 }
 
 void LinearActuator::extend(int inputDir)

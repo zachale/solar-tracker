@@ -11,6 +11,12 @@
 #include "../OtaUpdater/OtaUpdater.h"
 #include "../PositionHandoff/PositionHandoff.h"
 #include <Arduino.h>
+
+// Calibrations run back to back at every boot, to measure the sweeps. 0 in a field build.
+#ifndef BOOT_TEST_CALIBRATIONS
+#define BOOT_TEST_CALIBRATIONS 3
+#endif
+
 class SolarTracker
 {
 public:
@@ -74,6 +80,7 @@ private:
   void updateStatus();
   void actOnStatus(Status);
   void initializeStatus();
+  void runBootCalibrationTest();
   // What the status should be now, ignoring wind: AWAY while the away switch is on, else
   // ACTIVE or NIGHT by the schedule. Used at boot and when AWAY or SAFE ends.
   Status statusForNow();
