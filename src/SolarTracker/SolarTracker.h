@@ -12,7 +12,7 @@
 #include "../PositionHandoff/PositionHandoff.h"
 #include <Arduino.h>
 
-// Calibrations run back to back at every boot, to measure the sweeps. 0 in a field build.
+// Calibrations run back to back once per boot, to measure the sweeps. 0 in a field build.
 #ifndef BOOT_TEST_CALIBRATIONS
 #define BOOT_TEST_CALIBRATIONS 3
 #endif
@@ -75,6 +75,7 @@ private:
   static const int CLOCK_INTERRUPT_PIN = 3;
   // Set at boot when the last firmware handed its position over, so no calibration was needed.
   bool positionRestored = false;
+  bool bootTestDone = false; // the timing builds' calibrations, once per boot
   void extendActuatorOnHour();
   void extendActuatorToSafe();
   void updateStatus();

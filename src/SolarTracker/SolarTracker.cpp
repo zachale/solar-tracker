@@ -50,30 +50,40 @@ void SolarTracker::setup()
                                         String(actuator.getPercentExtended()) + "%, no calibration needed"
                                   : String("No position handed over; the first move calibrates"));
   dailySync();
-  runBootCalibrationTest();
   initializeStatus();
 }
 
-// Timing builds only (BOOT_TEST_CALIBRATIONS > 0): a few calibrations in a row at every boot,
+// Timing builds only (BOOT_TEST_CALIBRATIONS > 0): a few calibrations in a row, once per boot,
 // so the legs they record (LinearActuator::legsQuery, sent with every sync) show how long a
-// home and a max really take on this actuator. Never in away or SAFE; a wind that rises
-// during a sweep ends the test after that sweep. initializeStatus() then moves to wherever
-// the status wants the panel; at night it would stay where the last sweep left it, at full
-// extension, so it goes to the end position instead.
+// home and a max really take on this actuator. Day or night; never in away or SAFE, and a
+// wind that rises during a sweep ends the test after that sweep.
+//
+// Run from the loop, not from setup(), and only once OTA has settled: this boot has checked
+// the manifest, the image is confirmed and its rollback copy saved. So a trial confirms on
+// time, and a board that resets during the test, boot after boot, still checks for a newer
+// image every time before it starts sweeping.
 void SolarTracker::runBootCalibrationTest()
 {
-  if (BOOT_TEST_CALIBRATIONS <= 0)
+  if (BOOT_TEST_CALIBRATIONS <= 0 || bootTestDone || appMode || !otaUpdater.settled() ||
+      actuator.status != LinearActuator::STOP || !mayCalibrate()) // away or SAFE: waits for it to end
   {
     return;
   }
+  bootTestDone = true;
   for (int i = 0; i < BOOT_TEST_CALIBRATIONS && mayCalibrate(); i++)
   {
     Serial.println("Boot calibration test " + String(i + 1) + " of " + String(BOOT_TEST_CALIBRATIONS));
     actuator.recalibrate();
   }
-  if (mayCalibrate() && statusForNow() == NIGHT)
+  // Each sweep ends at full extension with no target. Back to where the status wants the
+  // panel; at night that is the end position, where NIGHT itself never moves it.
+  if (status == NIGHT)
   {
     actuator.extendToPercent(clockModule.getEndPercent());
+  }
+  else
+  {
+    actOnStatus(status);
   }
 }
 
@@ -174,6 +184,7 @@ void SolarTracker::pollSensorData()
   otaUpdater.service(wifiClient, !appMode && status != SAFE && actuator.status == LinearActuator::STOP);
 
   serviceSync();
+  runBootCalibrationTest();
 }
 
 // Bus health first: everything in the loop reads the RTC, and a wedged bus returns register

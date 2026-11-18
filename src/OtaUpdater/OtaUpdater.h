@@ -63,6 +63,12 @@ public:
   // WiFi.end() in particular, must wait until this is false or it kills the download.
   bool busy() const;
 
+  // Read-only. True once this boot has made its first manifest check, the running image is
+  // confirmed (not on trial), its rollback copy is on the SD card, and no download is in
+  // flight: anything long the tracker wants to do waits for this, so every boot gets the
+  // chance to fetch a newer image first.
+  bool settled() const { return firstCheckDone && state.phase == IDLE && state.copySaved && !downloading; }
+
   // Called right before the board restarts into another image (an install or a rollback),
   // with that image's version, so the tracker can hand its state to the next firmware.
   void onBeforeRestart(void (*fn)(void *ctx, const char *version), void *ctx);
