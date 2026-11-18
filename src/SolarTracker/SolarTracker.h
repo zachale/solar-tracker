@@ -12,9 +12,9 @@
 #include "../PositionHandoff/PositionHandoff.h"
 #include <Arduino.h>
 
-// Calibrations run back to back once per boot, to measure the sweeps. 0 in a field build.
+// Calibrations run back to back once per boot, to measure the sweeps (3 in the timing builds).
 #ifndef BOOT_TEST_CALIBRATIONS
-#define BOOT_TEST_CALIBRATIONS 3
+#define BOOT_TEST_CALIBRATIONS 0
 #endif
 
 class SolarTracker
