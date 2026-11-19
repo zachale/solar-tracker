@@ -43,6 +43,10 @@ public:
   // Latched at boot by the sketch. Decides whether this power session is allowed
   // to use the radio as a station at all.
   void setAppMode(bool);
+  // The dashboard's Recalibrate: a full sweep, then back to where the panel belongs.
+  void recalibrateAndReturn();
+  // The dashboard saved a schedule: the panel goes where it says now, not at the next hour.
+  void applySchedule();
   // True while an OTA download is in flight. Anything that would reset the radio waits.
   bool otaBusy() const { return otaUpdater.busy(); }
   // Over-the-air trial bookkeeping; first thing in setup() after the watchdog.

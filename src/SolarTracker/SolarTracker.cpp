@@ -322,9 +322,21 @@ bool SolarTracker::mayCalibrate()
   return status != AWAY && status != SAFE && !ButtonPanel::isAwayModeOverride();
 }
 
+// Where the panel belongs now: the hour's position while ACTIVE, the safe position in away
+// or SAFE, and the schedule's end position at night. ACTIVE past the schedule's end, in the
+// seconds before the status tick turns it to NIGHT, is the end position too: the hour's
+// position there lies beyond the end, out to full extension.
 int SolarTracker::restingPercent()
 {
-  return status == ACTIVE ? clockModule.getHourlyExtensionPercent() : clockModule.getEndPercent();
+  if (status == ACTIVE && clockModule.isActiveHours())
+  {
+    return clockModule.getHourlyExtensionPercent();
+  }
+  if (status == AWAY || status == SAFE)
+  {
+    return clockModule.getSafeExtensionPercent();
+  }
+  return clockModule.getEndPercent();
 }
 
 void SolarTracker::updateStatus()
@@ -379,6 +391,39 @@ void SolarTracker::actOnStatus(Status inputStatus)
 void SolarTracker::setAppMode(bool isAppMode)
 {
   appMode = isAppMode;
+}
+
+// The sweep ends at full extension, so the panel then goes back to where it belongs: to a
+// request made during the sweep (into SAFE, say) if there was one, otherwise to where the
+// status and the schedule want it now, which need not be where it started. Pressed during a
+// move, recalibrate() only records the calibration as owed, and that move carries on to its
+// own target.
+void SolarTracker::recalibrateAndReturn()
+{
+  if (actuator.status != LinearActuator::STOP)
+  {
+    actuator.recalibrate();
+    return;
+  }
+  int asked = actuator.recalibrate();
+  actuator.extendToPercent(asked >= 0 ? asked : restingPercent());
+}
+
+// ACTIVE and NIGHT follow the hours, which the new schedule may have moved, so the status is
+// settled first: ACTIVE past the new end would interpolate beyond it to full extension. Away
+// and SAFE keep their status, and move only for a new safe position. A move under way is
+// redirected; a sweep under way records it and goes there when it ends.
+void SolarTracker::applySchedule()
+{
+  if (status == ACTIVE || status == NIGHT)
+  {
+    Status now = clockModule.isActiveHours() ? ACTIVE : NIGHT;
+    if (now != status)
+    {
+      setStatus(now); // into ACTIVE, this already moves to the hour's position
+    }
+  }
+  actuator.extendToPercent(restingPercent());
 }
 
 void SolarTracker::dailySync()

@@ -11,7 +11,9 @@ these exercise the shipping code rather than a copy of it.
 ```
 
 Requires a host C++17 compiler and ArduinoJson, which the Arduino CLI already
-installs to `~/Documents/Arduino/libraries`.
+installs to `~/Documents/Arduino/libraries`, and the untracked `secrets.h` at the
+repository root, which `src/SolarTracker/SolarTracker.cpp` includes just as the
+firmware build does.
 
 ## Layout
 
@@ -23,6 +25,8 @@ installs to `~/Documents/Arduino/libraries`.
 | `stubs/RTClib.h` | DateTime arithmetic is real; the DS3231 is settable |
 | `stubs/SD.h` | In-memory card |
 | `stubs/mock.cpp` | Definitions for the mocked hardware state |
+| `stubs/WiFiS3.h`, `stubs/R4HttpClient.h`, `stubs/OTAUpdate.h` | Empty stand-ins so `SolarTracker` compiles |
+| `stubs/tracker_deps.cpp` | The radio, OTA and watchdog behind `SolarTracker`, as no-ops |
 
 ## Driving the mocks
 
@@ -54,10 +58,15 @@ neither layout nor mangling, so the firmware translation units are unaffected.
 - `LinearActuator` — percent/pulse conversion, the uncalibrated sentinel,
   stall detection and its step debounce
 - `SettingsManager` — config and WiFi credential round-trips through the card
+- `SolarTracker` — where the panel goes after the dashboard's Recalibrate and
+  after a schedule is saved, in every status, mid-move and mid-sweep. The radio,
+  OTA and watchdog behind it are no-ops (`stubs/tracker_deps.cpp`); the actuator
+  drives a simulated motor, and a test can run the tracker's own poll as the
+  sketch's loop does.
 
-Not covered: `SolarTracker`, `WifiClient` and `SettingsServer`, which need
-WiFiS3 and R4HttpClient stubs. `WifiClient::get()` is the one with a known live
-defect, so it is the obvious next target.
+Not covered: `WifiClient` and `SettingsServer`, which need working WiFiS3 and
+R4HttpClient stubs rather than the empty ones here. `WifiClient::get()` is the
+one with a known live defect, so it is the obvious next target.
 
 ## Known failure
 

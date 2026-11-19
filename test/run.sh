@@ -10,6 +10,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ARDUINOJSON="$HOME/Documents/Arduino/libraries/ArduinoJson/src"
+
+if [ ! -f secrets.h ]; then
+  echo "secrets.h is missing from the repository root. src/SolarTracker/SolarTracker.cpp" >&2
+  echo "includes it (the API base URL), here as in the firmware build." >&2
+  exit 1
+fi
 OUT=".test-build"
 mkdir -p "$OUT"
 
@@ -23,7 +29,9 @@ SOURCES=(
   test/test_urldecode.cpp
   test/test_telemetry.cpp
   test/test_handoff.cpp
+  test/test_tracker.cpp
   test/stubs/mock.cpp
+  test/stubs/tracker_deps.cpp
   src/Clock/Clock.cpp
   src/WindSpeedSensor/WindSpeedSensor.cpp
   src/LinearActuator/LinearActuator.cpp
@@ -31,6 +39,7 @@ SOURCES=(
   src/SettingsManager/SettingsManager.cpp
   src/Telemetry/Telemetry.cpp
   src/PositionHandoff/PositionHandoff.cpp
+  src/SolarTracker/SolarTracker.cpp
 )
 
 c++ -std=c++17 -g -O0 \

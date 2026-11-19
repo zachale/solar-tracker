@@ -149,12 +149,7 @@ void SettingsServer::checkForClient()
         // Check to see if the client request was "GET /H" or "GET /L":
         if (currentLine.endsWith("GET /recalibrate"))
         {
-          // A request made during the sweep (SAFE, away) is where the panel goes afterwards.
-          int asked = tracker->actuator.recalibrate();
-          if (asked >= 0)
-          {
-            tracker->actuator.extendToPercent(asked);
-          }
+          tracker->recalibrateAndReturn();
           endConnection(client);
           return;
         }
@@ -199,6 +194,7 @@ void SettingsServer::getParams(String params)
 void SettingsServer::actOnParameter(JsonDocument params)
 {
   bool needsSave = false;
+  bool scheduleChanged = false;
   Serial.println("Acting on param");
   String output;
   serializeJson(params, output);
@@ -211,12 +207,7 @@ void SettingsServer::actOnParameter(JsonDocument params)
 
   if (params["recalibrateActuator"])
   {
-    // A request made during the sweep (SAFE, away) is where the panel goes afterwards.
-    int asked = tracker->actuator.recalibrate();
-    if (asked >= 0)
-    {
-      tracker->actuator.extendToPercent(asked);
-    }
+    tracker->recalibrateAndReturn();
   }
 
   if (params["extendToPercent"])
@@ -268,6 +259,7 @@ void SettingsServer::actOnParameter(JsonDocument params)
     String output;
     serializeJson(params, output);
     needsSave = true;
+    scheduleChanged = true;
   }
 
   if (params["setSafePercent"])
@@ -276,6 +268,7 @@ void SettingsServer::actOnParameter(JsonDocument params)
     String output;
     serializeJson(params, output);
     needsSave = true;
+    scheduleChanged = true;
   }
 
   if (params["addWifiCredential"])
@@ -301,6 +294,12 @@ void SettingsServer::actOnParameter(JsonDocument params)
     Serial.println("Saving settings...");
     SettingsManager::save();
     Serial.print("...DONE!");
+  }
+
+  // After the save, so the new schedule is on the card before the move starts.
+  if (scheduleChanged)
+  {
+    tracker->applySchedule();
   }
 }
 

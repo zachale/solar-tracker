@@ -290,6 +290,27 @@ TEST_SUITE("actuator: when it may calibrate") {
     CHECK(simPos == doctest::Approx(800).epsilon(0.02));
   }
 
+  TEST_CASE("a request made during the sweep counts even when it is the target held before it") {
+    // Held at 50, a calibration due, an hourly move to 40 calibrates first; partway home the
+    // schedule changes and asks for 50 again. That is the newest request, and it wins.
+    LinearActuator a;
+    onBench(a, 500, true);
+    a.currentPercentTarget = 50;
+    mock::advance(WEEK_MS + 1);
+    static LinearActuator *redirect = nullptr;
+    static int passes = 0;
+    redirect = &a;
+    passes = 0;
+    a.setExtensionCallBack([] {
+      simMotor();
+      if (++passes == 30) redirect->extendToPercent(50);
+    });
+    a.extendToPercent(40);
+    CHECK(LinearActuator::recalibrations == 1);
+    CHECK(a.currentPercentTarget == 50);
+    CHECK(simPos == doctest::Approx(500).epsilon(0.02));
+  }
+
   TEST_CASE("a calibration that came due stays due past the 49.7 day millis wrap") {
     LinearActuator a;
     onBench(a, 500, true);

@@ -61,14 +61,16 @@ int LinearActuator::recalibrate()
     return -1;
   }
   Serial.println("Attempting to recalibrate");
-  int before = currentPercentTarget;
+  // Cleared for the sweep, so anything asked for during it is recorded and returned, the
+  // target held before it included: extendToPercent() ignores a request equal to the target.
+  currentPercentTarget = -1;
   delay(5000);
   home();
   max();
   recalibrations++;
   lastRecalibrationTime = millis();
   calibrationRequested = false;
-  int asked = currentPercentTarget != before ? currentPercentTarget : -1;
+  int asked = currentPercentTarget;
   // The sweep ends at full extension: whatever was last asked for has to be asked again.
   currentPercentTarget = -1;
   return asked;
